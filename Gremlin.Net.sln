@@ -5,9 +5,20 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E3FAE403-F6A5-4347-BEB0-29DD174DBF53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gremlin.Net", "src\Gremlin.Net\Gremlin.Net.csproj", "{ED588305-4778-4B71-92E5-81EA36539A4C}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{D70B291E-E292-48ED-91B3-F594A8CD7BF7}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Gremlin.NetCore", "src\Gremlin.NetCore\Gremlin.NetCore.xproj", "{9817DAE0-9723-47D8-BF52-9CAD15163A84}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Gremlin.NetCore.IntegrationTest", "test\Gremlin.NetCore.IntegrationTest\Gremlin.NetCore.IntegrationTest.xproj", "{9EF74662-EC4C-422B-93F8-6CDA6CE164A1}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Gremlin.NetCore.UnitTest", "test\Gremlin.NetCore.UnitTest\Gremlin.NetCore.UnitTest.xproj", "{E6ED09BA-FB63-4FBB-BE51-E9812764F687}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9EB60E0E-DB0E-40E6-B58D-38656CAFCC0E}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gremlin.Net", "src\Gremlin.Net\Gremlin.Net.csproj", "{ED588305-4778-4B71-92E5-81EA36539A4C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gremlin.Net.UnitTest", "test\Gremlin.Net.UnitTest\Gremlin.Net.UnitTest.csproj", "{3F559F3F-4C61-49D5-90EF-54105D989ABA}"
 EndProject
@@ -19,6 +30,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9817DAE0-9723-47D8-BF52-9CAD15163A84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9817DAE0-9723-47D8-BF52-9CAD15163A84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9817DAE0-9723-47D8-BF52-9CAD15163A84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9817DAE0-9723-47D8-BF52-9CAD15163A84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EF74662-EC4C-422B-93F8-6CDA6CE164A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EF74662-EC4C-422B-93F8-6CDA6CE164A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EF74662-EC4C-422B-93F8-6CDA6CE164A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EF74662-EC4C-422B-93F8-6CDA6CE164A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6ED09BA-FB63-4FBB-BE51-E9812764F687}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6ED09BA-FB63-4FBB-BE51-E9812764F687}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6ED09BA-FB63-4FBB-BE51-E9812764F687}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6ED09BA-FB63-4FBB-BE51-E9812764F687}.Release|Any CPU.Build.0 = Release|Any CPU
 		{ED588305-4778-4B71-92E5-81EA36539A4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{ED588305-4778-4B71-92E5-81EA36539A4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED588305-4778-4B71-92E5-81EA36539A4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -36,6 +59,9 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{9817DAE0-9723-47D8-BF52-9CAD15163A84} = {E3FAE403-F6A5-4347-BEB0-29DD174DBF53}
+		{9EF74662-EC4C-422B-93F8-6CDA6CE164A1} = {D70B291E-E292-48ED-91B3-F594A8CD7BF7}
+		{E6ED09BA-FB63-4FBB-BE51-E9812764F687} = {D70B291E-E292-48ED-91B3-F594A8CD7BF7}
 		{ED588305-4778-4B71-92E5-81EA36539A4C} = {E3FAE403-F6A5-4347-BEB0-29DD174DBF53}
 		{3F559F3F-4C61-49D5-90EF-54105D989ABA} = {D70B291E-E292-48ED-91B3-F594A8CD7BF7}
 		{A12FDE21-B78F-480A-B8B5-29A46F9A93BB} = {D70B291E-E292-48ED-91B3-F594A8CD7BF7}
