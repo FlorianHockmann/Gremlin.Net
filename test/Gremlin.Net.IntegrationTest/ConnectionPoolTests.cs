@@ -16,9 +16,9 @@
  */
 #endregion
 
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Gremlin.Net.IntegrationTest.Properties;
 using Gremlin.Net.IntegrationTest.Util;
 using Xunit;
 
@@ -27,8 +27,8 @@ namespace Gremlin.Net.IntegrationTest
     public class ConnectionPoolTests
     {
         private readonly ScriptRequestMessageProvider _requestMessageProvider = new ScriptRequestMessageProvider();
-        private static readonly string TestHost = Settings.Default.TestServerIpAddress;
-        private static readonly int TestPort = Settings.Default.TestServerPort;
+        private static readonly string TestHost = ConfigProvider.Configuration["TestServerIpAddress"];
+        private static readonly int TestPort = Convert.ToInt32(ConfigProvider.Configuration["TestServerPort"]);
         
         [Fact]
         public void ConnectionShouldBeReusedForSequentialRequests()

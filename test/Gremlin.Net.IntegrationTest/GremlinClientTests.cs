@@ -19,7 +19,6 @@
 using System;
 using System.Collections.Generic;
 using Gremlin.Net.Exceptions;
-using Gremlin.Net.IntegrationTest.Properties;
 using Gremlin.Net.IntegrationTest.Util;
 using Gremlin.Net.Messages;
 using Xunit;
@@ -29,8 +28,8 @@ namespace Gremlin.Net.IntegrationTest
     public class GremlinClientTests
     {
         private readonly ScriptRequestMessageProvider _requestMessageProvider = new ScriptRequestMessageProvider();
-        private static readonly string TestHost = Settings.Default.TestServerIpAddress;
-        private static readonly int TestPort = Settings.Default.TestServerPort;
+        private static readonly string TestHost = ConfigProvider.Configuration["TestServerIpAddress"];
+        private static readonly int TestPort = Convert.ToInt32(ConfigProvider.Configuration["TestServerPort"]);
 
         [Theory]
         [InlineData("1+1", "2")]
