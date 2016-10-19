@@ -1,11 +1,11 @@
 ﻿$gremlinServerUrl = 'https://repository.sonatype.org/service/local/artifact/maven/redirect?r=central-proxy&g=org.apache.tinkerpop&a=gremlin-server&e=zip&c=distribution&v=LATEST'
-$gremlinServerDirectory = "C:/Gremlin.Net"
-$gremlinServerArchive = "$gremlinServerDirectory/gremlin-server.zip"
+$workingDirectory = "C:/Gremlin.Net"
+$gremlinServerArchive = "$workingDirectory/gremlin-server.zip"
 
-Write-Output "Check if directory $gremlinServerDirectory exists..."
-if(!(Test-Path -Path $gremlinServerDirectory)){
+Write-Output "Check if directory $workingDirectory exists..."
+if(!(Test-Path -Path $workingDirectory)){
     Write-Output "Directory doesn't exist, creating it now."
-    New-Item -ItemType Directory -Path $gremlinServerDirectory
+    New-Item -ItemType Directory -Path $workingDirectory
 }
 else {
     Write-Output "Directory exists, nothing to do."
@@ -25,11 +25,11 @@ Add-Type -assembly “system.io.compression.filesystem”
 Write-Output "Check if an extracted version exists already..."
 $zipArchive = [io.compression.zipfile]::OpenRead($gremlinServerArchive)
 $archiveRootDirectory = $zipArchive.Entries[0]
-$gremlinServerDirectory = "$gremlinServerDirectory/$archiveRootDirectory"
+$gremlinServerDirectory = "$workingDirectory/$archiveRootDirectory"
 if (!(Test-Path -Path $gremlinServerDirectory))
 {
     Write-Output "No extracted version found, begin extracting..."
-    [io.compression.zipfile]::ExtractToDirectory($gremlinServerArchive, $gremlinServerDirectory)
+    [io.compression.zipfile]::ExtractToDirectory($gremlinServerArchive, $workingDirectory)
     Write-Output "Extraction finished."
 }
 else {
@@ -38,6 +38,7 @@ else {
 
 $gremlinServerStartFile = "bin/gremlin-server.bat"
 Write-Output "Starting Gremlin Server from $gremlinServerStartFile"
-Set-Location -Path $gremlinServerDirectory
+Write-Output "Switching to directory $gremlinServerDirectory"
+Set-Location $gremlinServerDirectory
 Start-Process $gremlinServerStartFile
 Write-Output "Gremlin Server should now be running"
