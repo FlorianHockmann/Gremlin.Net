@@ -113,7 +113,7 @@ namespace Gremlin.Net.IntegrationTest
                 Assert.Equal(typeof(ResponseException), innerException.GetType());
                 Assert.Contains(ResponseStatusCode.ServerTimeout.ToString(), innerException.Message);
                 Assert.Contains(timeOutInMs.ToString(), innerException.Message);
-                Assert.True(evaluationStopWatch.ElapsedMilliseconds < timeOutInMs*1000);
+                Assert.True(evaluationStopWatch.ElapsedMilliseconds < scriptSleepTimeInMs);
             }
         }
 
