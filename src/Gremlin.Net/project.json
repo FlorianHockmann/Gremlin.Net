@@ -23,6 +23,5 @@
   "owners": ["Florian Hockmann"],
   "projectUrl":  "https://github.com/FlorianHockmann/Gremlin.Net",
   "licenseUrl": "https://github.com/FlorianHockmann/Gremlin.Net/blob/master/LICENSE",
-  "releaseNotes": "Initial release"
   }
 }
