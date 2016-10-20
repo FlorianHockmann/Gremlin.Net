@@ -3,6 +3,10 @@ Gremlin.Net is a cross-platform Gremlin Server driver for .NET that is written i
 
 [![AppVeyor](https://img.shields.io/appveyor/ci/FlorianHockmann/Gremlin-Net.svg?style=plastic)](https://ci.appveyor.com/project/FlorianHockmann/Gremlin-Net)
 
+## Getting Started
+
+Install the [NuGet package](https://www.nuget.org/packages/Gremlin.Net/).
+
 ## Usage
 
 ```cs
