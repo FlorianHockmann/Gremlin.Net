@@ -19,6 +19,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using Gremlin.Net.Exceptions;
 using Gremlin.Net.IntegrationTest.Util;
 using Gremlin.Net.Messages;
@@ -33,7 +34,7 @@ namespace Gremlin.Net.IntegrationTest
         private static readonly int TestPort = Convert.ToInt32(ConfigProvider.Configuration["TestServerPort"]);
 
         [Fact]
-        public void AliasForTraversalSourceShouldBeUsed()
+        public async Task AliasForTraversalSourceShouldBeUsed()
         {
             var gremlinServer = new GremlinServer(TestHost, TestPort);
             using (var gremlinClient = new GremlinClient(gremlinServer))
@@ -46,14 +47,14 @@ namespace Gremlin.Net.IntegrationTest
                     Arguments = new ScriptRequestArguments {Aliases = aliases, GremlinScript = gremlinScript}
                 };
 
-                var result = gremlinClient.SubmitWithSingleResultAsync<bool>(requestMsg).Result;
+                var result = await gremlinClient.SubmitWithSingleResultAsync<bool>(requestMsg);
 
                 Assert.NotNull(result);
             }
         }
 
         [Fact]
-        public void InvalidOperationShouldThrowException()
+        public async Task InvalidOperationShouldThrowException()
         {
             var gremlinServer = new GremlinServer(TestHost, TestPort);
             using (var gremlinClient = new GremlinClient(gremlinServer))
@@ -63,17 +64,15 @@ namespace Gremlin.Net.IntegrationTest
                 requestMsg.Operation = ivalidOperationName;
 
                 var thrownException =
-                    Assert.Throws<AggregateException>(() => gremlinClient.SubmitAsync(requestMsg).Wait());
+                    await Assert.ThrowsAsync<ResponseException>(() => gremlinClient.SubmitAsync(requestMsg));
 
-                var innerException = thrownException.InnerException;
-                Assert.Equal(typeof(ResponseException), innerException.GetType());
-                Assert.Contains(ResponseStatusCode.MalformedRequest.ToString(), innerException.Message);
-                Assert.Contains(ivalidOperationName, innerException.Message);
+                Assert.Contains(ResponseStatusCode.MalformedRequest.ToString(), thrownException.Message);
+                Assert.Contains(ivalidOperationName, thrownException.Message);
             }
         }
 
         [Fact]
-        public void InvalidProcessorShouldThrowException()
+        public async Task InvalidProcessorShouldThrowException()
         {
             var gremlinServer = new GremlinServer(TestHost, TestPort);
             using (var gremlinClient = new GremlinClient(gremlinServer))
@@ -83,18 +82,16 @@ namespace Gremlin.Net.IntegrationTest
                 requestMsg.Processor = invalidProcessorName;
 
                 var thrownException =
-                    Assert.Throws<AggregateException>(() => gremlinClient.SubmitAsync(requestMsg).Wait());
+                    await Assert.ThrowsAsync<ResponseException>(() => gremlinClient.SubmitAsync(requestMsg));
 
-                var innerException = thrownException.InnerException;
-                Assert.Equal(typeof(ResponseException), innerException.GetType());
-                Assert.Contains(ResponseStatusCode.InvalidRequestArguments.ToString(), innerException.Message);
-                Assert.Contains(invalidProcessorName, innerException.Message);
-                Assert.Contains("OpProcessor", innerException.Message);
+                Assert.Contains(ResponseStatusCode.InvalidRequestArguments.ToString(), thrownException.Message);
+                Assert.Contains(invalidProcessorName, thrownException.Message);
+                Assert.Contains("OpProcessor", thrownException.Message);
             }
         }
 
         [Fact]
-        public void ScriptEvaluationTimeoutShouldBeConfigurable()
+        public async Task ScriptEvaluationTimeoutShouldBeConfigurable()
         {
             var gremlinServer = new GremlinServer(TestHost, TestPort);
             using (var gremlinClient = new GremlinClient(gremlinServer))
@@ -106,19 +103,18 @@ namespace Gremlin.Net.IntegrationTest
                 var evaluationStopWatch = new Stopwatch();
                 evaluationStopWatch.Start();
 
-                var thrownException = Assert.Throws<AggregateException>(() => gremlinClient.SubmitAsync(requestMsg).Wait());
+                var thrownException =
+                    await Assert.ThrowsAsync<ResponseException>(() => gremlinClient.SubmitAsync(requestMsg));
 
                 evaluationStopWatch.Stop();
-                var innerException = thrownException.InnerException;
-                Assert.Equal(typeof(ResponseException), innerException.GetType());
-                Assert.Contains(ResponseStatusCode.ServerTimeout.ToString(), innerException.Message);
-                Assert.Contains(timeOutInMs.ToString(), innerException.Message);
+                Assert.Contains(ResponseStatusCode.ServerTimeout.ToString(), thrownException.Message);
+                Assert.Contains(timeOutInMs.ToString(), thrownException.Message);
                 Assert.True(evaluationStopWatch.ElapsedMilliseconds < scriptSleepTimeInMs);
             }
         }
 
         [Fact]
-        public void UnsupportedLanguageShouldThrowException()
+        public async Task UnsupportedLanguageShouldThrowException()
         {
             var gremlinServer = new GremlinServer(TestHost, TestPort);
             using (var gremlinClient = new GremlinClient(gremlinServer))
@@ -128,13 +124,11 @@ namespace Gremlin.Net.IntegrationTest
                 requestMsg.Arguments.Language = unknownLanguage;
 
                 var thrownException =
-                    Assert.Throws<AggregateException>(() => gremlinClient.SubmitAsync(requestMsg).Wait());
+                    await Assert.ThrowsAsync<ResponseException>(() => gremlinClient.SubmitAsync(requestMsg));
 
-                var innerException = thrownException.InnerException;
-                Assert.Equal(typeof(ResponseException), innerException.GetType());
-                Assert.Contains(ResponseStatusCode.ScriptEvaluationError.ToString(), innerException.Message);
-                Assert.Contains(unknownLanguage, innerException.Message);
-                Assert.Contains("Language", innerException.Message);
+                Assert.Contains(ResponseStatusCode.ScriptEvaluationError.ToString(), thrownException.Message);
+                Assert.Contains(unknownLanguage, thrownException.Message);
+                Assert.Contains("Language", thrownException.Message);
             }
         }
     }

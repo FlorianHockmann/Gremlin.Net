@@ -31,13 +31,13 @@ namespace Gremlin.Net.IntegrationTest
         private static readonly int TestPort = Convert.ToInt32(ConfigProvider.Configuration["TestServerPort"]);
         
         [Fact]
-        public void ConnectionShouldBeReusedForSequentialRequests()
+        public async Task ConnectionShouldBeReusedForSequentialRequests()
         {
             var gremlinServer = new GremlinServer(TestHost, TestPort);
             using (var gremlinClient = new GremlinClient(gremlinServer))
             {
-                gremlinClient.SubmitAsync("").Wait();
-                gremlinClient.SubmitAsync("").Wait();
+                await gremlinClient.SubmitAsync("");
+                await gremlinClient.SubmitAsync("");
 
                 var nrConnections = gremlinClient.NrConnections;
                 Assert.Equal(1, nrConnections);
@@ -56,7 +56,7 @@ namespace Gremlin.Net.IntegrationTest
         }
 
         [Fact]
-        public void ParallelRequestsShouldBeExecutedOnDifferentConnections()
+        public async Task ParallelRequestsShouldBeExecutedOnDifferentConnections()
         {
             var gremlinServer = new GremlinServer(TestHost, TestPort);
             using (var gremlinClient = new GremlinClient(gremlinServer))
@@ -64,21 +64,21 @@ namespace Gremlin.Net.IntegrationTest
                 var sleepTime = 50;
                 var nrParallelRequests = 5;
 
-                ExecuteMultipleLongRunningRequestsInParallel(gremlinClient, nrParallelRequests, sleepTime);
+                await ExecuteMultipleLongRunningRequestsInParallel(gremlinClient, nrParallelRequests, sleepTime);
 
                 var nrConnections = gremlinClient.NrConnections;
                 Assert.Equal(nrParallelRequests, nrConnections);
             }
         }
 
-        private void ExecuteMultipleLongRunningRequestsInParallel(GremlinClient gremlinClient, int nrRequests,
+        private async Task ExecuteMultipleLongRunningRequestsInParallel(GremlinClient gremlinClient, int nrRequests,
             int requestRunningTimeInMs)
         {
             var longRunningRequestMsg = _requestMessageProvider.GetSleepMessage(requestRunningTimeInMs);
             var tasks = new List<Task>(nrRequests);
             for (var i = 0; i < nrRequests; i++)
                 tasks.Add(gremlinClient.SubmitAsync(longRunningRequestMsg));
-            Task.WaitAll(tasks.ToArray());
+            await Task.WhenAll(tasks);
         }
     }
 }

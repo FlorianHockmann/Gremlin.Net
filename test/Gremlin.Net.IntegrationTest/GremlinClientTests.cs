@@ -18,6 +18,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Gremlin.Net.Exceptions;
 using Gremlin.Net.IntegrationTest.Util;
 using Gremlin.Net.Messages;
@@ -34,19 +35,19 @@ namespace Gremlin.Net.IntegrationTest
         [Theory]
         [InlineData("1+1", "2")]
         [InlineData("'Hello' + 'World'", "HelloWorld")]
-        public void ScriptShouldBeEvaluatedAndResultReturned(string requestMsg, string expectedResponse)
+        public async Task ScriptShouldBeEvaluatedAndResultReturned(string requestMsg, string expectedResponse)
         {
             var gremlinServer = new GremlinServer(TestHost, TestPort);
             using (var gremlinClient = new GremlinClient(gremlinServer))
             {
-                var response = gremlinClient.SubmitWithSingleResultAsync<string>(requestMsg).Result;
+                var response = await gremlinClient.SubmitWithSingleResultAsync<string>(requestMsg);
 
                 Assert.Equal(expectedResponse, response);
             }
         }
 
         [Fact]
-        public void HandleBigResponseTest()
+        public async Task HandleBigResponseTest()
         {
             var gremlinServer = new GremlinServer(TestHost, TestPort);
             using (var gremlinClient = new GremlinClient(gremlinServer))
@@ -54,31 +55,31 @@ namespace Gremlin.Net.IntegrationTest
                 var responseMsgSize = 5000;
                 var requestMsg = $"'1'*{responseMsgSize}";
 
-                var response = gremlinClient.SubmitWithSingleResultAsync<string>(requestMsg).Result;
+                var response = await gremlinClient.SubmitWithSingleResultAsync<string>(requestMsg);
 
                 Assert.Equal(responseMsgSize, response.Length);
             }
         }
 
         [Fact]
-        public void InvalidScriptShouldThrowException()
+        public async Task InvalidScriptShouldThrowException()
         {
             var gremlinServer = new GremlinServer(TestHost, TestPort);
             using (var gremlinClient = new GremlinClient(gremlinServer))
             {
                 var requestMsg = "invalid";
 
-                var exception = Assert.Throws<AggregateException>(() => gremlinClient.SubmitAsync(requestMsg).Wait());
+                var exception =
+                    await Assert.ThrowsAsync<ResponseException>(() => gremlinClient.SubmitAsync(requestMsg));
 
-                var innerException = exception.InnerException;
-                Assert.Equal(typeof(ResponseException), innerException.GetType());
+                Assert.Equal(typeof(ResponseException), exception.GetType());
                 Assert.Contains($"{ResponseStatusCode.ScriptEvaluationError}: No such property: {requestMsg}",
-                    innerException.Message);
+                    exception.Message);
             }
         }
 
         [Fact]
-        public void ResponseBatchesShouldBeReassembled()
+        public async Task ResponseBatchesShouldBeReassembled()
         {
             const int batchSize = 2;
             var expectedResult = new List<int> {1, 2, 3, 4, 5};
@@ -97,14 +98,14 @@ namespace Gremlin.Net.IntegrationTest
             var gremlinServer = new GremlinServer(TestHost, TestPort);
             using (var gremlinClient = new GremlinClient(gremlinServer))
             {
-                var response = gremlinClient.SubmitAsync<int>(requestMessage).Result;
+                var response = await gremlinClient.SubmitAsync<int>(requestMessage);
 
                 Assert.Equal(expectedResult, response);
             }
         }
 
         [Fact]
-        public void ResponsesShouldBeCorrectlyAssignedToRequests()
+        public async Task ResponsesShouldBeCorrectlyAssignedToRequests()
         {
             var gremlinServer = new GremlinServer(TestHost, TestPort);
             using (var gremlinClient = new GremlinClient(gremlinServer))
@@ -119,15 +120,15 @@ namespace Gremlin.Net.IntegrationTest
                 var firstResponseTask = gremlinClient.SubmitWithSingleResultAsync<int>(firstRequestMsg);
                 var secondResponseTask = gremlinClient.SubmitWithSingleResultAsync<int>(secondScript);
 
-                var secondResponse = secondResponseTask.Result;
+                var secondResponse = await secondResponseTask;
                 Assert.Equal(expectedSecondResponse, secondResponse);
-                var firstResponse = firstResponseTask.Result;
+                var firstResponse = await firstResponseTask;
                 Assert.Equal(expectedFirstResult, firstResponse);
             }
         }
 
         [Fact]
-        public void ResponsesShouldBeEnumerable()
+        public async Task ResponsesShouldBeEnumerable()
         {
             var gremlinServer = new GremlinServer(TestHost, TestPort);
             using (var gremlinClient = new GremlinClient(gremlinServer))
@@ -136,44 +137,38 @@ namespace Gremlin.Net.IntegrationTest
                 var requestMsg = $"{nameof(expectedResult)}";
                 var bindings = new Dictionary<string, object> {{nameof(expectedResult), expectedResult}};
 
-                var response = gremlinClient.SubmitAsync<int>(requestMsg, bindings).Result;
+                var response = await gremlinClient.SubmitAsync<int>(requestMsg, bindings);
 
                 Assert.Equal(expectedResult, response);
             }
         }
 
         [Fact]
-        public void SimpleInvalidScriptShouldThrowExceptionOnExecution()
+        public async Task SimpleInvalidScriptShouldThrowExceptionOnExecution()
         {
             var gremlinServer = new GremlinServer(TestHost, TestPort);
             using (var gremlinClient = new GremlinClient(gremlinServer))
             {
                 var invalidRequestScript = "invalid";
 
-                var exceptionThrown =
-                    Assert.Throws<AggregateException>(() => gremlinClient.SubmitAsync(invalidRequestScript).Wait());
-
-                var innerException = exceptionThrown.InnerException;
-                Assert.Equal(typeof(ResponseException), innerException.GetType());
+                await Assert.ThrowsAsync<ResponseException>(() => gremlinClient.SubmitAsync(invalidRequestScript));
             }
         }
 
         [Fact]
-        public void SimpleScriptShouldBeExecutedWithoutErrors()
+        public async Task SimpleScriptShouldBeExecutedWithoutErrors()
         {
             var gremlinServer = new GremlinServer(TestHost, TestPort);
             using (var gremlinClient = new GremlinClient(gremlinServer))
             {
                 var requestMsg = _requestMessageProvider.GetDummyMessage();
 
-                var responseTask = gremlinClient.SubmitAsync(requestMsg);
-
-                responseTask.Wait();
+                await gremlinClient.SubmitAsync(requestMsg);
             }
         }
 
         [Fact]
-        public void UseBindingsForScript()
+        public async Task UseBindingsForScript()
         {
             var gremlinServer = new GremlinServer(TestHost, TestPort);
             using (var gremlinClient = new GremlinClient(gremlinServer))
@@ -183,14 +178,14 @@ namespace Gremlin.Net.IntegrationTest
                 var b = 2;
                 var bindings = new Dictionary<string, object> {{"a", a}, {"b", b}};
 
-                var response = gremlinClient.SubmitWithSingleResultAsync<int>(requestMsg, bindings).Result;
+                var response = await gremlinClient.SubmitWithSingleResultAsync<int>(requestMsg, bindings);
 
                 Assert.Equal(a + b, response);
             }
         }
 
         [Fact]
-        public void HandleResponseWithoutContent()
+        public async Task HandleResponseWithoutContent()
         {
             var gremlinServer = new GremlinServer(TestHost, TestPort);
             using (var gremlinClient = new GremlinClient(gremlinServer))
@@ -202,7 +197,7 @@ namespace Gremlin.Net.IntegrationTest
                     {"propertyValue", "unknownTestName"}
                 };
 
-                var response = gremlinClient.SubmitWithSingleResultAsync<object>(gremlinScript, bindings).Result;
+                var response = await gremlinClient.SubmitWithSingleResultAsync<object>(gremlinScript, bindings);
 
                 Assert.Null(response);
             }
