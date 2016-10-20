@@ -47,7 +47,7 @@ namespace Gremlin.Net
             }
 
             if (connection == null)
-                connection = await CreateNewConnectionAsync();
+                connection = await CreateNewConnectionAsync().ConfigureAwait(false);
 
             return new ProxyConnection(connection, AddConnection);
         }
@@ -56,7 +56,7 @@ namespace Gremlin.Net
         {
             NrConnections++;
             var newConnection = new Connection();
-            await newConnection.ConnectAsync(_uri);
+            await newConnection.ConnectAsync(_uri).ConfigureAwait(false);
             return newConnection;
         }
 
@@ -99,11 +99,8 @@ namespace Gremlin.Net
         private async Task TeardownAsync()
         {
             var closeTasks = new List<Task>(_connections.Count);
-            lock (_connectionsLock)
-            {
-                closeTasks.AddRange(_connections.Select(conn => conn.CloseAsync()));
-            }
-            await Task.WhenAll(closeTasks);
+            closeTasks.AddRange(_connections.Select(conn => conn.CloseAsync()));
+            await Task.WhenAll(closeTasks).ConfigureAwait(false);
         }
         #endregion
     }

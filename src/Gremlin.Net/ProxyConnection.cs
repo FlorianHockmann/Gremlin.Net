@@ -36,7 +36,7 @@ namespace Gremlin.Net
 
         public async Task<IList<T>> SubmitAsync<T>(ScriptRequestMessage requestMessage)
         {
-            return await _realConnection.SubmitAsync<T>(requestMessage);
+            return await _realConnection.SubmitAsync<T>(requestMessage).ConfigureAwait(false);
         }
 
         public void Dispose()

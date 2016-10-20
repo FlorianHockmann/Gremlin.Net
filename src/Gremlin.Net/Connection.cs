@@ -30,24 +30,24 @@ namespace Gremlin.Net
         
         public async Task ConnectAsync(Uri uri)
         {
-            await _webSocketConnection.ConnectAsync(uri);
+            await _webSocketConnection.ConnectAsync(uri).ConfigureAwait(false);
         }
 
         public async Task CloseAsync()
         {
-            await _webSocketConnection.CloseAsync();
+            await _webSocketConnection.CloseAsync().ConfigureAwait(false);
         }
 
         public async Task<IList<T>> SubmitAsync<T>(ScriptRequestMessage requestMessage)
         {
-            await SendAsync(requestMessage);
-            return await ReceiveAsync<T>();
+            await SendAsync(requestMessage).ConfigureAwait(false);
+            return await ReceiveAsync<T>().ConfigureAwait(false);
         }
 
         private async Task SendAsync(ScriptRequestMessage message)
         {
             var serializedMsg = _messageSerializer.SerializeMessage(message);
-            await _webSocketConnection.SendMessageAsync(serializedMsg);
+            await _webSocketConnection.SendMessageAsync(serializedMsg).ConfigureAwait(false);
         }
 
         private async Task<IList<T>> ReceiveAsync<T>()
@@ -56,7 +56,7 @@ namespace Gremlin.Net
             var result = new List<T>();
             do
             {
-                var received = await _webSocketConnection.ReceiveMessageAsync();
+                var received = await _webSocketConnection.ReceiveMessageAsync().ConfigureAwait(false);
                 var receivedMessage = _messageSerializer.DeserializeMessage<ResponseMessage<T>>(received);
 
                 status = receivedMessage.Status;

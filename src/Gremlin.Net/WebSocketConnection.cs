@@ -33,17 +33,21 @@ namespace Gremlin.Net
         public async Task ConnectAsync(Uri uri)
         {
             _client = new ClientWebSocket();
-            await _client.ConnectAsync(uri, CancellationToken.None);
+            await _client.ConnectAsync(uri, CancellationToken.None).ConfigureAwait(false);
         }
 
         public async Task CloseAsync()
         {
-            await _client.CloseAsync(WebSocketCloseStatus.NormalClosure, string.Empty, CancellationToken.None);
+            await
+                _client.CloseAsync(WebSocketCloseStatus.NormalClosure, string.Empty, CancellationToken.None)
+                    .ConfigureAwait(false);
         }
 
         public async Task SendMessageAsync(byte[] message)
         {
-            await _client.SendAsync(new ArraySegment<byte>(message), MessageType, true, CancellationToken.None);
+            await
+                _client.SendAsync(new ArraySegment<byte>(message), MessageType, true, CancellationToken.None)
+                    .ConfigureAwait(false);
         }
 
         public async Task<byte[]> ReceiveMessageAsync()
@@ -54,7 +58,7 @@ namespace Gremlin.Net
                 do
                 {
                     var receiveBuffer = new ArraySegment<byte>(new byte[ReceiveBufferSize]);
-                    received = await _client.ReceiveAsync(receiveBuffer, CancellationToken.None);
+                    received = await _client.ReceiveAsync(receiveBuffer, CancellationToken.None).ConfigureAwait(false);
                     ms.Write(receiveBuffer.Array, receiveBuffer.Offset, received.Count);
                 } while (!received.EndOfMessage);
 

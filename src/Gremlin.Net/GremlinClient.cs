@@ -38,25 +38,25 @@ namespace Gremlin.Net
         public async Task<T> SubmitWithSingleResultAsync<T>(string requestScript,
             Dictionary<string, object> bindings = null)
         {
-            var resultCollection = await SubmitAsync<T>(requestScript, bindings);
+            var resultCollection = await SubmitAsync<T>(requestScript, bindings).ConfigureAwait(false);
             return resultCollection.FirstOrDefault();
         }
 
         public async Task<T> SubmitWithSingleResultAsync<T>(ScriptRequestMessage requestMessage)
         {
-            var resultCollection = await SubmitAsync<T>(requestMessage);
+            var resultCollection = await SubmitAsync<T>(requestMessage).ConfigureAwait(false);
             return resultCollection.FirstOrDefault();
         }
 
         public async Task SubmitAsync(string requestScript,
             Dictionary<string, object> bindings = null)
         {
-            await SubmitAsync<object>(requestScript, bindings);
+            await SubmitAsync<object>(requestScript, bindings).ConfigureAwait(false);
         }
 
         public async Task SubmitAsync(ScriptRequestMessage requestMessage)
         {
-            await SubmitAsync<object>(requestMessage);
+            await SubmitAsync<object>(requestMessage).ConfigureAwait(false);
         }
 
         public async Task<IList<T>> SubmitAsync<T>(string requestScript,
@@ -66,13 +66,13 @@ namespace Gremlin.Net
             {
                 Arguments = new ScriptRequestArguments {GremlinScript = requestScript, Bindings = bindings}
             };
-            return await SubmitAsync<T>(requestMessage);
+            return await SubmitAsync<T>(requestMessage).ConfigureAwait(false);
         }
 
         public async Task<IList<T>> SubmitAsync<T>(ScriptRequestMessage requestMessage)
         {
-            using (var connection = await _connectionPool.GetAvailableConnectionAsync())
-                return await connection.SubmitAsync<T>(requestMessage);
+            using (var connection = await _connectionPool.GetAvailableConnectionAsync().ConfigureAwait(false))
+                return await connection.SubmitAsync<T>(requestMessage).ConfigureAwait(false);
         }
 
         #region IDisposable Support
