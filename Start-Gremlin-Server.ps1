@@ -39,6 +39,9 @@ else {
 $gremlinServerStartFile = "bin/gremlin-server.bat"
 Write-Output "Starting Gremlin Server from $gremlinServerStartFile"
 Write-Output "Switching to directory $gremlinServerDirectory"
+$currentDirectory = (Get-Item -Path ".\" -Verbose).FullName
 Set-Location $gremlinServerDirectory
 Start-Process $gremlinServerStartFile
 Write-Output "Gremlin Server should now be running"
+
+Set-Location $currentDirectory
