@@ -4,7 +4,7 @@
     "debugType": "portable"
   },
   "dependencies": {
-    "Gremlin.Net": "0.1.0-*",
+    "Gremlin.Net": "*",
     "xunit": "2.2.0-beta3-build3402",
     "dotnet-test-xunit": "2.2.0-preview2-build1029",
     "xunit.runner.console": "2.1.0",
