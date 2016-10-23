@@ -1,7 +1,10 @@
 {
   "version": "1.0.0-*",
   "buildOptions": {
-    "debugType": "portable"
+    "debugType": "portable",
+	"copyToOutput": {
+		"include": ["appsettings.json"]
+	}
   },
   "dependencies": {
     "Gremlin.Net": "0.1.0-*",
@@ -9,7 +12,9 @@
     "dotnet-test-xunit": "2.2.0-preview2-build1029",
     "Microsoft.Extensions.Configuration": "1.0.0",
     "Microsoft.Extensions.Configuration.Json": "1.0.0",
-    "xunit.runner.console": "2.1.0"
+    "xunit.runner.console": "2.1.0",
+    "OpenCover": "4.6.519",
+	"coveralls.io": "1.3.4"
   },
   "testRunner": "xunit",
   "frameworks": {
@@ -20,6 +25,7 @@
                     "version": "1.0.0"
                 }
             }
-        }
+        },
+		"net46":  {}
     }
 }
