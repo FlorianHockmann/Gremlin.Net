@@ -25,6 +25,6 @@ namespace Gremlin.Net
 {
     public interface IGremlinClient : IDisposable
     {
-        Task<IList<T>> SubmitAsync<T>(ScriptRequestMessage requestMessage);
+        Task<IEnumerable<T>> SubmitAsync<T>(ScriptRequestMessage requestMessage);
     }
 }

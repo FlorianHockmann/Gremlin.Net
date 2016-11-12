@@ -34,7 +34,7 @@ namespace Gremlin.Net
 
         public int NrConnections => _connectionPool.NrConnections;
         
-        public async Task<IList<T>> SubmitAsync<T>(ScriptRequestMessage requestMessage)
+        public async Task<IEnumerable<T>> SubmitAsync<T>(ScriptRequestMessage requestMessage)
         {
             using (var connection = await _connectionPool.GetAvailableConnectionAsync().ConfigureAwait(false))
                 return await connection.SubmitAsync<T>(requestMessage).ConfigureAwait(false);

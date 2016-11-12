@@ -1,4 +1,5 @@
 #region License
+
 /*
  * Copyright 2016 Florian Hockmann
  * 
@@ -14,6 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 #endregion
 
 using System.Collections.Generic;
@@ -51,7 +53,7 @@ namespace Gremlin.Net
             await gremlinClient.SubmitAsync<object>(requestMessage).ConfigureAwait(false);
         }
 
-        public static async Task<IList<T>> SubmitAsync<T>(this IGremlinClient gremlinClient, string requestScript,
+        public static async Task<IEnumerable<T>> SubmitAsync<T>(this IGremlinClient gremlinClient, string requestScript,
             Dictionary<string, object> bindings = null)
         {
             var requestMessage = new ScriptRequestMessage
