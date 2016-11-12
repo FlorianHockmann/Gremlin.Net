@@ -38,7 +38,7 @@ namespace Gremlin.Net
             await _webSocketConnection.CloseAsync().ConfigureAwait(false);
         }
 
-        public async Task<IList<T>> SubmitAsync<T>(ScriptRequestMessage requestMessage)
+        public async Task<IEnumerable<T>> SubmitAsync<T>(ScriptRequestMessage requestMessage)
         {
             await SendAsync(requestMessage).ConfigureAwait(false);
             return await ReceiveAsync<T>().ConfigureAwait(false);
@@ -50,7 +50,7 @@ namespace Gremlin.Net
             await _webSocketConnection.SendMessageAsync(serializedMsg).ConfigureAwait(false);
         }
 
-        private async Task<IList<T>> ReceiveAsync<T>()
+        private async Task<IEnumerable<T>> ReceiveAsync<T>()
         {
             ResponseStatus status;
             var result = new List<T>();

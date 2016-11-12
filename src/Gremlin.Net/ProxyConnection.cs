@@ -34,7 +34,7 @@ namespace Gremlin.Net
             _releaseAction = releaseAction;
         }
 
-        public async Task<IList<T>> SubmitAsync<T>(ScriptRequestMessage requestMessage)
+        public async Task<IEnumerable<T>> SubmitAsync<T>(ScriptRequestMessage requestMessage)
         {
             return await _realConnection.SubmitAsync<T>(requestMessage).ConfigureAwait(false);
         }
