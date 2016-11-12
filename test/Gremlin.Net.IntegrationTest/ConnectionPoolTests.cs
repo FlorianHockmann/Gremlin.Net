@@ -71,7 +71,7 @@ namespace Gremlin.Net.IntegrationTest
             }
         }
 
-        private async Task ExecuteMultipleLongRunningRequestsInParallel(GremlinClient gremlinClient, int nrRequests,
+        private async Task ExecuteMultipleLongRunningRequestsInParallel(IGremlinClient gremlinClient, int nrRequests,
             int requestRunningTimeInMs)
         {
             var longRunningRequestMsg = _requestMessageProvider.GetSleepMessage(requestRunningTimeInMs);
