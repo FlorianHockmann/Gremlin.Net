@@ -21,7 +21,7 @@ using Newtonsoft.Json;
 
 namespace Gremlin.Net.Messages
 {
-    public class ResponseMessage<T>
+    internal class ResponseMessage<T>
     {
         [JsonProperty(PropertyName = "requestId")]
         public Guid RequestId { get; set; }

@@ -20,13 +20,26 @@ using System;
 
 namespace Gremlin.Net
 {
+    /// <summary>
+    /// Represents a Gremlin Server.
+    /// </summary>
     public class GremlinServer
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GremlinServer"/> class with the specified connection parameters.
+        /// </summary>
+        /// <param name="hostname">The hostname of the server.</param>
+        /// <param name="port">The port on which Gremlin Server can be reached.</param>
+        /// <param name="enableSsl">Specifies whether SSL should be enabled.</param>
         public GremlinServer(string hostname, int port = 8182, bool enableSsl = false)
         {
             Uri = CreateUri(hostname, port, enableSsl);
         }
 
+        /// <summary>
+        /// Gets the URI of the Gremlin Server.
+        /// </summary>
+        /// <value>The WebSocket <see cref="System.Uri"/> that the Gremlin Server responds to.</value>
         public Uri Uri { get; }
 
         private Uri CreateUri(string hostname, int port, bool enableSsl)

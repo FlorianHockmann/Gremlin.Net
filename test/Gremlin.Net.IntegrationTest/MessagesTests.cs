@@ -66,7 +66,7 @@ namespace Gremlin.Net.IntegrationTest
                 var thrownException =
                     await Assert.ThrowsAsync<ResponseException>(() => gremlinClient.SubmitAsync(requestMsg));
 
-                Assert.Contains(ResponseStatusCode.MalformedRequest.ToString(), thrownException.Message);
+                Assert.Contains("MalformedRequest", thrownException.Message);
                 Assert.Contains(ivalidOperationName, thrownException.Message);
             }
         }
@@ -84,7 +84,7 @@ namespace Gremlin.Net.IntegrationTest
                 var thrownException =
                     await Assert.ThrowsAsync<ResponseException>(() => gremlinClient.SubmitAsync(requestMsg));
 
-                Assert.Contains(ResponseStatusCode.InvalidRequestArguments.ToString(), thrownException.Message);
+                Assert.Contains("InvalidRequestArguments", thrownException.Message);
                 Assert.Contains(invalidProcessorName, thrownException.Message);
                 Assert.Contains("OpProcessor", thrownException.Message);
             }
@@ -107,7 +107,7 @@ namespace Gremlin.Net.IntegrationTest
                     await Assert.ThrowsAsync<ResponseException>(() => gremlinClient.SubmitAsync(requestMsg));
 
                 evaluationStopWatch.Stop();
-                Assert.Contains(ResponseStatusCode.ServerTimeout.ToString(), thrownException.Message);
+                Assert.Contains("ServerTimeout", thrownException.Message);
                 Assert.Contains(timeOutInMs.ToString(), thrownException.Message);
                 Assert.True(evaluationStopWatch.ElapsedMilliseconds < scriptSleepTimeInMs);
             }
@@ -126,7 +126,7 @@ namespace Gremlin.Net.IntegrationTest
                 var thrownException =
                     await Assert.ThrowsAsync<ResponseException>(() => gremlinClient.SubmitAsync(requestMsg));
 
-                Assert.Contains(ResponseStatusCode.ScriptEvaluationError.ToString(), thrownException.Message);
+                Assert.Contains("ScriptEvaluationError", thrownException.Message);
                 Assert.Contains(unknownLanguage, thrownException.Message);
                 Assert.Contains("Language", thrownException.Message);
             }

@@ -20,9 +20,12 @@ using System;
 
 namespace Gremlin.Net.Exceptions
 {
+    /// <summary>
+    /// The exception that is thrown when a response is received from Gremlin Server that indicates that an error occurred.
+    /// </summary>
     public class ResponseException : Exception
     {
-        public ResponseException(string message) : base(message)
+        internal ResponseException(string message) : base(message)
         {
         }
     }

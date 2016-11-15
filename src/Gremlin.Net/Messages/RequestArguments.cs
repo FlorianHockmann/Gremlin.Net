@@ -20,8 +20,17 @@ using Newtonsoft.Json;
 
 namespace Gremlin.Net.Messages
 {
+    /// <summary>
+    /// Represents parameters to pass to Gremlin Server.
+    /// </summary>
     public abstract class RequestArguments
     {
+        /// <summary>
+        /// Gets or set the number of iterations each ResponseMessage should contain.
+        /// </summary>
+        /// <value>
+        /// When the result is an iterator this value defines the number of iterations each ResponseMessage should contain - overrides the resultIterationBatchSize server setting.
+        /// </value>
         [JsonProperty(PropertyName = "batchSize", NullValueHandling = NullValueHandling.Ignore)]
         public int? BatchSize { get; set; }
     }

@@ -22,7 +22,7 @@ using Newtonsoft.Json;
 
 namespace Gremlin.Net.Messages
 {
-    public class ResponseStatus
+    internal class ResponseStatus
     {
         [JsonProperty(PropertyName = "code")]
         public ResponseStatusCode Code { get; set; }

@@ -20,7 +20,7 @@ using System;
 
 namespace Gremlin.Net.Messages
 {
-    public enum ResponseStatusCode
+    internal enum ResponseStatusCode
     {
         Success = 200,
         NoContent = 204,
