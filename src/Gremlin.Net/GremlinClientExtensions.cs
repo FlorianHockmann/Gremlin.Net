@@ -54,7 +54,7 @@ namespace Gremlin.Net
         /// <remarks>If multiple results are received from Gremlin Server, then only the first gets returned. Use <see cref="SubmitAsync{T}"/> instead when you expect a collection of results.</remarks>
         /// <typeparam name="T">The type of the expected result.</typeparam>
         /// <param name="gremlinClient">The <see cref="IGremlinClient"/> that submits the request.</param>
-        /// <param name="requestMessage">The <see cref="IGremlinClient"/> to send.</param>
+        /// <param name="requestMessage">The <see cref="ScriptRequestMessage"/> to send.</param>
         /// <returns>A single result received from the Gremlin Server.</returns>
         /// <exception cref="Exceptions.ResponseException">Thrown when a response is received from Gremlin Server that indicates that an error occurred.</exception>
         public static async Task<T> SubmitWithSingleResultAsync<T>(this IGremlinClient gremlinClient,
@@ -82,7 +82,7 @@ namespace Gremlin.Net
         /// Submits a request message as an asynchronous operation without returning the result received from the Gremlin Server.
         /// </summary>
         /// <param name="gremlinClient">The <see cref="IGremlinClient"/> that submits the request.</param>
-        /// <param name="requestMessage">The <see cref="IGremlinClient"/> to send.</param>
+        /// <param name="requestMessage">The <see cref="ScriptRequestMessage"/> to send.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
         /// <exception cref="Exceptions.ResponseException">Thrown when a response is received from Gremlin Server that indicates that an error occurred.</exception>
         public static async Task SubmitAsync(this IGremlinClient gremlinClient, ScriptRequestMessage requestMessage)
