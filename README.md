@@ -17,3 +17,7 @@ using (var gremlinClient = new GremlinClient(gremlinServer))
         await gremlinClient.SubmitWithSingleResultAsync<bool>("g.V().has('name', 'gremlin').hasNext()");
 }
 ```
+
+## API Reference
+
+The API reference can be found here: [https://florianhockmann.github.io/Gremlin.Net/api/Gremlin.Net.html](https://florianhockmann.github.io/Gremlin.Net/api/Gremlin.Net.html)
