@@ -22,8 +22,7 @@
         "files": [
           "api/**.yml",
           "api/index.md"
-        ],
-        "dest": "."
+        ]
       },
       {
         "files": [
