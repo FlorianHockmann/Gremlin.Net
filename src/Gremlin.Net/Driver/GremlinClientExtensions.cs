@@ -21,9 +21,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Gremlin.Net.Messages;
+using Gremlin.Net.Driver.Messages;
 
-namespace Gremlin.Net
+namespace Gremlin.Net.Driver
 {
     /// <summary>
     /// Provides extension methods for the <see cref="IGremlinClient"/> interface.
@@ -107,6 +107,11 @@ namespace Gremlin.Net
                 Arguments = new ScriptRequestArguments {GremlinScript = requestScript, Bindings = bindings}
             };
             return await gremlinClient.SubmitAsync<T>(requestMessage).ConfigureAwait(false);
+        }
+
+        public static IEnumerable<T> Submit<T>(this IGremlinClient gremlinClient, ScriptRequestMessage requestMessage)
+        {
+            return gremlinClient.SubmitAsync<T>(requestMessage).Result;
         }
     }
 }

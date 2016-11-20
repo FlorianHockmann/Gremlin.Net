@@ -22,7 +22,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Gremlin.Net
+namespace Gremlin.Net.Driver
 {
     internal class ConnectionPool : IDisposable
     {

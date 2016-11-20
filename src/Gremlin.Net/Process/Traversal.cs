@@ -16,15 +16,15 @@
  */
 #endregion
 
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Gremlin.Net.Messages;
-
-namespace Gremlin.Net
+namespace Gremlin.Net.Process
 {
-    internal interface IConnection : IDisposable
+    public class Traversal
     {
-        Task<IEnumerable<T>> SubmitAsync<T>(ScriptRequestMessage requestMessage);
-    }
+        public Bytecode Bytecode { get; set; }
+
+        public Traversal(Bytecode bytecode)
+        {
+            Bytecode = bytecode;
+        }
+    } 
 }

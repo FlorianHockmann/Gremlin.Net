@@ -17,10 +17,10 @@
 #endregion
 
 using System.Text;
-using Gremlin.Net.Messages;
+using Gremlin.Net.Driver.Messages;
 using Newtonsoft.Json;
 
-namespace Gremlin.Net
+namespace Gremlin.Net.Driver
 {
     internal class JsonMessageSerializer
     {

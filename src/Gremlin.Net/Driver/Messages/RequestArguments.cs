@@ -16,17 +16,22 @@
  */
 #endregion
 
-using System;
+using Newtonsoft.Json;
 
-namespace Gremlin.Net.Exceptions
+namespace Gremlin.Net.Driver.Messages
 {
     /// <summary>
-    /// The exception that is thrown when a response is received from Gremlin Server that indicates that an error occurred.
+    /// Represents parameters to pass to Gremlin Server.
     /// </summary>
-    public class ResponseException : Exception
+    public abstract class RequestArguments
     {
-        internal ResponseException(string message) : base(message)
-        {
-        }
+        /// <summary>
+        /// Gets or set the number of iterations each ResponseMessage should contain.
+        /// </summary>
+        /// <value>
+        /// When the result is an iterator this value defines the number of iterations each ResponseMessage should contain - overrides the resultIterationBatchSize server setting.
+        /// </value>
+        [JsonProperty(PropertyName = "batchSize", NullValueHandling = NullValueHandling.Ignore)]
+        public int? BatchSize { get; set; }
     }
 }

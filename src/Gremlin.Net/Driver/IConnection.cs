@@ -19,22 +19,12 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Gremlin.Net.Messages;
+using Gremlin.Net.Driver.Messages;
 
-namespace Gremlin.Net
+namespace Gremlin.Net.Driver
 {
-    /// <summary>
-    /// Provides a mechanism for submitting Gremlin requests.
-    /// </summary>
-    public interface IGremlinClient : IDisposable
+    internal interface IConnection : IDisposable
     {
-        /// <summary>
-        /// Submits a request message as an asynchronous operation.
-        /// </summary>
-        /// <typeparam name="T">The type of the expected results.</typeparam>
-        /// <param name="requestMessage">The <see cref="ScriptRequestMessage"/> to send.</param>
-        /// <returns>An enumerable collection of the data returned from the server.</returns>
-        /// <exception cref="Exceptions.ResponseException">Thrown when a response is received from Gremlin Server that indicates that an error occurred.</exception>
         Task<IEnumerable<T>> SubmitAsync<T>(ScriptRequestMessage requestMessage);
     }
 }

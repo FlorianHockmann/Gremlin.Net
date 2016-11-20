@@ -19,7 +19,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace Gremlin.Net.Messages
+namespace Gremlin.Net.Driver.Messages
 {
     /// <summary>
     /// Represents a script request message to send to a Gremlin Server.
@@ -27,11 +27,11 @@ namespace Gremlin.Net.Messages
     public class ScriptRequestMessage
     {
         /// <summary>
-        /// Gets the ID of this request message.
+        /// Gets or sets the ID of this request message.
         /// </summary>
         /// <value>A UUID representing the unique identification for the request.</value>
         [JsonProperty(PropertyName = "requestId")]
-        public Guid RequestId => Guid.NewGuid();
+        public Guid RequestId { get; set; } = Guid.NewGuid();
 
         /// <summary>
         /// Gets or sets the name of the operation that should be executed by the Gremlin Server.

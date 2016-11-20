@@ -17,29 +17,16 @@
 #endregion
 
 using System.Collections.Generic;
-using Gremlin.Net.Exceptions;
 using Newtonsoft.Json;
 
-namespace Gremlin.Net.Messages
+namespace Gremlin.Net.Driver.Messages
 {
-    internal class ResponseStatus
+    internal class ResponseResult<T>
     {
-        [JsonProperty(PropertyName = "code")]
-        public ResponseStatusCode Code { get; set; }
+        [JsonProperty(PropertyName = "data")]
+        public List<T> Data { get; set; }
 
-        [JsonProperty(PropertyName = "attributes")]
-        public Dictionary<string, object> Attributes { get; set; }
-
-        [JsonProperty(PropertyName = "message")]
-        public string Message { get; set; }
-    }
-
-    internal static class ResponseStatusExtensions
-    {
-        public static void ThrowIfStatusIndicatesError(this ResponseStatus status)
-        {
-            if (status.Code.IndicatesError())
-                throw new ResponseException($"{status.Code}: {status.Message}");
-        }
+        [JsonProperty(PropertyName = "meta")]
+        public Dictionary<string, object> Meta { get; set; }
     }
 }

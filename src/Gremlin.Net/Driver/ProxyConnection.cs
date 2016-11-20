@@ -19,9 +19,9 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Gremlin.Net.Messages;
+using Gremlin.Net.Driver.Messages;
 
-namespace Gremlin.Net
+namespace Gremlin.Net.Driver
 {
     internal sealed class ProxyConnection : IConnection
     {

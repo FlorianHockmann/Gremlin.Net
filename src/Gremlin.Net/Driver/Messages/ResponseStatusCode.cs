@@ -18,7 +18,7 @@
 
 using System;
 
-namespace Gremlin.Net.Messages
+namespace Gremlin.Net.Driver.Messages
 {
     internal enum ResponseStatusCode
     {

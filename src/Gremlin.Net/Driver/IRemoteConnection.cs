@@ -16,20 +16,12 @@
  */
 #endregion
 
-using Gremlin.Net.Driver.Messages;
-using Xunit;
+using Gremlin.Net.Process;
 
-namespace Gremlin.Net.UnitTest
+namespace Gremlin.Net.Driver
 {
-    public class MessagesTests
+    public interface IRemoteConnection
     {
-        [Fact]
-        public void RequestIdsShouldBeUnique()
-        {
-            var firstMsg = new ScriptRequestMessage();
-            var secondMsg = new ScriptRequestMessage();
-
-            Assert.NotEqual(firstMsg.RequestId, secondMsg.RequestId);
-        }
+        RemoteTraversal Submit(Bytecode bytecode);
     }
 }

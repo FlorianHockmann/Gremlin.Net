@@ -18,7 +18,7 @@
 
 using System;
 
-namespace Gremlin.Net
+namespace Gremlin.Net.Driver
 {
     /// <summary>
     /// Represents a Gremlin Server.

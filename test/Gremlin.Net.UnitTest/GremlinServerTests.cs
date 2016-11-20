@@ -16,6 +16,7 @@
  */
 #endregion
 
+using Gremlin.Net.Driver;
 using Xunit;
 
 namespace Gremlin.Net.UnitTest

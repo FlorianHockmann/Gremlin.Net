@@ -16,17 +16,20 @@
  */
 #endregion
 
-using System.Collections.Generic;
+using System;
 using Newtonsoft.Json;
 
-namespace Gremlin.Net.Messages
+namespace Gremlin.Net.Driver.Messages
 {
-    internal class ResponseResult<T>
+    internal class ResponseMessage<T>
     {
-        [JsonProperty(PropertyName = "data")]
-        public List<T> Data { get; set; }
+        [JsonProperty(PropertyName = "requestId")]
+        public Guid RequestId { get; set; }
 
-        [JsonProperty(PropertyName = "meta")]
-        public Dictionary<string, object> Meta { get; set; }
+        [JsonProperty(PropertyName = "status")]
+        public ResponseStatus Status { get; set; }
+
+        [JsonProperty(PropertyName = "result")]
+        public ResponseResult<T> Result { get; set; }
     }
 }

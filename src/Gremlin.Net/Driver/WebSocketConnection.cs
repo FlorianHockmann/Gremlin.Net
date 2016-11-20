@@ -22,7 +22,7 @@ using System.Net.WebSockets;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Gremlin.Net
+namespace Gremlin.Net.Driver
 {
     internal class WebSocketConnection : IDisposable
     {

@@ -16,20 +16,15 @@
  */
 #endregion
 
-using System;
-using Newtonsoft.Json;
+using Gremlin.Net.Process;
 
-namespace Gremlin.Net.Messages
+namespace Gremlin.Net.Driver
 {
-    internal class ResponseMessage<T>
+    public class RemoteTraversal : Traversal
     {
-        [JsonProperty(PropertyName = "requestId")]
-        public Guid RequestId { get; set; }
-
-        [JsonProperty(PropertyName = "status")]
-        public ResponseStatus Status { get; set; }
-
-        [JsonProperty(PropertyName = "result")]
-        public ResponseResult<T> Result { get; set; }
+        public RemoteTraversal()
+            : base(null)
+        {
+        }
     }
 }

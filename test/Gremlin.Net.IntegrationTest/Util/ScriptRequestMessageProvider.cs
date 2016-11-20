@@ -17,7 +17,7 @@
 #endregion
 
 using System.Collections.Generic;
-using Gremlin.Net.Messages;
+using Gremlin.Net.Driver.Messages;
 
 namespace Gremlin.Net.IntegrationTest.Util
 {
@@ -41,7 +41,7 @@ namespace Gremlin.Net.IntegrationTest.Util
         public ScriptRequestMessage GetDummyMessage()
         {
             var gremlinScript = "1";
-            return new ScriptRequestMessage {Arguments = new ScriptRequestArguments {GremlinScript = gremlinScript}};
+            return new ScriptRequestMessage { Arguments = new ScriptRequestArguments {GremlinScript = gremlinScript}};
         }
     }
 }

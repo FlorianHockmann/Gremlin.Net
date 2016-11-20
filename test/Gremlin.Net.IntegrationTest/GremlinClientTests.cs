@@ -19,9 +19,10 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Gremlin.Net.Exceptions;
+using Gremlin.Net.Driver;
+using Gremlin.Net.Driver.Exceptions;
+using Gremlin.Net.Driver.Messages;
 using Gremlin.Net.IntegrationTest.Util;
-using Gremlin.Net.Messages;
 using Xunit;
 
 namespace Gremlin.Net.IntegrationTest
