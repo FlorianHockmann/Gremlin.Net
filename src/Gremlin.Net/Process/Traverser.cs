@@ -16,12 +16,17 @@
  */
 #endregion
 
-using Gremlin.Net.Process;
-
-namespace Gremlin.Net.Driver
+namespace Gremlin.Net.Process
 {
-    public interface IRemoteConnection
+    public class Traverser<T>
     {
-        RemoteTraversal<TReturn> Submit<TReturn>(Bytecode bytecode);
+        public T Object { get; private set; }
+        public long Bulk { get; private set; }
+
+        public Traverser(T obj, long bulk = 1)
+        {
+            Object = obj;
+            Bulk = bulk;
+        }
     }
 }
