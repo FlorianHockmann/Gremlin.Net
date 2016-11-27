@@ -16,51 +16,23 @@
  */
 #endregion
 
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Gremlin.Net.Process
 {
     public class Bytecode
     {
-        private readonly List<object> _sourceInstructions = new List<object>();
-        private readonly List<object> _stepInstructions = new List<object>();
-        private Dictionary<string, object> _bindings = new Dictionary<string, object>();
+        public List<Instruction> SourceInstructions { get; } = new List<Instruction>();
+        public List<Instruction> StepInstructions { get; } = new List<Instruction>();
 
         public void AddSource(string sourceName, params object[] args)
         {
-            var instruction = new List<object>{sourceName};
-            foreach (var arg in args)
-                instruction.Add(ConvertArgument(arg));
-            _sourceInstructions.AddRange(instruction);
+            SourceInstructions.Add(new Instruction(sourceName, args));
         }
 
         public void AddStep(string stepName, params object[] args)
         {
-            var instruction = new List<object>{stepName};
-            instruction.AddRange(args.Select(ConvertArgument));
-            _stepInstructions.AddRange(instruction);
+            StepInstructions.Add(new Instruction(stepName, args));
         }
-
-        private object ConvertArgument(object argument)
-        {
-            if (IsEnumerable(argument))
-            {
-                var enumerableArgument = argument as IEnumerable;
-                var convertedArguments = (from object arg in enumerableArgument select ConvertArgument(arg)).ToList();
-                return ConvertArgument(convertedArguments);
-            }
-            else
-            {
-                return argument;
-            }
-        }
-
-        private bool IsEnumerable(object argument)
-        {
-            var enumerable = argument as IEnumerable;
-            return enumerable != null;
-        }
-	}
+    }
 }
