@@ -1,4 +1,5 @@
 ﻿using Gremlin.Net.Process;
+using Gremlin.Net.Process.Traversal;
 using Xunit;
 
 namespace Gremlin.Net.UnitTest

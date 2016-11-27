@@ -1,4 +1,4 @@
-#region License
+﻿#region License
 /*
  * Copyright 2016 Florian Hockmann
  * 
@@ -17,22 +17,15 @@
 #endregion
 
 using System.Collections.Generic;
+using Gremlin.Net.Process.Traversal;
 
-namespace Gremlin.Net.Process
+namespace Gremlin.Net.Process.Remote
 {
-    public class Bytecode
+    public class RemoteTraversal<T> : Traversal.Traversal
     {
-        public List<Instruction> SourceInstructions { get; } = new List<Instruction>();
-        public List<Instruction> StepInstructions { get; } = new List<Instruction>();
-
-        public void AddSource(string sourceName, params object[] args)
+        public RemoteTraversal(IEnumerable<Traverser<T>> traversers)
+            : base(null)
         {
-            SourceInstructions.Add(new Instruction(sourceName, args));
-        }
-
-        public void AddStep(string stepName, params object[] args)
-        {
-            StepInstructions.Add(new Instruction(stepName, args));
         }
     }
 }

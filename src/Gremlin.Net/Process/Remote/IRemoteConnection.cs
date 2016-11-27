@@ -1,4 +1,4 @@
-#region License
+﻿#region License
 /*
  * Copyright 2016 Florian Hockmann
  * 
@@ -16,15 +16,12 @@
  */
 #endregion
 
-namespace Gremlin.Net.Process
-{
-    public class Traversal
-    {
-        public Bytecode Bytecode { get; set; }
+using Gremlin.Net.Process.Traversal;
 
-        public Traversal(Bytecode bytecode)
-        {
-            Bytecode = bytecode;
-        }
-    } 
+namespace Gremlin.Net.Process.Remote
+{
+    public interface IRemoteConnection
+    {
+        RemoteTraversal<TReturn> Submit<TReturn>(Bytecode bytecode);
+    }
 }

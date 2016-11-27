@@ -1,4 +1,4 @@
-namespace Gremlin.Net.Process
+namespace Gremlin.Net.Process.Traversal
 {
     public class Instruction
     {

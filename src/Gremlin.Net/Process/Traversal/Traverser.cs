@@ -16,16 +16,17 @@
  */
 #endregion
 
-using System.Collections.Generic;
-using Gremlin.Net.Process;
-
-namespace Gremlin.Net.Driver
+namespace Gremlin.Net.Process.Traversal
 {
-    public class RemoteTraversal<T> : Traversal
+    public class Traverser<T>
     {
-        public RemoteTraversal(IEnumerable<Traverser<T>> traversers)
-            : base(null)
+        public T Object { get; private set; }
+        public long Bulk { get; private set; }
+
+        public Traverser(T obj, long bulk = 1)
         {
+            Object = obj;
+            Bulk = bulk;
         }
     }
 }

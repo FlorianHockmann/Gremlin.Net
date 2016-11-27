@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 /*
  * Copyright 2016 Florian Hockmann
  * 
@@ -16,17 +16,23 @@
  */
 #endregion
 
-namespace Gremlin.Net.Process
-{
-    public class Traverser<T>
-    {
-        public T Object { get; private set; }
-        public long Bulk { get; private set; }
+using System.Collections.Generic;
 
-        public Traverser(T obj, long bulk = 1)
+namespace Gremlin.Net.Process.Traversal
+{
+    public class Bytecode
+    {
+        public List<Instruction> SourceInstructions { get; } = new List<Instruction>();
+        public List<Instruction> StepInstructions { get; } = new List<Instruction>();
+
+        public void AddSource(string sourceName, params object[] args)
         {
-            Object = obj;
-            Bulk = bulk;
+            SourceInstructions.Add(new Instruction(sourceName, args));
+        }
+
+        public void AddStep(string stepName, params object[] args)
+        {
+            StepInstructions.Add(new Instruction(stepName, args));
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Gremlin.Net.Process
+﻿namespace Gremlin.Net.Process.Traversal
 {
     public class Bindings
     {
