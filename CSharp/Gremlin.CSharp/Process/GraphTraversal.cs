@@ -17,7 +17,7 @@
  * under the License.
  */
 
-using namespace Gremlin.Net.Process;
+using Gremlin.Net.Process;
 
 namespace Gremlin.CSharp.Process
 {
