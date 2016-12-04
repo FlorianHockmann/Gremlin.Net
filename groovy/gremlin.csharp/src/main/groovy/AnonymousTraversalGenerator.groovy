@@ -19,6 +19,15 @@ namespace Gremlin.CSharp.Process
 {
     public static class __
     {
+        public static GraphTraversal start()
+        {
+            return new GraphTraversal(new Bytecode());
+        }
+
+        public static GraphTraversal __(params object[] args)
+        {
+            return __.inject(args);
+        }
 """)
         __.getMethods().
                 findAll { GraphTraversal.class.equals(it.returnType) }.
