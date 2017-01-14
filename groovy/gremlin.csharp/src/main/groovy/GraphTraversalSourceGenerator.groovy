@@ -12,21 +12,24 @@ class GraphTraversalSourceGenerator {
 
         csharpClass.append(
 """
-using Gremlin.Net.Process;
+using System.Collections.Generic;
+using Gremlin.Net.Process.Traversal;
 
 namespace Gremlin.CSharp.Process
 {
     public class GraphTraversalSource
     {
+        public IList<ITraversalStrategy> TraversalStrategies { get; set; }
         public Bytecode Bytecode { get; set; }
 
-        public GraphTraversalSource()
-            : this(new Bytecode())
+         public GraphTraversalSource()
+            : this(new List<ITraversalStrategy>(), new Bytecode())
         {
         }
 
-        public GraphTraversalSource(Bytecode bytecode)
+        public GraphTraversalSource(IList<ITraversalStrategy> traversalStrategies, Bytecode bytecode)
         {
+            TraversalStrategies = traversalStrategies;
             Bytecode = bytecode;
         }
 """
@@ -54,7 +57,7 @@ namespace Gremlin.CSharp.Process
 """
         public GraphTraversalSource ${sharpMethodName}(params object[] args)
         {
-            var source = new GraphTraversalSource(Bytecode);
+            var source = new GraphTraversalSource(TraversalStrategies, Bytecode);
             source.Bytecode.AddSource("${javaMethodName}\", args);
             return source;
         }
@@ -81,7 +84,7 @@ namespace Gremlin.CSharp.Process
                             """
         public GraphTraversal ${sharpMethodName}(params object[] args)
         {
-            var traversal = new GraphTraversal(Bytecode);
+            var traversal = new GraphTraversal(TraversalStrategies, Bytecode);
             traversal.Bytecode.AddStep("${javaMethodName}\", args);
             return traversal;
         }

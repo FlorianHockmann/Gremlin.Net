@@ -17,475 +17,468 @@
  * under the License.
  */
 
-using Gremlin.Net.Process;
-
 namespace Gremlin.CSharp.Process
 {
     public static class __
     {
-        public static GraphTraversal start()
+        public static GraphTraversal Start()
         {
-            return new GraphTraversal(new Bytecode());
-        }
-
-        public static GraphTraversal __(params object[] args)
-        {
-            return __.inject(args);
+            return new GraphTraversal();
         }
 
         public static GraphTraversal V(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).V(args);
+            return new GraphTraversal().V(args);
         }
 
         public static GraphTraversal AddE(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).AddE(args);
+            return new GraphTraversal().AddE(args);
         }
 
         public static GraphTraversal AddInE(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).AddInE(args);
+            return new GraphTraversal().AddInE(args);
         }
 
         public static GraphTraversal AddOutE(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).AddOutE(args);
+            return new GraphTraversal().AddOutE(args);
         }
 
         public static GraphTraversal AddV(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).AddV(args);
+            return new GraphTraversal().AddV(args);
         }
 
         public static GraphTraversal Aggregate(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Aggregate(args);
+            return new GraphTraversal().Aggregate(args);
         }
 
         public static GraphTraversal And(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).And(args);
+            return new GraphTraversal().And(args);
         }
 
         public static GraphTraversal As(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).As(args);
+            return new GraphTraversal().As(args);
         }
 
         public static GraphTraversal Barrier(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Barrier(args);
+            return new GraphTraversal().Barrier(args);
         }
 
         public static GraphTraversal Both(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Both(args);
+            return new GraphTraversal().Both(args);
         }
 
         public static GraphTraversal BothE(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).BothE(args);
+            return new GraphTraversal().BothE(args);
         }
 
         public static GraphTraversal BothV(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).BothV(args);
+            return new GraphTraversal().BothV(args);
         }
 
         public static GraphTraversal Branch(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Branch(args);
+            return new GraphTraversal().Branch(args);
         }
 
         public static GraphTraversal Cap(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Cap(args);
+            return new GraphTraversal().Cap(args);
         }
 
         public static GraphTraversal Choose(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Choose(args);
+            return new GraphTraversal().Choose(args);
         }
 
         public static GraphTraversal Coalesce(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Coalesce(args);
+            return new GraphTraversal().Coalesce(args);
         }
 
         public static GraphTraversal Coin(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Coin(args);
+            return new GraphTraversal().Coin(args);
         }
 
         public static GraphTraversal Constant(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Constant(args);
+            return new GraphTraversal().Constant(args);
         }
 
         public static GraphTraversal Count(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Count(args);
+            return new GraphTraversal().Count(args);
         }
 
         public static GraphTraversal CyclicPath(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).CyclicPath(args);
+            return new GraphTraversal().CyclicPath(args);
         }
 
         public static GraphTraversal Dedup(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Dedup(args);
+            return new GraphTraversal().Dedup(args);
         }
 
         public static GraphTraversal Drop(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Drop(args);
+            return new GraphTraversal().Drop(args);
         }
 
         public static GraphTraversal Emit(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Emit(args);
+            return new GraphTraversal().Emit(args);
         }
 
         public static GraphTraversal Filter(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Filter(args);
+            return new GraphTraversal().Filter(args);
         }
 
         public static GraphTraversal FlatMap(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).FlatMap(args);
+            return new GraphTraversal().FlatMap(args);
         }
 
         public static GraphTraversal Fold(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Fold(args);
+            return new GraphTraversal().Fold(args);
         }
 
         public static GraphTraversal Group(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Group(args);
+            return new GraphTraversal().Group(args);
         }
 
         public static GraphTraversal GroupCount(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).GroupCount(args);
+            return new GraphTraversal().GroupCount(args);
         }
 
         public static GraphTraversal GroupV3d0(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).GroupV3d0(args);
+            return new GraphTraversal().GroupV3d0(args);
         }
 
         public static GraphTraversal Has(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Has(args);
+            return new GraphTraversal().Has(args);
         }
 
         public static GraphTraversal HasId(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).HasId(args);
+            return new GraphTraversal().HasId(args);
         }
 
         public static GraphTraversal HasKey(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).HasKey(args);
+            return new GraphTraversal().HasKey(args);
         }
 
         public static GraphTraversal HasLabel(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).HasLabel(args);
+            return new GraphTraversal().HasLabel(args);
         }
 
         public static GraphTraversal HasNot(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).HasNot(args);
+            return new GraphTraversal().HasNot(args);
         }
 
         public static GraphTraversal HasValue(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).HasValue(args);
+            return new GraphTraversal().HasValue(args);
         }
 
         public static GraphTraversal Id(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Id(args);
+            return new GraphTraversal().Id(args);
         }
 
         public static GraphTraversal Identity(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Identity(args);
+            return new GraphTraversal().Identity(args);
         }
 
         public static GraphTraversal In(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).In(args);
+            return new GraphTraversal().In(args);
         }
 
         public static GraphTraversal InE(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).InE(args);
+            return new GraphTraversal().InE(args);
         }
 
         public static GraphTraversal InV(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).InV(args);
+            return new GraphTraversal().InV(args);
         }
 
         public static GraphTraversal Inject(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Inject(args);
+            return new GraphTraversal().Inject(args);
         }
 
         public static GraphTraversal Is(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Is(args);
+            return new GraphTraversal().Is(args);
         }
 
         public static GraphTraversal Key(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Key(args);
+            return new GraphTraversal().Key(args);
         }
 
         public static GraphTraversal Label(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Label(args);
+            return new GraphTraversal().Label(args);
         }
 
         public static GraphTraversal Limit(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Limit(args);
+            return new GraphTraversal().Limit(args);
         }
 
         public static GraphTraversal Local(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Local(args);
+            return new GraphTraversal().Local(args);
         }
 
         public static GraphTraversal Loops(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Loops(args);
+            return new GraphTraversal().Loops(args);
         }
 
         public static GraphTraversal Map(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Map(args);
+            return new GraphTraversal().Map(args);
         }
 
         public static GraphTraversal MapKeys(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).MapKeys(args);
+            return new GraphTraversal().MapKeys(args);
         }
 
         public static GraphTraversal MapValues(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).MapValues(args);
+            return new GraphTraversal().MapValues(args);
         }
 
         public static GraphTraversal Match(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Match(args);
+            return new GraphTraversal().Match(args);
         }
 
         public static GraphTraversal Max(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Max(args);
+            return new GraphTraversal().Max(args);
         }
 
         public static GraphTraversal Mean(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Mean(args);
+            return new GraphTraversal().Mean(args);
         }
 
         public static GraphTraversal Min(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Min(args);
+            return new GraphTraversal().Min(args);
         }
 
         public static GraphTraversal Not(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Not(args);
+            return new GraphTraversal().Not(args);
         }
 
         public static GraphTraversal Optional(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Optional(args);
+            return new GraphTraversal().Optional(args);
         }
 
         public static GraphTraversal Or(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Or(args);
+            return new GraphTraversal().Or(args);
         }
 
         public static GraphTraversal Order(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Order(args);
+            return new GraphTraversal().Order(args);
         }
 
         public static GraphTraversal OtherV(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).OtherV(args);
+            return new GraphTraversal().OtherV(args);
         }
 
         public static GraphTraversal Out(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Out(args);
+            return new GraphTraversal().Out(args);
         }
 
         public static GraphTraversal OutE(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).OutE(args);
+            return new GraphTraversal().OutE(args);
         }
 
         public static GraphTraversal OutV(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).OutV(args);
+            return new GraphTraversal().OutV(args);
         }
 
         public static GraphTraversal Path(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Path(args);
+            return new GraphTraversal().Path(args);
         }
 
         public static GraphTraversal Project(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Project(args);
+            return new GraphTraversal().Project(args);
         }
 
         public static GraphTraversal Properties(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Properties(args);
+            return new GraphTraversal().Properties(args);
         }
 
         public static GraphTraversal Property(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Property(args);
+            return new GraphTraversal().Property(args);
         }
 
         public static GraphTraversal PropertyMap(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).PropertyMap(args);
+            return new GraphTraversal().PropertyMap(args);
         }
 
         public static GraphTraversal Range(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Range(args);
+            return new GraphTraversal().Range(args);
         }
 
         public static GraphTraversal Repeat(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Repeat(args);
+            return new GraphTraversal().Repeat(args);
         }
 
         public static GraphTraversal Sack(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Sack(args);
+            return new GraphTraversal().Sack(args);
         }
 
         public static GraphTraversal Sample(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Sample(args);
+            return new GraphTraversal().Sample(args);
         }
 
         public static GraphTraversal Select(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Select(args);
+            return new GraphTraversal().Select(args);
         }
 
         public static GraphTraversal SideEffect(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).SideEffect(args);
+            return new GraphTraversal().SideEffect(args);
         }
 
         public static GraphTraversal SimplePath(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).SimplePath(args);
+            return new GraphTraversal().SimplePath(args);
         }
 
         public static GraphTraversal Store(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Store(args);
+            return new GraphTraversal().Store(args);
         }
 
         public static GraphTraversal Subgraph(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Subgraph(args);
+            return new GraphTraversal().Subgraph(args);
         }
 
         public static GraphTraversal Sum(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Sum(args);
+            return new GraphTraversal().Sum(args);
         }
 
         public static GraphTraversal Tail(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Tail(args);
+            return new GraphTraversal().Tail(args);
         }
 
         public static GraphTraversal TimeLimit(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).TimeLimit(args);
+            return new GraphTraversal().TimeLimit(args);
         }
 
         public static GraphTraversal Times(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Times(args);
+            return new GraphTraversal().Times(args);
         }
 
         public static GraphTraversal To(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).To(args);
+            return new GraphTraversal().To(args);
         }
 
         public static GraphTraversal ToE(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).ToE(args);
+            return new GraphTraversal().ToE(args);
         }
 
         public static GraphTraversal ToV(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).ToV(args);
+            return new GraphTraversal().ToV(args);
         }
 
         public static GraphTraversal Tree(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Tree(args);
+            return new GraphTraversal().Tree(args);
         }
 
         public static GraphTraversal Unfold(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Unfold(args);
+            return new GraphTraversal().Unfold(args);
         }
 
         public static GraphTraversal Union(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Union(args);
+            return new GraphTraversal().Union(args);
         }
 
         public static GraphTraversal Until(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Until(args);
+            return new GraphTraversal().Until(args);
         }
 
         public static GraphTraversal Value(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Value(args);
+            return new GraphTraversal().Value(args);
         }
 
         public static GraphTraversal ValueMap(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).ValueMap(args);
+            return new GraphTraversal().ValueMap(args);
         }
 
         public static GraphTraversal Values(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Values(args);
+            return new GraphTraversal().Values(args);
         }
 
         public static GraphTraversal Where(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).Where(args);
+            return new GraphTraversal().Where(args);
         }
 	}
 }

@@ -10,15 +10,22 @@ class GraphTraversalGenerator {
 
         csharpClass.append(
 """
-using Gremlin.Net.Process;
+using System.Collections.Generic;
+using Gremlin.Net.Process.Traversal;
 
 namespace Gremlin.CSharp.Process
 {
     public class GraphTraversal : Traversal
     {
-        public GraphTraversal(Bytecode bytecode)
-            : base(bytecode)
+        public GraphTraversal()
+            : this(new List<ITraversalStrategy>(), new Bytecode())
         {
+        }
+
+        public GraphTraversal(IList<ITraversalStrategy> traversalStrategies, Bytecode bytecode)
+        {
+            TraversalStrategies = traversalStrategies;
+            Bytecode = bytecode;
         }
 """)
         GraphTraversal.getMethods().

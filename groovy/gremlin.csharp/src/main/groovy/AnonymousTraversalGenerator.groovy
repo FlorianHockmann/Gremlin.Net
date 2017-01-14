@@ -13,20 +13,13 @@ class AnonymousTraversalGenerator {
 
         csharpClass.append(
 """
-using Gremlin.Net.Process;
-
 namespace Gremlin.CSharp.Process
 {
     public static class __
     {
-        public static GraphTraversal start()
+        public static GraphTraversal Start()
         {
-            return new GraphTraversal(new Bytecode());
-        }
-
-        public static GraphTraversal __(params object[] args)
-        {
-            return __.inject(args);
+            return new GraphTraversal();
         }
 """)
         __.getMethods().
@@ -43,7 +36,7 @@ namespace Gremlin.CSharp.Process
 """
         public static GraphTraversal ${sharpMethodName}(params object[] args)
         {
-            return new GraphTraversal(new Bytecode()).${sharpMethodName}(args);
+            return new GraphTraversal().${sharpMethodName}(args);
         }
 """)
                 }

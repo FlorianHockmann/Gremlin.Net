@@ -17,62 +17,65 @@
  * under the License.
  */
 
-using Gremlin.Net.Process;
+using System.Collections.Generic;
+using Gremlin.Net.Process.Traversal;
 
 namespace Gremlin.CSharp.Process
 {
     public class GraphTraversalSource
     {
+        public IList<ITraversalStrategy> TraversalStrategies { get; set; }
         public Bytecode Bytecode { get; set; }
 
-        public GraphTraversalSource()
-            : this(new Bytecode())
+         public GraphTraversalSource()
+            : this(new List<ITraversalStrategy>(), new Bytecode())
         {
         }
 
-        public GraphTraversalSource(Bytecode bytecode)
+        public GraphTraversalSource(IList<ITraversalStrategy> traversalStrategies, Bytecode bytecode)
         {
+            TraversalStrategies = traversalStrategies;
             Bytecode = bytecode;
         }
 
         public GraphTraversalSource WithBulk(params object[] args)
         {
-            var source = new GraphTraversalSource(Bytecode);
+            var source = new GraphTraversalSource(TraversalStrategies, Bytecode);
             source.Bytecode.AddSource("withBulk", args);
             return source;
         }
 
         public GraphTraversalSource WithPath(params object[] args)
         {
-            var source = new GraphTraversalSource(Bytecode);
+            var source = new GraphTraversalSource(TraversalStrategies, Bytecode);
             source.Bytecode.AddSource("withPath", args);
             return source;
         }
 
         public GraphTraversalSource WithSack(params object[] args)
         {
-            var source = new GraphTraversalSource(Bytecode);
+            var source = new GraphTraversalSource(TraversalStrategies, Bytecode);
             source.Bytecode.AddSource("withSack", args);
             return source;
         }
 
         public GraphTraversalSource WithSideEffect(params object[] args)
         {
-            var source = new GraphTraversalSource(Bytecode);
+            var source = new GraphTraversalSource(TraversalStrategies, Bytecode);
             source.Bytecode.AddSource("withSideEffect", args);
             return source;
         }
 
         public GraphTraversalSource WithStrategies(params object[] args)
         {
-            var source = new GraphTraversalSource(Bytecode);
+            var source = new GraphTraversalSource(TraversalStrategies, Bytecode);
             source.Bytecode.AddSource("withStrategies", args);
             return source;
         }
 
         public GraphTraversalSource WithoutStrategies(params object[] args)
         {
-            var source = new GraphTraversalSource(Bytecode);
+            var source = new GraphTraversalSource(TraversalStrategies, Bytecode);
             source.Bytecode.AddSource("withoutStrategies", args);
             return source;
         }
@@ -84,28 +87,28 @@ namespace Gremlin.CSharp.Process
 
         public GraphTraversal E(params object[] args)
         {
-            var traversal = new GraphTraversal(Bytecode);
+            var traversal = new GraphTraversal(TraversalStrategies, Bytecode);
             traversal.Bytecode.AddStep("E", args);
             return traversal;
         }
 
         public GraphTraversal V(params object[] args)
         {
-            var traversal = new GraphTraversal(Bytecode);
+            var traversal = new GraphTraversal(TraversalStrategies, Bytecode);
             traversal.Bytecode.AddStep("V", args);
             return traversal;
         }
 
         public GraphTraversal AddV(params object[] args)
         {
-            var traversal = new GraphTraversal(Bytecode);
+            var traversal = new GraphTraversal(TraversalStrategies, Bytecode);
             traversal.Bytecode.AddStep("addV", args);
             return traversal;
         }
 
         public GraphTraversal Inject(params object[] args)
         {
-            var traversal = new GraphTraversal(Bytecode);
+            var traversal = new GraphTraversal(TraversalStrategies, Bytecode);
             traversal.Bytecode.AddStep("inject", args);
             return traversal;
         }
