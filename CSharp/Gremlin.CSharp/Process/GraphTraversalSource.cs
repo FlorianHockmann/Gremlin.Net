@@ -18,6 +18,7 @@
  */
 
 using System.Collections.Generic;
+using Gremlin.Net.Process.Remote;
 using Gremlin.Net.Process.Traversal;
 
 namespace Gremlin.CSharp.Process
@@ -83,6 +84,13 @@ namespace Gremlin.CSharp.Process
         public GraphTraversalSource WithBindings(object bindings)
         {
             return this;
+        }
+
+        public GraphTraversalSource WithRemote(IRemoteConnection remoteConnection)
+        {
+            var source = new GraphTraversalSource(TraversalStrategies, Bytecode);
+            source.TraversalStrategies.Add(new RemoteStrategy(remoteConnection));
+            return source;
         }
 
         public GraphTraversal E(params object[] args)

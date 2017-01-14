@@ -13,6 +13,7 @@ class GraphTraversalSourceGenerator {
         csharpClass.append(
 """
 using System.Collections.Generic;
+using Gremlin.Net.Process.Remote;
 using Gremlin.Net.Process.Traversal;
 
 namespace Gremlin.CSharp.Process
@@ -70,7 +71,14 @@ namespace Gremlin.CSharp.Process
         {
             return this;
         }
-""")    // ToDo: Add methods for withRemote() and withComputer()
+
+        public GraphTraversalSource WithRemote(IRemoteConnection remoteConnection)
+        {
+            var source = new GraphTraversalSource(TraversalStrategies, Bytecode);
+            source.TraversalStrategies.Add(new RemoteStrategy(remoteConnection));
+            return source;
+        }
+""")    // ToDo: Add method for withComputer()
 
         GraphTraversalSource.getMethods(). // SPAWN STEPS
                 findAll { GraphTraversal.class.equals(it.returnType) }.
