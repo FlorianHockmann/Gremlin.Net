@@ -45,7 +45,7 @@ namespace Gremlin.Net.Driver
         public int NrConnections => _connectionPool.NrConnections;
 
         /// <inheritdoc />
-        public async Task<IEnumerable<T>> SubmitAsync<T>(ScriptRequestMessage requestMessage)
+        public async Task<IEnumerable<T>> SubmitAsync<T>(RequestMessage requestMessage)
         {
             using (var connection = await _connectionPool.GetAvailableConnectionAsync().ConfigureAwait(false))
                 return await connection.SubmitAsync<T>(requestMessage).ConfigureAwait(false);

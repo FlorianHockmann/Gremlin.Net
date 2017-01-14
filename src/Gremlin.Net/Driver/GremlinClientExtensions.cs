@@ -21,7 +21,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Gremlin.Net.Driver.Messages;
+using Gremlin.Net.Driver.Messages.Standard;
+using Gremlin.Net.Driver.Messages.Traversal;
+using Gremlin.Net.Process.Traversal;
 
 namespace Gremlin.Net.Driver
 {
@@ -109,9 +111,14 @@ namespace Gremlin.Net.Driver
             return await gremlinClient.SubmitAsync<T>(requestMessage).ConfigureAwait(false);
         }
 
-        public static IEnumerable<T> Submit<T>(this IGremlinClient gremlinClient, ScriptRequestMessage requestMessage)
+        public static async Task<IEnumerable<TReturn>> SubmitAsync<TReturn>(this IGremlinClient gremlinClient,
+            Bytecode bytecode)
         {
-            return gremlinClient.SubmitAsync<T>(requestMessage).Result;
+            var requestMsg = new BytecodeRequestMessage()
+            {
+                Arguments = new BytecodeArguments {Bytecode = bytecode}
+            };
+            return await gremlinClient.SubmitAsync<TReturn>(requestMsg);
         }
     }
 }

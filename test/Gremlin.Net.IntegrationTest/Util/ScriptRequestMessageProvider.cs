@@ -17,7 +17,7 @@
 #endregion
 
 using System.Collections.Generic;
-using Gremlin.Net.Driver.Messages;
+using Gremlin.Net.Driver.Messages.Standard;
 
 namespace Gremlin.Net.IntegrationTest.Util
 {

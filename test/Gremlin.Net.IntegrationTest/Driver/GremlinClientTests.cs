@@ -22,10 +22,12 @@ using System.Threading.Tasks;
 using Gremlin.Net.Driver;
 using Gremlin.Net.Driver.Exceptions;
 using Gremlin.Net.Driver.Messages;
+using Gremlin.Net.Driver.Messages.Standard;
 using Gremlin.Net.IntegrationTest.Util;
+using Gremlin.Net.Process.Traversal;
 using Xunit;
 
-namespace Gremlin.Net.IntegrationTest
+namespace Gremlin.Net.IntegrationTest.Driver
 {
     public class GremlinClientTests
     {
@@ -201,6 +203,22 @@ namespace Gremlin.Net.IntegrationTest
                 var response = await gremlinClient.SubmitWithSingleResultAsync<object>(gremlinScript, bindings);
 
                 Assert.Null(response);
+            }
+        }
+
+        [Fact(Skip = "GraphSON serialization still missing")]
+        public async Task HandleBytecodeMessage()
+        {
+            var gremlinServer = new GremlinServer(TestHost, TestPort);
+            using (var gremlinClient = new GremlinClient(gremlinServer))
+            {
+                var bytecode = new Bytecode();
+                bytecode.AddSource("V");
+                bytecode.AddStep("count");
+
+                var response = await gremlinClient.SubmitAsync<int>(bytecode);
+
+                Assert.NotNull(response);
             }
         }
     }

@@ -19,7 +19,7 @@
 using Gremlin.Net.Driver;
 using Xunit;
 
-namespace Gremlin.Net.UnitTest
+namespace Gremlin.Net.UnitTest.Driver
 {
     public class GremlinServerTests
     {

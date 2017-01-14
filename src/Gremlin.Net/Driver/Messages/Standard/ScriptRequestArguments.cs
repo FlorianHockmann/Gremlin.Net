@@ -19,7 +19,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Gremlin.Net.Driver.Messages
+namespace Gremlin.Net.Driver.Messages.Standard
 {
     /// <summary>
     /// Represents parameters to pass to Gremlin Server for a <see cref="ScriptRequestMessage"/>.

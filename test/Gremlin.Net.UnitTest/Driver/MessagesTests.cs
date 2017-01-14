@@ -16,16 +16,20 @@
  */
 #endregion
 
-using System.Collections.Generic;
-using Gremlin.Net.Process.Traversal;
+using Gremlin.Net.Driver.Messages.Standard;
+using Xunit;
 
-namespace Gremlin.Net.Process.Remote
+namespace Gremlin.Net.UnitTest.Driver
 {
-    public class RemoteTraversal<T> : Traversal.Traversal
+    public class MessagesTests
     {
-        public RemoteTraversal(IEnumerable<Traverser<T>> traversers)
-            : base(null)
+        [Fact]
+        public void RequestIdsShouldBeUnique()
         {
+            var firstMsg = new ScriptRequestMessage();
+            var secondMsg = new ScriptRequestMessage();
+
+            Assert.NotEqual(firstMsg.RequestId, secondMsg.RequestId);
         }
     }
 }

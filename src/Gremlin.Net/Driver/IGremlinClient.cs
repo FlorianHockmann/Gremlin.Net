@@ -32,9 +32,9 @@ namespace Gremlin.Net.Driver
         /// Submits a request message as an asynchronous operation.
         /// </summary>
         /// <typeparam name="T">The type of the expected results.</typeparam>
-        /// <param name="requestMessage">The <see cref="ScriptRequestMessage"/> to send.</param>
+        /// <param name="requestMessage">The <see cref="RequestMessage"/> to send.</param>
         /// <returns>An enumerable collection of the data returned from the server.</returns>
         /// <exception cref="Exceptions.ResponseException">Thrown when a response is received from Gremlin Server that indicates that an error occurred.</exception>
-        Task<IEnumerable<T>> SubmitAsync<T>(ScriptRequestMessage requestMessage);
+        Task<IEnumerable<T>> SubmitAsync<T>(RequestMessage requestMessage);
     }
 }

@@ -38,13 +38,13 @@ namespace Gremlin.Net.Driver
             await _webSocketConnection.CloseAsync().ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<T>> SubmitAsync<T>(ScriptRequestMessage requestMessage)
+        public async Task<IEnumerable<T>> SubmitAsync<T>(RequestMessage requestMessage)
         {
             await SendAsync(requestMessage).ConfigureAwait(false);
             return await ReceiveAsync<T>().ConfigureAwait(false);
         }
 
-        private async Task SendAsync(ScriptRequestMessage message)
+        private async Task SendAsync(RequestMessage message)
         {
             var serializedMsg = _messageSerializer.SerializeMessage(message);
             await _webSocketConnection.SendMessageAsync(serializedMsg).ConfigureAwait(false);

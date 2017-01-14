@@ -23,7 +23,7 @@ using Gremlin.Net.Driver;
 using Gremlin.Net.IntegrationTest.Util;
 using Xunit;
 
-namespace Gremlin.Net.IntegrationTest
+namespace Gremlin.Net.IntegrationTest.Driver
 {
     public class ConnectionPoolTests
     {

@@ -17,9 +17,12 @@
 #endregion
 
 using System.Collections.Generic;
+using Gremlin.Net.Structure.IO.GraphSON;
+using Newtonsoft.Json;
 
 namespace Gremlin.Net.Process.Traversal
 {
+    [JsonConverter(typeof(BytecodeConverter))]
     public class Bytecode
     {
         public List<Instruction> SourceInstructions { get; } = new List<Instruction>();

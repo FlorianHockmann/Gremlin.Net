@@ -25,8 +25,9 @@ namespace Gremlin.Net.Driver
     internal class JsonMessageSerializer
     {
         private const string MimeType = "application/json";
+        //private const string MimeType = "application/vnd.gremlin-v2.0+json";
 
-        public byte[] SerializeMessage(ScriptRequestMessage message)
+        public byte[] SerializeMessage(RequestMessage message)
         {
             var payload = JsonConvert.SerializeObject(message);
             var messageWithHeader = $"{(char) MimeType.Length}{MimeType}{payload}";

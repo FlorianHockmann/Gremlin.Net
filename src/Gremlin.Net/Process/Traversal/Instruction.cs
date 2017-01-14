@@ -1,5 +1,9 @@
+using Gremlin.Net.Structure.IO.GraphSON;
+using Newtonsoft.Json;
+
 namespace Gremlin.Net.Process.Traversal
 {
+    [JsonConverter(typeof(InstructionConverter))]
     public class Instruction
     {
         public string OperatorName { get; private set; }

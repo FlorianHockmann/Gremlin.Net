@@ -18,12 +18,12 @@
 
 namespace Gremlin.Net.Process.Traversal
 {
-    public class Traverser<T>
+    public class Traverser
     {
-        public T Object { get; private set; }
-        public long Bulk { get; private set; }
+        public object Object { get; private set; }
+        public long Bulk { get; set; }
 
-        public Traverser(T obj, long bulk = 1)
+        public Traverser(object obj, long bulk = 1)
         {
             Object = obj;
             Bulk = bulk;

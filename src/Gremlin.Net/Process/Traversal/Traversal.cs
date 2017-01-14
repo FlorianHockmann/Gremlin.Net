@@ -16,15 +16,101 @@
  */
 #endregion
 
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
 namespace Gremlin.Net.Process.Traversal
 {
-    public class Traversal
+    public abstract class Traversal : IDisposable, IEnumerator
     {
-        public Bytecode Bytecode { get; set; }
+        public Bytecode Bytecode { get; protected set; }
+        public ITraversalSideEffects SideEffects { get; set; }
+        public IEnumerable<Traverser> Traversers { get; set; }
+        protected IList<ITraversalStrategy> TraversalStrategies { get; set; } = new List<ITraversalStrategy>();
+        private IEnumerator<Traverser> _traverserEnumerator;
 
-        public Traversal(Bytecode bytecode)
+        private IEnumerator<Traverser> TraverserEnumerator
+            => _traverserEnumerator ?? (_traverserEnumerator = GetTraverserEnumerator());
+
+        private IEnumerator<Traverser> GetTraverserEnumerator()
         {
-            Bytecode = bytecode;
+            if (Traversers == null)
+                ApplyStrategies();
+            return Traversers.GetEnumerator();
         }
+
+        private void ApplyStrategies()
+        {
+            foreach (var strategy in TraversalStrategies)
+                strategy.Apply(this);
+        }
+
+        public object Next()
+        {
+            MoveNext();
+            return Current;
+        }
+
+        public IEnumerable<object> Next(int amount)
+        {
+            for (var i = 0; i < amount; i++)
+                yield return Next();
+        }
+
+        public Traversal Iterate()
+        {
+            while (MoveNext())
+            {
+            }
+            return this;
+        }
+
+        public Traverser NextTraverser()
+        {
+            TraverserEnumerator.MoveNext();
+            return TraverserEnumerator.Current;
+        }
+
+        public List<object> ToList()
+        {
+            var objs = new List<object>();
+            while (MoveNext())
+            {
+                objs.Add(Current);
+            }
+            return objs;
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                SideEffects?.Dispose();
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+        }
+
+        public bool MoveNext()
+        {
+            var currentTraverser = TraverserEnumerator.Current;
+            if (currentTraverser?.Bulk > 1)
+            {
+                currentTraverser.Bulk--;
+                return true;
+            }
+            return TraverserEnumerator.MoveNext();
+        }
+
+        public void Reset()
+        {
+            throw new NotSupportedException();
+        }
+
+        public object Current => TraverserEnumerator.Current?.Object;
     } 
 }

@@ -16,20 +16,23 @@
  */
 #endregion
 
-using Gremlin.Net.Driver.Messages;
-using Xunit;
+using Newtonsoft.Json;
 
-namespace Gremlin.Net.UnitTest
+namespace Gremlin.Net.Driver.Messages.Standard
 {
-    public class MessagesTests
+    /// <summary>
+    /// Represents a script request message to send to a Gremlin Server.
+    /// </summary>
+    public class ScriptRequestMessage : RequestMessage
     {
-        [Fact]
-        public void RequestIdsShouldBeUnique()
-        {
-            var firstMsg = new ScriptRequestMessage();
-            var secondMsg = new ScriptRequestMessage();
+        public override string Operation => "eval";
 
-            Assert.NotEqual(firstMsg.RequestId, secondMsg.RequestId);
-        }
+        public override string Processor => "";
+
+        /// <summary>
+        /// Gets or sets parameters for this <see cref="ScriptRequestMessage"/> to pass to Gremlin Server.
+        /// </summary>
+        [JsonProperty(PropertyName = "args")]
+        public ScriptRequestArguments Arguments { get; set; }
     }
 }
