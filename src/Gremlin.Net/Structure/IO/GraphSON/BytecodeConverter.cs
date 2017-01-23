@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Reflection;
 using Gremlin.Net.Process.Traversal;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Gremlin.Net.Structure.IO.GraphSON
 {
@@ -25,8 +24,6 @@ namespace Gremlin.Net.Structure.IO.GraphSON
             }
 
             var typedValue = new TypedValue(nameof(Bytecode), valueDict);
-            //var jObject = JObject.FromObject(typedValue);
-            //jObject.WriteTo(writer);
             serializer.Serialize(writer, typedValue);
         }
 
