@@ -206,7 +206,8 @@ namespace Gremlin.Net.IntegrationTest.Driver
             }
         }
 
-        [Fact(Skip = "GraphSON serialization still missing")]
+        [Fact]
+        //[Fact(Skip = "GraphSON serialization still missing")]
         public async Task HandleBytecodeMessage()
         {
             var gremlinServer = new GremlinServer(TestHost, TestPort);
@@ -216,7 +217,7 @@ namespace Gremlin.Net.IntegrationTest.Driver
                 bytecode.AddSource("V");
                 bytecode.AddStep("count");
 
-                var response = await gremlinClient.SubmitAsync<int>(bytecode);
+                var response = await gremlinClient.SubmitAsync<Traverser>(bytecode);
 
                 Assert.NotNull(response);
             }

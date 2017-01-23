@@ -13,9 +13,9 @@ namespace Gremlin.Net.Structure.IO.GraphSON
             writer.WriteRaw($"[\"{instruction.OperatorName}\"]");
             //var bytecode = value as Bytecode;
             //writer.WriteStartObject();
-            //writer.WritePropertyName(GraphSONTokens.ValueType);
+            //writer.WritePropertyName(GraphSONTokens.TypeKey);
             //serializer.Serialize(writer, $"{GraphSONTokens.GremlinTypeNamespace}:{nameof(Bytecode)}");
-            //writer.WritePropertyName(GraphSONTokens.ValueProp);
+            //writer.WritePropertyName(GraphSONTokens.ValueKey);
             //writer.WriteStartObject();
             //writer.WritePropertyName("step");
             //var steps = bytecode.SourceInstructions;

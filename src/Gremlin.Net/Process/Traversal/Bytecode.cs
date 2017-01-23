@@ -22,7 +22,7 @@ using Newtonsoft.Json;
 
 namespace Gremlin.Net.Process.Traversal
 {
-    [JsonConverter(typeof(BytecodeConverter))]
+    //[JsonConverter(typeof(BytecodeConverter))]
     public class Bytecode
     {
         public List<Instruction> SourceInstructions { get; } = new List<Instruction>();

@@ -25,7 +25,7 @@ namespace Gremlin.Net.Driver
 {
     internal class Connection : IConnection
     {
-        private readonly JsonMessageSerializer _messageSerializer = new JsonMessageSerializer();
+        private readonly GraphSONMessageSerializer _messageSerializer = new GraphSONMessageSerializer();
         private readonly WebSocketConnection _webSocketConnection = new WebSocketConnection();
         
         public async Task ConnectAsync(Uri uri)
