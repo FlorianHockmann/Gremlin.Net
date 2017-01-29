@@ -20,10 +20,10 @@ namespace Gremlin.Net.Process.Traversal
 {
     public class Traverser
     {
-        public object Object { get; private set; }
+        public dynamic Object { get; private set; }
         public long Bulk { get; set; }
 
-        public Traverser(object obj, long bulk = 1)
+        public Traverser(dynamic obj, long bulk = 1)
         {
             Object = obj;
             Bulk = bulk;

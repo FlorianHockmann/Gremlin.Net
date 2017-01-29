@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Gremlin.Net.Process.Traversal;
 using Gremlin.Net.Structure.IO.GraphSON;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Xunit;
 
 namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
@@ -72,6 +72,15 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
 
             var expectedGraphSon = "{\"@type\":\"g:Bytecode\",\"@value\":{\"step\":[[\"V\",{\"@type\":\"g:Int64\",\"@value\":1}],[\"has\",\"age\",{\"@type\":\"g:Int32\",\"@value\":20}],[\"has\",\"height\",{\"@type\":\"g:Double\",\"@value\":6.5}]]}}";
             Assert.Equal(expectedGraphSon, graphSON);
+        }
+
+        [Fact]
+        public void SimpleDeserializeTest()
+        {
+            dynamic d = JObject.Parse("{\"@type\":\"g:Traverser\",\"@value\":1}");
+
+            Assert.NotNull(d);
+            Assert.Equal("g:Traverser", (string)d["@type"]);
         }
     }
 }

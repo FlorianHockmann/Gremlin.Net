@@ -18,10 +18,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Gremlin.Net.Driver;
 using Gremlin.Net.Driver.Exceptions;
-using Gremlin.Net.Driver.Messages;
 using Gremlin.Net.Driver.Messages.Standard;
 using Gremlin.Net.IntegrationTest.Util;
 using Gremlin.Net.Process.Traversal;
@@ -207,7 +207,6 @@ namespace Gremlin.Net.IntegrationTest.Driver
         }
 
         [Fact]
-        //[Fact(Skip = "GraphSON serialization still missing")]
         public async Task HandleBytecodeMessage()
         {
             var gremlinServer = new GremlinServer(TestHost, TestPort);
@@ -219,7 +218,10 @@ namespace Gremlin.Net.IntegrationTest.Driver
 
                 var response = await gremlinClient.SubmitAsync<Traverser>(bytecode);
 
-                Assert.NotNull(response);
+                var traversers = response.ToList();
+                Assert.Equal(1, traversers.Count);
+                Assert.Equal(1, traversers[0].Bulk);
+                Assert.Equal(0, traversers[0].Object);
             }
         }
     }

@@ -18,13 +18,19 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
 using Gremlin.Net.Driver.Messages;
+using Gremlin.Net.Structure.IO.GraphSON;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Gremlin.Net.Driver
 {
     internal class Connection : IConnection
     {
+        private readonly GraphSONWriter _graphSONWriter = new GraphSONWriter();
+        private readonly GraphSONReader _graphSONReader = new GraphSONReader();
         private readonly GraphSONMessageSerializer _messageSerializer = new GraphSONMessageSerializer();
         private readonly WebSocketConnection _webSocketConnection = new WebSocketConnection();
         
@@ -46,7 +52,7 @@ namespace Gremlin.Net.Driver
 
         private async Task SendAsync(RequestMessage message)
         {
-            var serializedMsg = _messageSerializer.SerializeMessage(message);
+            var serializedMsg = _graphSONWriter.SerializeMessage(message);
             await _webSocketConnection.SendMessageAsync(serializedMsg).ConfigureAwait(false);
         }
 
@@ -57,13 +63,18 @@ namespace Gremlin.Net.Driver
             do
             {
                 var received = await _webSocketConnection.ReceiveMessageAsync().ConfigureAwait(false);
-                var receivedMessage = _messageSerializer.DeserializeMessage<ResponseMessage<T>>(received);
+                var responseStr = Encoding.UTF8.GetString(received);
+                var receivedMsg = JObject.Parse(responseStr);
 
-                status = receivedMessage.Status;
+                status = JsonConvert.DeserializeObject<ResponseStatus>(receivedMsg["status"].ToString());
                 status.ThrowIfStatusIndicatesError();
 
                 if (status.Code != ResponseStatusCode.NoContent)
-                    result.AddRange(receivedMessage.Result.Data);
+                {
+                    var receivedData = _graphSONReader.ToObject(receivedMsg["result"]["data"]);
+                    foreach(var d in receivedData)
+                        result.Add(d);
+                }
             } while (status.Code == ResponseStatusCode.PartialContent);
 
             return result;
