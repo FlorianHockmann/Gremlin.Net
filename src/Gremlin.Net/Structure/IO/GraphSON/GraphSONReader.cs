@@ -22,8 +22,12 @@ namespace Gremlin.Net.Structure.IO.GraphSON
             {
                 return jToken.Select(t => ToObject(t));
             }
-            var graphSONType = (string)jToken["@type"];
-            return _deserializerByGraphSONType[graphSONType].Objectify(jToken["@value"], this);
+            if (jToken.HasValues)
+            {
+                var graphSONType = (string)jToken[GraphSONTokens.TypeKey];
+                return _deserializerByGraphSONType[graphSONType].Objectify(jToken[GraphSONTokens.ValueKey], this);
+            }
+            return ((JValue) jToken).Value;
         }
     }
 }

@@ -207,7 +207,7 @@ namespace Gremlin.Net.IntegrationTest.Driver
         }
 
         [Fact]
-        public async Task HandleBytecodeMessage()
+        public async Task HandleCountBytecodeMessage()
         {
             var gremlinServer = new GremlinServer(TestHost, TestPort);
             using (var gremlinClient = new GremlinClient(gremlinServer))
@@ -222,6 +222,27 @@ namespace Gremlin.Net.IntegrationTest.Driver
                 Assert.Equal(1, traversers.Count);
                 Assert.Equal(1, traversers[0].Bulk);
                 Assert.Equal(0, traversers[0].Object);
+            }
+        }
+
+        [Fact]
+        public async Task HandleGetLabelBytecodeMessage()
+        {
+            var gremlinServer = new GremlinServer(TestHost, TestPort);
+            using (var gremlinClient = new GremlinClient(gremlinServer))
+            {
+                var bytecode = new Bytecode();
+                const string expectedLabel = "person";
+                bytecode.AddSource("V");
+                bytecode.AddStep("values", "name");
+                bytecode.AddStep("inject", expectedLabel);
+
+                var response = await gremlinClient.SubmitAsync<Traverser>(bytecode);
+
+                var traversers = response.ToList();
+                Assert.Equal(1, traversers.Count);
+                Assert.Equal(1, traversers[0].Bulk);
+                Assert.Equal(expectedLabel, traversers[0].Object);
             }
         }
     }
