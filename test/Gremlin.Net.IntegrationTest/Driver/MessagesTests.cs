@@ -49,7 +49,7 @@ namespace Gremlin.Net.IntegrationTest.Driver
                     Arguments = new ScriptRequestArguments {Aliases = aliases, GremlinScript = gremlinScript}
                 };
 
-                var result = await gremlinClient.SubmitWithSingleResultAsync<bool>(requestMsg);
+                var result = await gremlinClient.SubmitWithSingleResultAsync<long>(requestMsg);
 
                 Assert.NotNull(result);
             }

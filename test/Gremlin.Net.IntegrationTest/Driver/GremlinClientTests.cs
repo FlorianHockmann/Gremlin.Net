@@ -36,7 +36,7 @@ namespace Gremlin.Net.IntegrationTest.Driver
         private static readonly int TestPort = Convert.ToInt32(ConfigProvider.Configuration["TestServerPort"]);
 
         [Theory]
-        [InlineData("1+1", "2")]
+        [InlineData("'justAString'", "justAString")]
         [InlineData("'Hello' + 'World'", "HelloWorld")]
         public async Task ScriptShouldBeEvaluatedAndResultReturned(string requestMsg, string expectedResponse)
         {
