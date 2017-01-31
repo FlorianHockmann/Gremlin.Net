@@ -19,6 +19,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Gremlin.Net.Driver;
 using Gremlin.Net.Driver.Exceptions;
@@ -55,42 +56,40 @@ namespace Gremlin.Net.IntegrationTest.Driver
             }
         }
 
-        //[Fact]
-        //public async Task InvalidOperationShouldThrowException()
-        //{
-        //    var gremlinServer = new GremlinServer(TestHost, TestPort);
-        //    using (var gremlinClient = new GremlinClient(gremlinServer))
-        //    {
-        //        var ivalidOperationName = "invalid";
-        //        var requestMsg = _requestMessageProvider.GetDummyMessage();
-        //        requestMsg.Operation = ivalidOperationName;
+        [Fact]
+        public async Task InvalidOperationShouldThrowException()
+        {
+            var gremlinServer = new GremlinServer(TestHost, TestPort);
+            using (var gremlinClient = new GremlinClient(gremlinServer))
+            {
+                var ivalidOperationName = "invalid";
+                var requestMsg = new TestMessage(ivalidOperationName);
 
-        //        var thrownException =
-        //            await Assert.ThrowsAsync<ResponseException>(() => gremlinClient.SubmitAsync(requestMsg));
+                var thrownException =
+                    await Assert.ThrowsAsync<ResponseException>(() => gremlinClient.SubmitAsync<dynamic>(requestMsg));
 
-        //        Assert.Contains("MalformedRequest", thrownException.Message);
-        //        Assert.Contains(ivalidOperationName, thrownException.Message);
-        //    }
-        //}
+                Assert.Contains("MalformedRequest", thrownException.Message);
+                Assert.Contains(ivalidOperationName, thrownException.Message);
+            }
+        }
 
-        //[Fact]
-        //public async Task InvalidProcessorShouldThrowException()
-        //{
-        //    var gremlinServer = new GremlinServer(TestHost, TestPort);
-        //    using (var gremlinClient = new GremlinClient(gremlinServer))
-        //    {
-        //        var invalidProcessorName = "invalid";
-        //        var requestMsg = _requestMessageProvider.GetDummyMessage();
-        //        requestMsg.Processor = invalidProcessorName;
+        [Fact]
+        public async Task InvalidProcessorShouldThrowException()
+        {
+            var gremlinServer = new GremlinServer(TestHost, TestPort);
+            using (var gremlinClient = new GremlinClient(gremlinServer))
+            {
+                var invalidProcessorName = "invalid";
+                var requestMsg = new TestMessage(processor: invalidProcessorName);
 
-        //        var thrownException =
-        //            await Assert.ThrowsAsync<ResponseException>(() => gremlinClient.SubmitAsync(requestMsg));
+                var thrownException =
+                    await Assert.ThrowsAsync<ResponseException>(() => gremlinClient.SubmitAsync<dynamic>(requestMsg));
 
-        //        Assert.Contains("InvalidRequestArguments", thrownException.Message);
-        //        Assert.Contains(invalidProcessorName, thrownException.Message);
-        //        Assert.Contains("OpProcessor", thrownException.Message);
-        //    }
-        //}
+                Assert.Contains("InvalidRequestArguments", thrownException.Message);
+                Assert.Contains(invalidProcessorName, thrownException.Message);
+                Assert.Contains("OpProcessor", thrownException.Message);
+            }
+        }
 
         [Fact]
         public async Task ScriptEvaluationTimeoutShouldBeConfigurable()
@@ -132,6 +131,18 @@ namespace Gremlin.Net.IntegrationTest.Driver
                 Assert.Contains(unknownLanguage, thrownException.Message);
                 Assert.Contains("Language", thrownException.Message);
             }
+        }
+    }
+
+    internal class TestMessage : RequestMessage
+    {
+        public override string Operation { get; }
+        public override string Processor { get; }
+
+        public TestMessage(string operation = "eval", string processor = "")
+        {
+            Operation = operation;
+            Processor = processor;
         }
     }
 }
