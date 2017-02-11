@@ -14,7 +14,7 @@ namespace Gremlin.CSharp.IntegrationTest
         {
             var graph = new Graph();
             var connection = _connectionFactory.CreateRemoteConnection();
-            var g = graph.traversal().WithRemote(connection);
+            var g = graph.Traversal().WithRemote(connection);
 
             var count = g.V().Count().Next();
 
@@ -26,7 +26,7 @@ namespace Gremlin.CSharp.IntegrationTest
         {
             var graph = new Graph();
             var connection = _connectionFactory.CreateRemoteConnection();
-            var g = graph.traversal().WithRemote(connection);
+            var g = graph.Traversal().WithRemote(connection);
 
             var t = g.V().Repeat(Out()).Times(2).Values("name");
             var names = t.ToList();
@@ -41,7 +41,7 @@ namespace Gremlin.CSharp.IntegrationTest
         {
             var graph = new Graph();
             var connection = _connectionFactory.CreateRemoteConnection();
-            var g = graph.traversal().WithRemote(connection);
+            var g = graph.Traversal().WithRemote(connection);
 
             var receivedValueMap = g.V().Has("name", "marko").ValueMap().Next();
 

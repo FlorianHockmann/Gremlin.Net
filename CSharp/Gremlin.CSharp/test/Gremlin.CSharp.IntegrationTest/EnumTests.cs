@@ -14,7 +14,7 @@ namespace Gremlin.CSharp.IntegrationTest
         {
             var graph = new Graph();
             var connection = _connectionFactory.CreateRemoteConnection();
-            var g = graph.traversal().WithRemote(connection);
+            var g = graph.Traversal().WithRemote(connection);
 
             var personsCount = g.V().Has(T.label, "person").Count().Next();
 
@@ -26,7 +26,7 @@ namespace Gremlin.CSharp.IntegrationTest
         {
             var graph = new Graph();
             var connection = _connectionFactory.CreateRemoteConnection();
-            var g = graph.traversal().WithRemote(connection);
+            var g = graph.Traversal().WithRemote(connection);
 
             var orderedAges = g.V().Values("age").Order().By(Order.decr).ToList();
 
