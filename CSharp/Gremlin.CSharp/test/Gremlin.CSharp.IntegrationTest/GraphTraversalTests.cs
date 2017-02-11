@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Gremlin.CSharp.Process;
 using Gremlin.CSharp.Structure;
 using Xunit;
 using static Gremlin.CSharp.Process.__;
+using static Gremlin.CSharp.Process.Scope;
 
 namespace Gremlin.CSharp.IntegrationTest
 {
@@ -62,7 +62,7 @@ namespace Gremlin.CSharp.IntegrationTest
             var g = graph.Traversal().WithRemote(connection);
 
             var shortestPathLength =
-                g.V(5).Repeat(Both().SimplePath()).Until(HasId(6)).Limit(1).Path().Count(Scope.local).Next();
+                g.V(5).Repeat(Both().SimplePath()).Until(HasId(6)).Limit(1).Path().Count(local).Next();
 
             Assert.Equal((long)4, shortestPathLength);
         }
