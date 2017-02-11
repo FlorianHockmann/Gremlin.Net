@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json.Linq;
 
@@ -16,18 +17,46 @@ namespace Gremlin.Net.Structure.IO.GraphSON
                 {"g:Double", new DoubleConverter()}
             };
 
-        internal dynamic ToObject(JToken jToken)
+        public dynamic ToObject(JToken jToken)
         {
             if (jToken is JArray)
             {
-                return jToken.Select(t => ToObject(t));
+                return jToken.Select(t => ToObject(t)).ToList();
             }
             if (jToken.HasValues)
             {
-                var graphSONType = (string)jToken[GraphSONTokens.TypeKey];
-                return _deserializerByGraphSONType[graphSONType].Objectify(jToken[GraphSONTokens.ValueKey], this);
+                if (HasTypeKey(jToken))
+                {
+                    return ReadTypedValue(jToken);
+                }
+                return ReadDictionary(jToken);
             }
             return ((JValue) jToken).Value;
+        }
+
+        private bool HasTypeKey(JToken jToken)
+        {
+            var graphSONType = (string)jToken[GraphSONTokens.TypeKey];
+            return graphSONType != null;
+        }
+
+        private dynamic ReadTypedValue(JToken typedValue)
+        {
+            var graphSONType = (string)typedValue[GraphSONTokens.TypeKey];
+            return _deserializerByGraphSONType[graphSONType].Objectify(typedValue[GraphSONTokens.ValueKey], this);
+        }
+
+        private dynamic ReadDictionary(JToken jtokenDict)
+        {
+            var dict = new Dictionary<string, dynamic>();
+            foreach (var e in jtokenDict)
+            {
+                var property = e as JProperty;
+                if (property == null)
+                    throw new InvalidOperationException($"Cannot read graphson: {jtokenDict}");
+                dict.Add(property.Name, ToObject(property.Value));
+            }
+            return dict;
         }
     }
 }

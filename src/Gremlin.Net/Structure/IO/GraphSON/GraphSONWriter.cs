@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 using Gremlin.Net.Driver.Messages;
@@ -45,6 +47,14 @@ namespace Gremlin.Net.Structure.IO.GraphSON
             {
                 return serializer.Dictify(objectData, this);
             }
+            if (IsDictionaryType(type))
+            {
+                return DictToGraphSONDict(objectData);
+            }
+            if (IsCollectionType(type))
+            {
+                return CollectionToGraphSONCollection(objectData);
+            }
             return objectData;
         }
 
@@ -65,6 +75,36 @@ namespace Gremlin.Net.Structure.IO.GraphSON
             }
             serializer = null;
             return false;
+        }
+
+        private bool IsDictionaryType(Type type)
+        {
+            return type.IsConstructedGenericType && type.GetGenericTypeDefinition() == typeof(Dictionary<,>);
+        }
+
+        private Dictionary<string, dynamic> DictToGraphSONDict(dynamic dict)
+        {
+            var graphSONDict = new Dictionary<string, dynamic>();
+            foreach (var keyValue in dict)
+            {
+                graphSONDict.Add(ToDict(keyValue.Key), ToDict(keyValue.Value));
+            }
+            return graphSONDict;
+        }
+
+        private bool IsCollectionType(Type type)
+        {
+            return type.GetInterfaces().Contains(typeof(ICollection));
+        }
+
+        private dynamic CollectionToGraphSONCollection(dynamic collection)
+        {
+            var list = new List<dynamic>();
+            foreach (var e in collection)
+            {
+                list.Add(ToDict(e));
+            }
+            return list;
         }
     }
 }
