@@ -1,10 +1,5 @@
-﻿using System;
-using Gremlin.CSharp.Process;
+﻿using System.Collections.Generic;
 using Gremlin.CSharp.Structure;
-using Gremlin.Net.Driver;
-using Gremlin.Net.Driver.Remote;
-using Gremlin.Net.IntegrationTest;
-using Gremlin.Net.Process.Remote;
 using Xunit;
 using static Gremlin.CSharp.Process.__;
 
@@ -12,14 +7,13 @@ namespace Gremlin.CSharp.IntegrationTest
 {
     public class GraphTraversalTests
     {
-        private static readonly string TestHost = ConfigProvider.Configuration["TestServerIpAddress"];
-        private static readonly int TestPort = Convert.ToInt32(ConfigProvider.Configuration["TestServerPort"]);
+        private readonly RemoteConnectionFactory _connectionFactory = new RemoteConnectionFactory();
 
         [Fact]
         public void g_V_Count_Test()
         {
             var graph = new Graph();
-            var connection = CreateRemoteConnection();
+            var connection = _connectionFactory.CreateRemoteConnection();
             var g = graph.traversal().WithRemote(connection);
 
             var count = g.V().Count().Next();
@@ -31,7 +25,7 @@ namespace Gremlin.CSharp.IntegrationTest
         public void NestedTraversalTest()
         {
             var graph = new Graph();
-            var connection = CreateRemoteConnection();
+            var connection = _connectionFactory.CreateRemoteConnection();
             var g = graph.traversal().WithRemote(connection);
 
             var t = g.V().Repeat(Out()).Times(2).Values("name");
@@ -42,9 +36,23 @@ namespace Gremlin.CSharp.IntegrationTest
             Assert.Contains("ripple", names);
         }
 
-        private IRemoteConnection CreateRemoteConnection()
+        [Fact]
+        public void GetValueMapTest()
         {
-            return new DriverRemoteConnection(new GremlinClient(new GremlinServer(TestHost, TestPort)));
+            var graph = new Graph();
+            var connection = _connectionFactory.CreateRemoteConnection();
+            var g = graph.traversal().WithRemote(connection);
+
+            var receivedValueMap = g.V().Has("name", "marko").ValueMap().Next();
+
+            var expectedValueMap = new Dictionary<string, dynamic>
+            {
+                {"age", new List<object> {29}},
+                {"name", new List<object> {"marko"}}
+            };
+            Assert.Equal(expectedValueMap, receivedValueMap);
         }
+
+        
     }
 }
