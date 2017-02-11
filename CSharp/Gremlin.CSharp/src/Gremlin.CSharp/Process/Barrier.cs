@@ -21,6 +21,6 @@ namespace Gremlin.CSharp.Process
 {
     public enum Barrier
     {
-        NormSack
+        normSack
     }
 }

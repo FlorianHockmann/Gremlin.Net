@@ -21,8 +21,8 @@ namespace Gremlin.CSharp.Process
 {
     public enum Cardinality
     {
-        List,
-        Set,
-        Single
+        list,
+        set,
+        single
     }
 }

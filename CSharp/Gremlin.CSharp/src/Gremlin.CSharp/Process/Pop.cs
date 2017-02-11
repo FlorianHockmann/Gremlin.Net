@@ -21,8 +21,8 @@ namespace Gremlin.CSharp.Process
 {
     public enum Pop
     {
-        All,
-        First,
-        Last
+        all,
+        first,
+        last
     }
 }

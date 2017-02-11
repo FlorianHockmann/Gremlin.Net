@@ -21,12 +21,12 @@ namespace Gremlin.CSharp.Process
 {
     public enum Order
     {
-        Decr,
-        Incr,
-        KeyDecr,
-        KeyIncr,
-        Shuffle,
-        ValueDecr,
-        ValueIncr
+        decr,
+        incr,
+        keyDecr,
+        keyIncr,
+        shuffle,
+        valueDecr,
+        valueIncr
     }
 }

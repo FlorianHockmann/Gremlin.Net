@@ -21,9 +21,9 @@ namespace Gremlin.CSharp.Process
 {
     public enum T
     {
-        Id,
-        Key,
-        Label,
-        Value
+        id,
+        key,
+        label,
+        value
     }
 }

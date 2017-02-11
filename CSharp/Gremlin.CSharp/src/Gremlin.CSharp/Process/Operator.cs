@@ -21,16 +21,16 @@ namespace Gremlin.CSharp.Process
 {
     public enum Operator
     {
-        AddAll,
-        And,
-        Assign,
-        Div,
-        Max,
-        Min,
-        Minus,
-        Mult,
-        Or,
-        Sum,
-        SumLong
+        addAll,
+        and,
+        assign,
+        div,
+        max,
+        min,
+        minus,
+        mult,
+        or,
+        sum,
+        sumLong
     }
 }

@@ -21,7 +21,7 @@ namespace Gremlin.CSharp.Process
 {
     public enum Scope
     {
-        Global,
-        Local
+        global,
+        local
     }
 }

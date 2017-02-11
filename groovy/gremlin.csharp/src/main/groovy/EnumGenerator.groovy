@@ -26,7 +26,7 @@ namespace Gremlin.CSharp.Process
 """)
         enumClass.getEnumConstants()
                 .sort { a, b -> a.name() <=> b.name() }
-                .each { value -> csharpEnum.append("        ${SymbolHelper.toCSharp(value.name())},\n"); }
+                .each { value -> csharpEnum.append("        ${value.name()},\n"); }
         csharpEnum.deleteCharAt(csharpEnum.length() - 2)
 
         csharpEnum.append("    }\n")

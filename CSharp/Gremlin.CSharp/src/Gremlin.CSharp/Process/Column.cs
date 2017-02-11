@@ -21,7 +21,7 @@ namespace Gremlin.CSharp.Process
 {
     public enum Column
     {
-        Keys,
-        Values
+        keys,
+        values
     }
 }
