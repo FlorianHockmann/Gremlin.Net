@@ -4,7 +4,7 @@ namespace Gremlin.CSharp.Structure
 {
     public class Graph
     {
-        public GraphTraversalSource traversal()
+        public GraphTraversalSource Traversal()
         {
             return new GraphTraversalSource();
         }
