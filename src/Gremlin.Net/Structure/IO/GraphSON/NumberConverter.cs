@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Gremlin.Net.Structure.IO.GraphSON
 {
-    public abstract class NumberConverter : JsonConverter, IGraphSONDeserializer
+    public abstract class NumberConverter : JsonConverter, IGraphSONDeserializer, IGraphSONSerializer
     {
         protected abstract string GraphSONTypeName { get; }
         protected abstract Type HandledType { get; }
@@ -32,6 +33,11 @@ namespace Gremlin.Net.Structure.IO.GraphSON
         public dynamic Objectify(JToken graphsonObject, GraphSONReader reader)
         {
             return graphsonObject.ToObject(HandledType);
+        }
+
+        public Dictionary<string, dynamic> Dictify(dynamic objectData, GraphSONWriter writer)
+        {
+            return GraphSONUtil.ToTypedValue(GraphSONTypeName, objectData);
         }
     }
 }

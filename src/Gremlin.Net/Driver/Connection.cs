@@ -31,7 +31,6 @@ namespace Gremlin.Net.Driver
     {
         private readonly GraphSONWriter _graphSONWriter = new GraphSONWriter();
         private readonly GraphSONReader _graphSONReader = new GraphSONReader();
-        private readonly GraphSONMessageSerializer _messageSerializer = new GraphSONMessageSerializer();
         private readonly WebSocketConnection _webSocketConnection = new WebSocketConnection();
         
         public async Task ConnectAsync(Uri uri)
