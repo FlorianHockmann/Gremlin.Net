@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Gremlin.CSharp.Process;
 using Gremlin.CSharp.Structure;
 using Xunit;
 using static Gremlin.CSharp.Process.__;
@@ -53,6 +54,17 @@ namespace Gremlin.CSharp.IntegrationTest
             Assert.Equal(expectedValueMap, receivedValueMap);
         }
 
-        
+        [Fact]
+        public void ShortestPathLengthTest()
+        {
+            var graph = new Graph();
+            var connection = _connectionFactory.CreateRemoteConnection();
+            var g = graph.Traversal().WithRemote(connection);
+
+            var shortestPathLength =
+                g.V(5).Repeat(Both().SimplePath()).Until(HasId(6)).Limit(1).Path().Count(Scope.local).Next();
+
+            Assert.Equal((long)4, shortestPathLength);
+        }
     }
 }
