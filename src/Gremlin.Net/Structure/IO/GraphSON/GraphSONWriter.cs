@@ -24,7 +24,8 @@ namespace Gremlin.Net.Structure.IO.GraphSON
                 {typeof(int), new Int32Converter()},
                 {typeof(long), new Int64Converter()},
                 {typeof(float), new FloatConverter()},
-                {typeof(double), new DoubleConverter()}
+                {typeof(double), new DoubleConverter()},
+                {typeof(Enum), new EnumSerializer()}
             };
 
         public byte[] SerializeMessage(RequestMessage message)

@@ -47,9 +47,25 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
 
         }
 
+        [Fact]
+        public void EnumSerializationTest()
+        {
+            var writer = CreateStandardGraphSONWriter();
+
+            var serializedEnum = writer.WriteObject(T.label);
+
+            var expectedGraphSON = "{\"@type\":\"g:T\",\"@value\":\"label\"}";
+            Assert.Equal(expectedGraphSON, serializedEnum);
+        }
+
         private GraphSONWriter CreateStandardGraphSONWriter()
         {
             return new GraphSONWriter();
         }
+    }
+
+    internal enum T
+    {
+        label
     }
 }
