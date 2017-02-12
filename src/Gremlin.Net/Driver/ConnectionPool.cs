@@ -28,11 +28,11 @@ namespace Gremlin.Net.Driver
     {
         private readonly ConcurrentBag<Connection> _connections = new ConcurrentBag<Connection>();
         private readonly object _connectionsLock = new object();
-        private readonly Uri _uri;
+        private readonly ConnectionFactory _connectionFactory;
 
-        public ConnectionPool(Uri uri)
+        public ConnectionPool(ConnectionFactory connectionFactory)
         {
-            _uri = uri;
+            _connectionFactory = connectionFactory;
         }
 
         public int NrConnections { get; private set; }
@@ -55,8 +55,8 @@ namespace Gremlin.Net.Driver
         private async Task<Connection> CreateNewConnectionAsync()
         {
             NrConnections++;
-            var newConnection = new Connection();
-            await newConnection.ConnectAsync(_uri).ConfigureAwait(false);
+            var newConnection = _connectionFactory.CreateConnection();
+            await newConnection.ConnectAsync().ConfigureAwait(false);
             return newConnection;
         }
 

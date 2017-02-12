@@ -20,6 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Gremlin.Net.Driver.Messages;
+using Gremlin.Net.Structure.IO.GraphSON;
 
 namespace Gremlin.Net.Driver
 {
@@ -34,9 +35,13 @@ namespace Gremlin.Net.Driver
         /// Initializes a new instance of the <see cref="GremlinClient"/> class for the specified Gremlin Server.
         /// </summary>
         /// <param name="gremlinServer">The <see cref="GremlinServer"/> the requests should be sent to.</param>
-        public GremlinClient(GremlinServer gremlinServer)
+        public GremlinClient(GremlinServer gremlinServer, GraphSONReader graphSONReader = null,
+            GraphSONWriter graphSONWriter = null)
         {
-            _connectionPool = new ConnectionPool(gremlinServer.Uri);
+            var reader = graphSONReader ?? new GraphSONReader();
+            var writer = graphSONWriter ?? new GraphSONWriter();
+            var connectionFactory = new ConnectionFactory(gremlinServer.Uri, reader, writer);
+            _connectionPool = new ConnectionPool(connectionFactory);
         }
 
         /// <summary>

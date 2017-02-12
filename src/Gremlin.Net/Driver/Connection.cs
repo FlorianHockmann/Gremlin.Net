@@ -29,13 +29,21 @@ namespace Gremlin.Net.Driver
 {
     internal class Connection : IConnection
     {
-        private readonly GraphSONWriter _graphSONWriter = new GraphSONWriter();
-        private readonly GraphSONReader _graphSONReader = new GraphSONReader();
+        private readonly Uri _uri;
+        private readonly GraphSONWriter _graphSONWriter;
+        private readonly GraphSONReader _graphSONReader;
         private readonly WebSocketConnection _webSocketConnection = new WebSocketConnection();
-        
-        public async Task ConnectAsync(Uri uri)
+
+        public Connection(Uri uri, GraphSONReader graphSONReader, GraphSONWriter graphSONWriter)
         {
-            await _webSocketConnection.ConnectAsync(uri).ConfigureAwait(false);
+            _uri = uri;
+            _graphSONReader = graphSONReader;
+            _graphSONWriter = graphSONWriter;
+        }
+
+        public async Task ConnectAsync()
+        {
+            await _webSocketConnection.ConnectAsync(_uri).ConfigureAwait(false);
         }
 
         public async Task CloseAsync()
