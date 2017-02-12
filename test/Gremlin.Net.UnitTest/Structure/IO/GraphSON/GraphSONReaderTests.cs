@@ -48,9 +48,34 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
             Assert.Equal(expectedDict, deserializedDict);
         }
 
+        [Fact]
+        public void CustomDeserializationTest()
+        {
+            var deserializerByGraphSONType = new Dictionary<string, IGraphSONDeserializer>
+            {
+                {"NS:TestClass", new TestGraphSONDeserializer()}
+            };
+            var reader = new GraphSONReader(deserializerByGraphSONType);
+            var graphSON = "{\"@type\":\"NS:TestClass\",\"@value\":\"test\"}";
+
+            var jObject = JObject.Parse(graphSON);
+            var readObj = reader.ToObject(jObject);
+
+            Assert.Equal("test", readObj.Value);
+        }
+
         private GraphSONReader CreateStandardGraphSONReader()
         {
             return new GraphSONReader();
+        }
+    }
+
+    internal class TestGraphSONDeserializer : IGraphSONDeserializer
+    {
+
+        public dynamic Objectify(JToken graphsonObject, GraphSONReader reader)
+        {
+            return new TestClass {Value = graphsonObject.ToString()};
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Gremlin.Net.Structure.IO.GraphSON;
 using Xunit;
 
@@ -58,6 +59,21 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
             Assert.Equal(expectedGraphSON, serializedEnum);
         }
 
+        [Fact]
+        public void CustomSerializationTest()
+        {
+            var customSerializerByType = new Dictionary<Type, IGraphSONSerializer>
+            {
+                {typeof(TestClass), new TestGraphSONSerializer {TestNamespace = "NS"} }
+            };
+            var writer = new GraphSONWriter(customSerializerByType);
+            var testObj = new TestClass {Value = "test"};
+
+            var serialized = writer.WriteObject(testObj);
+
+            Assert.Equal("{\"@type\":\"NS:TestClass\",\"@value\":\"test\"}", serialized);
+        }
+
         private GraphSONWriter CreateStandardGraphSONWriter()
         {
             return new GraphSONWriter();
@@ -67,5 +83,15 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
     internal enum T
     {
         label
+    }
+
+    internal class TestGraphSONSerializer : IGraphSONSerializer
+    {
+        public string TestNamespace { get; set; }
+
+        public Dictionary<string, dynamic> Dictify(dynamic objectData, GraphSONWriter writer)
+        {
+            return GraphSONUtil.ToTypedValue(nameof(TestClass), objectData.Value, TestNamespace);
+        }
     }
 }

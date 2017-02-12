@@ -15,7 +15,7 @@ namespace Gremlin.Net.Structure.IO.GraphSON
     {
         private const string MimeType = "application/vnd.gremlin-v2.0+json";
 
-        private readonly Dictionary<Type, IGraphSONSerializer> _serializerByGraphSONType = new Dictionary
+        private readonly Dictionary<Type, IGraphSONSerializer> _serializerByType = new Dictionary
             <Type, IGraphSONSerializer>
             {
                 {typeof(Traversal), new TraversalSerializer()},
@@ -27,6 +27,18 @@ namespace Gremlin.Net.Structure.IO.GraphSON
                 {typeof(double), new DoubleConverter()},
                 {typeof(Enum), new EnumSerializer()}
             };
+
+        public GraphSONWriter()
+        {
+        }
+
+        public GraphSONWriter(Dictionary<Type, IGraphSONSerializer> customSerializerByType)
+        {
+            foreach (var serializerAndType in customSerializerByType)
+            {
+                _serializerByType.Add(serializerAndType.Key, serializerAndType.Value);
+            }
+        }
 
         public byte[] SerializeMessage(RequestMessage message)
         {
@@ -61,16 +73,16 @@ namespace Gremlin.Net.Structure.IO.GraphSON
 
         private bool TryGetSerializerFor(out IGraphSONSerializer serializer, Type type)
         {
-            if (_serializerByGraphSONType.ContainsKey(type))
+            if (_serializerByType.ContainsKey(type))
             {
-                serializer = _serializerByGraphSONType[type];
+                serializer = _serializerByType[type];
                 return true;
             }
-            foreach (var supportedType in _serializerByGraphSONType.Keys)
+            foreach (var supportedType in _serializerByType.Keys)
             {
                 if (supportedType.IsAssignableFrom(type))
                 {
-                    serializer = _serializerByGraphSONType[supportedType];
+                    serializer = _serializerByType[supportedType];
                     return true;
                 }
             }
