@@ -221,7 +221,7 @@ namespace Gremlin.Net.IntegrationTest.Driver
                 var traversers = response.ToList();
                 Assert.Equal(1, traversers.Count);
                 Assert.Equal(1, traversers[0].Bulk);
-                Assert.Equal(0, traversers[0].Object);
+                Assert.Equal((long) 6, traversers[0].Object);
             }
         }
 
@@ -234,7 +234,8 @@ namespace Gremlin.Net.IntegrationTest.Driver
                 var bytecode = new Bytecode();
                 const string expectedLabel = "person";
                 bytecode.AddSource("V");
-                bytecode.AddStep("values", "name");
+                bytecode.AddStep("has", "name", "nobody");
+                bytecode.AddStep("label");
                 bytecode.AddStep("inject", expectedLabel);
 
                 var response = await gremlinClient.SubmitAsync<Traverser>(bytecode);

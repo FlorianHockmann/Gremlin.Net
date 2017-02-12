@@ -18,6 +18,7 @@ namespace Gremlin.Net.IntegrationTest.Process.Remote
             const string expectedResult = "gremlin";
             var testBytecode = new Bytecode();
             testBytecode.AddStep("V");
+            testBytecode.AddStep("has", "test");
             testBytecode.AddStep("inject", expectedResult);
             var testTraversal = CreateTraversalWithRemoteStrategy(testBytecode);
 
