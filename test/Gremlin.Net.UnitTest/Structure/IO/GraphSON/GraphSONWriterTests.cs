@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Gremlin.Net.Process.Traversal;
 using Gremlin.Net.Structure.IO.GraphSON;
 using Xunit;
 
@@ -57,6 +58,32 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
 
             var expectedGraphSON = "{\"@type\":\"g:T\",\"@value\":\"label\"}";
             Assert.Equal(expectedGraphSON, serializedEnum);
+        }
+
+        [Fact]
+        public void PredicateWithSingleValueSerializationTest()
+        {
+            var writer = CreateStandardGraphSONWriter();
+            var predicate = new TraversalPredicate("lt", 5);
+
+            var serializedPredicate = writer.WriteObject(predicate);
+
+            var expectedGraphSON =
+                "{\"@type\":\"g:P\",\"@value\":{\"predicate\":\"lt\",\"value\":{\"@type\":\"g:Int32\",\"@value\":5}}}";
+            Assert.Equal(expectedGraphSON, serializedPredicate);
+        }
+
+        [Fact]
+        public void PredicateSerializationTest()
+        {
+            var writer = CreateStandardGraphSONWriter();
+            var predicate = new TraversalPredicate("within", new List<int> {1, 2});
+
+            var serializedPredicate = writer.WriteObject(predicate);
+
+            var expectedGraphSON =
+                "{\"@type\":\"g:P\",\"@value\":{\"predicate\":\"within\",\"value\":[{\"@type\":\"g:Int32\",\"@value\":1},{\"@type\":\"g:Int32\",\"@value\":2}]}}";
+            Assert.Equal(expectedGraphSON, serializedPredicate);
         }
 
         [Fact]
