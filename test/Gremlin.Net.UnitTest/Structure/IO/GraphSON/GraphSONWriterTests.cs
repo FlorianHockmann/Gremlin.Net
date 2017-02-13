@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Gremlin.Net.Process.Traversal;
+using Gremlin.Net.Structure;
 using Gremlin.Net.Structure.IO.GraphSON;
 using Xunit;
 
@@ -99,6 +100,32 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
             var serialized = writer.WriteObject(testObj);
 
             Assert.Equal("{\"@type\":\"NS:TestClass\",\"@value\":\"test\"}", serialized);
+        }
+
+        [Fact]
+        public void VertexWriter_WriteSimpleVertex_ToGraphSON()
+        {
+            var writer = CreateStandardGraphSONWriter();
+            var vertex = new Vertex(45.23f);
+
+            var graphSON = writer.WriteObject(vertex);
+
+            const string expected =
+                "{\"@type\":\"g:Vertex\",\"@value\":{\"id\":{\"@type\":\"g:Float\",\"@value\":45.23},\"label\":\"vertex\"}}";
+            Assert.Equal(expected, graphSON);
+        }
+
+        [Fact]
+        public void VertexWriter_WriteVertexWithLabel_ToGraphSON()
+        {
+            var writer = CreateStandardGraphSONWriter();
+            var vertex = new Vertex((long)123, "project");
+
+            var graphSON = writer.WriteObject(vertex);
+
+            const string expected =
+                "{\"@type\":\"g:Vertex\",\"@value\":{\"id\":{\"@type\":\"g:Int64\",\"@value\":123},\"label\":\"project\"}}";
+            Assert.Equal(expected, graphSON);
         }
 
         private GraphSONWriter CreateStandardGraphSONWriter()
