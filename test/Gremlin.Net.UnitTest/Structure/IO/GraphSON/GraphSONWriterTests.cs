@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Gremlin.Net.Process.Traversal;
 using Gremlin.Net.Structure;
+using Gremlin.Net.Structure.IO;
 using Gremlin.Net.Structure.IO.GraphSON;
 using Xunit;
 
@@ -125,6 +126,19 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
 
             const string expected =
                 "{\"@type\":\"g:Vertex\",\"@value\":{\"id\":{\"@type\":\"g:Int64\",\"@value\":123},\"label\":\"project\"}}";
+            Assert.Equal(expected, graphSON);
+        }
+
+        [Fact]
+        public void EdgeWriter_WriteEdge_ToGraphSON()
+        {
+            var writer = CreateStandardGraphSONWriter();
+            var edge = new Edge(7, new Vertex(0, "person"), "knows", new Vertex(1, "dog"));
+
+            var graphSON = writer.WriteObject(edge);
+
+            const string expected =
+                "{\"@type\":\"g:Edge\",\"@value\":{\"id\":{\"@type\":\"g:Int32\",\"@value\":7},\"outV\":{\"@type\":\"g:Int32\",\"@value\":0},\"outVLabel\":\"person\",\"label\":\"knows\",\"inV\":{\"@type\":\"g:Int32\",\"@value\":1},\"inVLabel\":\"dog\"}}";
             Assert.Equal(expected, graphSON);
         }
 

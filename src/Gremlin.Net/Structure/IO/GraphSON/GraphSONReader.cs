@@ -15,7 +15,8 @@ namespace Gremlin.Net.Structure.IO.GraphSON
                 {"g:Int64", new Int64Converter()},
                 {"g:Float", new FloatConverter()},
                 {"g:Double", new DoubleConverter()},
-                {"g:Vertex", new VertexDeserializer()}
+                {"g:Vertex", new VertexDeserializer()},
+                {"g:Edge", new EdgeDeserializer()}
             };
 
         public GraphSONReader()

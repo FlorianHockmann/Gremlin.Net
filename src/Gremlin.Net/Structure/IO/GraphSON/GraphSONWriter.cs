@@ -27,7 +27,8 @@ namespace Gremlin.Net.Structure.IO.GraphSON
                 {typeof(double), new DoubleConverter()},
                 {typeof(Enum), new EnumSerializer()},
                 {typeof(TraversalPredicate), new TraversalPredicateSerializer()},
-                {typeof(Vertex), new VertexSerializer()}
+                {typeof(Vertex), new VertexSerializer()},
+                {typeof(Edge), new EdgeSerializer()}
             };
 
         public GraphSONWriter()

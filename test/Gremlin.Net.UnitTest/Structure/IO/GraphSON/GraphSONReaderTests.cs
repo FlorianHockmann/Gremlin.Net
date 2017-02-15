@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Gremlin.Net.Structure;
+using Gremlin.Net.Structure.IO;
 using Gremlin.Net.Structure.IO.GraphSON;
 using Newtonsoft.Json.Linq;
 using Xunit;
@@ -87,6 +88,21 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
             Assert.Equal(new Vertex(1), readVertex);
             Assert.Equal("person", readVertex.Label);
             Assert.Equal(typeof(int), readVertex.Id.GetType());
+        }
+
+        [Fact]
+        public void EdgeReader_EdgeWithProperties_DeserializeToEdge()
+        {
+            var graphSon =
+                "{\"@type\":\"g:Edge\", \"@value\":{\"id\":{\"@type\":\"g:Int64\",\"@value\":17},\"label\":\"knows\",\"inV\":\"x\",\"outV\":\"y\",\"inVLabel\":\"xLab\",\"properties\":{\"aKey\":\"aValue\",\"bKey\":true}}}";
+            var reader = CreateStandardGraphSONReader();
+
+            Edge readEdge = reader.ToObject(JObject.Parse(graphSon));
+
+            Assert.Equal((long)17, readEdge.Id);
+            Assert.Equal("knows", readEdge.Label);
+            Assert.Equal(new Vertex("x", "xLabel"), readEdge.InV);
+            Assert.Equal(new Vertex("y"), readEdge.OutV);
         }
 
         private GraphSONReader CreateStandardGraphSONReader()
