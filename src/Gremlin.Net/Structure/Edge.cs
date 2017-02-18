@@ -1,4 +1,4 @@
-﻿namespace Gremlin.Net.Structure.IO
+﻿namespace Gremlin.Net.Structure
 {
     public class Edge : Element
     {

@@ -142,6 +142,46 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
             Assert.Equal(expected, graphSON);
         }
 
+        [Fact]
+        public void PropertyWriter_WritePropertyWithVertexPropertyElement_ToGraphSON()
+        {
+            var writer = CreateStandardGraphSONWriter();
+            var property = new Property("name", "marko",
+                new VertexProperty("anId", "aKey", 21345, new Vertex("vertexId")));
+
+            var graphSON = writer.WriteObject(property);
+
+            const string expected =
+                "{\"@type\":\"g:Property\",\"@value\":{\"key\":\"name\",\"value\":\"marko\",\"element\":{\"@type\":\"g:VertexProperty\",\"@value\":{\"id\":\"anId\",\"label\":\"aKey\",\"vertex\":\"vertexId\"}}}}";
+            Assert.Equal(expected, graphSON);
+        }
+
+        [Fact]
+        public void PropertyWriter_WritePropertyWithEdgeElement_ToGraphSON()
+        {
+            var writer = CreateStandardGraphSONWriter();
+            var property = new Property("aKey", "aValue", new Edge("anId", new Vertex(1), "edgeLabel", new Vertex(2)));
+
+            var graphSON = writer.WriteObject(property);
+
+            const string expected =
+                "{\"@type\":\"g:Property\",\"@value\":{\"key\":\"aKey\",\"value\":\"aValue\",\"element\":{\"@type\":\"g:Edge\",\"@value\":{\"id\":\"anId\",\"outV\":{\"@type\":\"g:Int32\",\"@value\":1},\"label\":\"edgeLabel\",\"inV\":{\"@type\":\"g:Int32\",\"@value\":2}}}}}";
+            Assert.Equal(expected, graphSON);
+        }
+
+        [Fact]
+        public void VertexPropertyWriter_WriteVertexProperty_ToGraphSON()
+        {
+            var writer = CreateStandardGraphSONWriter();
+            var vertexProperty = new VertexProperty("blah", "keyA", true, new Vertex("stephen"));
+
+            var graphSON = writer.WriteObject(vertexProperty);
+
+            const string expected =
+                "{\"@type\":\"g:VertexProperty\",\"@value\":{\"id\":\"blah\",\"label\":\"keyA\",\"value\":true,\"vertex\":\"stephen\"}}";
+            Assert.Equal(expected, graphSON);
+        }
+
         private GraphSONWriter CreateStandardGraphSONWriter()
         {
             return new GraphSONWriter();

@@ -105,6 +105,40 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
             Assert.Equal(new Vertex("y"), readEdge.OutV);
         }
 
+        [Fact]
+        public void PropertyReader_PropertyWithEdgeElement_DeserializeToProperty()
+        {
+            var graphSon =
+                "{\"@type\":\"g:Property\",\"@value\":{\"key\":\"aKey\",\"value\":{\"@type\":\"g:Int64\",\"@value\":17},\"element\":{\"@type\":\"g:Edge\",\"@value\":{\"id\":{\"@type\":\"g:Int64\",\"@value\":122},\"label\":\"knows\",\"inV\":\"x\",\"outV\":\"y\",\"inVLabel\":\"xLab\"}}}}";
+            var reader = CreateStandardGraphSONReader();
+
+            Property readProperty = reader.ToObject(JObject.Parse(graphSon));
+
+            Assert.Equal("aKey", readProperty.Key);
+            Assert.Equal((long)17, readProperty.Value);
+            Assert.Equal(typeof(Edge), readProperty.Element.GetType());
+            var edge = readProperty.Element as Edge;
+            Assert.Equal((long)122, edge.Id);
+            Assert.Equal("knows", edge.Label);
+            Assert.Equal("x", edge.InV.Id);
+            Assert.Equal("y", edge.OutV.Id);
+        }
+
+        [Fact]
+        public void VertexPropertyReader_SimpleVertexProperty_DeserializeToVertexProperty()
+        {
+            var graphSon =
+                "{\"@type\":\"g:VertexProperty\",\"@value\":{\"id\":\"anId\",\"label\":\"aKey\",\"value\":true,\"vertex\":{\"@type\":\"g:Int32\",\"@value\":9}}}";
+            var reader = CreateStandardGraphSONReader();
+
+            VertexProperty readVertexProperty = reader.ToObject(JObject.Parse(graphSon));
+
+            Assert.Equal("anId", readVertexProperty.Id);
+            Assert.Equal("aKey", readVertexProperty.Label);
+            Assert.True(readVertexProperty.Value);
+            Assert.NotNull(readVertexProperty.Vertex);
+        }
+
         private GraphSONReader CreateStandardGraphSONReader()
         {
             return new GraphSONReader();

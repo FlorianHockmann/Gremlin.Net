@@ -6,7 +6,7 @@ namespace Gremlin.Net.UnitTest.Structure
     public class VertexTests
     {
         [Fact]
-        public void VertexLabel_NoLabelSpecified_ShouldHaveDefaultLabel()
+        public void Label_NoLabelSpecified_ShouldHaveDefaultLabel()
         {
             var vertex = new Vertex(1);
 
@@ -16,7 +16,7 @@ namespace Gremlin.Net.UnitTest.Structure
         [Theory]
         [InlineData(1)]
         [InlineData(5823)]
-        public void VertexToString_WithValidId_IncludeId(object vertexId)
+        public void oString_WithValidId_IncludeId(object vertexId)
         {
             var vertex = new Vertex(vertexId);
 
@@ -26,7 +26,7 @@ namespace Gremlin.Net.UnitTest.Structure
         }
 
         [Fact]
-        public void VertexLabel_LabelSpecified_ShouldReturnSpecifiedLabel()
+        public void Label_LabelSpecified_ShouldReturnSpecifiedLabel()
         {
             const string specifiedLabel = "person";
 
@@ -36,12 +36,14 @@ namespace Gremlin.Net.UnitTest.Structure
         }
 
         [Fact]
-        public void VertexEquals_EqualId_ReturnsTrue()
+        public void Equals_EqualId_ReturnsTrue()
         {
             var firstVertex = new Vertex(1);
             var secondVertex = new Vertex(1);
 
-            Assert.Equal(firstVertex, secondVertex);
+            var areEqual = firstVertex.Equals(secondVertex);
+
+            Assert.True(areEqual);
         }
     }
 }

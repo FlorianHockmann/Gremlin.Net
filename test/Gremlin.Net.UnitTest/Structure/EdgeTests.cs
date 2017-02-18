@@ -2,7 +2,7 @@
 using Gremlin.Net.Structure.IO;
 using Xunit;
 
-namespace Gremlin.Net.UnitTest.Structure.IO
+namespace Gremlin.Net.UnitTest.Structure
 {
     public class EdgeTests
     {
