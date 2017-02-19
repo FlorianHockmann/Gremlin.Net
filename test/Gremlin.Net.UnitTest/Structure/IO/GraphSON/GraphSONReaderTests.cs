@@ -139,6 +139,22 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
             Assert.NotNull(readVertexProperty.Vertex);
         }
 
+        [Fact]
+        public void PathReader_PathWithVerticesAndString_DeserializeToPath()
+        {
+            var graphSon =
+                "{\"@type\":\"g:Path\",\"@value\":{\"labels\":[[\"a\"],[\"b\",\"c\"],[]],\"objects\":[{\"@type\":\"g:Vertex\",\"@value\":{\"id\":{\"@type\":\"g:Int32\",\"@value\":1},\"label\":\"person\",\"properties\":{\"name\":[{\"@type\":\"g:VertexProperty\",\"@value\":{\"id\":{\"@type\":\"g:Int64\",\"@value\":0},\"value\":\"marko\",\"label\":\"name\"}}],\"age\":[{\"@type\":\"g:VertexProperty\",\"@value\":{\"id\":{\"@type\":\"g:Int64\",\"@value\":1},\"value\":{\"@type\":\"g:Int32\",\"@value\":29},\"label\":\"age\"}}]}}},{\"@type\":\"g:Vertex\",\"@value\":{\"id\":{\"@type\":\"g:Int32\",\"@value\":3},\"label\":\"software\",\"properties\":{\"name\":[{\"@type\":\"g:VertexProperty\",\"@value\":{\"id\":{\"@type\":\"g:Int64\",\"@value\":4},\"value\":\"lop\",\"label\":\"name\"}}],\"lang\":[{\"@type\":\"g:VertexProperty\",\"@value\":{\"id\":{\"@type\":\"g:Int64\",\"@value\":5},\"value\":\"java\",\"label\":\"lang\"}}]}}},\"lop\"]}}";
+            var reader = CreateStandardGraphSONReader();
+
+            Path readPath = reader.ToObject(JObject.Parse(graphSon));
+
+            Assert.Equal("[v[1], v[3], lop]", readPath.ToString());
+            Assert.Equal(new Vertex(1), readPath[0]);
+            Assert.Equal(new Vertex(1), readPath["a"]);
+            Assert.Equal("lop", readPath[2]);
+            Assert.Equal(3, readPath.Count);
+        }
+
         private GraphSONReader CreateStandardGraphSONReader()
         {
             return new GraphSONReader();
