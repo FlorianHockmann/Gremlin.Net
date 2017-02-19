@@ -7,6 +7,7 @@ using System.Text;
 using Gremlin.Net.Driver.Messages;
 using Gremlin.Net.Driver.Messages.Traversal;
 using Gremlin.Net.Process.Traversal;
+using Gremlin.Net.Process.Traversal.Strategy;
 using Newtonsoft.Json;
 
 namespace Gremlin.Net.Structure.IO.GraphSON
@@ -30,7 +31,8 @@ namespace Gremlin.Net.Structure.IO.GraphSON
                 {typeof(Vertex), new VertexSerializer()},
                 {typeof(Edge), new EdgeSerializer()},
                 {typeof(Property), new PropertySerializer()},
-                {typeof(VertexProperty), new VertexPropertySerializer()}
+                {typeof(VertexProperty), new VertexPropertySerializer()},
+                {typeof(AbstractTraversalStrategy), new TraversalStrategySerializer()}
             };
 
         public GraphSONWriter()
