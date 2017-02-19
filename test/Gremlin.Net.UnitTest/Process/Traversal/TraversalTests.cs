@@ -4,7 +4,7 @@ using System.Linq;
 using Gremlin.Net.Process.Traversal;
 using Xunit;
 
-namespace Gremlin.Net.UnitTest.Process
+namespace Gremlin.Net.UnitTest.Process.Traversal
 {
     public class TraversalTests
     {

@@ -1,5 +1,4 @@
 ﻿using Gremlin.Net.Structure;
-using Gremlin.Net.Structure.IO;
 using Xunit;
 
 namespace Gremlin.Net.UnitTest.Structure

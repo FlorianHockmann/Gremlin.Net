@@ -2,7 +2,7 @@
 using Gremlin.Net.Process.Traversal;
 using Xunit;
 
-namespace Gremlin.Net.UnitTest
+namespace Gremlin.Net.UnitTest.Process.Traversal
 {
     public class BytecodeTests
     {

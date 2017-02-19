@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Gremlin.Net.Process.Traversal;
 
-namespace Gremlin.Net.UnitTest.Process
+namespace Gremlin.Net.UnitTest.Process.Traversal
 {
     public class TestTraversalStrategy : ITraversalStrategy
     {
@@ -12,7 +12,7 @@ namespace Gremlin.Net.UnitTest.Process
             _traversers = traversersToAddOnApplication;
         }
 
-        public void Apply(Traversal traversal)
+        public void Apply(Net.Process.Traversal.Traversal traversal)
         {
             traversal.Traversers = _traversers;
         }

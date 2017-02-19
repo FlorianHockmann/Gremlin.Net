@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Gremlin.Net.Structure;
-using Gremlin.Net.Structure.IO;
 using Gremlin.Net.Structure.IO.GraphSON;
 using Newtonsoft.Json.Linq;
 using Xunit;

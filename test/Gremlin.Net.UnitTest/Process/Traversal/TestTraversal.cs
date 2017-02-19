@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Gremlin.Net.Process.Traversal;
 
-namespace Gremlin.Net.UnitTest
+namespace Gremlin.Net.UnitTest.Process.Traversal
 {
-    public class TestTraversal : Traversal
+    public class TestTraversal : Net.Process.Traversal.Traversal
     {
         public TestTraversal(List<object> traverserObjs)
         {
