@@ -20,6 +20,7 @@
 using System.Collections.Generic;
 using Gremlin.Net.Process.Remote;
 using Gremlin.Net.Process.Traversal;
+using Gremlin.Net.Process.Traversal.Strategy.Decoration;
 
 namespace Gremlin.CSharp.Process
 {
@@ -91,6 +92,13 @@ namespace Gremlin.CSharp.Process
             var source = new GraphTraversalSource(TraversalStrategies, Bytecode);
             source.TraversalStrategies.Add(new RemoteStrategy(remoteConnection));
             return source;
+        }
+        
+        public GraphTraversalSource WithComputer(string graphComputer = null, int? workers = null, string persist = null,
+            string result = null, Traversal vertices = null, Traversal edges = null,
+            Dictionary<string, dynamic> configuration = null)
+        {
+            return WithStrategies(new VertexProgramStrategy(graphComputer, workers, persist, result, vertices, edges, configuration));
         }
 
         public GraphTraversal E(params object[] args)
