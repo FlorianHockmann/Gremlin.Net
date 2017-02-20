@@ -181,6 +181,18 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
             Assert.Equal(expected, graphSON);
         }
 
+        [Fact]
+        public void UuidWriter_WriteUuid_ToGraphSON()
+        {
+            var writer = CreateStandardGraphSONWriter();
+            var guid = Guid.Parse("41d2e28a-20a4-4ab0-b379-d810dede3786");
+
+            var graphSon = writer.WriteObject(guid);
+
+            const string expected = "{\"@type\":\"g:UUID\",\"@value\":\"41d2e28a-20a4-4ab0-b379-d810dede3786\"}";
+            Assert.Equal(expected, graphSon);
+        }
+
         private GraphSONWriter CreateStandardGraphSONWriter()
         {
             return new GraphSONWriter();

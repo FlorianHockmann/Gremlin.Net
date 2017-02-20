@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Gremlin.Net.Structure;
 using Gremlin.Net.Structure.IO.GraphSON;
 using Newtonsoft.Json.Linq;
@@ -152,6 +153,17 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
             Assert.Equal(new Vertex(1), readPath["a"]);
             Assert.Equal("lop", readPath[2]);
             Assert.Equal(3, readPath.Count);
+        }
+
+        [Fact]
+        public void UuidReader_Uuid_DeserializeToGuid()
+        {
+            var graphSon = "{\"@type\":\"g:UUID\",\"@value\":\"41d2e28a-20a4-4ab0-b379-d810dede3786\"}";
+            var reader = CreateStandardGraphSONReader();
+
+            Guid readGuid = reader.ToObject(JObject.Parse(graphSon));
+
+            Assert.Equal(Guid.Parse("41d2e28a-20a4-4ab0-b379-d810dede3786"), readGuid);
         }
 
         private GraphSONReader CreateStandardGraphSONReader()
