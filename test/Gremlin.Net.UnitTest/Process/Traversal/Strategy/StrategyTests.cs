@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Gremlin.Net.Process.Traversal.Strategy;
 using Gremlin.Net.Process.Traversal.Strategy.Optimization;
+using Gremlin.Net.Process.Traversal.Strategy.Verification;
 using Xunit;
 
 namespace Gremlin.Net.UnitTest.Process.Traversal.Strategy
@@ -45,6 +46,30 @@ namespace Gremlin.Net.UnitTest.Process.Traversal.Strategy
             var areEqual = firstStrategy.Equals(secondStrategy);
 
             Assert.False(areEqual);
+        }
+
+        [Fact]
+        public void GetHashCode_EqualStrategyNameDifferentConfiguration_SameHashCode()
+        {
+            var firstStrategy = new TestStrategy("aConfigKey", "aConfigValue");
+            var secondStrategy = new TestStrategy("anotherKey", "anotherValue");
+
+            var firstHashCode = firstStrategy.GetHashCode();
+            var secondHashCode = secondStrategy.GetHashCode();
+
+            Assert.Equal(firstHashCode, secondHashCode);
+        }
+
+        [Fact]
+        public void GetHashCode_DifferentNameDifferentConfiguration_DifferentHashCode()
+        {
+            var firstStrategy = new TestStrategy();
+            var secondStrategy = new ReadOnlyStrategy();
+
+            var firstHashCode = firstStrategy.GetHashCode();
+            var secondHashCode = secondStrategy.GetHashCode();
+
+            Assert.NotEqual(firstHashCode, secondHashCode);
         }
     }
 
