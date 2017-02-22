@@ -16,6 +16,8 @@ namespace Gremlin.Net.Structure.IO.GraphSON
                 {"g:Float", new FloatConverter()},
                 {"g:Double", new DoubleConverter()},
                 {"g:UUID", new UuidDeserializer()},
+                {"g:Date", new DateDeserializer()},
+                {"g:Timestamp", new DateDeserializer()},
                 {"g:Vertex", new VertexDeserializer()},
                 {"g:Edge", new EdgeDeserializer()},
                 {"g:Property", new PropertyDeserializer()},

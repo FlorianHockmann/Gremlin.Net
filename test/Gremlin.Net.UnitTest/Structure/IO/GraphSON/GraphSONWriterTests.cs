@@ -182,7 +182,7 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
         }
 
         [Fact]
-        public void UuidWriter_WriteUuid_ToGraphSON()
+        public void UuidWriter_WriteGuid_ToGraphSON()
         {
             var writer = CreateStandardGraphSONWriter();
             var guid = Guid.Parse("41d2e28a-20a4-4ab0-b379-d810dede3786");
@@ -190,6 +190,18 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
             var graphSon = writer.WriteObject(guid);
 
             const string expected = "{\"@type\":\"g:UUID\",\"@value\":\"41d2e28a-20a4-4ab0-b379-d810dede3786\"}";
+            Assert.Equal(expected, graphSon);
+        }
+
+        [Fact]
+        public void DateWriter_WriteDatetime_ToGraphSON()
+        {
+            var writer = CreateStandardGraphSONWriter();
+            var dateTime = TestUtils.FromJavaTime(1475583442552);
+
+            var graphSon = writer.WriteObject(dateTime);
+
+            const string expected = "{\"@type\":\"g:Date\",\"@value\":1475583442552}";
             Assert.Equal(expected, graphSon);
         }
 

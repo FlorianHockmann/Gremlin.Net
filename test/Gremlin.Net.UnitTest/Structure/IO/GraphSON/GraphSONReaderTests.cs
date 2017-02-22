@@ -166,6 +166,30 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
             Assert.Equal(Guid.Parse("41d2e28a-20a4-4ab0-b379-d810dede3786"), readGuid);
         }
 
+        [Fact]
+        public void DateReader_Date_DeserializeToDateTime()
+        {
+            var graphSon = "{\"@type\":\"g:Date\",\"@value\":1475583442552}";
+            var reader = CreateStandardGraphSONReader();
+
+            DateTime readDateTime = reader.ToObject(JObject.Parse(graphSon));
+
+            var expectedDateTime = TestUtils.FromJavaTime(1475583442552);
+            Assert.Equal(expectedDateTime, readDateTime);
+        }
+
+        [Fact]
+        public void TimestampReader_Timestamp_DeserializeToDateTime()
+        {
+            var graphSon = "{\"@type\":\"g:Timestamp\",\"@value\":1475583442558}";
+            var reader = CreateStandardGraphSONReader();
+
+            DateTime readDateTime = reader.ToObject(JObject.Parse(graphSon));
+
+            var expectedDateTime = TestUtils.FromJavaTime(1475583442558);
+            Assert.Equal(expectedDateTime, readDateTime);
+        }
+
         private GraphSONReader CreateStandardGraphSONReader()
         {
             return new GraphSONReader();
