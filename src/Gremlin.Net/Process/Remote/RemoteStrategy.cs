@@ -1,4 +1,5 @@
-﻿using Gremlin.Net.Process.Traversal;
+﻿using System.Threading.Tasks;
+using Gremlin.Net.Process.Traversal;
 
 namespace Gremlin.Net.Process.Remote
 {
@@ -15,6 +16,14 @@ namespace Gremlin.Net.Process.Remote
         {
             if (traversal.Traversers != null) return;
             var remoteTraversal = _remoteConnection.Submit(traversal.Bytecode);
+            traversal.SideEffects = remoteTraversal.SideEffects;
+            traversal.Traversers = remoteTraversal.Traversers;
+        }
+
+        public async Task ApplyAsync(Traversal.Traversal traversal)
+        {
+            if (traversal.Traversers != null) return;
+            var remoteTraversal = await _remoteConnection.SubmitAsync(traversal.Bytecode).ConfigureAwait(false);
             traversal.SideEffects = remoteTraversal.SideEffects;
             traversal.Traversers = remoteTraversal.Traversers;
         }

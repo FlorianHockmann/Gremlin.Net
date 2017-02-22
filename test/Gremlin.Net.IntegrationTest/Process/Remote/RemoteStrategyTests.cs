@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Gremlin.Net.Driver;
 using Gremlin.Net.Driver.Remote;
 using Gremlin.Net.Process.Remote;
@@ -23,6 +24,21 @@ namespace Gremlin.Net.IntegrationTest.Process.Remote
             var testTraversal = CreateTraversalWithRemoteStrategy(testBytecode);
 
             var actualResult = testTraversal.Next();
+
+            Assert.Equal(expectedResult, actualResult);
+        }
+
+        [Fact]
+        public async Task TraversalPromiseTest()
+        {
+            const string expectedResult = "gremlin";
+            var testBytecode = new Bytecode();
+            testBytecode.AddStep("V");
+            testBytecode.AddStep("has", "test");
+            testBytecode.AddStep("inject", expectedResult);
+            var testTraversal = CreateTraversalWithRemoteStrategy(testBytecode);
+
+            var actualResult = await testTraversal.Promise(t => t.Next());
 
             Assert.Equal(expectedResult, actualResult);
         }

@@ -16,6 +16,7 @@
  */
 #endregion
 
+using System.Threading.Tasks;
 using Gremlin.Net.Process.Traversal;
 
 namespace Gremlin.Net.Process.Remote
@@ -23,5 +24,6 @@ namespace Gremlin.Net.Process.Remote
     public interface IRemoteConnection
     {
         Traversal.Traversal Submit(Bytecode bytecode);
+        Task<Traversal.Traversal> SubmitAsync(Bytecode bytecode);
     }
 }

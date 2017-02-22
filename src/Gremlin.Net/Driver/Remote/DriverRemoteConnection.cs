@@ -1,4 +1,5 @@
-﻿using Gremlin.Net.Process.Remote;
+﻿using System.Threading.Tasks;
+using Gremlin.Net.Process.Remote;
 using Gremlin.Net.Process.Traversal;
 
 namespace Gremlin.Net.Driver.Remote
@@ -15,6 +16,13 @@ namespace Gremlin.Net.Driver.Remote
         public Traversal Submit(Bytecode bytecode)
         {
             var resultSet = _client.SubmitAsync<Traverser>(bytecode).Result;
+
+            return new DriverRemoteTraversal(_client, resultSet);
+        }
+
+        public async Task<Traversal> SubmitAsync(Bytecode bytecode)
+        {
+            var resultSet = await _client.SubmitAsync<Traverser>(bytecode).ConfigureAwait(false);
 
             return new DriverRemoteTraversal(_client, resultSet);
         }

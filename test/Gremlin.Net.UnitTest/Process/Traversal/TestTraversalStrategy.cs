@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Gremlin.Net.Process.Traversal;
 
 namespace Gremlin.Net.UnitTest.Process.Traversal
@@ -15,6 +16,12 @@ namespace Gremlin.Net.UnitTest.Process.Traversal
         public void Apply(Net.Process.Traversal.Traversal traversal)
         {
             traversal.Traversers = _traversers;
+        }
+
+        public Task ApplyAsync(Net.Process.Traversal.Traversal traversal)
+        {
+            traversal.Traversers = _traversers;
+            return Task.CompletedTask;
         }
     }
 }

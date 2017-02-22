@@ -19,6 +19,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Gremlin.Net.Process.Traversal
 {
@@ -44,6 +45,12 @@ namespace Gremlin.Net.Process.Traversal
         {
             foreach (var strategy in TraversalStrategies)
                 strategy.Apply(this);
+        }
+
+        private async Task ApplyStrategiesAsync()
+        {
+            foreach (var strategy in TraversalStrategies)
+                await strategy.ApplyAsync(this).ConfigureAwait(false);
         }
 
         public object Next()
@@ -112,5 +119,11 @@ namespace Gremlin.Net.Process.Traversal
         }
 
         public object Current => TraverserEnumerator.Current?.Object;
+
+        public async Task<TReturn> Promise<TReturn>(Func<Traversal,TReturn> callback)
+        {
+            await ApplyStrategiesAsync().ConfigureAwait(false);
+            return callback(this);
+        }
     } 
 }

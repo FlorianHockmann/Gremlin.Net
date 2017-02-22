@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Gremlin.Net.Process.Traversal.Strategy
 {
@@ -10,6 +11,11 @@ namespace Gremlin.Net.Process.Traversal.Strategy
 
         public virtual void Apply(Traversal traversal)
         {
+        }
+
+        public virtual Task ApplyAsync(Traversal traversal)
+        {
+            return Task.CompletedTask;
         }
 
         public bool Equals(AbstractTraversalStrategy other)
