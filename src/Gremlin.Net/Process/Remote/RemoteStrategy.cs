@@ -14,10 +14,7 @@ namespace Gremlin.Net.Process.Remote
 
         public void Apply(Traversal.Traversal traversal)
         {
-            if (traversal.Traversers != null) return;
-            var remoteTraversal = _remoteConnection.Submit(traversal.Bytecode);
-            traversal.SideEffects = remoteTraversal.SideEffects;
-            traversal.Traversers = remoteTraversal.Traversers;
+            ApplyAsync(traversal).Wait();
         }
 
         public async Task ApplyAsync(Traversal.Traversal traversal)

@@ -23,7 +23,6 @@ namespace Gremlin.Net.Process.Remote
 {
     public interface IRemoteConnection
     {
-        Traversal.Traversal Submit(Bytecode bytecode);
         Task<Traversal.Traversal> SubmitAsync(Bytecode bytecode);
     }
 }

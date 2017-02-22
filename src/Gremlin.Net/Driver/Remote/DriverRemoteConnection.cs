@@ -13,13 +13,6 @@ namespace Gremlin.Net.Driver.Remote
             _client = client;
         }
 
-        public Traversal Submit(Bytecode bytecode)
-        {
-            var resultSet = _client.SubmitAsync<Traverser>(bytecode).Result;
-
-            return new DriverRemoteTraversal(_client, resultSet);
-        }
-
         public async Task<Traversal> SubmitAsync(Bytecode bytecode)
         {
             var resultSet = await _client.SubmitAsync<Traverser>(bytecode).ConfigureAwait(false);
