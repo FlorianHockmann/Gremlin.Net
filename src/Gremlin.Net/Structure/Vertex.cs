@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Gremlin.Net.Structure
+﻿namespace Gremlin.Net.Structure
 {
     public class Vertex : Element
     {
