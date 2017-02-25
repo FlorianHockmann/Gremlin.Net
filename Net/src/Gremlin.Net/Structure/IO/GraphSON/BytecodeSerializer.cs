@@ -1,26 +1,38 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Gremlin.Net.Process.Traversal;
 
 namespace Gremlin.Net.Structure.IO.GraphSON
 {
     public class BytecodeSerializer : IGraphSONSerializer
     {
-        public Dictionary<string, dynamic> Dictify(dynamic bytecode, GraphSONWriter writer)
+        public Dictionary<string, dynamic> Dictify(dynamic bytecodeObj, GraphSONWriter writer)
         {
-            var steps = bytecode.SourceInstructions;
-            steps.AddRange(bytecode.StepInstructions);
+            Bytecode bytecode = bytecodeObj;
 
-            var valueDict = new Dictionary<string, List<List<dynamic>>> { { "step", new List<List<dynamic>>() } };
-
-            foreach (var step in steps)
+            var valueDict = new Dictionary<string, List<List<dynamic>>>();
+            if (bytecode.SourceInstructions.Count > 0)
             {
-                var stepTmp = new List<dynamic> { step.OperatorName };
-                foreach(var arg in step.Arguments)
-                    stepTmp.Add(writer.ToDict(arg));
-                valueDict["step"].Add(stepTmp);
+                valueDict["source"] = DictifyInstructions(bytecode.SourceInstructions, writer);
+            }
+            if (bytecode.StepInstructions.Count > 0)
+            {
+                valueDict["step"] = DictifyInstructions(bytecode.StepInstructions, writer);
             }
 
             return GraphSONUtil.ToTypedValue(nameof(Bytecode), valueDict);
+        }
+
+        private List<List<dynamic>> DictifyInstructions(IEnumerable<Instruction> instructions, GraphSONWriter writer)
+        {
+            var result = new List<List<dynamic>>();
+            foreach (var instruction in instructions)
+            {
+                var dictifiedInstruction = new List<dynamic> { instruction.OperatorName };
+                dictifiedInstruction.AddRange(instruction.Arguments.Select(arg => writer.ToDict(arg)));
+                result.Add(dictifiedInstruction);
+            }
+            return result;
         }
     }
 }

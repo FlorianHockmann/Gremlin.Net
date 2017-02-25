@@ -1,7 +1,7 @@
 {
   "version": "0.1.0-alpha2",
   "dependencies": {
-    "Gremlin.Net": "0.2.2-*"
+    "Gremlin.Net": "0.2.2-beta06"
   },
   "frameworks": {
     "netcoreapp1.0": {
