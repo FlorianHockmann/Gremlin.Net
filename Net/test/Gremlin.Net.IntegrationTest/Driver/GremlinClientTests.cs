@@ -18,20 +18,18 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Gremlin.Net.Driver;
 using Gremlin.Net.Driver.Exceptions;
-using Gremlin.Net.Driver.Messages.Standard;
+using Gremlin.Net.Driver.Messages;
 using Gremlin.Net.IntegrationTest.Util;
-using Gremlin.Net.Process.Traversal;
 using Xunit;
 
 namespace Gremlin.Net.IntegrationTest.Driver
 {
     public class GremlinClientTests
     {
-        private readonly ScriptRequestMessageProvider _requestMessageProvider = new ScriptRequestMessageProvider();
+        private readonly RequestMessageProvider _requestMessageProvider = new RequestMessageProvider();
         private static readonly string TestHost = ConfigProvider.Configuration["TestServerIpAddress"];
         private static readonly int TestPort = Convert.ToInt32(ConfigProvider.Configuration["TestServerPort"]);
 
@@ -88,16 +86,12 @@ namespace Gremlin.Net.IntegrationTest.Driver
             var expectedResult = new List<int> {1, 2, 3, 4, 5};
             var requestScript = $"{nameof(expectedResult)}";
             var bindings = new Dictionary<string, object> {{nameof(expectedResult), expectedResult}};
-            var requestMessage = new ScriptRequestMessage
-            {
-                Arguments =
-                    new ScriptRequestArguments
-                    {
-                        BatchSize = batchSize,
-                        GremlinScript = requestScript,
-                        Bindings = bindings
-                    }
-            };
+            var requestMessage =
+                RequestMessage.Build(Tokens.OpsEval)
+                    .AddArgument(Tokens.ArgsBatchSize, batchSize)
+                    .AddArgument(Tokens.ArgsGremlin, requestScript)
+                    .AddArgument(Tokens.ArgsBindings, bindings)
+                    .Create();
             var gremlinServer = new GremlinServer(TestHost, TestPort);
             using (var gremlinClient = new GremlinClient(gremlinServer))
             {
@@ -115,8 +109,10 @@ namespace Gremlin.Net.IntegrationTest.Driver
             {
                 var sleepTime = 100;
                 var expectedFirstResult = 1;
-                var firstRequestMsg = _requestMessageProvider.GetSleepMessage(sleepTime);
-                firstRequestMsg.Arguments.GremlinScript += $"{expectedFirstResult}";
+                var gremlinScript = _requestMessageProvider.GetSleepGremlinScript(sleepTime);
+                gremlinScript += $"{expectedFirstResult}";
+                var firstRequestMsg = RequestMessage.Build(Tokens.OpsEval)
+                    .AddArgument(Tokens.ArgsGremlin, gremlinScript).Create();
                 var expectedSecondResponse = 2;
                 var secondScript = $"{expectedSecondResponse}";
 
@@ -181,7 +177,8 @@ namespace Gremlin.Net.IntegrationTest.Driver
                 var b = 2;
                 var bindings = new Dictionary<string, object> {{"a", a}, {"b", b}};
 
-                var response = await gremlinClient.SubmitWithSingleResultAsync<int>(requestMsg, bindings);
+                var response =
+                    await gremlinClient.SubmitWithSingleResultAsync<int>(requestMsg, bindings);
 
                 Assert.Equal(a + b, response);
             }
@@ -200,50 +197,10 @@ namespace Gremlin.Net.IntegrationTest.Driver
                     {"propertyValue", "unknownTestName"}
                 };
 
-                var response = await gremlinClient.SubmitWithSingleResultAsync<object>(gremlinScript, bindings);
+                var response =
+                    await gremlinClient.SubmitWithSingleResultAsync<object>(gremlinScript, bindings);
 
                 Assert.Null(response);
-            }
-        }
-
-        [Fact]
-        public async Task HandleCountBytecodeMessage()
-        {
-            var gremlinServer = new GremlinServer(TestHost, TestPort);
-            using (var gremlinClient = new GremlinClient(gremlinServer))
-            {
-                var bytecode = new Bytecode();
-                bytecode.AddSource("V");
-                bytecode.AddStep("count");
-
-                var response = await gremlinClient.SubmitAsync<Traverser>(bytecode);
-
-                var traversers = response.ToList();
-                Assert.Equal(1, traversers.Count);
-                Assert.Equal(1, traversers[0].Bulk);
-                Assert.Equal((long) 6, traversers[0].Object);
-            }
-        }
-
-        [Fact]
-        public async Task HandleGetLabelBytecodeMessage()
-        {
-            var gremlinServer = new GremlinServer(TestHost, TestPort);
-            using (var gremlinClient = new GremlinClient(gremlinServer))
-            {
-                var bytecode = new Bytecode();
-                const string expectedLabel = "person";
-                bytecode.AddSource("V");
-                bytecode.AddStep("has", "name", "nobody");
-                bytecode.AddStep("label");
-                bytecode.AddStep("inject", expectedLabel);
-
-                var response = await gremlinClient.SubmitAsync<Traverser>(bytecode);
-
-                var traversers = response.ToList();
-                Assert.Equal(1, traversers.Count);
-                Assert.Equal(1, traversers[0].Bulk);
-                Assert.Equal(expectedLabel, traversers[0].Object);
             }
         }
     }

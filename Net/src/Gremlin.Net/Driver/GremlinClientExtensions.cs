@@ -21,9 +21,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Gremlin.Net.Driver.Messages.Standard;
-using Gremlin.Net.Driver.Messages.Traversal;
-using Gremlin.Net.Process.Traversal;
+using Gremlin.Net.Driver.Messages;
 
 namespace Gremlin.Net.Driver
 {
@@ -56,11 +54,11 @@ namespace Gremlin.Net.Driver
         /// <remarks>If multiple results are received from Gremlin Server, then only the first gets returned. Use <see cref="SubmitAsync{T}"/> instead when you expect a collection of results.</remarks>
         /// <typeparam name="T">The type of the expected result.</typeparam>
         /// <param name="gremlinClient">The <see cref="IGremlinClient"/> that submits the request.</param>
-        /// <param name="requestMessage">The <see cref="ScriptRequestMessage"/> to send.</param>
+        /// <param name="requestMessage">The <see cref="RequestMessage"/> to send.</param>
         /// <returns>A single result received from the Gremlin Server.</returns>
         /// <exception cref="Exceptions.ResponseException">Thrown when a response is received from Gremlin Server that indicates that an error occurred.</exception>
         public static async Task<T> SubmitWithSingleResultAsync<T>(this IGremlinClient gremlinClient,
-            ScriptRequestMessage requestMessage)
+            RequestMessage requestMessage)
         {
             var resultCollection = await gremlinClient.SubmitAsync<T>(requestMessage).ConfigureAwait(false);
             return resultCollection.FirstOrDefault();
@@ -84,10 +82,10 @@ namespace Gremlin.Net.Driver
         /// Submits a request message as an asynchronous operation without returning the result received from the Gremlin Server.
         /// </summary>
         /// <param name="gremlinClient">The <see cref="IGremlinClient"/> that submits the request.</param>
-        /// <param name="requestMessage">The <see cref="ScriptRequestMessage"/> to send.</param>
+        /// <param name="requestMessage">The <see cref="RequestMessage"/> to send.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
         /// <exception cref="Exceptions.ResponseException">Thrown when a response is received from Gremlin Server that indicates that an error occurred.</exception>
-        public static async Task SubmitAsync(this IGremlinClient gremlinClient, ScriptRequestMessage requestMessage)
+        public static async Task SubmitAsync(this IGremlinClient gremlinClient, RequestMessage requestMessage)
         {
             await gremlinClient.SubmitAsync<object>(requestMessage).ConfigureAwait(false);
         }
@@ -104,21 +102,13 @@ namespace Gremlin.Net.Driver
         public static async Task<IEnumerable<T>> SubmitAsync<T>(this IGremlinClient gremlinClient, string requestScript,
             Dictionary<string, object> bindings = null)
         {
-            var requestMessage = new ScriptRequestMessage
+            var msgBuilder = RequestMessage.Build(Tokens.OpsEval).AddArgument(Tokens.ArgsGremlin, requestScript);
+            if (bindings != null)
             {
-                Arguments = new ScriptRequestArguments {GremlinScript = requestScript, Bindings = bindings}
-            };
-            return await gremlinClient.SubmitAsync<T>(requestMessage).ConfigureAwait(false);
-        }
-
-        public static async Task<IEnumerable<TReturn>> SubmitAsync<TReturn>(this IGremlinClient gremlinClient,
-            Bytecode bytecode)
-        {
-            var requestMsg = new BytecodeRequestMessage()
-            {
-                Arguments = new BytecodeArguments {Bytecode = bytecode}
-            };
-            return await gremlinClient.SubmitAsync<TReturn>(requestMsg);
+                msgBuilder.AddArgument(Tokens.ArgsBindings, bindings);
+            }
+            var msg = msgBuilder.Create();
+            return await gremlinClient.SubmitAsync<T>(msg).ConfigureAwait(false);
         }
     }
 }

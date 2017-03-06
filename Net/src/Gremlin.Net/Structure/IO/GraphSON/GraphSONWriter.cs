@@ -5,7 +5,6 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using Gremlin.Net.Driver.Messages;
-using Gremlin.Net.Driver.Messages.Traversal;
 using Gremlin.Net.Process.Traversal;
 using Gremlin.Net.Process.Traversal.Strategy;
 using Newtonsoft.Json;
@@ -21,7 +20,7 @@ namespace Gremlin.Net.Structure.IO.GraphSON
             {
                 {typeof(Traversal), new TraversalSerializer()},
                 {typeof(Bytecode), new BytecodeSerializer()},
-                {typeof(BytecodeRequestMessage), new BytecodeRequestMessageSerializer()},
+                {typeof(RequestMessage), new RequestMessageSerializer()},
                 {typeof(int), new Int32Converter()},
                 {typeof(long), new Int64Converter()},
                 {typeof(float), new FloatConverter()},

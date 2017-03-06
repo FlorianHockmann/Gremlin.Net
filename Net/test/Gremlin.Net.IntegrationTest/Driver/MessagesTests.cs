@@ -23,7 +23,6 @@ using System.Threading.Tasks;
 using Gremlin.Net.Driver;
 using Gremlin.Net.Driver.Exceptions;
 using Gremlin.Net.Driver.Messages;
-using Gremlin.Net.Driver.Messages.Standard;
 using Gremlin.Net.IntegrationTest.Util;
 using Xunit;
 
@@ -31,7 +30,7 @@ namespace Gremlin.Net.IntegrationTest.Driver
 {
     public class MessagesTests
     {
-        private readonly ScriptRequestMessageProvider _requestMessageProvider = new ScriptRequestMessageProvider();
+        private readonly RequestMessageProvider _requestMessageProvider = new RequestMessageProvider();
         private static readonly string TestHost = ConfigProvider.Configuration["TestServerIpAddress"];
         private static readonly int TestPort = Convert.ToInt32(ConfigProvider.Configuration["TestServerPort"]);
 
@@ -44,10 +43,11 @@ namespace Gremlin.Net.IntegrationTest.Driver
                 var aliasTraversalSource = "g2";
                 var aliases = new Dictionary<string, string> {{aliasTraversalSource, "g"}};
                 var gremlinScript = $"{aliasTraversalSource}.V().count()";
-                var requestMsg = new ScriptRequestMessage
-                {
-                    Arguments = new ScriptRequestArguments {Aliases = aliases, GremlinScript = gremlinScript}
-                };
+                var requestMsg =
+                    RequestMessage.Build(Tokens.OpsEval)
+                        .AddArgument(Tokens.ArgsAliases, aliases)
+                        .AddArgument(Tokens.ArgsGremlin, gremlinScript)
+                        .Create();
 
                 var result = await gremlinClient.SubmitWithSingleResultAsync<long>(requestMsg);
 
@@ -62,7 +62,7 @@ namespace Gremlin.Net.IntegrationTest.Driver
             using (var gremlinClient = new GremlinClient(gremlinServer))
             {
                 var ivalidOperationName = "invalid";
-                var requestMsg = new TestMessage(ivalidOperationName);
+                var requestMsg = RequestMessage.Build(ivalidOperationName).Create();
 
                 var thrownException =
                     await Assert.ThrowsAsync<ResponseException>(() => gremlinClient.SubmitAsync<dynamic>(requestMsg));
@@ -79,7 +79,7 @@ namespace Gremlin.Net.IntegrationTest.Driver
             using (var gremlinClient = new GremlinClient(gremlinServer))
             {
                 var invalidProcessorName = "invalid";
-                var requestMsg = new TestMessage(processor: invalidProcessorName);
+                var requestMsg = RequestMessage.Build("").Processor(invalidProcessorName).Create();
 
                 var thrownException =
                     await Assert.ThrowsAsync<ResponseException>(() => gremlinClient.SubmitAsync<dynamic>(requestMsg));
@@ -98,8 +98,13 @@ namespace Gremlin.Net.IntegrationTest.Driver
             {
                 const int timeOutInMs = 1;
                 const int scriptSleepTimeInMs = 5000;
-                var requestMsg = _requestMessageProvider.GetSleepMessage(scriptSleepTimeInMs);
-                requestMsg.Arguments.ScriptEvaluationTimeoutInMs = timeOutInMs;
+                var sleepScript = _requestMessageProvider.GetSleepGremlinScript(scriptSleepTimeInMs);
+
+                var requestMsg =
+                    RequestMessage.Build(Tokens.OpsEval)
+                        .AddArgument(Tokens.ArgsGremlin, sleepScript)
+                        .AddArgument(Tokens.ArgsEvalTimeout, timeOutInMs)
+                        .Create();
                 var evaluationStopWatch = new Stopwatch();
                 evaluationStopWatch.Start();
 
@@ -120,8 +125,11 @@ namespace Gremlin.Net.IntegrationTest.Driver
             using (var gremlinClient = new GremlinClient(gremlinServer))
             {
                 var unknownLanguage = "unknown";
-                var requestMsg = _requestMessageProvider.GetDummyMessage();
-                requestMsg.Arguments.Language = unknownLanguage;
+                var requestMsg =
+                    RequestMessage.Build(Tokens.OpsEval)
+                        .AddArgument(Tokens.ArgsGremlin, "1")
+                        .AddArgument(Tokens.ArgsLanguage, unknownLanguage)
+                        .Create();
 
                 var thrownException =
                     await Assert.ThrowsAsync<ResponseException>(() => gremlinClient.SubmitAsync(requestMsg));
@@ -130,18 +138,6 @@ namespace Gremlin.Net.IntegrationTest.Driver
                 Assert.Contains(unknownLanguage, thrownException.Message);
                 Assert.Contains("Language", thrownException.Message);
             }
-        }
-    }
-
-    internal class TestMessage : RequestMessage
-    {
-        public override string Operation { get; }
-        public override string Processor { get; }
-
-        public TestMessage(string operation = "eval", string processor = "")
-        {
-            Operation = operation;
-            Processor = processor;
         }
     }
 }

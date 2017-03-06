@@ -1,4 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Gremlin.Net.Driver.Messages;
 using Gremlin.Net.Process.Remote;
 using Gremlin.Net.Process.Traversal;
 
@@ -15,9 +18,21 @@ namespace Gremlin.Net.Driver.Remote
 
         public async Task<Traversal> SubmitAsync(Bytecode bytecode)
         {
-            var resultSet = await _client.SubmitAsync<Traverser>(bytecode).ConfigureAwait(false);
+            var requestId = Guid.NewGuid();
+            var resultSet = await SubmitBytecodeAsync(requestId, bytecode).ConfigureAwait(false);
+            return new DriverRemoteTraversal(_client, requestId, resultSet);
+        }
 
-            return new DriverRemoteTraversal(_client, resultSet);
+        private async Task<IEnumerable<Traverser>> SubmitBytecodeAsync(Guid requestid, Bytecode bytecode)
+        {
+            var requestMsg =
+                RequestMessage.Build(Tokens.OpsBytecode)
+                    .Processor(Tokens.ProcessorTraversal)
+                    .OverrideRequestId(requestid)
+                    .AddArgument(Tokens.ArgsGremlin, bytecode)
+                    .AddArgument(Tokens.ArgsAliases, new Dictionary<string, string> {{"g", "g"}})
+                    .Create();
+            return await _client.SubmitAsync<Traverser>(requestMsg).ConfigureAwait(false);
         }
     }
 }

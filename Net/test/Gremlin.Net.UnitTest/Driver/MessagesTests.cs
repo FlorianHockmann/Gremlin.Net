@@ -16,7 +16,8 @@
  */
 #endregion
 
-using Gremlin.Net.Driver.Messages.Standard;
+using Gremlin.Net.Driver;
+using Gremlin.Net.Driver.Messages;
 using Xunit;
 
 namespace Gremlin.Net.UnitTest.Driver
@@ -26,8 +27,8 @@ namespace Gremlin.Net.UnitTest.Driver
         [Fact]
         public void RequestIdsShouldBeUnique()
         {
-            var firstMsg = new ScriptRequestMessage();
-            var secondMsg = new ScriptRequestMessage();
+            var firstMsg = RequestMessage.Build(Tokens.OpsEval).Create();
+            var secondMsg = RequestMessage.Build(Tokens.OpsEval).Create();
 
             Assert.NotEqual(firstMsg.RequestId, secondMsg.RequestId);
         }

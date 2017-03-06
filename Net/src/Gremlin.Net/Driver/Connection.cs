@@ -17,10 +17,14 @@
 #endregion
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using Gremlin.Net.Driver.Messages;
+using Gremlin.Net.Process.Traversal;
 using Gremlin.Net.Structure.IO.GraphSON;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -66,6 +70,8 @@ namespace Gremlin.Net.Driver
         private async Task<IEnumerable<T>> ReceiveAsync<T>()
         {
             ResponseStatus status;
+            IAggregator aggregator = null;
+            var isAggregatingSideEffects = false;
             var result = new List<T>();
             do
             {
@@ -79,11 +85,31 @@ namespace Gremlin.Net.Driver
                 if (status.Code != ResponseStatusCode.NoContent)
                 {
                     var receivedData = _graphSONReader.ToObject(receivedMsg["result"]["data"]);
-                    foreach(var d in receivedData)
-                        result.Add(d);
+                    foreach (var d in receivedData)
+                    {
+                        if (receivedMsg["result"]["meta"]["sideEffectKey"] != null)
+                        {
+                            if (aggregator == null)
+                            {
+                                aggregator =
+                                    new AggregatorFactory().GetAggregatorFor(
+                                        (string) receivedMsg["result"]["meta"]["aggregateTo"]);
+                            }
+                            aggregator.Add(d);
+                            isAggregatingSideEffects = true;
+                        }
+                        else
+                        {
+                            result.Add(d);
+                        }
+                    }
                 }
             } while (status.Code == ResponseStatusCode.PartialContent);
 
+            if (isAggregatingSideEffects)
+            {
+                return new List<T> {(T) aggregator.GetAggregatedResult()};
+            }
             return result;
         }
 
@@ -108,5 +134,74 @@ namespace Gremlin.Net.Driver
             }
         }
         #endregion
+    }
+
+    internal class AggregatorFactory
+    {
+        public IAggregator GetAggregatorFor(string aggregateTo)
+        {
+            if (aggregateTo == "map")
+            {
+                return new DictionaryAggregator();
+            }
+            if (aggregateTo == "bulkset")
+            {
+                return new TraverserAggregator();
+            }
+            return new DefaultAggregator();
+        }
+    }
+
+    internal class DefaultAggregator : IAggregator
+    {
+        private readonly List<dynamic> _result = new List<dynamic>();
+
+        public void Add(object value)
+        {
+            _result.Add(value);
+        }
+
+        public object GetAggregatedResult()
+        {
+            return _result;
+        }
+    }
+
+    internal class DictionaryAggregator : IAggregator
+    {
+        private readonly Dictionary<string, dynamic> _result = new Dictionary<string, dynamic>();
+
+        public void Add(object value)
+        {
+            var newEntry = ((Dictionary<string, dynamic>) value).First();
+            _result.Add(newEntry.Key, newEntry.Value);
+        }
+
+        public object GetAggregatedResult()
+        {
+            return _result;
+        }
+    }
+
+    internal class TraverserAggregator : IAggregator
+    {
+        private readonly Dictionary<object, long> _result = new Dictionary<object, long>();
+
+        public void Add(object value)
+        {
+            var traverser = (Traverser) value;
+            _result.Add(traverser.Object, traverser.Bulk);
+        }
+
+        public object GetAggregatedResult()
+        {
+            return _result;
+        }
+    }
+
+    internal interface IAggregator
+    {
+        void Add(object value);
+        object GetAggregatedResult();
     }
 }
