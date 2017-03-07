@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Gremlin.Net is a cross-platform Gremlin Server driver for .NET that is written in C#. It uses WebSockets to communicate with Gremlin Server.</Description>
+    <AssemblyTitle>Gremlin.Net</AssemblyTitle>
+    <VersionPrefix>0.2.2-beta06</VersionPrefix>
+    <Authors>Florian Hockmann</Authors>
+    <TargetFramework>netstandard1.3</TargetFramework>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <AssemblyName>Gremlin.Net</AssemblyName>
+    <PackageId>Gremlin.Net</PackageId>
+    <PackageTags>gremlin;tinkerpop;tinkerpop3;titan</PackageTags>
+    <PackageProjectUrl>https://github.com/FlorianHockmann/Gremlin.Net</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/FlorianHockmann/Gremlin.Net/blob/master/LICENSE</PackageLicenseUrl>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Collections" Version="4.0.11" />
+    <PackageReference Include="System.Linq" Version="4.1.0" />
+    <PackageReference Include="System.Runtime" Version="4.1.0" />
+    <PackageReference Include="System.Runtime.InteropServices" Version="4.1.0" />
+    <PackageReference Include="System.Threading" Version="4.0.11" />
+    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+    <PackageReference Include="System.Net.WebSockets" Version="4.0.0" />
+    <PackageReference Include="System.Net.WebSockets.Client" Version="4.0.0" />
+    <PackageReference Include="System.Collections.Concurrent" Version="4.0.12" />
+    <PackageReference Include="System.Reflection.TypeExtensions" Version="4.1.0" />
+  </ItemGroup>
+
+</Project>
