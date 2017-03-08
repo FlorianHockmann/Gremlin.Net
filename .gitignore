@@ -254,3 +254,6 @@ paket-files/
 
 # VS Code
 .vscode/
+
+# Cake tools
+tools/
