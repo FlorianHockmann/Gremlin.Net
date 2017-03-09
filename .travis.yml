@@ -1,3 +1,4 @@
 language: csharp
 script:
-  - ./Net/build.sh
+  - cd Net
+  - ./build.sh
