@@ -1,6 +1,9 @@
 language: csharp
 dotnet: 1.0.0-preview3-004056
 dist: trusty
+sudo: required
+before_script:
+  - sudo apt-get install dotnet-dev-1.0.1
 script:
   - cd Net
   - ./build.sh
