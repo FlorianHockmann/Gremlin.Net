@@ -3,6 +3,7 @@ dotnet: 1.0.0-preview3-004056
 dist: trusty
 sudo: required
 before_script:
+  - ./start-gremlin-server.sh
   - sudo apt-get install dotnet-dev-1.0.1
 script:
   - cd Net
