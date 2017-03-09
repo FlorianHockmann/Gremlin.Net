@@ -1,7 +1,7 @@
 # Gremlin.Net
 Gremlin.Net is a cross-platform Gremlin Server driver for .NET that is written in C#. It uses WebSockets to communicate with Gremlin Server.
 
-[![AppVeyor](https://img.shields.io/appveyor/ci/FlorianHockmann/Gremlin-Net.svg?style=plastic)](https://ci.appveyor.com/project/FlorianHockmann/Gremlin-Net) [![Coveralls](https://img.shields.io/coveralls/FlorianHockmann/Gremlin.Net.svg?style=plastic)](https://coveralls.io/r/FlorianHockmann/Gremlin.Net)
+[![Travis](https://img.shields.io/travis/FlorianHockmann/Gremlin.Net/glvSupport.svg)](https://travis-ci.org/FlorianHockmann/Gremlin.Net)
 
 ## Getting Started
 
