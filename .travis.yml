@@ -1,5 +1,6 @@
 language: csharp
 dotnet: 1.0.0-preview3-004056
+dist: trusty
 script:
   - cd Net
   - ./build.sh
