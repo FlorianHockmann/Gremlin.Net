@@ -8,7 +8,7 @@ namespace Gremlin.Net.UnitTest.Structure
         [Theory]
         [InlineData(1)]
         [InlineData(5823)]
-        public void oString_WithValidId_IncludeId(object vertexId)
+        public void ToString_WithValidId_IncludeId(object vertexId)
         {
             var vertex = new Vertex(vertexId);
 
