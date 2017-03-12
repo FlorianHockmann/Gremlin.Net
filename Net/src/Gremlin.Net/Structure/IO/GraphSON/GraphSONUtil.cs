@@ -11,9 +11,7 @@ namespace Gremlin.Net.Structure.IO.GraphSON
                 {GraphSONTokens.TypeKey, FormatTypeName(prefix, typename)}
             };
             if (value != null)
-            {
                 typedValue[GraphSONTokens.ValueKey] = value;
-            }
             return typedValue;
         }
 

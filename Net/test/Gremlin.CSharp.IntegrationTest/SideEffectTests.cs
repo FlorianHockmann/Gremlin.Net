@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Gremlin.CSharp.Structure;
-using Gremlin.Net.Driver.Remote;
 using Xunit;
 
 namespace Gremlin.CSharp.IntegrationTest
@@ -13,29 +11,30 @@ namespace Gremlin.CSharp.IntegrationTest
         private readonly RemoteConnectionFactory _connectionFactory = new RemoteConnectionFactory();
 
         [Fact]
-        public void Get_NonExistingKey_Throw()
+        public void Get_CloseAfterSameGet_GetCachedSideEffect()
         {
             var graph = new Graph();
             var connection = _connectionFactory.CreateRemoteConnection();
             var g = graph.Traversal().WithRemote(connection);
-            var t = g.V().Iterate();
+            var t = g.V().Aggregate("a").Iterate();
 
-            Assert.Throws<KeyNotFoundException>(() => t.SideEffects.Get("m"));
+            t.SideEffects.Get("a");
+            t.SideEffects.Close();
+            var results = t.SideEffects.Get("a");
+
+            Assert.NotNull(results);
         }
 
         [Fact]
-        public void Keys_NamedGroupCount_SideEffectKey()
+        public void Get_ClosedSideEffects_Throw()
         {
             var graph = new Graph();
             var connection = _connectionFactory.CreateRemoteConnection();
             var g = graph.Traversal().WithRemote(connection);
-            var t = g.V().Out("created").GroupCount("m").By("name").Iterate();
+            var t = g.V().Aggregate("a").Iterate();
 
-            var keys = t.SideEffects.Keys();
-
-            var keysList = keys.ToList();
-            Assert.Equal(1, keysList.Count);
-            Assert.Contains("m", keysList);
+            t.SideEffects.Close();
+            Assert.Throws<InvalidOperationException>(() => t.SideEffects.Get("a"));
         }
 
         [Fact]
@@ -71,6 +70,17 @@ namespace Gremlin.CSharp.IntegrationTest
         }
 
         [Fact]
+        public void Get_NonExistingKey_Throw()
+        {
+            var graph = new Graph();
+            var connection = _connectionFactory.CreateRemoteConnection();
+            var g = graph.Traversal().WithRemote(connection);
+            var t = g.V().Iterate();
+
+            Assert.Throws<KeyNotFoundException>(() => t.SideEffects.Get("m"));
+        }
+
+        [Fact]
         public void Get_TraversalWithTwoSideEffects_GetBothSideEffects()
         {
             var graph = new Graph();
@@ -83,37 +93,10 @@ namespace Gremlin.CSharp.IntegrationTest
             Assert.Equal(2, keys.Count);
             Assert.Contains("m", keys);
             Assert.Contains("n", keys);
-            var n = (Dictionary<object, long>)t.SideEffects.Get("n");
+            var n = (Dictionary<object, long>) t.SideEffects.Get("n");
             Assert.Equal(2, n.Count);
             Assert.Equal(3, n["lop"]);
             Assert.Equal(1, n["ripple"]);
-        }
-
-        [Fact]
-        public void Get_ClosedSideEffects_Throw()
-        {
-            var graph = new Graph();
-            var connection = _connectionFactory.CreateRemoteConnection();
-            var g = graph.Traversal().WithRemote(connection);
-            var t = g.V().Aggregate("a").Iterate();
-
-            t.SideEffects.Close();
-            Assert.Throws<InvalidOperationException>(() => t.SideEffects.Get("a"));
-        }
-
-        [Fact]
-        public void Get_CloseAfterSameGet_GetCachedSideEffect()
-        {
-            var graph = new Graph();
-            var connection = _connectionFactory.CreateRemoteConnection();
-            var g = graph.Traversal().WithRemote(connection);
-            var t = g.V().Aggregate("a").Iterate();
-
-            t.SideEffects.Get("a");
-            t.SideEffects.Close();
-            var results = t.SideEffects.Get("a");
-
-            Assert.NotNull(results);
         }
 
         [Fact]
@@ -131,6 +114,21 @@ namespace Gremlin.CSharp.IntegrationTest
             Assert.Equal(2, keys.Count);
             Assert.Contains("a", keys);
             Assert.Contains("b", keys);
+        }
+
+        [Fact]
+        public void Keys_NamedGroupCount_SideEffectKey()
+        {
+            var graph = new Graph();
+            var connection = _connectionFactory.CreateRemoteConnection();
+            var g = graph.Traversal().WithRemote(connection);
+            var t = g.V().Out("created").GroupCount("m").By("name").Iterate();
+
+            var keys = t.SideEffects.Keys();
+
+            var keysList = keys.ToList();
+            Assert.Equal(1, keysList.Count);
+            Assert.Contains("m", keysList);
         }
     }
 }

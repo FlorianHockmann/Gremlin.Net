@@ -1,4 +1,5 @@
 ﻿#region License
+
 /*
  * Copyright 2016 Florian Hockmann
  * 
@@ -14,6 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 #endregion
 
 using System;
@@ -21,7 +23,7 @@ using System;
 namespace Gremlin.Net.Driver.Exceptions
 {
     /// <summary>
-    /// The exception that is thrown when a response is received from Gremlin Server that indicates that an error occurred.
+    ///     The exception that is thrown when a response is received from Gremlin Server that indicates that an error occurred.
     /// </summary>
     public class ResponseException : Exception
     {

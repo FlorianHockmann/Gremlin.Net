@@ -1,4 +1,5 @@
 ﻿#region License
+
 /*
  * Copyright 2016 Florian Hockmann
  * 
@@ -14,6 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 #endregion
 
 using System;
@@ -26,9 +28,9 @@ namespace Gremlin.Net.Driver
 {
     internal class ConnectionPool : IDisposable
     {
+        private readonly ConnectionFactory _connectionFactory;
         private readonly ConcurrentBag<Connection> _connections = new ConcurrentBag<Connection>();
         private readonly object _connectionsLock = new object();
-        private readonly ConnectionFactory _connectionFactory;
 
         public ConnectionPool(ConnectionFactory connectionFactory)
         {
@@ -36,7 +38,7 @@ namespace Gremlin.Net.Driver
         }
 
         public int NrConnections { get; private set; }
-        
+
         public async Task<IConnection> GetAvailableConnectionAsync()
         {
             Connection connection = null;
@@ -63,10 +65,13 @@ namespace Gremlin.Net.Driver
         private void AddConnection(Connection connection)
         {
             lock (_connectionsLock)
+            {
                 _connections.Add(connection);
+            }
         }
 
         #region IDisposable Support
+
         private bool _disposed;
 
         public void Dispose()
@@ -80,7 +85,6 @@ namespace Gremlin.Net.Driver
             if (!_disposed)
             {
                 if (disposing)
-                {
                     lock (_connectionsLock)
                     {
                         if (_connections != null && !_connections.IsEmpty)
@@ -91,7 +95,6 @@ namespace Gremlin.Net.Driver
                                 conn.Dispose();
                         }
                     }
-                }
                 _disposed = true;
             }
         }
@@ -102,6 +105,7 @@ namespace Gremlin.Net.Driver
             closeTasks.AddRange(_connections.Select(conn => conn.CloseAsync()));
             await Task.WhenAll(closeTasks).ConfigureAwait(false);
         }
+
         #endregion
     }
 }

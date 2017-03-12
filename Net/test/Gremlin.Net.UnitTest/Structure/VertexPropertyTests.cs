@@ -6,16 +6,6 @@ namespace Gremlin.Net.UnitTest.Structure
     public class VertexPropertyTests
     {
         [Fact]
-        public void ToString_VertexProperty_CommonVertexPropertyRepresentation()
-        {
-            var vertexProperty = new VertexProperty((long) 24, "name", "marko", new Vertex(1));
-
-            var stringRepresentation = vertexProperty.ToString();
-
-            Assert.Equal("vp[name->marko]", stringRepresentation);
-        }
-
-        [Fact]
         public void Constructor_ValidArguments_InitializeProperties()
         {
             const long id = 24;
@@ -35,12 +25,22 @@ namespace Gremlin.Net.UnitTest.Structure
         [Fact]
         public void Equals_EqualVertexProperty_ReturnsTrue()
         {
-            var firstVertexProperty = new VertexProperty((long)24, "name", "marko", new Vertex(1));
-            var secondVertexProperty = new VertexProperty((long)24, "name", "marko", new Vertex(1));
+            var firstVertexProperty = new VertexProperty((long) 24, "name", "marko", new Vertex(1));
+            var secondVertexProperty = new VertexProperty((long) 24, "name", "marko", new Vertex(1));
 
             var areEqual = firstVertexProperty.Equals(secondVertexProperty);
 
             Assert.True(areEqual);
+        }
+
+        [Fact]
+        public void ToString_VertexProperty_CommonVertexPropertyRepresentation()
+        {
+            var vertexProperty = new VertexProperty((long) 24, "name", "marko", new Vertex(1));
+
+            var stringRepresentation = vertexProperty.ToString();
+
+            Assert.Equal("vp[name->marko]", stringRepresentation);
         }
     }
 }

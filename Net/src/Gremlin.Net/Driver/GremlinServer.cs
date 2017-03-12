@@ -1,4 +1,5 @@
 ﻿#region License
+
 /*
  * Copyright 2016 Florian Hockmann
  * 
@@ -14,6 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 #endregion
 
 using System;
@@ -21,12 +23,12 @@ using System;
 namespace Gremlin.Net.Driver
 {
     /// <summary>
-    /// Represents a Gremlin Server.
+    ///     Represents a Gremlin Server.
     /// </summary>
     public class GremlinServer
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="GremlinServer"/> class with the specified connection parameters.
+        ///     Initializes a new instance of the <see cref="GremlinServer" /> class with the specified connection parameters.
         /// </summary>
         /// <param name="hostname">The hostname of the server.</param>
         /// <param name="port">The port on which Gremlin Server can be reached.</param>
@@ -37,9 +39,9 @@ namespace Gremlin.Net.Driver
         }
 
         /// <summary>
-        /// Gets the URI of the Gremlin Server.
+        ///     Gets the URI of the Gremlin Server.
         /// </summary>
-        /// <value>The WebSocket <see cref="System.Uri"/> that the Gremlin Server responds to.</value>
+        /// <value>The WebSocket <see cref="System.Uri" /> that the Gremlin Server responds to.</value>
         public Uri Uri { get; }
 
         private Uri CreateUri(string hostname, int port, bool enableSsl)

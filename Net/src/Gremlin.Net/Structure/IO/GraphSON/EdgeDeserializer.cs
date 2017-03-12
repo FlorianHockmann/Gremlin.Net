@@ -10,7 +10,7 @@ namespace Gremlin.Net.Structure.IO.GraphSON
             var outVLabel = (string) (graphsonObject["outVLabel"] ?? Vertex.DefaultLabel);
             var outV = new Vertex(outVId, outVLabel);
             var inVId = reader.ToObject(graphsonObject["inV"]);
-            var inVLabel = (string)(graphsonObject["inVLabel"] ?? Vertex.DefaultLabel);
+            var inVLabel = (string) (graphsonObject["inVLabel"] ?? Vertex.DefaultLabel);
             var inV = new Vertex(inVId, inVLabel);
             var edgeId = reader.ToObject(graphsonObject["id"]);
             var edgeLabel = (string) graphsonObject["label"] ?? "edge";

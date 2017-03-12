@@ -3,7 +3,7 @@
     public class Bindings
     {
         /// <summary>
-        /// Binds the variable to the specified value.
+        ///     Binds the variable to the specified value.
         /// </summary>
         /// <param name="variable">The variable to bind.</param>
         /// <param name="value">The value to which the variable should be bound.</param>
@@ -12,7 +12,5 @@
         {
             return new Binding(variable, value);
         }
-
-
     }
 }

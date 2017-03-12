@@ -14,7 +14,7 @@ namespace Gremlin.Net.Structure.IO.GraphSON
             var dict = new Dictionary<string, dynamic>
             {
                 {"predicate", p.OperatorName},
-                {"value",  value}
+                {"value", value}
             };
             return GraphSONUtil.ToTypedValue("P", dict);
         }

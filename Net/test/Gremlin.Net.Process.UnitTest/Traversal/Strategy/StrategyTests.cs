@@ -8,21 +8,14 @@ namespace Gremlin.Net.Process.UnitTest.Traversal.Strategy
     public class StrategyTests
     {
         [Fact]
-        public void StrategyName_TestStrategy_ClassName()
+        public void Equals_DifferentStrategyNames_ReturnFalse()
         {
-            var testStrategy = new TestStrategy();
+            var firstStrategy = new TestStrategy("aConfigKey", "aConfigValue");
+            var secondStrategy = new IncidentToAdjacentStrategy();
 
-            Assert.Equal((string) "TestStrategy", (string) testStrategy.StrategyName);
-        }
+            var areEqual = firstStrategy.Equals(secondStrategy);
 
-        [Fact]
-        public void ToString_TestStrategy_StrategyName()
-        {
-            var testStrategy = new TestStrategy();
-
-            var strategyStr = testStrategy.ToString();
-
-            Assert.Equal("TestStrategy", strategyStr);
+            Assert.False(areEqual);
         }
 
         [Fact]
@@ -37,14 +30,15 @@ namespace Gremlin.Net.Process.UnitTest.Traversal.Strategy
         }
 
         [Fact]
-        public void Equals_DifferentStrategyNames_ReturnFalse()
+        public void GetHashCode_DifferentNameDifferentConfiguration_DifferentHashCode()
         {
-            var firstStrategy = new TestStrategy("aConfigKey", "aConfigValue");
-            var secondStrategy = new IncidentToAdjacentStrategy();
+            var firstStrategy = new TestStrategy();
+            var secondStrategy = new ReadOnlyStrategy();
 
-            var areEqual = firstStrategy.Equals(secondStrategy);
+            var firstHashCode = firstStrategy.GetHashCode();
+            var secondHashCode = secondStrategy.GetHashCode();
 
-            Assert.False(areEqual);
+            Assert.NotEqual(firstHashCode, secondHashCode);
         }
 
         [Fact]
@@ -60,22 +54,29 @@ namespace Gremlin.Net.Process.UnitTest.Traversal.Strategy
         }
 
         [Fact]
-        public void GetHashCode_DifferentNameDifferentConfiguration_DifferentHashCode()
+        public void StrategyName_TestStrategy_ClassName()
         {
-            var firstStrategy = new TestStrategy();
-            var secondStrategy = new ReadOnlyStrategy();
+            var testStrategy = new TestStrategy();
 
-            var firstHashCode = firstStrategy.GetHashCode();
-            var secondHashCode = secondStrategy.GetHashCode();
+            Assert.Equal("TestStrategy", testStrategy.StrategyName);
+        }
 
-            Assert.NotEqual(firstHashCode, secondHashCode);
+        [Fact]
+        public void ToString_TestStrategy_StrategyName()
+        {
+            var testStrategy = new TestStrategy();
+
+            var strategyStr = testStrategy.ToString();
+
+            Assert.Equal("TestStrategy", strategyStr);
         }
     }
 
     internal class TestStrategy : AbstractTraversalStrategy
     {
         public TestStrategy()
-        { }
+        {
+        }
 
         public TestStrategy(string configKey, dynamic configValue)
         {

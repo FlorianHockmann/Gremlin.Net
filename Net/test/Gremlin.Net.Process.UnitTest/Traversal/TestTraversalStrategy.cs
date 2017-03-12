@@ -13,12 +13,12 @@ namespace Gremlin.Net.Process.UnitTest.Traversal
             _traversers = traversersToAddOnApplication;
         }
 
-        public void Apply(Net.Process.Traversal.Traversal traversal)
+        public void Apply(Process.Traversal.Traversal traversal)
         {
             traversal.Traversers = _traversers;
         }
 
-        public Task ApplyAsync(Net.Process.Traversal.Traversal traversal)
+        public Task ApplyAsync(Process.Traversal.Traversal traversal)
         {
             traversal.Traversers = _traversers;
             return Task.CompletedTask;

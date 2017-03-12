@@ -5,14 +5,6 @@ namespace Gremlin.Net.UnitTest.Structure
 {
     public class VertexTests
     {
-        [Fact]
-        public void Label_NoLabelSpecified_ShouldHaveDefaultLabel()
-        {
-            var vertex = new Vertex(1);
-
-            Assert.Equal("vertex", vertex.Label);
-        }
-
         [Theory]
         [InlineData(1)]
         [InlineData(5823)]
@@ -26,16 +18,6 @@ namespace Gremlin.Net.UnitTest.Structure
         }
 
         [Fact]
-        public void Label_LabelSpecified_ShouldReturnSpecifiedLabel()
-        {
-            const string specifiedLabel = "person";
-
-            var vertex = new Vertex(1, specifiedLabel);
-            
-            Assert.Equal(specifiedLabel, vertex.Label);
-        }
-
-        [Fact]
         public void Equals_EqualId_ReturnsTrue()
         {
             var firstVertex = new Vertex(1);
@@ -44,6 +26,24 @@ namespace Gremlin.Net.UnitTest.Structure
             var areEqual = firstVertex.Equals(secondVertex);
 
             Assert.True(areEqual);
+        }
+
+        [Fact]
+        public void Label_LabelSpecified_ShouldReturnSpecifiedLabel()
+        {
+            const string specifiedLabel = "person";
+
+            var vertex = new Vertex(1, specifiedLabel);
+
+            Assert.Equal(specifiedLabel, vertex.Label);
+        }
+
+        [Fact]
+        public void Label_NoLabelSpecified_ShouldHaveDefaultLabel()
+        {
+            var vertex = new Vertex(1);
+
+            Assert.Equal("vertex", vertex.Label);
         }
     }
 }

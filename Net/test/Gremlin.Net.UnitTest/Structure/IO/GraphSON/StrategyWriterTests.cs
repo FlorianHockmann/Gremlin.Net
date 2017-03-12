@@ -7,6 +7,11 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
 {
     public class StrategyWriterTests
     {
+        private GraphSONWriter CreateGraphSONWriter()
+        {
+            return new GraphSONWriter();
+        }
+
         [Fact]
         public void WriteObject_SubgraphStrategyWithoutValues_ExpectedGraphSON()
         {
@@ -30,13 +35,9 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
 
             var graphSon = writer.WriteObject(subgraphStrategy);
 
-            const string expected = "{\"@type\":\"g:SubgraphStrategy\",\"@value\":{\"vertices\":{\"@type\":\"g:Bytecode\",\"@value\":{\"step\":[[\"has\",\"name\",\"marko\"]]}}}}";
+            const string expected =
+                "{\"@type\":\"g:SubgraphStrategy\",\"@value\":{\"vertices\":{\"@type\":\"g:Bytecode\",\"@value\":{\"step\":[[\"has\",\"name\",\"marko\"]]}}}}";
             Assert.Equal(expected, graphSon);
-        }
-
-        private GraphSONWriter CreateGraphSONWriter()
-        {
-            return new GraphSONWriter();
         }
     }
 }

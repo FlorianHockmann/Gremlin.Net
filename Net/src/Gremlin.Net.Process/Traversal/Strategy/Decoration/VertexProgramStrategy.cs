@@ -10,29 +10,17 @@ namespace Gremlin.Net.Process.Traversal.Strategy.Decoration
             Dictionary<string, dynamic> configuration = null)
         {
             if (graphComputer != null)
-            {
                 Configuration["graphComputer"] = graphComputer;
-            }
             if (workers != null)
-            {
                 Configuration["workers"] = workers;
-            }
             if (persist != null)
-            {
                 Configuration["persist"] = persist;
-            }
             if (result != null)
-            {
                 Configuration["result"] = result;
-            }
             if (vertices != null)
-            {
                 Configuration["vertices"] = vertices;
-            }
             if (edges != null)
-            {
                 Configuration["edges"] = edges;
-            }
             configuration?.ToList().ForEach(x => Configuration[x.Key] = x.Value);
         }
     }

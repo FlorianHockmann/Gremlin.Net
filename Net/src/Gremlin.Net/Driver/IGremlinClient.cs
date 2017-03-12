@@ -1,4 +1,5 @@
 #region License
+
 /*
  * Copyright 2016 Florian Hockmann
  * 
@@ -14,6 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 #endregion
 
 using System;
@@ -24,17 +26,20 @@ using Gremlin.Net.Driver.Messages;
 namespace Gremlin.Net.Driver
 {
     /// <summary>
-    /// Provides a mechanism for submitting Gremlin requests.
+    ///     Provides a mechanism for submitting Gremlin requests.
     /// </summary>
     public interface IGremlinClient : IDisposable
     {
         /// <summary>
-        /// Submits a request message as an asynchronous operation.
+        ///     Submits a request message as an asynchronous operation.
         /// </summary>
         /// <typeparam name="T">The type of the expected results.</typeparam>
-        /// <param name="requestMessage">The <see cref="RequestMessage"/> to send.</param>
+        /// <param name="requestMessage">The <see cref="RequestMessage" /> to send.</param>
         /// <returns>A collection of the data returned from the server.</returns>
-        /// <exception cref="Exceptions.ResponseException">Thrown when a response is received from Gremlin Server that indicates that an error occurred.</exception>
+        /// <exception cref="Exceptions.ResponseException">
+        ///     Thrown when a response is received from Gremlin Server that indicates
+        ///     that an error occurred.
+        /// </exception>
         Task<IReadOnlyCollection<T>> SubmitAsync<T>(RequestMessage requestMessage);
     }
 }

@@ -1,4 +1,5 @@
 ﻿#region License
+
 /*
  * Copyright 2016 Florian Hockmann
  * 
@@ -14,6 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 #endregion
 
 using System;
@@ -29,7 +31,7 @@ namespace Gremlin.Net.Driver
         private const int ReceiveBufferSize = 1024;
         private const WebSocketMessageType MessageType = WebSocketMessageType.Binary;
         private ClientWebSocket _client;
-        
+
         public async Task ConnectAsync(Uri uri)
         {
             _client = new ClientWebSocket();
@@ -67,6 +69,7 @@ namespace Gremlin.Net.Driver
         }
 
         #region IDisposable Support
+
         private bool _disposed;
 
         public void Dispose()
@@ -80,12 +83,11 @@ namespace Gremlin.Net.Driver
             if (!_disposed)
             {
                 if (disposing)
-                {
                     _client?.Dispose();
-                }
                 _disposed = true;
             }
         }
+
         #endregion
     }
 }

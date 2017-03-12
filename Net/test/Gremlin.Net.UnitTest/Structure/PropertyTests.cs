@@ -6,13 +6,17 @@ namespace Gremlin.Net.UnitTest.Structure
     public class PropertyTests
     {
         [Fact]
-        public void ToString_SimpleVertexProperty_CommonEdgeRepresentation()
+        public void Constructor_ValidArguments_InitializeProperties()
         {
-            var property = new Property("age", 29, new Vertex(1));
+            const string key = "age";
+            const int value = 29;
+            var element = new Vertex(1);
 
-            var stringRepresentation = property.ToString();
+            var property = new Property(key, value, element);
 
-            Assert.Equal("p[age->29]", stringRepresentation);
+            Assert.Equal(key, property.Key);
+            Assert.Equal(value, property.Value);
+            Assert.Equal(element, property.Element);
         }
 
         [Fact]
@@ -27,17 +31,13 @@ namespace Gremlin.Net.UnitTest.Structure
         }
 
         [Fact]
-        public void Constructor_ValidArguments_InitializeProperties()
+        public void ToString_SimpleVertexProperty_CommonEdgeRepresentation()
         {
-            const string key = "age";
-            const int value = 29;
-            var element = new Vertex(1);
+            var property = new Property("age", 29, new Vertex(1));
 
-            var property = new Property(key, value, element);
+            var stringRepresentation = property.ToString();
 
-            Assert.Equal(key, property.Key);
-            Assert.Equal(value, property.Value);
-            Assert.Equal(element, property.Element);
+            Assert.Equal("p[age->29]", stringRepresentation);
         }
     }
 }

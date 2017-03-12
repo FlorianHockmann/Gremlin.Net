@@ -5,9 +5,9 @@ namespace Gremlin.Net.Driver
 {
     internal class ConnectionFactory
     {
-        private readonly Uri _uri;
         private readonly GraphSONReader _graphSONReader;
         private readonly GraphSONWriter _graphSONWriter;
+        private readonly Uri _uri;
 
         public ConnectionFactory(Uri uri, GraphSONReader graphSONReader, GraphSONWriter graphSONWriter)
         {

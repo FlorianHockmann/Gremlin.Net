@@ -15,11 +15,6 @@ namespace Gremlin.Net.Structure
         public dynamic Value { get; }
         public Element Element { get; }
 
-        public override string ToString()
-        {
-            return $"p[{Key}->{Value}]";
-        }
-
         public bool Equals(Property other)
         {
             if (ReferenceEquals(null, other)) return false;
@@ -27,11 +22,16 @@ namespace Gremlin.Net.Structure
             return string.Equals(Key, other.Key) && Equals(Value, other.Value) && Equals(Element, other.Element);
         }
 
+        public override string ToString()
+        {
+            return $"p[{Key}->{Value}]";
+        }
+
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
+            if (obj.GetType() != GetType()) return false;
             return Equals((Property) obj);
         }
 

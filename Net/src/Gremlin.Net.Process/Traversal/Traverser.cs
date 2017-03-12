@@ -1,4 +1,5 @@
 ﻿#region License
+
 /*
  * Copyright 2016 Florian Hockmann
  * 
@@ -14,19 +15,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 #endregion
 
 namespace Gremlin.Net.Process.Traversal
 {
     public class Traverser
     {
-        public dynamic Object { get; private set; }
-        public long Bulk { get; set; }
-
         public Traverser(dynamic obj, long bulk = 1)
         {
             Object = obj;
             Bulk = bulk;
         }
+
+        public dynamic Object { get; private set; }
+        public long Bulk { get; set; }
     }
 }

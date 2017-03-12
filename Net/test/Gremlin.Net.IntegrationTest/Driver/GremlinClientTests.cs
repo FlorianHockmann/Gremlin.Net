@@ -1,4 +1,5 @@
 ﻿#region License
+
 /*
  * Copyright 2016 Florian Hockmann
  * 
@@ -14,6 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 #endregion
 
 using System;
@@ -59,6 +61,26 @@ namespace Gremlin.Net.IntegrationTest.Driver
                 var response = await gremlinClient.SubmitWithSingleResultAsync<string>(requestMsg);
 
                 Assert.Equal(responseMsgSize, response.Length);
+            }
+        }
+
+        [Fact]
+        public async Task HandleResponseWithoutContent()
+        {
+            var gremlinServer = new GremlinServer(TestHost, TestPort);
+            using (var gremlinClient = new GremlinClient(gremlinServer))
+            {
+                var gremlinScript = "g.V().has(propertyKey, propertyValue);";
+                var bindings = new Dictionary<string, object>
+                {
+                    {"propertyKey", "name"},
+                    {"propertyValue", "unknownTestName"}
+                };
+
+                var response =
+                    await gremlinClient.SubmitWithSingleResultAsync<object>(gremlinScript, bindings);
+
+                Assert.Null(response);
             }
         }
 
@@ -181,26 +203,6 @@ namespace Gremlin.Net.IntegrationTest.Driver
                     await gremlinClient.SubmitWithSingleResultAsync<int>(requestMsg, bindings);
 
                 Assert.Equal(a + b, response);
-            }
-        }
-
-        [Fact]
-        public async Task HandleResponseWithoutContent()
-        {
-            var gremlinServer = new GremlinServer(TestHost, TestPort);
-            using (var gremlinClient = new GremlinClient(gremlinServer))
-            {
-                var gremlinScript = "g.V().has(propertyKey, propertyValue);";
-                var bindings = new Dictionary<string, object>
-                {
-                    {"propertyKey", "name"},
-                    {"propertyValue", "unknownTestName"}
-                };
-
-                var response =
-                    await gremlinClient.SubmitWithSingleResultAsync<object>(gremlinScript, bindings);
-
-                Assert.Null(response);
             }
         }
     }

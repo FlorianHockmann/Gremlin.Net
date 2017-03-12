@@ -20,9 +20,7 @@ namespace Gremlin.Net.Structure.IO.GraphSON
         private dynamic CreateElementDict(Element element, GraphSONWriter writer)
         {
             if (element == null)
-            {
                 return null;
-            }
             var serializedElement = writer.ToDict(element);
             Dictionary<string, dynamic> elementDict = serializedElement;
             if (elementDict.ContainsKey(GraphSONTokens.ValueKey))

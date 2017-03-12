@@ -1,4 +1,5 @@
 ﻿#region License
+
 /*
  * Copyright 2016 Florian Hockmann
  * 
@@ -14,6 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 #endregion
 
 using System;
@@ -30,7 +32,17 @@ namespace Gremlin.Net.IntegrationTest.Driver
         private readonly RequestMessageProvider _requestMessageProvider = new RequestMessageProvider();
         private static readonly string TestHost = ConfigProvider.Configuration["TestServerIpAddress"];
         private static readonly int TestPort = Convert.ToInt32(ConfigProvider.Configuration["TestServerPort"]);
-        
+
+        private async Task ExecuteMultipleLongRunningRequestsInParallel(IGremlinClient gremlinClient, int nrRequests,
+            int requestRunningTimeInMs)
+        {
+            var longRunningRequestMsg = _requestMessageProvider.GetSleepMessage(requestRunningTimeInMs);
+            var tasks = new List<Task>(nrRequests);
+            for (var i = 0; i < nrRequests; i++)
+                tasks.Add(gremlinClient.SubmitAsync(longRunningRequestMsg));
+            await Task.WhenAll(tasks);
+        }
+
         [Fact]
         public async Task ConnectionShouldBeReusedForSequentialRequests()
         {
@@ -70,16 +82,6 @@ namespace Gremlin.Net.IntegrationTest.Driver
                 var nrConnections = gremlinClient.NrConnections;
                 Assert.Equal(nrParallelRequests, nrConnections);
             }
-        }
-
-        private async Task ExecuteMultipleLongRunningRequestsInParallel(IGremlinClient gremlinClient, int nrRequests,
-            int requestRunningTimeInMs)
-        {
-            var longRunningRequestMsg = _requestMessageProvider.GetSleepMessage(requestRunningTimeInMs);
-            var tasks = new List<Task>(nrRequests);
-            for (var i = 0; i < nrRequests; i++)
-                tasks.Add(gremlinClient.SubmitAsync(longRunningRequestMsg));
-            await Task.WhenAll(tasks);
         }
     }
 }

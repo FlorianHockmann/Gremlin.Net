@@ -4,14 +4,14 @@ namespace Gremlin.Net.Process.Traversal
 {
     public class Binding : IEquatable<Binding>
     {
-        public string Key { get; private set; }
-        public object Value { get; private set; }
-
         public Binding(string key, object value)
         {
             Key = key;
             Value = value;
         }
+
+        public string Key { get; }
+        public object Value { get; }
 
         public bool Equals(Binding other)
         {

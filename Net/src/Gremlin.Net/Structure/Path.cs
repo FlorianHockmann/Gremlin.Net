@@ -13,13 +13,42 @@ namespace Gremlin.Net.Structure
             Objects = objects;
         }
 
+        public List<List<string>> Labels { get; }
+
+        public List<object> Objects { get; }
+
+        public object this[string label]
+        {
+            get
+            {
+                object obj;
+                var objFound = TryGetValue(label, out obj);
+                if (!objFound)
+                    throw new KeyNotFoundException($"The step with label {label} does not exist");
+                return obj;
+            }
+        }
+
+        public bool Equals(Path other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return ObjectsEqual(other.Objects) && LabelsEqual(other.Labels);
+        }
+
         public dynamic this[int index] => Objects[index];
 
         public int Count => Objects.Count;
 
-        public List<List<string>> Labels { get; }
+        public IEnumerator<object> GetEnumerator()
+        {
+            return ((IReadOnlyList<object>) Objects).GetEnumerator();
+        }
 
-        public List<object> Objects { get; }
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return ((IReadOnlyList<object>) Objects).GetEnumerator();
+        }
 
         public override string ToString()
         {
@@ -38,61 +67,28 @@ namespace Gremlin.Net.Structure
             {
                 if (!Labels[i].Contains(label)) continue;
                 if (value == null)
-                {
                     value = Objects[i];
-                }
                 else if (value.GetType() == typeof(List<object>))
-                {
-                    ((List<object>)value).Add(Objects[i]);
-                }
+                    ((List<object>) value).Add(Objects[i]);
                 else
-                {
-                    value = new List<object> { value, Objects[i] };
-                }
+                    value = new List<object> {value, Objects[i]};
             }
             return value != null;
-        }
-
-        public object this[string label]
-        {
-            get
-            {
-                object obj;
-                var objFound = TryGetValue(label, out obj);
-                if (!objFound)
-                {
-                    throw new KeyNotFoundException($"The step with label {label} does not exist");
-                }
-                return obj;
-            }
-        }
-
-        public bool Equals(Path other)
-        {
-            if (ReferenceEquals(null, other)) return false;
-            if (ReferenceEquals(this, other)) return true;
-            return ObjectsEqual(other.Objects) && LabelsEqual(other.Labels);
         }
 
         private bool ObjectsEqual(IReadOnlyCollection<object> otherObjects)
         {
             if (Objects == null)
-            {
                 return otherObjects == null;
-            }
             return Objects.SequenceEqual(otherObjects);
         }
 
         private bool LabelsEqual(IReadOnlyList<List<string>> otherLabels)
         {
             if (Labels == null)
-            {
                 return otherLabels == null;
-            }
             if (Labels.Count != otherLabels.Count)
-            {
                 return false;
-            }
             var foundUnequalObjLabels = Labels.Where((objLabels, i) => !objLabels.SequenceEqual(otherLabels[i])).Any();
             return !foundUnequalObjLabels;
         }
@@ -101,7 +97,7 @@ namespace Gremlin.Net.Structure
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
+            if (obj.GetType() != GetType()) return false;
             return Equals((Path) obj);
         }
 
@@ -111,16 +107,6 @@ namespace Gremlin.Net.Structure
             {
                 return ((Labels?.GetHashCode() ?? 0) * 397) ^ (Objects?.GetHashCode() ?? 0);
             }
-        }
-
-        public IEnumerator<object> GetEnumerator()
-        {
-            return ((IReadOnlyList<object>)Objects).GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return ((IReadOnlyList<object>)Objects).GetEnumerator();
         }
     }
 }

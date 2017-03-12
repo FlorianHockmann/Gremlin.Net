@@ -13,6 +13,13 @@ namespace Gremlin.Net.IntegrationTest.Process.Remote
         private static readonly string TestHost = ConfigProvider.Configuration["TestServerIpAddress"];
         private static readonly int TestPort = Convert.ToInt32(ConfigProvider.Configuration["TestServerPort"]);
 
+        private Traversal CreateTraversalWithRemoteStrategy(Bytecode bytecode)
+        {
+            var remoteStrategy =
+                new RemoteStrategy(new DriverRemoteConnection(new GremlinClient(new GremlinServer(TestHost, TestPort))));
+            return new TestTraversal(remoteStrategy, bytecode);
+        }
+
         [Fact]
         public void RemoteStrategyShouldSendBytecodeToGremlinServer()
         {
@@ -41,13 +48,6 @@ namespace Gremlin.Net.IntegrationTest.Process.Remote
             var actualResult = await testTraversal.Promise(t => t.Next());
 
             Assert.Equal(expectedResult, actualResult);
-        }
-
-        private Traversal CreateTraversalWithRemoteStrategy(Bytecode bytecode)
-        {
-            var remoteStrategy =
-                new RemoteStrategy(new DriverRemoteConnection(new GremlinClient(new GremlinServer(TestHost, TestPort))));
-            return new TestTraversal(remoteStrategy, bytecode);
         }
     }
 

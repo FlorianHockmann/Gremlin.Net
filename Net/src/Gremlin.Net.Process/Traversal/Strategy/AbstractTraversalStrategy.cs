@@ -9,6 +9,13 @@ namespace Gremlin.Net.Process.Traversal.Strategy
         public string StrategyName => GetType().Name;
         public Dictionary<string, dynamic> Configuration { get; } = new Dictionary<string, dynamic>();
 
+        public bool Equals(AbstractTraversalStrategy other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return StrategyName == other.StrategyName;
+        }
+
         public virtual void Apply(Traversal traversal)
         {
         }
@@ -16,13 +23,6 @@ namespace Gremlin.Net.Process.Traversal.Strategy
         public virtual Task ApplyAsync(Traversal traversal)
         {
             return Task.CompletedTask;
-        }
-
-        public bool Equals(AbstractTraversalStrategy other)
-        {
-            if (ReferenceEquals(null, other)) return false;
-            if (ReferenceEquals(this, other)) return true;
-            return StrategyName == other.StrategyName;
         }
 
         public override bool Equals(object obj)

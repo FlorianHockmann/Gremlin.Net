@@ -2,16 +2,16 @@
 {
     public class TraversalPredicate
     {
-        public string OperatorName { get; set; }
-        public dynamic Value { get; set; }
-        public TraversalPredicate Other { get; set; }
-
         public TraversalPredicate(string operatorName, dynamic value, TraversalPredicate other = null)
         {
             OperatorName = operatorName;
             Value = value;
             Other = other;
         }
+
+        public string OperatorName { get; set; }
+        public dynamic Value { get; set; }
+        public TraversalPredicate Other { get; set; }
 
         public TraversalPredicate And(TraversalPredicate otherPredicate)
         {

@@ -5,9 +5,7 @@
         public MatchAlgorithmStrategy(string matchAlgorithm = null)
         {
             if (matchAlgorithm != null)
-            {
                 Configuration["matchAlgorithm"] = matchAlgorithm;
-            }
         }
     }
 }

@@ -32,23 +32,17 @@ namespace Gremlin.Net.Structure.IO.GraphSON
         public GraphSONReader(Dictionary<string, IGraphSONDeserializer> deserializerByGraphSONType)
         {
             foreach (var deserializerAndGraphSONType in deserializerByGraphSONType)
-            {
                 _deserializerByGraphSONType.Add(deserializerAndGraphSONType.Key, deserializerAndGraphSONType.Value);
-            }
         }
 
         public dynamic ToObject(JToken jToken)
         {
             if (jToken is JArray)
-            {
                 return jToken.Select(t => ToObject(t)).ToList();
-            }
             if (jToken.HasValues)
             {
                 if (HasTypeKey(jToken))
-                {
                     return ReadTypedValue(jToken);
-                }
                 return ReadDictionary(jToken);
             }
             return ((JValue) jToken).Value;
@@ -56,13 +50,13 @@ namespace Gremlin.Net.Structure.IO.GraphSON
 
         private bool HasTypeKey(JToken jToken)
         {
-            var graphSONType = (string)jToken[GraphSONTokens.TypeKey];
+            var graphSONType = (string) jToken[GraphSONTokens.TypeKey];
             return graphSONType != null;
         }
 
         private dynamic ReadTypedValue(JToken typedValue)
         {
-            var graphSONType = (string)typedValue[GraphSONTokens.TypeKey];
+            var graphSONType = (string) typedValue[GraphSONTokens.TypeKey];
             return _deserializerByGraphSONType[graphSONType].Objectify(typedValue[GraphSONTokens.ValueKey], this);
         }
 

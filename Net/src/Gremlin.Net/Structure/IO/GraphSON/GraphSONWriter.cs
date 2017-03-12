@@ -5,9 +5,9 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using Gremlin.Net.Driver.Messages;
-using Newtonsoft.Json;
-using Gremlin.Net.Process.Traversal.Strategy;
 using Gremlin.Net.Process.Traversal;
+using Gremlin.Net.Process.Traversal.Strategy;
+using Newtonsoft.Json;
 
 namespace Gremlin.Net.Structure.IO.GraphSON
 {
@@ -44,15 +44,13 @@ namespace Gremlin.Net.Structure.IO.GraphSON
         public GraphSONWriter(Dictionary<Type, IGraphSONSerializer> customSerializerByType)
         {
             foreach (var serializerAndType in customSerializerByType)
-            {
                 _serializerByType.Add(serializerAndType.Key, serializerAndType.Value);
-            }
         }
 
         public byte[] SerializeMessage(RequestMessage message)
         {
             var payload = WriteObject(message);
-            var messageWithHeader = $"{(char)MimeType.Length}{MimeType}{payload}";
+            var messageWithHeader = $"{(char) MimeType.Length}{MimeType}{payload}";
             return Encoding.UTF8.GetBytes(messageWithHeader);
         }
 
@@ -65,18 +63,12 @@ namespace Gremlin.Net.Structure.IO.GraphSON
         {
             var type = objectData.GetType();
             IGraphSONSerializer serializer;
-            if(TryGetSerializerFor(out serializer, type))
-            {
+            if (TryGetSerializerFor(out serializer, type))
                 return serializer.Dictify(objectData, this);
-            }
             if (IsDictionaryType(type))
-            {
                 return DictToGraphSONDict(objectData);
-            }
             if (IsCollectionType(type))
-            {
                 return CollectionToGraphSONCollection(objectData);
-            }
             return objectData;
         }
 
@@ -88,13 +80,11 @@ namespace Gremlin.Net.Structure.IO.GraphSON
                 return true;
             }
             foreach (var supportedType in _serializerByType.Keys)
-            {
                 if (supportedType.IsAssignableFrom(type))
                 {
                     serializer = _serializerByType[supportedType];
                     return true;
                 }
-            }
             serializer = null;
             return false;
         }
@@ -108,9 +98,7 @@ namespace Gremlin.Net.Structure.IO.GraphSON
         {
             var graphSONDict = new Dictionary<string, dynamic>();
             foreach (var keyValue in dict)
-            {
                 graphSONDict.Add(ToDict(keyValue.Key), ToDict(keyValue.Value));
-            }
             return graphSONDict;
         }
 
@@ -123,9 +111,7 @@ namespace Gremlin.Net.Structure.IO.GraphSON
         {
             var list = new List<dynamic>();
             foreach (var e in collection)
-            {
                 list.Add(ToDict(e));
-            }
             return list;
         }
     }

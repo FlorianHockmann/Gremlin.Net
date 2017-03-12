@@ -4,14 +4,14 @@ namespace Gremlin.Net.Structure
 {
     public abstract class Element : IEquatable<Element>
     {
-        public object Id { get; }
-        public string Label { get; }
-
         protected Element(object id, string label)
         {
             Id = id;
             Label = label;
         }
+
+        public object Id { get; }
+        public string Label { get; }
 
         public bool Equals(Element other)
         {
@@ -24,7 +24,7 @@ namespace Gremlin.Net.Structure
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
+            if (obj.GetType() != GetType()) return false;
             return Equals((Element) obj);
         }
 

@@ -9,18 +9,6 @@ namespace Gremlin.CSharp.IntegrationTest
         private readonly RemoteConnectionFactory _connectionFactory = new RemoteConnectionFactory();
 
         [Fact]
-        public void SimplePWithinTest()
-        {
-            var graph = new Graph();
-            var connection = _connectionFactory.CreateRemoteConnection();
-            var g = graph.Traversal().WithRemote(connection);
-
-            var count = g.V().Has("name", P.Within("josh", "vadas")).Count().Next();
-
-            Assert.Equal((long)2, count);
-        }
-
-        [Fact]
         public void PredicateAndTest()
         {
             var graph = new Graph();
@@ -29,7 +17,19 @@ namespace Gremlin.CSharp.IntegrationTest
 
             var count = g.V().Has("age", P.Gt(30).And(P.Lt(35))).Count().Next();
 
-            Assert.Equal((long)1, count);
+            Assert.Equal((long) 1, count);
+        }
+
+        [Fact]
+        public void SimplePWithinTest()
+        {
+            var graph = new Graph();
+            var connection = _connectionFactory.CreateRemoteConnection();
+            var g = graph.Traversal().WithRemote(connection);
+
+            var count = g.V().Has("name", P.Within("josh", "vadas")).Count().Next();
+
+            Assert.Equal((long) 2, count);
         }
     }
 }

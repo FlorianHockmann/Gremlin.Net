@@ -4,7 +4,6 @@ using Gremlin.Net.Process.Traversal;
 using Gremlin.Net.Structure;
 using Xunit;
 using static Gremlin.CSharp.Process.__;
-using static Gremlin.CSharp.Process.Scope;
 
 namespace Gremlin.CSharp.IntegrationTest
 {
@@ -21,22 +20,7 @@ namespace Gremlin.CSharp.IntegrationTest
 
             var count = g.V().Count().Next();
 
-            Assert.Equal((long)6, count);
-        }
-
-        [Fact]
-        public void NestedTraversalTest()
-        {
-            var graph = new Graph();
-            var connection = _connectionFactory.CreateRemoteConnection();
-            var g = graph.Traversal().WithRemote(connection);
-
-            var t = g.V().Repeat(Out()).Times(2).Values("name");
-            var names = t.ToList();
-
-            Assert.Equal((long)2, names.Count);
-            Assert.Contains("lop", names);
-            Assert.Contains("ripple", names);
+            Assert.Equal((long) 6, count);
         }
 
         [Fact]
@@ -57,6 +41,21 @@ namespace Gremlin.CSharp.IntegrationTest
         }
 
         [Fact]
+        public void NestedTraversalTest()
+        {
+            var graph = new Graph();
+            var connection = _connectionFactory.CreateRemoteConnection();
+            var g = graph.Traversal().WithRemote(connection);
+
+            var t = g.V().Repeat(Out()).Times(2).Values("name");
+            var names = t.ToList();
+
+            Assert.Equal((long) 2, names.Count);
+            Assert.Contains("lop", names);
+            Assert.Contains("ripple", names);
+        }
+
+        [Fact]
         public void ShortestPathTest()
         {
             var graph = new Graph();
@@ -66,7 +65,7 @@ namespace Gremlin.CSharp.IntegrationTest
             var shortestPath =
                 (Path) g.V(5).Repeat(Both().SimplePath()).Until(HasId(6)).Limit(1).Path().Next();
 
-            Assert.Equal((long)4, shortestPath.Count);
+            Assert.Equal((long) 4, shortestPath.Count);
             Assert.Equal(new Vertex((long) 6), shortestPath[3]);
         }
 

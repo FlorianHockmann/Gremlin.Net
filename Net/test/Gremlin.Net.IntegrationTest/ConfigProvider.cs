@@ -1,4 +1,5 @@
 ﻿#region License
+
 /*
  * Copyright 2016 Stefan Hausotte
  * 
@@ -14,8 +15,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 #endregion
- 
+
 using System.IO;
 using Microsoft.Extensions.Configuration;
 
@@ -23,18 +25,18 @@ namespace Gremlin.Net.IntegrationTest
 {
     public static class ConfigProvider
     {
-        public static IConfiguration Configuration { get; private set; }
-
         static ConfigProvider()
         {
             Configuration = GetConfig();
         }
 
-        static IConfiguration GetConfig()
+        public static IConfiguration Configuration { get; private set; }
+
+        private static IConfiguration GetConfig()
         {
             var configFile = Path.Combine(Directory.GetCurrentDirectory(), "appsettings.json");
             var builder = new ConfigurationBuilder()
-                .AddJsonFile(configFile, optional: false, reloadOnChange: false);
+                .AddJsonFile(configFile, false, false);
 
             return builder.Build();
         }

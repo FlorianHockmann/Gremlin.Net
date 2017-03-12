@@ -1,4 +1,5 @@
 #region License
+
 /*
  * Copyright 2016 Florian Hockmann
  * 
@@ -14,6 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 #endregion
 
 using System;
@@ -25,14 +27,37 @@ namespace Gremlin.Net.Process.Traversal
 {
     public abstract class Traversal : IDisposable, IEnumerator
     {
+        private IEnumerator<Traverser> _traverserEnumerator;
         public Bytecode Bytecode { get; protected set; }
         public ITraversalSideEffects SideEffects { get; set; }
         public IEnumerable<Traverser> Traversers { get; set; }
         protected IList<ITraversalStrategy> TraversalStrategies { get; set; } = new List<ITraversalStrategy>();
-        private IEnumerator<Traverser> _traverserEnumerator;
 
         private IEnumerator<Traverser> TraverserEnumerator
             => _traverserEnumerator ?? (_traverserEnumerator = GetTraverserEnumerator());
+
+        public void Dispose()
+        {
+            Dispose(true);
+        }
+
+        public bool MoveNext()
+        {
+            var currentTraverser = TraverserEnumerator.Current;
+            if (currentTraverser?.Bulk > 1)
+            {
+                currentTraverser.Bulk--;
+                return true;
+            }
+            return TraverserEnumerator.MoveNext();
+        }
+
+        public void Reset()
+        {
+            throw new NotSupportedException();
+        }
+
+        public object Current => TraverserEnumerator.Current?.Object;
 
         private IEnumerator<Traverser> GetTraverserEnumerator()
         {
@@ -83,47 +108,20 @@ namespace Gremlin.Net.Process.Traversal
         {
             var objs = new List<object>();
             while (MoveNext())
-            {
                 objs.Add(Current);
-            }
             return objs;
         }
 
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)
-            {
                 SideEffects?.Dispose();
-            }
         }
 
-        public void Dispose()
-        {
-            Dispose(true);
-        }
-
-        public bool MoveNext()
-        {
-            var currentTraverser = TraverserEnumerator.Current;
-            if (currentTraverser?.Bulk > 1)
-            {
-                currentTraverser.Bulk--;
-                return true;
-            }
-            return TraverserEnumerator.MoveNext();
-        }
-
-        public void Reset()
-        {
-            throw new NotSupportedException();
-        }
-
-        public object Current => TraverserEnumerator.Current?.Object;
-
-        public async Task<TReturn> Promise<TReturn>(Func<Traversal,TReturn> callback)
+        public async Task<TReturn> Promise<TReturn>(Func<Traversal, TReturn> callback)
         {
             await ApplyStrategiesAsync().ConfigureAwait(false);
             return callback(this);
         }
-    } 
+    }
 }
