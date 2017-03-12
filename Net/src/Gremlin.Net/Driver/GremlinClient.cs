@@ -35,6 +35,8 @@ namespace Gremlin.Net.Driver
         /// Initializes a new instance of the <see cref="GremlinClient"/> class for the specified Gremlin Server.
         /// </summary>
         /// <param name="gremlinServer">The <see cref="GremlinServer"/> the requests should be sent to.</param>
+        /// <param name="graphSONReader">A <see cref="GraphSONReader"/> instance to read received GraphSON data.</param>
+        /// <param name="graphSONWriter">a <see cref="GraphSONWriter"/> instance to write GraphSON data.</param>
         public GremlinClient(GremlinServer gremlinServer, GraphSONReader graphSONReader = null,
             GraphSONWriter graphSONWriter = null)
         {
@@ -50,7 +52,7 @@ namespace Gremlin.Net.Driver
         public int NrConnections => _connectionPool.NrConnections;
 
         /// <inheritdoc />
-        public async Task<IEnumerable<T>> SubmitAsync<T>(RequestMessage requestMessage)
+        public async Task<IReadOnlyCollection<T>> SubmitAsync<T>(RequestMessage requestMessage)
         {
             using (var connection = await _connectionPool.GetAvailableConnectionAsync().ConfigureAwait(false))
                 return await connection.SubmitAsync<T>(requestMessage).ConfigureAwait(false);

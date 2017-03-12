@@ -53,7 +53,7 @@ namespace Gremlin.Net.Driver
             await _webSocketConnection.CloseAsync().ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<T>> SubmitAsync<T>(RequestMessage requestMessage)
+        public async Task<IReadOnlyCollection<T>> SubmitAsync<T>(RequestMessage requestMessage)
         {
             await SendAsync(requestMessage).ConfigureAwait(false);
             return await ReceiveAsync<T>().ConfigureAwait(false);
@@ -65,7 +65,7 @@ namespace Gremlin.Net.Driver
             await _webSocketConnection.SendMessageAsync(serializedMsg).ConfigureAwait(false);
         }
 
-        private async Task<IEnumerable<T>> ReceiveAsync<T>()
+        private async Task<IReadOnlyCollection<T>> ReceiveAsync<T>()
         {
             ResponseStatus status;
             IAggregator aggregator = null;

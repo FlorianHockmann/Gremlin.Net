@@ -25,6 +25,6 @@ namespace Gremlin.Net.Driver
 {
     internal interface IConnection : IDisposable
     {
-        Task<IEnumerable<T>> SubmitAsync<T>(RequestMessage requestMessage);
+        Task<IReadOnlyCollection<T>> SubmitAsync<T>(RequestMessage requestMessage);
     }
 }

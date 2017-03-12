@@ -34,7 +34,7 @@ namespace Gremlin.Net.Driver
             _releaseAction = releaseAction;
         }
 
-        public async Task<IEnumerable<T>> SubmitAsync<T>(RequestMessage requestMessage)
+        public async Task<IReadOnlyCollection<T>> SubmitAsync<T>(RequestMessage requestMessage)
         {
             return await _realConnection.SubmitAsync<T>(requestMessage).ConfigureAwait(false);
         }
