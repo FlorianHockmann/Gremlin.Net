@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gremlin.Net.Process", "src\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gremlin.Net.Process.UnitTest", "test\Gremlin.Net.Process.UnitTest\Gremlin.Net.Process.UnitTest.csproj", "{D97CA283-AC86-4EC9-9E1D-5F9A97977687}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gremlin.CSharp.UnitTest", "test\Gremlin.CSharp.UnitTest\Gremlin.CSharp.UnitTest.csproj", "{F2D976C2-D5EC-4BE5-9F6F-FCFAA9F59858}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{D97CA283-AC86-4EC9-9E1D-5F9A97977687}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D97CA283-AC86-4EC9-9E1D-5F9A97977687}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D97CA283-AC86-4EC9-9E1D-5F9A97977687}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2D976C2-D5EC-4BE5-9F6F-FCFAA9F59858}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2D976C2-D5EC-4BE5-9F6F-FCFAA9F59858}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2D976C2-D5EC-4BE5-9F6F-FCFAA9F59858}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2D976C2-D5EC-4BE5-9F6F-FCFAA9F59858}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -69,5 +75,6 @@ Global
 		{232F0F2B-178E-4214-99C7-CC4DC6710F44} = {1B54FAC2-5411-4BB6-B450-FE2FFD8C4782}
 		{4949181B-C97D-4BB4-A312-9C1506EC7DA7} = {584F838B-DAE2-44F5-868C-1F532949C827}
 		{D97CA283-AC86-4EC9-9E1D-5F9A97977687} = {1B54FAC2-5411-4BB6-B450-FE2FFD8C4782}
+		{F2D976C2-D5EC-4BE5-9F6F-FCFAA9F59858} = {1B54FAC2-5411-4BB6-B450-FE2FFD8C4782}
 	EndGlobalSection
 EndGlobal
