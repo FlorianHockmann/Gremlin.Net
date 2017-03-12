@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Gremlin.Net.Process.Traversal;
 using Gremlin.Net.Structure;
 using Gremlin.Net.Structure.IO.GraphSON;
+using Moq;
 using Xunit;
 
 namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
@@ -52,6 +53,21 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
             var serialized = writer.WriteObject(testObj);
 
             Assert.Equal("{\"@type\":\"NS:TestClass\",\"@value\":\"test\"}", serialized);
+        }
+
+        [Fact]
+        public void GraphSonWriter_CustomSerializerForCommonType_OverwriteDefaultSerializer()
+        {
+            var customSerializerMock = new Mock<IGraphSONSerializer>();
+            var customSerializerByType = new Dictionary<Type, IGraphSONSerializer>
+            {
+                {typeof(int), customSerializerMock.Object}
+            };
+            var writer = new GraphSONWriter(customSerializerByType);
+
+            writer.WriteObject(12);
+
+            customSerializerMock.Verify(m => m.Dictify(It.Is<int>(v => v == 12), It.IsAny<GraphSONWriter>()));
         }
 
         [Fact]

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Gremlin.Net.Structure;
 using Gremlin.Net.Structure.IO.GraphSON;
+using Moq;
 using Newtonsoft.Json.Linq;
 using Xunit;
 
@@ -28,6 +29,23 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
             var readObj = reader.ToObject(jObject);
 
             Assert.Equal("test", readObj.Value);
+        }
+
+        [Fact]
+        public void GraphSonReader_CustomDeserializerForCommonType_OverwriteDefaultDeserializer()
+        {
+            var customSerializerMock = new Mock<IGraphSONDeserializer>();
+            var overrideTypeString = "g:Int64";
+            var customSerializerByType = new Dictionary<string, IGraphSONDeserializer>
+            {
+                {overrideTypeString, customSerializerMock.Object}
+            };
+            var reader = new GraphSONReader(customSerializerByType);
+
+
+            reader.ToObject(JObject.Parse($"{{\"@type\":\"{overrideTypeString}\",\"@value\":12}}"));
+
+            customSerializerMock.Verify(m => m.Objectify(It.IsAny<JToken>(), It.IsAny<GraphSONReader>()));
         }
 
         [Fact]
@@ -84,6 +102,42 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
             var deserializedValue = reader.ToObject(jObject);
 
             Assert.Equal(5, deserializedValue);
+        }
+
+        [Fact]
+        public void Int64DeserializationTest()
+        {
+            var serializedValue = "{\"@type\":\"g:Int64\",\"@value\":5}";
+            var reader = CreateStandardGraphSONReader();
+
+            var jObject = JObject.Parse(serializedValue);
+            var deserializedValue = reader.ToObject(jObject);
+
+            Assert.Equal((long) 5, deserializedValue);
+        }
+
+        [Fact]
+        public void FloatDeserializationTest()
+        {
+            var serializedValue = "{\"@type\":\"g:Float\",\"@value\":31.3}";
+            var reader = CreateStandardGraphSONReader();
+
+            var jObject = JObject.Parse(serializedValue);
+            var deserializedValue = reader.ToObject(jObject);
+
+            Assert.Equal((float) 31.3, deserializedValue);
+        }
+
+        [Fact]
+        public void DoubleDeserializationTest()
+        {
+            var serializedValue = "{\"@type\":\"g:Double\",\"@value\":31.2}";
+            var reader = CreateStandardGraphSONReader();
+
+            var jObject = JObject.Parse(serializedValue);
+            var deserializedValue = reader.ToObject(jObject);
+
+            Assert.Equal(31.2, deserializedValue);
         }
 
         [Fact]
