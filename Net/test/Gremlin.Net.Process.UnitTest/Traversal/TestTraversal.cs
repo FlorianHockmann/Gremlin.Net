@@ -2,9 +2,9 @@
 using System.Linq;
 using Gremlin.Net.Process.Traversal;
 
-namespace Gremlin.Net.UnitTest.Process.Traversal
+namespace Gremlin.Net.Process.UnitTest.Traversal
 {
-    public class TestTraversal : Net.Process.Traversal.Traversal
+    public class TestTraversal : Process.Traversal.Traversal
     {
         public TestTraversal(List<object> traverserObjs)
         {

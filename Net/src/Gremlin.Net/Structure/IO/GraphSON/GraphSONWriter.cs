@@ -5,9 +5,9 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using Gremlin.Net.Driver.Messages;
-using Gremlin.Net.Process.Traversal;
-using Gremlin.Net.Process.Traversal.Strategy;
 using Newtonsoft.Json;
+using Gremlin.Net.Process.Traversal.Strategy;
+using Gremlin.Net.Process.Traversal;
 
 namespace Gremlin.Net.Structure.IO.GraphSON
 {

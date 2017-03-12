@@ -30,4 +30,8 @@
     <PackageReference Include="System.Reflection.TypeExtensions" Version="4.3.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Gremlin.Net.Process\Gremlin.Net.Process.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -4,7 +4,7 @@ using System.Linq;
 using Gremlin.Net.Process.Traversal;
 using Xunit;
 
-namespace Gremlin.Net.UnitTest.Process.Traversal
+namespace Gremlin.Net.Process.UnitTest.Traversal
 {
     public class TraversalTests
     {
@@ -29,7 +29,7 @@ namespace Gremlin.Net.UnitTest.Process.Traversal
             var actualFirstObj = traversal.Next();
             var actualSecondObj = traversal.Next();
 
-            Assert.Equal(expectedFirstObj, actualFirstObj);
+            Assert.Equal<object>(expectedFirstObj, actualFirstObj);
             Assert.Null(actualSecondObj);
         }
 
@@ -41,7 +41,7 @@ namespace Gremlin.Net.UnitTest.Process.Traversal
 
             var traversedObjs = traversal.ToList();
 
-            Assert.Equal(expectedObjs, traversedObjs);
+            Assert.Equal<List<object>>(expectedObjs, traversedObjs);
         }
 
         [Fact]
@@ -54,7 +54,7 @@ namespace Gremlin.Net.UnitTest.Process.Traversal
             var traversedObjs = traversal.ToList();
 
             var expectedObjs = UnfoldBulks(objs, bulks);
-            Assert.Equal(expectedObjs, traversedObjs);
+            Assert.Equal<List<object>>(expectedObjs, traversedObjs);
         }
 
         [Theory]
@@ -69,7 +69,7 @@ namespace Gremlin.Net.UnitTest.Process.Traversal
 
             var traversedObjs = traversal.Next(nrOfResults);
 
-            var traversedObjsList = traversedObjs.ToList();
+            var traversedObjsList = Enumerable.ToList<object>(traversedObjs);
             Assert.Equal(nrOfResults, traversedObjsList.Count);
             for(var i = 0; i < nrOfResults; i++)
                 Assert.Equal(objs[i], traversedObjsList[i]);
@@ -126,7 +126,7 @@ namespace Gremlin.Net.UnitTest.Process.Traversal
 
             var actualObj = testTraversal.Next();
 
-            Assert.Equal(expectedObj, actualObj);
+            Assert.Equal<object>(expectedObj, actualObj);
         }
     }
 }

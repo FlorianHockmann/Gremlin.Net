@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Gremlin.Net.Process.Traversal;
 
-namespace Gremlin.Net.UnitTest.Process.Traversal
+namespace Gremlin.Net.Process.UnitTest.Traversal
 {
     public class TestTraversalStrategy : ITraversalStrategy
     {

@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Gremlin.Net\Gremlin.Net.csproj" />
+    <ProjectReference Include="..\Gremlin.Net.Process\Gremlin.Net.Process.csproj" />
   </ItemGroup>
 
 </Project>

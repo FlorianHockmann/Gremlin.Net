@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using Gremlin.Net.Process.Traversal.Strategy;
+﻿using Gremlin.Net.Process.Traversal.Strategy;
 using Gremlin.Net.Process.Traversal.Strategy.Optimization;
 using Gremlin.Net.Process.Traversal.Strategy.Verification;
 using Xunit;
 
-namespace Gremlin.Net.UnitTest.Process.Traversal.Strategy
+namespace Gremlin.Net.Process.UnitTest.Traversal.Strategy
 {
     public class StrategyTests
     {
@@ -13,7 +12,7 @@ namespace Gremlin.Net.UnitTest.Process.Traversal.Strategy
         {
             var testStrategy = new TestStrategy();
 
-            Assert.Equal("TestStrategy", testStrategy.StrategyName);
+            Assert.Equal((string) "TestStrategy", (string) testStrategy.StrategyName);
         }
 
         [Fact]

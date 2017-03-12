@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Gremlin.Net.Process\Gremlin.Net.Process.csproj" />
     <ProjectReference Include="..\..\src\Gremlin.Net\Gremlin.Net.csproj" />
   </ItemGroup>
 
