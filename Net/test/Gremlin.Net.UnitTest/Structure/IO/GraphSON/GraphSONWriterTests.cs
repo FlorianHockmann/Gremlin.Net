@@ -205,6 +205,19 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
             Assert.Equal(expected, graphSon);
         }
 
+        [Fact]
+        public void BindingWriter_WriteBinding_ToGraphSON()
+        {
+            var writer = CreateStandardGraphSONWriter();
+            var binding = new Binding("theKey", 123);
+
+            var graphSon = writer.WriteObject(binding);
+
+            const string expected =
+                "{\"@type\":\"g:Binding\",\"@value\":{\"value\":{\"@type\":\"g:Int32\",\"@value\":123},\"key\":\"theKey\"}}";
+            Assert.Equal(expected, graphSon);
+        }
+
         private GraphSONWriter CreateStandardGraphSONWriter()
         {
             return new GraphSONWriter();

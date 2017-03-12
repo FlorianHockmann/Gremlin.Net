@@ -14,9 +14,8 @@ namespace Gremlin.Net.Process.UnitTest.Traversal
             bytecode.AddStep("hasLabel", bindings.Of("label", "testLabel"));
 
             var arg = bytecode.StepInstructions[0].Arguments[0];
-            var binding = arg as Binding<string>;
-            Assert.Equal(new Binding<string>("label", "testLabel"), binding);
-
+            var binding = arg as Binding;
+            Assert.Equal(new Binding("label", "testLabel"), binding);
         }
     }
 }

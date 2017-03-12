@@ -109,6 +109,20 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
             Assert.Equal(expectedGraphSon, graphSON);
         }
 
+        [Fact]
+        public void TraversalWithBindingsSerializationTest()
+        {
+            var bytecode = new Bytecode();
+            bytecode.AddStep("V", new Binding("id", 123));
+            var graphsonWriter = CreateGraphSONWriter();
+
+            var graphSon = graphsonWriter.WriteObject(bytecode);
+
+            var expectedGraphSon =
+                "{\"@type\":\"g:Bytecode\",\"@value\":{\"step\":[[\"V\",{\"@type\":\"g:Binding\",\"@value\":{\"value\":{\"@type\":\"g:Int32\",\"@value\":123},\"key\":\"id\"}}]]}}";
+            Assert.Equal(expectedGraphSon, graphSon);
+        }
+
         private GraphSONWriter CreateGraphSONWriter()
         {
             return new GraphSONWriter();

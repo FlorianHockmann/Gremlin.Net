@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Gremlin.CSharp.Structure;
+using Gremlin.Net.Process.Traversal;
 using Gremlin.Net.Structure;
 using Xunit;
 using static Gremlin.CSharp.Process.__;
@@ -67,6 +68,19 @@ namespace Gremlin.CSharp.IntegrationTest
 
             Assert.Equal((long)4, shortestPath.Count);
             Assert.Equal(new Vertex((long) 6), shortestPath[3]);
+        }
+
+        [Fact]
+        public void TraversalWithBindingsTest()
+        {
+            var graph = new Graph();
+            var connection = _connectionFactory.CreateRemoteConnection();
+            var g = graph.Traversal().WithRemote(connection);
+
+            var b = new Bindings();
+            var count = g.V().Has(b.Of("propertyKey", "name"), b.Of("propertyValue", "marko")).OutE().Count().Next();
+
+            Assert.Equal((long) 3, count);
         }
     }
 }

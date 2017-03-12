@@ -5,13 +5,12 @@
         /// <summary>
         /// Binds the variable to the specified value.
         /// </summary>
-        /// <typeparam name="TValue">The type of the value.</typeparam>
         /// <param name="variable">The variable to bind.</param>
         /// <param name="value">The value to which the variable should be bound.</param>
         /// <returns>The original value.</returns>
-        public Binding<TValue> Of<TValue>(string variable, TValue value)
+        public Binding Of(string variable, object value)
         {
-            return new Binding<TValue>(variable, value);
+            return new Binding(variable, value);
         }
 
 
