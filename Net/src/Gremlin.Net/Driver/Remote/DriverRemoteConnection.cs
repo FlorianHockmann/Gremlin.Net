@@ -7,7 +7,7 @@ using Gremlin.Net.Process.Traversal;
 
 namespace Gremlin.Net.Driver.Remote
 {
-    public class DriverRemoteConnection : IRemoteConnection
+    public class DriverRemoteConnection : IRemoteConnection, IDisposable
     {
         private readonly IGremlinClient _client;
 
@@ -33,6 +33,11 @@ namespace Gremlin.Net.Driver.Remote
                     .AddArgument(Tokens.ArgsAliases, new Dictionary<string, string> {{"g", "g"}})
                     .Create();
             return await _client.SubmitAsync<Traverser>(requestMsg).ConfigureAwait(false);
+        }
+
+        public void Dispose()
+        {
+            _client?.Dispose();
         }
     }
 }
