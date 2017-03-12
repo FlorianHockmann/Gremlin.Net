@@ -22,5 +22,10 @@
         {
             return new TraversalPredicate("or", this, otherPredicate);
         }
+
+        public override string ToString()
+        {
+            return Other == null ? $"{OperatorName}({Value})" : $"{OperatorName}({Value},{Other})";
+        }
     }
 }
