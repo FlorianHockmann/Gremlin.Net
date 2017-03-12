@@ -32,7 +32,7 @@ namespace Gremlin.Net.Structure.IO.GraphSON
         public GraphSONReader(Dictionary<string, IGraphSONDeserializer> deserializerByGraphSONType)
         {
             foreach (var deserializerAndGraphSONType in deserializerByGraphSONType)
-                _deserializerByGraphSONType.Add(deserializerAndGraphSONType.Key, deserializerAndGraphSONType.Value);
+                _deserializerByGraphSONType[deserializerAndGraphSONType.Key] = deserializerAndGraphSONType.Value;
         }
 
         public dynamic ToObject(JToken jToken)

@@ -44,7 +44,7 @@ namespace Gremlin.Net.Structure.IO.GraphSON
         public GraphSONWriter(Dictionary<Type, IGraphSONSerializer> customSerializerByType)
         {
             foreach (var serializerAndType in customSerializerByType)
-                _serializerByType.Add(serializerAndType.Key, serializerAndType.Value);
+                _serializerByType[serializerAndType.Key] = serializerAndType.Value;
         }
 
         public byte[] SerializeMessage(RequestMessage message)
