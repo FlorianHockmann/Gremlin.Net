@@ -9,7 +9,7 @@ using Xunit;
 
 namespace Gremlin.CSharp.IntegrationTest
 {
-    public class StrategiesTest
+    public class StrategiesTests
     {
         [Fact]
         public void TraversalWithoutStrategies_AfterWithStrategiesWasCalled_WithStrategiesNotAffected()
