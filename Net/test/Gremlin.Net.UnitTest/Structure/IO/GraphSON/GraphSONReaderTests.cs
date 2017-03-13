@@ -226,6 +226,21 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
         }
 
         [Fact]
+        public void VertexPropertyReader_VertexPropertyWithVertexLabel_DeserializeToVertexProperty()
+        {
+            var graphSon =
+                "{\"@type\":\"g:VertexProperty\", \"@value\":{\"id\":{\"@type\":\"g:Int32\",\"@value\":1},\"label\":\"name\",\"value\":\"marko\"}}";
+            var reader = CreateStandardGraphSONReader();
+
+            VertexProperty readVertexProperty = reader.ToObject(JObject.Parse(graphSon));
+
+            Assert.Equal(1, readVertexProperty.Id);
+            Assert.Equal("name", readVertexProperty.Label);
+            Assert.Equal("marko", readVertexProperty.Value);
+            Assert.Null(readVertexProperty.Vertex);
+        }
+
+        [Fact]
         public void VertexReader_ReadSimpleVertexGraphSon_DeserializeToVertex()
         {
             var graphSon = "{\"@type\":\"g:Vertex\", \"@value\":{\"id\":{\"@type\":\"g:Float\",\"@value\":45.23}}}";

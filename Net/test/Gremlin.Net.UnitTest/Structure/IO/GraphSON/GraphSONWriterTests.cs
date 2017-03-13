@@ -16,6 +16,56 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
         }
 
         [Fact]
+        public void NumberConverter_WriteInt_ToInt32GraphSon()
+        {
+            var writer = CreateStandardGraphSONWriter();
+
+            var graphSon = writer.WriteObject(1);
+
+            Assert.Equal("{\"@type\":\"g:Int32\",\"@value\":1}", graphSon);
+        }
+
+        [Fact]
+        public void NumberConverter_WriteLong_ToInt64GraphSon()
+        {
+            var writer = CreateStandardGraphSONWriter();
+
+            var graphSon = writer.WriteObject((long) 2);
+
+            Assert.Equal("{\"@type\":\"g:Int64\",\"@value\":2}", graphSon);
+        }
+
+        [Fact]
+        public void NumberConverter_WriteFloat_ToFloatGraphSon()
+        {
+            var writer = CreateStandardGraphSONWriter();
+
+            var graphSon = writer.WriteObject((float) 3.2);
+
+            Assert.Equal("{\"@type\":\"g:Float\",\"@value\":3.2}", graphSon);
+        }
+
+        [Fact]
+        public void NumberConverter_WriteDouble_ToDoubleGraphSon()
+        {
+            var writer = CreateStandardGraphSONWriter();
+
+            var graphSon = writer.WriteObject(3.2);
+
+            Assert.Equal("{\"@type\":\"g:Double\",\"@value\":3.2}", graphSon);
+        }
+
+        [Fact]
+        public void GraphSonWriter_WriteBoolean_ToUntypedValueString()
+        {
+            var writer = CreateStandardGraphSONWriter();
+
+            var graphSon = writer.WriteObject(true);
+
+            Assert.Equal("true", graphSon);
+        }
+
+        [Fact]
         public void ArraySerializationTest()
         {
             var writer = CreateStandardGraphSONWriter();
