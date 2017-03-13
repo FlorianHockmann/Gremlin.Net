@@ -24,6 +24,31 @@ namespace Gremlin.CSharp.IntegrationTest
         }
 
         [Fact]
+        public void g_VX1X_Next_Test()
+        {
+            var graph = new Graph();
+            var connection = _connectionFactory.CreateRemoteConnection();
+            var g = graph.Traversal().WithRemote(connection);
+
+            var vertex = (Vertex) g.V(1).Next();
+
+            Assert.Equal(new Vertex((long) 1), vertex);
+            Assert.Equal((long) 1, vertex.Id);
+        }
+
+        [Fact]
+        public void g_VX1X_NextTraverser_Test()
+        {
+            var graph = new Graph();
+            var connection = _connectionFactory.CreateRemoteConnection();
+            var g = graph.Traversal().WithRemote(connection);
+
+            var traverser = g.V(1).NextTraverser();
+
+            Assert.Equal(new Traverser(new Vertex((long)1)), traverser);
+        }
+
+        [Fact]
         public void GetValueMapTest()
         {
             var graph = new Graph();

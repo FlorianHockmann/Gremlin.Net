@@ -18,6 +18,8 @@
 
 #endregion
 
+using System;
+
 namespace Gremlin.Net.Process.Traversal
 {
     public class Traverser
@@ -30,5 +32,25 @@ namespace Gremlin.Net.Process.Traversal
 
         public dynamic Object { get; private set; }
         public long Bulk { get; set; }
+
+        public bool Equals(Traverser other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return Equals(Object, other.Object);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((Traverser)obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return (Object != null ? Object.GetHashCode() : 0);
+        }
     }
 }
