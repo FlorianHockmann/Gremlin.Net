@@ -1,35 +1,36 @@
-﻿using Gremlin.CSharp.Process;
+﻿using System.Collections.Generic;
+using Gremlin.CSharp.Process;
 using Gremlin.CSharp.Structure;
 using Xunit;
 
-namespace Gremlin.CSharp.IntegrationTest
+namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
 {
-    public class PredicateTests
+    public class EnumTests
     {
         private readonly RemoteConnectionFactory _connectionFactory = new RemoteConnectionFactory();
 
         [Fact]
-        public void PredicateAndTest()
+        public void OrderTest()
         {
             var graph = new Graph();
             var connection = _connectionFactory.CreateRemoteConnection();
             var g = graph.Traversal().WithRemote(connection);
 
-            var count = g.V().Has("age", P.Gt(30).And(P.Lt(35))).Count().Next();
+            var orderedAges = g.V().Values("age").Order().By(Order.decr).ToList();
 
-            Assert.Equal((long) 1, count);
+            Assert.Equal(new List<object> {35, 32, 29, 27}, orderedAges);
         }
 
         [Fact]
-        public void SimplePWithinTest()
+        public void SimpleTLabelTest()
         {
             var graph = new Graph();
             var connection = _connectionFactory.CreateRemoteConnection();
             var g = graph.Traversal().WithRemote(connection);
 
-            var count = g.V().Has("name", P.Within("josh", "vadas")).Count().Next();
+            var personsCount = g.V().Has(T.label, "person").Count().Next();
 
-            Assert.Equal((long) 2, count);
+            Assert.Equal((long) 4, personsCount);
         }
     }
 }

@@ -1,10 +1,9 @@
 ﻿using System;
 using Gremlin.Net.Driver;
-using Gremlin.Net.Driver.Remote;
 using Gremlin.Net.IntegrationTest;
 using Gremlin.Net.Process.Remote;
 
-namespace Gremlin.CSharp.IntegrationTest
+namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
 {
     internal class RemoteConnectionFactory
     {
@@ -13,7 +12,7 @@ namespace Gremlin.CSharp.IntegrationTest
 
         public IRemoteConnection CreateRemoteConnection()
         {
-            return new DriverRemoteConnection(new GremlinClient(new GremlinServer(TestHost, TestPort)));
+            return new Net.Driver.Remote.DriverRemoteConnection(new GremlinClient(new GremlinServer(TestHost, TestPort)));
         }
     }
 }

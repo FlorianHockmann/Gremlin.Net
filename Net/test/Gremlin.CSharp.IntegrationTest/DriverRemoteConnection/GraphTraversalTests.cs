@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Gremlin.CSharp.Process;
 using Gremlin.CSharp.Structure;
 using Gremlin.Net.Process.Traversal;
 using Gremlin.Net.Structure;
 using Xunit;
-using static Gremlin.CSharp.Process.__;
-using static Gremlin.CSharp.Process.P;
 
-namespace Gremlin.CSharp.IntegrationTest
+namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
 {
     public class GraphTraversalTests
     {
@@ -69,7 +68,7 @@ namespace Gremlin.CSharp.IntegrationTest
             var connection = _connectionFactory.CreateRemoteConnection();
             var g = graph.Traversal().WithRemote(connection);
 
-            var result = g.V().Repeat(Both()).Times(5).Next(10);
+            var result = g.V().Repeat(__.Both()).Times(5).Next(10);
 
             Assert.Equal(10, result.Count());
         }
@@ -98,7 +97,7 @@ namespace Gremlin.CSharp.IntegrationTest
             var connection = _connectionFactory.CreateRemoteConnection();
             var g = graph.Traversal().WithRemote(connection);
 
-            var t = g.V().Repeat(Out()).Times(2).Values("name");
+            var t = g.V().Repeat(__.Out()).Times(2).Values("name");
             var names = t.ToList();
 
             Assert.Equal((long) 2, names.Count);
@@ -119,7 +118,7 @@ namespace Gremlin.CSharp.IntegrationTest
                     .Out("created")
                     .In("created")
                     .Values("name")
-                    .Where(Within("a"))
+                    .Where(P.Within("a"))
                     .ToList();
 
             Assert.Equal(2, results.Count);
@@ -135,7 +134,7 @@ namespace Gremlin.CSharp.IntegrationTest
             var g = graph.Traversal().WithRemote(connection);
 
             var shortestPath =
-                (Path) g.V(5).Repeat(Both().SimplePath()).Until(HasId(6)).Limit(1).Path().Next();
+                (Path) g.V(5).Repeat(__.Both().SimplePath()).Until(__.HasId(6)).Limit(1).Path().Next();
 
             Assert.Equal((long) 4, shortestPath.Count);
             Assert.Equal(new Vertex((long) 6), shortestPath[3]);

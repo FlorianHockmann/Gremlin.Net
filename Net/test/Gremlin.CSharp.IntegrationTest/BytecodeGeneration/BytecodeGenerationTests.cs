@@ -2,7 +2,7 @@
 using Gremlin.CSharp.Structure;
 using Xunit;
 
-namespace Gremlin.CSharp.IntegrationTest
+namespace Gremlin.CSharp.IntegrationTest.BytecodeGeneration
 {
     public class BytecodeGenerationTests
     {

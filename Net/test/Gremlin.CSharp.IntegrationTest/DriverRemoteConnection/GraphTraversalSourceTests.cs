@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
+using Gremlin.CSharp.Process;
 using Gremlin.CSharp.Structure;
 using Xunit;
-using static Gremlin.CSharp.Process.P;
 
-namespace Gremlin.CSharp.IntegrationTest
+namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
 {
     public class GraphTraversalSourceTests
     {
@@ -21,7 +21,7 @@ namespace Gremlin.CSharp.IntegrationTest
                 .Out("created")
                 .In("created")
                 .Values("name")
-                .Where(Within("a"))
+                .Where(P.Within("a"))
                 .ToList();
 
             Assert.Equal(2, results.Count);
