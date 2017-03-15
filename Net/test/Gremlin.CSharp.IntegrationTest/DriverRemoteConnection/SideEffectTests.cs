@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Gremlin.CSharp.IntegrationTest.DriverRemoteConnection;
 using Gremlin.CSharp.Structure;
 using Xunit;
 
-namespace Gremlin.CSharp.IntegrationTest
+namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
 {
     public class SideEffectTests
     {
