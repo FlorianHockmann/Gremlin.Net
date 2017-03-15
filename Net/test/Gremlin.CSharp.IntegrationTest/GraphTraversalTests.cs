@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Gremlin.CSharp.Structure;
 using Gremlin.Net.Process.Traversal;
 using Gremlin.Net.Structure;
 using Xunit;
 using static Gremlin.CSharp.Process.__;
+using static Gremlin.CSharp.Process.P;
 
 namespace Gremlin.CSharp.IntegrationTest
 {
@@ -49,6 +51,30 @@ namespace Gremlin.CSharp.IntegrationTest
         }
 
         [Fact]
+        public void g_VX1X_ToList_Test()
+        {
+            var graph = new Graph();
+            var connection = _connectionFactory.CreateRemoteConnection();
+            var g = graph.Traversal().WithRemote(connection);
+
+            var list = g.V(1).ToList();
+
+            Assert.Equal(1, list.Count);
+        }
+
+        [Fact]
+        public void Next_WithAmountArgument_AmountNrValues()
+        {
+            var graph = new Graph();
+            var connection = _connectionFactory.CreateRemoteConnection();
+            var g = graph.Traversal().WithRemote(connection);
+
+            var result = g.V().Repeat(Both()).Times(5).Next(10);
+
+            Assert.Equal(10, result.Count());
+        }
+
+        [Fact]
         public void GetValueMapTest()
         {
             var graph = new Graph();
@@ -66,7 +92,7 @@ namespace Gremlin.CSharp.IntegrationTest
         }
 
         [Fact]
-        public void NestedTraversalTest()
+        public void g_V_RepeatXOutX_TimesX2X_ValuesXNameX_Test()
         {
             var graph = new Graph();
             var connection = _connectionFactory.CreateRemoteConnection();
@@ -78,6 +104,27 @@ namespace Gremlin.CSharp.IntegrationTest
             Assert.Equal((long) 2, names.Count);
             Assert.Contains("lop", names);
             Assert.Contains("ripple", names);
+        }
+
+        [Fact]
+        public void WithSideEffect_TraversalUsingSideEffects_IncludeInResults()
+        {
+            var graph = new Graph();
+            var connection = _connectionFactory.CreateRemoteConnection();
+            var g = graph.Traversal().WithRemote(connection);
+
+            var results =
+                g.WithSideEffect("a", new List<string> {"josh", "peter"})
+                    .V(1)
+                    .Out("created")
+                    .In("created")
+                    .Values("name")
+                    .Where(Within("a"))
+                    .ToList();
+
+            Assert.Equal(2, results.Count);
+            Assert.Contains("josh", results);
+            Assert.Contains("peter", results);
         }
 
         [Fact]
