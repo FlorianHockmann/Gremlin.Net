@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Gremlin.CSharp.Process;
 using Gremlin.CSharp.Structure;
 using Gremlin.Net.Process.Traversal;
@@ -151,6 +152,18 @@ namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
             var count = g.V().Has(b.Of("propertyKey", "name"), b.Of("propertyValue", "marko")).OutE().Count().Next();
 
             Assert.Equal((long) 3, count);
+        }
+
+        [Fact]
+        public async Task g_V_Count_PromiseXNextX_Test()
+        {
+            var graph = new Graph();
+            var connection = _connectionFactory.CreateRemoteConnection();
+            var g = graph.Traversal().WithRemote(connection);
+
+            var count = await g.V().Count().Promise(t => t.Next());
+
+            Assert.Equal((long) 6, count);
         }
     }
 }

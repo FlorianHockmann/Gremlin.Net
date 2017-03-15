@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Gremlin.CSharp.Structure;
 using Xunit;
 
@@ -100,6 +101,19 @@ namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
         }
 
         [Fact]
+        public void Keys_TraversalWithoutSideEffect_NoKeys()
+        {
+            var graph = new Graph();
+            var connection = _connectionFactory.CreateRemoteConnection();
+            var g = graph.Traversal().WithRemote(connection);
+
+            var t = g.V().Iterate();
+            var keys = t.SideEffects.Keys();
+
+            Assert.Equal(0, keys.Count);
+        }
+
+        [Fact]
         public void Keys_CloseAfterGet_CachedKeys()
         {
             var graph = new Graph();
@@ -129,6 +143,44 @@ namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
             var keysList = keys.ToList();
             Assert.Equal(1, keysList.Count);
             Assert.Contains("m", keysList);
+        }
+
+        [Fact]
+        public async Task TraversalExecutedAsynchronously_SideEffectsKeys_Keys()
+        {
+            var graph = new Graph();
+            var connection = _connectionFactory.CreateRemoteConnection();
+            var g = graph.Traversal().WithRemote(connection);
+
+            var t = await g.V().Aggregate("a").Promise(x => x);
+            var keys = t.SideEffects.Keys();
+
+            Assert.Equal(1, keys.Count);
+            Assert.Contains("a", keys);
+        }
+
+        [Fact]
+        public async Task TraversalExecutedAsynchronously_SideEffectsGet_SideEffectValue()
+        {
+            var graph = new Graph();
+            var connection = _connectionFactory.CreateRemoteConnection();
+            var g = graph.Traversal().WithRemote(connection);
+
+            var t = await g.V().Aggregate("a").Promise(x => x);
+            var value = t.SideEffects.Get("a");
+
+            Assert.NotNull(value);
+        }
+
+        [Fact]
+        public async Task TraversalExecutedAsynchronously_SideEffectsClose_DontThrow()
+        {
+            var graph = new Graph();
+            var connection = _connectionFactory.CreateRemoteConnection();
+            var g = graph.Traversal().WithRemote(connection);
+
+            var t = await g.V().Aggregate("a").Promise(x => x);
+            t.SideEffects.Close();
         }
     }
 }
