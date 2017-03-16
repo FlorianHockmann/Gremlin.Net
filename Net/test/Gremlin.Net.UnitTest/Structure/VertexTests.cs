@@ -35,7 +35,7 @@ namespace Gremlin.Net.UnitTest.Structure
 
             var areEqual = vertex.Equals(null);
 
-            Assert.True(areEqual);
+            Assert.False(areEqual);
         }
 
         [Fact]

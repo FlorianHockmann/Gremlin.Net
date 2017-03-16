@@ -105,7 +105,15 @@ namespace Gremlin.Net.Structure
         {
             unchecked
             {
-                return ((Labels?.GetHashCode() ?? 0) * 397) ^ (Objects?.GetHashCode() ?? 0);
+                var hashCode = 19;
+                if (Labels != null)
+                    hashCode = Labels.Where(objLabels => objLabels != null)
+                        .Aggregate(hashCode,
+                            (current1, objLabels) => objLabels.Aggregate(current1,
+                                (current, label) => current * 31 + label.GetHashCode()));
+                if (Objects != null)
+                    hashCode = Objects.Aggregate(hashCode, (current, obj) => current * 31 + obj.GetHashCode());
+                return hashCode;
             }
         }
     }
