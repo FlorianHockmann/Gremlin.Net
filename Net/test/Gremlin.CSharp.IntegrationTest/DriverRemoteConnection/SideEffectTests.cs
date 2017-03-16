@@ -39,6 +39,18 @@ namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
         }
 
         [Fact]
+        public void Get_DisposedSideEffects_Throw()
+        {
+            var graph = new Graph();
+            var connection = _connectionFactory.CreateRemoteConnection();
+            var g = graph.Traversal().WithRemote(connection);
+            var t = g.V().Aggregate("a").Iterate();
+
+            t.SideEffects.Dispose();
+            Assert.Throws<InvalidOperationException>(() => t.SideEffects.Get("a"));
+        }
+
+        [Fact]
         public void Get_NamedGroupCount_SideEffectValue()
         {
             var graph = new Graph();

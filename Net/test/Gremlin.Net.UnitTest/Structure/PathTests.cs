@@ -155,6 +155,117 @@ namespace Gremlin.Net.UnitTest.Structure
         }
 
         [Fact]
+        public void EqualsObject_EqualPath_ReturnTrue()
+        {
+            var firstPath =
+                new Path(
+                    new List<List<string>>
+                    {
+                        new List<string> {"a", "b"},
+                        new List<string> {"c", "b"},
+                        new List<string>()
+                    }, new List<object> { 1, new Vertex(1), "hello" });
+            object secondPath =
+                new Path(
+                    new List<List<string>>
+                    {
+                        new List<string> {"a", "b"},
+                        new List<string> {"c", "b"},
+                        new List<string>()
+                    }, new List<object> { 1, new Vertex(1), "hello" });
+
+            var equals = firstPath.Equals(secondPath);
+
+            Assert.True(equals);
+        }
+
+        [Fact]
+        public void EqualsObject_LabelsNotEqual_ReturnFalse()
+        {
+            var firstPath =
+                new Path(
+                    new List<List<string>>
+                    {
+                        new List<string> {"a", "b"},
+                        new List<string> {"c", "b"},
+                        new List<string>()
+                    }, new List<object> { 1, new Vertex(1), "hello" });
+            object secondPath =
+                new Path(
+                    new List<List<string>>
+                    {
+                        new List<string> {"a"},
+                        new List<string> {"c", "b"},
+                        new List<string>()
+                    }, new List<object> { 1, new Vertex(1), "hello" });
+
+            var equals = firstPath.Equals(secondPath);
+
+            Assert.False(equals);
+        }
+
+        [Fact]
+        public void EqualsObject_ObjectsNotEqual_ReturnFalse()
+        {
+            var firstPath =
+                new Path(
+                    new List<List<string>>
+                    {
+                        new List<string> {"a", "b"},
+                        new List<string> {"c", "b"},
+                        new List<string>()
+                    }, new List<object> { 1, new Vertex(1), "hello" });
+            object secondPath =
+                new Path(
+                    new List<List<string>>
+                    {
+                        new List<string> {"a", "b"},
+                        new List<string> {"c", "b"},
+                        new List<string>()
+                    }, new List<object> { 3, new Vertex(1), "hello" });
+
+            var equals = firstPath.Equals(secondPath);
+
+            Assert.False(equals);
+        }
+
+        [Fact]
+        public void Equals_OtherIsNull_ReturnFalse()
+        {
+            var path = new Path(new List<List<string>> {new List<string> {"a", "b"},}, new List<object> {1});
+
+            var equals = path.Equals(null);
+
+            Assert.False(equals);
+        }
+
+        [Fact]
+        public void GetHashCode_EqualPaths_EqualHashCodes()
+        {
+            var firstPath =
+                new Path(
+                    new List<List<string>>
+                    {
+                        new List<string> {"a", "b"},
+                        new List<string> {"c", "b"},
+                        new List<string>()
+                    }, new List<object> { 1, new Vertex(1), "hello" });
+            var secondPath =
+                new Path(
+                    new List<List<string>>
+                    {
+                        new List<string> {"a", "b"},
+                        new List<string> {"c", "b"},
+                        new List<string>()
+                    }, new List<object> { 1, new Vertex(1), "hello" });
+
+            var firstHashCode = firstPath.GetHashCode();
+            var secondHashCode = secondPath.GetHashCode();
+
+            Assert.Equal(firstHashCode, secondHashCode);
+        }
+
+        [Fact]
         public void IndexAccessor_InvalidIndex_Throw()
         {
             var objects = new List<object> {1, new Vertex(1), "hello"};

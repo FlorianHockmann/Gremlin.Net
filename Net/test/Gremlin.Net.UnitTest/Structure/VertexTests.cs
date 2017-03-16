@@ -29,6 +29,27 @@ namespace Gremlin.Net.UnitTest.Structure
         }
 
         [Fact]
+        public void Equals_OtherIsNull_ReturnsFalse()
+        {
+            var vertex = new Vertex(1);
+
+            var areEqual = vertex.Equals(null);
+
+            Assert.True(areEqual);
+        }
+
+        [Fact]
+        public void EqualsObject_EqualId_ReturnsTrue()
+        {
+            var firstVertex = new Vertex(1);
+            object secondVertex = new Vertex(1);
+
+            var areEqual = firstVertex.Equals(secondVertex);
+
+            Assert.True(areEqual);
+        }
+
+        [Fact]
         public void Label_LabelSpecified_ShouldReturnSpecifiedLabel()
         {
             const string specifiedLabel = "person";

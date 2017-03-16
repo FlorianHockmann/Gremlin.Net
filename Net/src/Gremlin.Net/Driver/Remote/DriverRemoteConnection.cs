@@ -11,9 +11,14 @@ namespace Gremlin.Net.Driver.Remote
     {
         private readonly IGremlinClient _client;
 
+        /// <summary>
+        /// Initializes a new DriverRemoteConnection.
+        /// </summary>
+        /// <param name="client">The client that will be used for the connection.</param>
+        /// <exception cref="ArgumentNullException">Thrown when client is null.</exception>
         public DriverRemoteConnection(IGremlinClient client)
         {
-            _client = client;
+            _client = client ?? throw new ArgumentNullException(nameof(client));
         }
 
         public async Task<Traversal> SubmitAsync(Bytecode bytecode)
