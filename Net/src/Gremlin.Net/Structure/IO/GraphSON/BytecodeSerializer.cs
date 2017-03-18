@@ -4,7 +4,7 @@ using Gremlin.Net.Process.Traversal;
 
 namespace Gremlin.Net.Structure.IO.GraphSON
 {
-    public class BytecodeSerializer : IGraphSONSerializer
+    internal class BytecodeSerializer : IGraphSONSerializer
     {
         public Dictionary<string, dynamic> Dictify(dynamic bytecodeObj, GraphSONWriter writer)
         {

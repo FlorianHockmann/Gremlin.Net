@@ -4,7 +4,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Gremlin.Net.Structure.IO.GraphSON
 {
-    public abstract class NumberConverter : IGraphSONDeserializer, IGraphSONSerializer
+    internal abstract class NumberConverter : IGraphSONDeserializer, IGraphSONSerializer
     {
         protected abstract string GraphSONTypeName { get; }
         protected abstract Type HandledType { get; }

@@ -2,7 +2,7 @@
 
 namespace Gremlin.Net.Structure.IO.GraphSON
 {
-    public class EnumSerializer : IGraphSONSerializer
+    internal class EnumSerializer : IGraphSONSerializer
     {
         public Dictionary<string, dynamic> Dictify(dynamic objectData, GraphSONWriter writer)
         {

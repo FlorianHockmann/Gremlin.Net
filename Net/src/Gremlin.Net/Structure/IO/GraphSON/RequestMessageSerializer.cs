@@ -3,7 +3,7 @@ using Gremlin.Net.Driver.Messages;
 
 namespace Gremlin.Net.Structure.IO.GraphSON
 {
-    public class RequestMessageSerializer : IGraphSONSerializer
+    internal class RequestMessageSerializer : IGraphSONSerializer
     {
         public Dictionary<string, dynamic> Dictify(dynamic objectData, GraphSONWriter writer)
         {

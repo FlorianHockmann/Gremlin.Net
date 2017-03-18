@@ -1,6 +1,6 @@
 ﻿namespace Gremlin.Net.Structure.IO.GraphSON
 {
-    public class GraphSONTokens
+    internal class GraphSONTokens
     {
         public static string TypeKey = "@type";
         public static string ValueKey = "@value";

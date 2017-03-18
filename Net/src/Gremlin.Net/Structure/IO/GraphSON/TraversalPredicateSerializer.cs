@@ -3,7 +3,7 @@ using Gremlin.Net.Process.Traversal;
 
 namespace Gremlin.Net.Structure.IO.GraphSON
 {
-    public class TraversalPredicateSerializer : IGraphSONSerializer
+    internal class TraversalPredicateSerializer : IGraphSONSerializer
     {
         public Dictionary<string, dynamic> Dictify(dynamic predicate, GraphSONWriter writer)
         {

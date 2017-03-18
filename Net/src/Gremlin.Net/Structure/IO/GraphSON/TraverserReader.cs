@@ -3,7 +3,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Gremlin.Net.Structure.IO.GraphSON
 {
-    public class TraverserReader : IGraphSONDeserializer
+    internal class TraverserReader : IGraphSONDeserializer
     {
         public dynamic Objectify(JToken graphsonObject, GraphSONReader reader)
         {

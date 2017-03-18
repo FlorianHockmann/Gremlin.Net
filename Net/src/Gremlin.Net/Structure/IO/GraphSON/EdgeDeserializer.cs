@@ -2,7 +2,7 @@
 
 namespace Gremlin.Net.Structure.IO.GraphSON
 {
-    public class EdgeDeserializer : IGraphSONDeserializer
+    internal class EdgeDeserializer : IGraphSONDeserializer
     {
         public dynamic Objectify(JToken graphsonObject, GraphSONReader reader)
         {
