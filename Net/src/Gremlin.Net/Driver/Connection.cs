@@ -20,11 +20,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Gremlin.Net.Driver.Messages;
-using Gremlin.Net.Process.Traversal;
+using Gremlin.Net.Driver.ResultsAggregation;
 using Gremlin.Net.Structure.IO.GraphSON;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -128,70 +127,5 @@ namespace Gremlin.Net.Driver
         }
 
         #endregion
-    }
-
-    internal class AggregatorFactory
-    {
-        public IAggregator GetAggregatorFor(string aggregateTo)
-        {
-            if (aggregateTo == "map")
-                return new DictionaryAggregator();
-            if (aggregateTo == "bulkset")
-                return new TraverserAggregator();
-            return new DefaultAggregator();
-        }
-    }
-
-    internal class DefaultAggregator : IAggregator
-    {
-        private readonly List<dynamic> _result = new List<dynamic>();
-
-        public void Add(object value)
-        {
-            _result.Add(value);
-        }
-
-        public object GetAggregatedResult()
-        {
-            return _result;
-        }
-    }
-
-    internal class DictionaryAggregator : IAggregator
-    {
-        private readonly Dictionary<string, dynamic> _result = new Dictionary<string, dynamic>();
-
-        public void Add(object value)
-        {
-            var newEntry = ((Dictionary<string, dynamic>) value).First();
-            _result.Add(newEntry.Key, newEntry.Value);
-        }
-
-        public object GetAggregatedResult()
-        {
-            return _result;
-        }
-    }
-
-    internal class TraverserAggregator : IAggregator
-    {
-        private readonly Dictionary<object, long> _result = new Dictionary<object, long>();
-
-        public void Add(object value)
-        {
-            var traverser = (Traverser) value;
-            _result.Add(traverser.Object, traverser.Bulk);
-        }
-
-        public object GetAggregatedResult()
-        {
-            return _result;
-        }
-    }
-
-    internal interface IAggregator
-    {
-        void Add(object value);
-        object GetAggregatedResult();
     }
 }
