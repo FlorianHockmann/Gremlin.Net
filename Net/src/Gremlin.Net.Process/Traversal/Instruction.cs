@@ -8,7 +8,7 @@ namespace Gremlin.Net.Process.Traversal
             Arguments = arguments;
         }
 
-        public string OperatorName { get; private set; }
-        public dynamic[] Arguments { get; private set; }
+        public string OperatorName { get; }
+        public dynamic[] Arguments { get; }
     }
 }

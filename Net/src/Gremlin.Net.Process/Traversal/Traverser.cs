@@ -30,8 +30,8 @@ namespace Gremlin.Net.Process.Traversal
             Bulk = bulk;
         }
 
-        public dynamic Object { get; private set; }
-        public long Bulk { get; set; }
+        public dynamic Object { get; }
+        public long Bulk { get; internal set; }
 
         public bool Equals(Traverser other)
         {
@@ -44,7 +44,7 @@ namespace Gremlin.Net.Process.Traversal
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
+            if (obj.GetType() != GetType()) return false;
             return Equals((Traverser)obj);
         }
 

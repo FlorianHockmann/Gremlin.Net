@@ -32,7 +32,7 @@ namespace Gremlin.Net.Process.Traversal
         {
             unchecked
             {
-                return ((Key != null ? Key.GetHashCode() : 0) * 397) ^ (Value != null ? Value.GetHashCode() : 0);
+                return ((Key?.GetHashCode() ?? 0) * 397) ^ (Value?.GetHashCode() ?? 0);
             }
         }
     }
