@@ -10,7 +10,7 @@ namespace Gremlin.Net.Structure.IO.GraphSON
         {
             Bytecode bytecode = bytecodeObj;
 
-            var valueDict = new Dictionary<string, List<List<dynamic>>>();
+            var valueDict = new Dictionary<string, IEnumerable<IEnumerable<dynamic>>>();
             if (bytecode.SourceInstructions.Count > 0)
                 valueDict["source"] = DictifyInstructions(bytecode.SourceInstructions, writer);
             if (bytecode.StepInstructions.Count > 0)
@@ -19,15 +19,16 @@ namespace Gremlin.Net.Structure.IO.GraphSON
             return GraphSONUtil.ToTypedValue(nameof(Bytecode), valueDict);
         }
 
-        private List<List<dynamic>> DictifyInstructions(IEnumerable<Instruction> instructions, GraphSONWriter writer)
+        private IEnumerable<IEnumerable<dynamic>> DictifyInstructions(IEnumerable<Instruction> instructions,
+            GraphSONWriter writer)
         {
-            var result = new List<List<dynamic>>();
-            foreach (var instruction in instructions)
-            {
-                var dictifiedInstruction = new List<dynamic> {instruction.OperatorName};
-                dictifiedInstruction.AddRange(instruction.Arguments.Select(arg => writer.ToDict(arg)));
-                result.Add(dictifiedInstruction);
-            }
+            return instructions.Select(instruction => DictifyInstruction(instruction, writer));
+        }
+
+        private IEnumerable<dynamic> DictifyInstruction(Instruction instruction, GraphSONWriter writer)
+        {
+            var result = new List<dynamic> { instruction.OperatorName };
+            result.AddRange(instruction.Arguments.Select(arg => writer.ToDict(arg)));
             return result;
         }
     }

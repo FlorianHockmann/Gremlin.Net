@@ -7,7 +7,7 @@ namespace Gremlin.Net.Structure.IO.GraphSON
     {
         public Dictionary<string, dynamic> Dictify(dynamic objectData, GraphSONWriter writer)
         {
-            var traversal = objectData as Traversal;
+            Traversal traversal = objectData;
             var bytecode = traversal.Bytecode;
             return writer.ToDict(bytecode);
         }

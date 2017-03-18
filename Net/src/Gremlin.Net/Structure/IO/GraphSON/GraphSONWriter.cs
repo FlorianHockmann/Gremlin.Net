@@ -62,8 +62,7 @@ namespace Gremlin.Net.Structure.IO.GraphSON
         internal dynamic ToDict(dynamic objectData)
         {
             var type = objectData.GetType();
-            IGraphSONSerializer serializer;
-            if (TryGetSerializerFor(out serializer, type))
+            if (TryGetSerializerFor(out IGraphSONSerializer serializer, type))
                 return serializer.Dictify(objectData, this);
             if (IsDictionaryType(type))
                 return DictToGraphSONDict(objectData);
@@ -107,12 +106,10 @@ namespace Gremlin.Net.Structure.IO.GraphSON
             return type.GetInterfaces().Contains(typeof(ICollection));
         }
 
-        private dynamic CollectionToGraphSONCollection(dynamic collection)
+        private IEnumerable<dynamic> CollectionToGraphSONCollection(dynamic collection)
         {
-            var list = new List<dynamic>();
             foreach (var e in collection)
-                list.Add(ToDict(e));
-            return list;
+                yield return ToDict(e);
         }
     }
 }

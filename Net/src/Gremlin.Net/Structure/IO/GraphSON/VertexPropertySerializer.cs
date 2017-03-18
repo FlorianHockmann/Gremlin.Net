@@ -10,7 +10,7 @@ namespace Gremlin.Net.Structure.IO.GraphSON
             var valueDict = new Dictionary<string, dynamic>
             {
                 {"id", writer.ToDict(vertexProperty.Id)},
-                {"label", writer.ToDict(vertexProperty.Label)},
+                {"label", vertexProperty.Label},
                 {"value", writer.ToDict(vertexProperty.Value)},
                 {"vertex", writer.ToDict(vertexProperty.Vertex.Id)}
             };

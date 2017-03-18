@@ -13,7 +13,7 @@ namespace Gremlin.Net.Structure.IO.GraphSON
                 {"value", writer.ToDict(binding.Value)},
                 {"key", binding.Key}
             };
-            return GraphSONUtil.ToTypedValue("Binding", valueDict);
+            return GraphSONUtil.ToTypedValue(nameof(Binding), valueDict);
         }
     }
 }

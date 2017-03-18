@@ -37,13 +37,13 @@ namespace Gremlin.Net.Structure.IO.GraphSON
 
         public dynamic ToObject(IEnumerable<JToken> graphSonData)
         {
-            return graphSonData.Select(graphson => ToObject(graphson)).ToList();
+            return graphSonData.Select(graphson => ToObject(graphson));
         }
 
         public dynamic ToObject(JToken jToken)
         {
             if (jToken is JArray)
-                return jToken.Select(t => ToObject(t)).ToList();
+                return jToken.Select(t => ToObject(t));
             if (!jToken.HasValues) return ((JValue) jToken).Value;
             if (!HasTypeKey(jToken)) return ReadDictionary(jToken);
             return ReadTypedValue(jToken);

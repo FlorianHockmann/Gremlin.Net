@@ -10,7 +10,7 @@ namespace Gremlin.Net.Structure.IO.GraphSON
             var elementDict = CreateElementDict(property.Element, writer);
             var valueDict = new Dictionary<string, dynamic>
             {
-                {"key", writer.ToDict(property.Key)},
+                {"key", property.Key},
                 {"value", writer.ToDict(property.Value)},
                 {"element", elementDict}
             };
