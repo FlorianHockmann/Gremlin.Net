@@ -6,7 +6,7 @@ using Gremlin.Net.Process.Traversal;
 
 namespace Gremlin.Net.Driver.Remote
 {
-    public class DriverRemoteTraversalSideEffects : ITraversalSideEffects
+    internal class DriverRemoteTraversalSideEffects : ITraversalSideEffects
     {
         private readonly IGremlinClient _gremlinClient;
         private readonly List<string> _keys = new List<string>();
@@ -32,15 +32,23 @@ namespace Gremlin.Net.Driver.Remote
                 throw new InvalidOperationException("Traversal has been closed - side-effect keys cannot be retrieved");
             if (!_retrievedAllKeys)
             {
-                var msg =
-                    RequestMessage.Build(Tokens.OpsKeys)
-                        .AddArgument(Tokens.ArgsSideEffect, _serverSideEffectId)
-                        .Processor(Tokens.ProcessorTraversal)
-                        .Create();
-                _keys.AddRange(_gremlinClient.SubmitAsync<string>(msg).Result);
+                _keys.AddRange(RetrieveKeys());
                 _retrievedAllKeys = true;
             }
             return _keys;
+        }
+
+        private IEnumerable<string> RetrieveKeys()
+        {
+            return _gremlinClient.SubmitAsync<string>(SideEffectKeysMessage()).Result;
+        }
+
+        private RequestMessage SideEffectKeysMessage()
+        {
+            return RequestMessage.Build(Tokens.OpsKeys)
+                .AddArgument(Tokens.ArgsSideEffect, _serverSideEffectId)
+                .Processor(Tokens.ProcessorTraversal)
+                .Create();
         }
 
         public object Get(string key)
@@ -52,31 +60,44 @@ namespace Gremlin.Net.Driver.Remote
                 if (_closed)
                     throw new InvalidOperationException(
                         "Traversal has been closed - no new side-effects can be retrieved");
-                var msg =
-                    RequestMessage.Build(Tokens.OpsGather)
-                        .AddArgument(Tokens.ArgsSideEffect, _serverSideEffectId)
-                        .AddArgument(Tokens.ArgsSideEffectKey, key)
-                        .AddArgument(Tokens.ArgsAliases, new Dictionary<string, string> {{"g", "g"}})
-                        .Processor(Tokens.ProcessorTraversal)
-                        .Create();
-                var sideEffects = _gremlinClient.SubmitWithSingleResultAsync<object>(msg).Result;
-                _sideEffects.Add(key, sideEffects);
+                _sideEffects.Add(key, RetrieveSideEffectsForKey(key));
             }
             return _sideEffects[key];
         }
 
+        private object RetrieveSideEffectsForKey(string key)
+        {
+            return _gremlinClient.SubmitWithSingleResultAsync<object>(SideEffectGatherMessage(key)).Result;
+        }
+
+        private RequestMessage SideEffectGatherMessage(string key)
+        {
+            return RequestMessage.Build(Tokens.OpsGather)
+                .AddArgument(Tokens.ArgsSideEffect, _serverSideEffectId)
+                .AddArgument(Tokens.ArgsSideEffectKey, key)
+                .AddArgument(Tokens.ArgsAliases, new Dictionary<string, string> { { "g", "g" } })
+                .Processor(Tokens.ProcessorTraversal)
+                .Create();
+        }
+
         public void Close()
         {
-            if (!_closed)
-            {
-                var msg =
-                    RequestMessage.Build(Tokens.OpsClose)
-                        .AddArgument(Tokens.ArgsSideEffect, _serverSideEffectId)
-                        .Processor(Tokens.ProcessorTraversal)
-                        .Create();
-                _gremlinClient.SubmitAsync<object>(msg).Wait();
-                _closed = true;
-            }
+            if (_closed) return;
+            CloseSideEffects();
+            _closed = true;
+        }
+
+        private void CloseSideEffects()
+        {
+            _gremlinClient.SubmitAsync<object>(SideEffectCloseMessage()).Wait();
+        }
+
+        private RequestMessage SideEffectCloseMessage()
+        {
+            return RequestMessage.Build(Tokens.OpsClose)
+                .AddArgument(Tokens.ArgsSideEffect, _serverSideEffectId)
+                .Processor(Tokens.ProcessorTraversal)
+                .Create();
         }
     }
 }

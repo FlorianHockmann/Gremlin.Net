@@ -44,13 +44,9 @@ namespace Gremlin.Net.Structure.IO.GraphSON
         {
             if (jToken is JArray)
                 return jToken.Select(t => ToObject(t)).ToList();
-            if (jToken.HasValues)
-            {
-                if (HasTypeKey(jToken))
-                    return ReadTypedValue(jToken);
-                return ReadDictionary(jToken);
-            }
-            return ((JValue) jToken).Value;
+            if (!jToken.HasValues) return ((JValue) jToken).Value;
+            if (!HasTypeKey(jToken)) return ReadDictionary(jToken);
+            return ReadTypedValue(jToken);
         }
 
         private bool HasTypeKey(JToken jToken)
