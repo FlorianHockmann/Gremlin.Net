@@ -35,6 +35,11 @@ namespace Gremlin.Net.Structure.IO.GraphSON
                 _deserializerByGraphSONType[deserializerAndGraphSONType.Key] = deserializerAndGraphSONType.Value;
         }
 
+        public dynamic ToObject(IEnumerable<JToken> graphSonData)
+        {
+            return graphSonData.Select(graphson => ToObject(graphson)).ToList();
+        }
+
         public dynamic ToObject(JToken jToken)
         {
             if (jToken is JArray)

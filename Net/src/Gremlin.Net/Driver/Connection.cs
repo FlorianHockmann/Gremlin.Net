@@ -77,21 +77,21 @@ namespace Gremlin.Net.Driver
             {
                 var received = await _webSocketConnection.ReceiveMessageAsync().ConfigureAwait(false);
                 var responseStr = Encoding.UTF8.GetString(received);
-                var receivedMsg = JObject.Parse(responseStr);
+                var receivedMsg = JsonConvert.DeserializeObject<ResponseMessage<JToken>>(responseStr);
 
-                status = JsonConvert.DeserializeObject<ResponseStatus>(receivedMsg["status"].ToString());
+                status = receivedMsg.Status;
                 status.ThrowIfStatusIndicatesError();
 
                 if (status.Code != ResponseStatusCode.NoContent)
                 {
-                    var receivedData = _graphSONReader.ToObject(receivedMsg["result"]["data"]);
+                    var receivedData = _graphSONReader.ToObject(receivedMsg.Result.Data);
                     foreach (var d in receivedData)
-                        if (receivedMsg["result"]["meta"]["sideEffectKey"] != null)
+                        if (receivedMsg.Result.Meta.ContainsKey("sideEffectKey"))
                         {
                             if (aggregator == null)
                                 aggregator =
                                     new AggregatorFactory().GetAggregatorFor(
-                                        (string) receivedMsg["result"]["meta"]["aggregateTo"]);
+                                        (string)receivedMsg.Result.Meta["aggregateTo"]);
                             aggregator.Add(d);
                             isAggregatingSideEffects = true;
                         }
