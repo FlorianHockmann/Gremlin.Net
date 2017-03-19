@@ -59,7 +59,8 @@ namespace Gremlin.CSharp.Process
 """
         public GraphTraversalSource ${sharpMethodName}(params object[] args)
         {
-            var source = new GraphTraversalSource(TraversalStrategies, Bytecode);
+            var source = new GraphTraversalSource(new List<ITraversalStrategy>(TraversalStrategies),
+                new Bytecode(Bytecode));
             source.Bytecode.AddSource("${javaMethodName}\", args);
             return source;
         }
@@ -75,7 +76,8 @@ namespace Gremlin.CSharp.Process
 
         public GraphTraversalSource WithRemote(IRemoteConnection remoteConnection)
         {
-            var source = new GraphTraversalSource(TraversalStrategies, Bytecode);
+            var source = new GraphTraversalSource(new List<ITraversalStrategy>(TraversalStrategies),
+                new Bytecode(Bytecode));
             source.TraversalStrategies.Add(new RemoteStrategy(remoteConnection));
             return source;
         }
@@ -100,7 +102,7 @@ namespace Gremlin.CSharp.Process
                             """
         public GraphTraversal ${sharpMethodName}(params object[] args)
         {
-            var traversal = new GraphTraversal(TraversalStrategies, Bytecode);
+            var traversal = new GraphTraversal(TraversalStrategies, new Bytecode(Bytecode));
             traversal.Bytecode.AddStep("${javaMethodName}\", args);
             return traversal;
         }

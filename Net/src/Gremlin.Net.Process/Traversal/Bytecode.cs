@@ -27,6 +27,17 @@ namespace Gremlin.Net.Process.Traversal
         public List<Instruction> SourceInstructions { get; } = new List<Instruction>();
         public List<Instruction> StepInstructions { get; } = new List<Instruction>();
 
+        public Bytecode()
+        {
+            
+        }
+
+        public Bytecode(Bytecode byteCode)
+        {
+            SourceInstructions = new List<Instruction>(byteCode.SourceInstructions);
+            StepInstructions = new List<Instruction>(byteCode.StepInstructions);
+        }
+
         public void AddSource(string sourceName, params object[] args)
         {
             SourceInstructions.Add(new Instruction(sourceName, args));
