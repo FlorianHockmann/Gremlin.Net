@@ -31,7 +31,7 @@ namespace Gremlin.Net.Process.Traversal
         public Bytecode Bytecode { get; protected set; }
         public ITraversalSideEffects SideEffects { get; set; }
         public IEnumerable<Traverser> Traversers { get; set; }
-        protected IList<ITraversalStrategy> TraversalStrategies { get; set; } = new List<ITraversalStrategy>();
+        protected ICollection<ITraversalStrategy> TraversalStrategies { get; set; } = new List<ITraversalStrategy>();
 
         private IEnumerator<Traverser> TraverserEnumerator
             => _traverserEnumerator ?? (_traverserEnumerator = GetTraverserEnumerator());
