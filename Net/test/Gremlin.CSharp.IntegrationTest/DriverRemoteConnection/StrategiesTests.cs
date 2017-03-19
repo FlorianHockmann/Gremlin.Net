@@ -1,6 +1,10 @@
-﻿using Gremlin.CSharp.Process;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Gremlin.CSharp.Process;
 using Gremlin.CSharp.Structure;
+using Gremlin.Net.Driver.Exceptions;
 using Gremlin.Net.Process.Traversal.Strategy.Decoration;
+using Gremlin.Net.Process.Traversal.Strategy.Verification;
 using Xunit;
 
 namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
@@ -152,6 +156,37 @@ namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
             var count = g.E().Count().Next();
 
             Assert.Equal((long)6, count);
+        }
+
+        [Fact]
+        public async Task ModifyingTraversalSourceWithReadOnlyStrategyShouldThrow()
+        {
+            var graph = new Graph();
+            var connection = _connectionFactory.CreateRemoteConnection();
+            var g = graph.Traversal().WithRemote(connection).WithStrategies(new ReadOnlyStrategy());
+
+            await Assert.ThrowsAsync<ResponseException>(async () => await g.AddV("person").Promise(t => t.Next()));
+        }
+
+        [Fact]
+        public void PartitionStrategyShouldResultInSeparatedViews()
+        {
+            var graph = new Graph();
+            var connection = _connectionFactory.CreateRemoteConnection();
+            var g1 = graph.Traversal()
+                .WithRemote(connection)
+                .WithStrategies(new PartitionStrategy("_partition", "p1", new List<string> {"p1"}));
+            var g2 = graph.Traversal()
+                .WithRemote(connection)
+                .WithStrategies(new PartitionStrategy("_partition", "p2", new List<string> {"p2"}));
+
+            g1.AddV().Property("name", "tester").Next();
+
+            Assert.Equal((long)1, g1.V().Has("name", "tester").Count().Next());
+            Assert.Equal((long)0, g2.V().Has("name", "tester").Count().Next());
+
+            // cleanup
+            g1.V().Has("name", "tester").Drop().Next();
         }
     }
 }
