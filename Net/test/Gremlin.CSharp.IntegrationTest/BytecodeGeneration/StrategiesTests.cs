@@ -15,8 +15,7 @@ namespace Gremlin.CSharp.IntegrationTest.BytecodeGeneration
         public void TraversalWithoutStrategies_AfterWithStrategiesWasCalled_WithStrategiesNotAffected()
         {
             var graph = new Graph();
-            var g = graph.Traversal();
-            g.WithStrategies(new ReadOnlyStrategy(), new IncidentToAdjacentStrategy());
+            var g = graph.Traversal().WithStrategies(new ReadOnlyStrategy(), new IncidentToAdjacentStrategy());
 
             var bytecode = g.WithoutStrategies(new ReadOnlyStrategy()).Bytecode;
 
@@ -110,8 +109,7 @@ namespace Gremlin.CSharp.IntegrationTest.BytecodeGeneration
         public void TraversalWithStrategies_Strategies_ApplyToReusedGraphTraversalSource()
         {
             var graph = new Graph();
-            var g = graph.Traversal();
-            g.WithStrategies(new ReadOnlyStrategy(), new IncidentToAdjacentStrategy());
+            var g = graph.Traversal().WithStrategies(new ReadOnlyStrategy(), new IncidentToAdjacentStrategy());
 
             var bytecode = g.V().Bytecode;
 
