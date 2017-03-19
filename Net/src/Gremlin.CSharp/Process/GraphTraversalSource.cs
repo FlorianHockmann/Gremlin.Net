@@ -26,7 +26,7 @@ namespace Gremlin.CSharp.Process
 {
     public class GraphTraversalSource
     {
-        public IList<ITraversalStrategy> TraversalStrategies { get; set; }
+        public ICollection<ITraversalStrategy> TraversalStrategies { get; set; }
         public Bytecode Bytecode { get; set; }
 
          public GraphTraversalSource()
@@ -34,7 +34,7 @@ namespace Gremlin.CSharp.Process
         {
         }
 
-        public GraphTraversalSource(IList<ITraversalStrategy> traversalStrategies, Bytecode bytecode)
+        public GraphTraversalSource(ICollection<ITraversalStrategy> traversalStrategies, Bytecode bytecode)
         {
             TraversalStrategies = traversalStrategies;
             Bytecode = bytecode;
