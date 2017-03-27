@@ -2,8 +2,17 @@
 
 namespace Gremlin.Net.Structure
 {
+    /// <summary>
+    ///     A <see cref="Property" /> denotes a key/value pair associated with an <see cref="Edge" />.
+    /// </summary>
     public class Property : IEquatable<Property>
     {
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="Property" /> class.
+        /// </summary>
+        /// <param name="key">The key of the property.</param>
+        /// <param name="value">The value of the property.</param>
+        /// <param name="element">The element that the property is associated with.</param>
         public Property(string key, dynamic value, Element element)
         {
             Key = key;
@@ -11,10 +20,22 @@ namespace Gremlin.Net.Structure
             Element = element;
         }
 
+        /// <summary>
+        ///     Gets the key of the property.
+        /// </summary>
         public string Key { get; }
+
+        /// <summary>
+        ///     Gets the value of the property.
+        /// </summary>
         public dynamic Value { get; }
+
+        /// <summary>
+        ///     Gets the element that this property is associated with.
+        /// </summary>
         public Element Element { get; }
 
+        /// <inheritdoc />
         public bool Equals(Property other)
         {
             if (ReferenceEquals(null, other)) return false;
@@ -22,11 +43,13 @@ namespace Gremlin.Net.Structure
             return string.Equals(Key, other.Key) && Equals(Value, other.Value) && Equals(Element, other.Element);
         }
 
+        /// <inheritdoc />
         public override string ToString()
         {
             return $"p[{Key}->{Value}]";
         }
 
+        /// <inheritdoc />
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
@@ -35,6 +58,7 @@ namespace Gremlin.Net.Structure
             return Equals((Property) obj);
         }
 
+        /// <inheritdoc />
         public override int GetHashCode()
         {
             unchecked

@@ -11,6 +11,9 @@ using Newtonsoft.Json;
 
 namespace Gremlin.Net.Structure.IO.GraphSON
 {
+    /// <summary>
+    ///     Allows to serialize objects to GraphSON.
+    /// </summary>
     public class GraphSONWriter
     {
         private const string MimeType = "application/vnd.gremlin-v2.0+json";
@@ -37,23 +40,35 @@ namespace Gremlin.Net.Structure.IO.GraphSON
                 {typeof(AbstractTraversalStrategy), new TraversalStrategySerializer()}
             };
 
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="GraphSONWriter" /> class.
+        /// </summary>
         public GraphSONWriter()
         {
         }
 
-        public GraphSONWriter(Dictionary<Type, IGraphSONSerializer> customSerializerByType)
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="GraphSONWriter" /> class.
+        /// </summary>
+        /// <param name="customSerializerByType"><see cref="IGraphSONSerializer" /> serializers identified by their <see cref="Type" />.</param>
+        public GraphSONWriter(IReadOnlyDictionary<Type, IGraphSONSerializer> customSerializerByType)
         {
             foreach (var serializerAndType in customSerializerByType)
                 _serializerByType[serializerAndType.Key] = serializerAndType.Value;
         }
 
-        public byte[] SerializeMessage(RequestMessage message)
+        internal byte[] SerializeMessage(RequestMessage message)
         {
             var payload = WriteObject(message);
             var messageWithHeader = $"{(char) MimeType.Length}{MimeType}{payload}";
             return Encoding.UTF8.GetBytes(messageWithHeader);
         }
 
+        /// <summary>
+        ///     Serializes an object to GraphSON.
+        /// </summary>
+        /// <param name="objectData">The object to serialize.</param>
+        /// <returns>The serialized GraphSON.</returns>
         public string WriteObject(dynamic objectData)
         {
             return JsonConvert.SerializeObject(ToDict(objectData));

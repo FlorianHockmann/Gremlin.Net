@@ -5,6 +5,9 @@ using Newtonsoft.Json.Linq;
 
 namespace Gremlin.Net.Structure.IO.GraphSON
 {
+    /// <summary>
+    ///     Allows to deserialize GraphSON to objects.
+    /// </summary>
     public class GraphSONReader
     {
         private readonly Dictionary<string, IGraphSONDeserializer> _deserializerByGraphSONType = new Dictionary
@@ -25,21 +28,38 @@ namespace Gremlin.Net.Structure.IO.GraphSON
                 {"g:Path", new PathDeserializer()}
             };
 
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="GraphSONReader" /> class.
+        /// </summary>
         public GraphSONReader()
         {
         }
 
-        public GraphSONReader(Dictionary<string, IGraphSONDeserializer> deserializerByGraphSONType)
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="GraphSONReader" /> class.
+        /// </summary>
+        /// <param name="deserializerByGraphSONType"><see cref="IGraphSONDeserializer" /> deserializers identified by their GraphSON type.</param>
+        public GraphSONReader(IReadOnlyDictionary<string, IGraphSONDeserializer> deserializerByGraphSONType)
         {
             foreach (var deserializerAndGraphSONType in deserializerByGraphSONType)
                 _deserializerByGraphSONType[deserializerAndGraphSONType.Key] = deserializerAndGraphSONType.Value;
         }
 
+        /// <summary>
+        ///     Deserializes a GraphSON collection to an object.
+        /// </summary>
+        /// <param name="graphSonData">The GraphSON collection to deserialize.</param>
+        /// <returns>The deserialized object.</returns>
         public dynamic ToObject(IEnumerable<JToken> graphSonData)
         {
             return graphSonData.Select(graphson => ToObject(graphson));
         }
 
+        /// <summary>
+        ///     Deserializes GraphSON to an object.
+        /// </summary>
+        /// <param name="jToken">The GraphSON to deserialize.</param>
+        /// <returns>The deserialized object.</returns>
         public dynamic ToObject(JToken jToken)
         {
             if (jToken is JArray)

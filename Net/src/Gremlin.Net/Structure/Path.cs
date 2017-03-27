@@ -2,19 +2,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Gremlin.Net.Process.Traversal;
 
 namespace Gremlin.Net.Structure
 {
+    /// <summary>
+    ///     A Path denotes a particular walk through a graph as defined by a <see cref="Traversal" />.
+    /// </summary>
+    /// <remarks>In abstraction, any Path implementation maintains two lists: a list of sets of labels and a list of objects.
+    /// The list of labels are the labels of the steps traversed. The list of objects are the objects traversed.</remarks>
     public class Path : IReadOnlyList<object>, IEquatable<Path>
     {
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="Path" /> class.
+        /// </summary>
+        /// <param name="labels">The labels associated with the path</param>
+        /// <param name="objects">The objects in the <see cref="Path" />.</param>
         public Path(List<List<string>> labels, List<object> objects)
         {
             Labels = labels;
             Objects = objects;
         }
 
+        /// <summary>
+        ///     Gets an ordered list of the labels associated with the <see cref="Path" />.
+        /// </summary>
         public List<List<string>> Labels { get; }
 
+        /// <summary>
+        ///     Gets an ordered list of the objects in the <see cref="Path" />.
+        /// </summary>
         public List<object> Objects { get; }
 
         public object this[string label]
@@ -29,6 +46,7 @@ namespace Gremlin.Net.Structure
             }
         }
 
+        /// <inheritdoc />
         public bool Equals(Path other)
         {
             if (ReferenceEquals(null, other)) return false;
@@ -40,6 +58,7 @@ namespace Gremlin.Net.Structure
 
         public int Count => Objects.Count;
 
+        /// <inheritdoc />
         public IEnumerator<object> GetEnumerator()
         {
             return ((IReadOnlyList<object>) Objects).GetEnumerator();
@@ -50,6 +69,7 @@ namespace Gremlin.Net.Structure
             return ((IReadOnlyList<object>) Objects).GetEnumerator();
         }
 
+        /// <inheritdoc />
         public override string ToString()
         {
             return $"[{string.Join(", ", Objects)}]";
@@ -93,6 +113,7 @@ namespace Gremlin.Net.Structure
             return !foundUnequalObjLabels;
         }
 
+        /// <inheritdoc />
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
@@ -101,6 +122,7 @@ namespace Gremlin.Net.Structure
             return Equals((Path) obj);
         }
 
+        /// <inheritdoc />
         public override int GetHashCode()
         {
             unchecked
