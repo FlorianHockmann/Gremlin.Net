@@ -14,7 +14,7 @@ namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
         private readonly RemoteConnectionFactory _connectionFactory = new RemoteConnectionFactory();
 
         [Fact]
-        public void g_V_Count_Next_WithVertexLabelSubgraphStrategy_CountOfSubgraphVertices()
+        public void g_V_Count_Next_WithVertexLabelSubgraphStrategy()
         {
             var graph = new Graph();
             var connection = _connectionFactory.CreateRemoteConnection();
@@ -29,7 +29,7 @@ namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
         }
 
         [Fact]
-        public void g_E_Count_Next_WithVertexAndEdgeLabelSubgraphStrategy_CountOfSubgraphEdges()
+        public void g_E_Count_Next_WithVertexAndEdgeLabelSubgraphStrategy()
         {
             var graph = new Graph();
             var connection = _connectionFactory.CreateRemoteConnection();
@@ -45,7 +45,7 @@ namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
         }
 
         [Fact]
-        public void g_V_Label_Dedup_Count_Next_WithVertexLabelSubgraphStrategy_CountLabelsOfSubgraphVertices()
+        public void g_V_Label_Dedup_Count_Next_WithVertexLabelSubgraphStrategy()
         {
             var graph = new Graph();
             var connection = _connectionFactory.CreateRemoteConnection();
@@ -60,7 +60,7 @@ namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
         }
 
         [Fact]
-        public void g_V_Label_Dedup_Next_WWithVertexLabelSubgraphStrategy_LabelOfSubgraphVertices()
+        public void g_V_Label_Dedup_Next_WWithVertexLabelSubgraphStrategy()
         {
             var graph = new Graph();
             var connection = _connectionFactory.CreateRemoteConnection();
@@ -75,7 +75,7 @@ namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
         }
 
         [Fact]
-        public void g_V_Count_Next_WithVertexHasPropertySubgraphStrategy_CountOfSubgraphVertices()
+        public void g_V_Count_Next_WithVertexHasPropertySubgraphStrategy()
         {
             var graph = new Graph();
             var connection = _connectionFactory.CreateRemoteConnection();
@@ -90,7 +90,7 @@ namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
         }
 
         [Fact]
-        public void g_E_Count_Next_WithEdgeLimitSubgraphStrategy_CountOfSubgraphEdges()
+        public void g_E_Count_Next_WithEdgeLimitSubgraphStrategy()
         {
             var graph = new Graph();
             var connection = _connectionFactory.CreateRemoteConnection();
@@ -105,7 +105,7 @@ namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
         }
 
         [Fact]
-        public void g_V_Label_Dedup_Next_WithVertexHasPropertySubgraphStrategy_LabelOfSubgraphVertices()
+        public void g_V_Label_Dedup_Next_WithVertexHasPropertySubgraphStrategy()
         {
             var graph = new Graph();
             var connection = _connectionFactory.CreateRemoteConnection();
@@ -120,7 +120,7 @@ namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
         }
 
         [Fact]
-        public void g_V_ValuesXnameX_Next_WithVertexHasPropertySubgraphStrategy_NameValueOfSubgraphVertices()
+        public void g_V_ValuesXnameX_Next_WithVertexHasPropertySubgraphStrategy()
         {
             var graph = new Graph();
             var connection = _connectionFactory.CreateRemoteConnection();
@@ -135,7 +135,7 @@ namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
         }
 
         [Fact]
-        public void g_V_Count_Next_WithComputer_CountOfVertices()
+        public void g_V_Count_Next_WithComputer()
         {
             var graph = new Graph();
             var connection = _connectionFactory.CreateRemoteConnection();
@@ -147,7 +147,7 @@ namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
         }
 
         [Fact]
-        public void g_E_Count_Next_WithComputer_CountOfEdges()
+        public void g_E_Count_Next_WithComputer()
         {
             var graph = new Graph();
             var connection = _connectionFactory.CreateRemoteConnection();
@@ -159,7 +159,7 @@ namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
         }
 
         [Fact]
-        public async Task ModifyingTraversalSourceWithReadOnlyStrategyShouldThrow()
+        public async Task ShouldThrowWhenModifyingTraversalSourceWithReadOnlyStrategy()
         {
             var graph = new Graph();
             var connection = _connectionFactory.CreateRemoteConnection();
@@ -169,7 +169,7 @@ namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
         }
 
         [Fact]
-        public void PartitionStrategyShouldResultInSeparatedViews()
+        public void ShouldUseSeparatedViewsForPartitionStrategy()
         {
             var graph = new Graph();
             var connection = _connectionFactory.CreateRemoteConnection();

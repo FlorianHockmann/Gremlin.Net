@@ -6,7 +6,7 @@ namespace Gremlin.Net.UnitTest.Structure
     public class EdgeTests
     {
         [Fact]
-        public void Constructor_ValidArguments_CorrectProperties()
+        public void ShouldAssignPropertiesCorrectly()
         {
             const int id = 2;
             var outV = new Vertex(1);
@@ -22,7 +22,7 @@ namespace Gremlin.Net.UnitTest.Structure
         }
 
         [Fact]
-        public void ToString_ValidEdge_CommonEdgeRepresentation()
+        public void ShouldReturnCommonStringRepresentationForToString()
         {
             var edge = new Edge(2, new Vertex(1), "said", new Vertex("hello", "phrase"));
 

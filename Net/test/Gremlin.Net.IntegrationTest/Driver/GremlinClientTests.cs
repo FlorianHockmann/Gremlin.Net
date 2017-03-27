@@ -38,7 +38,7 @@ namespace Gremlin.Net.IntegrationTest.Driver
         [Theory]
         [InlineData("'justAString'", "justAString")]
         [InlineData("'Hello' + 'World'", "HelloWorld")]
-        public async Task ScriptShouldBeEvaluatedAndResultReturned(string requestMsg, string expectedResponse)
+        public async Task ShouldSendScriptForEvaluationAndReturnCorrectResult(string requestMsg, string expectedResponse)
         {
             var gremlinServer = new GremlinServer(TestHost, TestPort);
             using (var gremlinClient = new GremlinClient(gremlinServer))
@@ -50,7 +50,7 @@ namespace Gremlin.Net.IntegrationTest.Driver
         }
 
         [Fact]
-        public async Task HandleBigResponseTest()
+        public async Task ShouldHandleBigResponse()
         {
             var gremlinServer = new GremlinServer(TestHost, TestPort);
             using (var gremlinClient = new GremlinClient(gremlinServer))
@@ -65,7 +65,7 @@ namespace Gremlin.Net.IntegrationTest.Driver
         }
 
         [Fact]
-        public async Task HandleResponseWithoutContent()
+        public async Task ShouldHandleResponseWithoutContent()
         {
             var gremlinServer = new GremlinServer(TestHost, TestPort);
             using (var gremlinClient = new GremlinClient(gremlinServer))
@@ -85,7 +85,7 @@ namespace Gremlin.Net.IntegrationTest.Driver
         }
 
         [Fact]
-        public async Task InvalidScriptShouldThrowException()
+        public async Task ShouldThrowExceptionForInvalidScript()
         {
             var gremlinServer = new GremlinServer(TestHost, TestPort);
             using (var gremlinClient = new GremlinClient(gremlinServer))
@@ -102,7 +102,7 @@ namespace Gremlin.Net.IntegrationTest.Driver
         }
 
         [Fact]
-        public async Task ResponseBatchesShouldBeReassembled()
+        public async Task ShouldReassembleResponseBatches()
         {
             const int batchSize = 2;
             var expectedResult = new List<int> {1, 2, 3, 4, 5};
@@ -124,7 +124,7 @@ namespace Gremlin.Net.IntegrationTest.Driver
         }
 
         [Fact]
-        public async Task ResponsesShouldBeCorrectlyAssignedToRequests()
+        public async Task ShouldCorrectlyAssignResponsesToRequests()
         {
             var gremlinServer = new GremlinServer(TestHost, TestPort);
             using (var gremlinClient = new GremlinClient(gremlinServer))
@@ -149,7 +149,7 @@ namespace Gremlin.Net.IntegrationTest.Driver
         }
 
         [Fact]
-        public async Task ResponsesShouldBeEnumerable()
+        public async Task ShouldReturnEnumerableResult()
         {
             var gremlinServer = new GremlinServer(TestHost, TestPort);
             using (var gremlinClient = new GremlinClient(gremlinServer))
@@ -165,7 +165,7 @@ namespace Gremlin.Net.IntegrationTest.Driver
         }
 
         [Fact]
-        public async Task SimpleInvalidScriptShouldThrowExceptionOnExecution()
+        public async Task ShouldThrowOnExecutionOfSimpleInvalidScript()
         {
             var gremlinServer = new GremlinServer(TestHost, TestPort);
             using (var gremlinClient = new GremlinClient(gremlinServer))
@@ -177,7 +177,7 @@ namespace Gremlin.Net.IntegrationTest.Driver
         }
 
         [Fact]
-        public async Task SimpleScriptShouldBeExecutedWithoutErrors()
+        public async Task ShouldHandleSimpleScriptWithoutErrors()
         {
             var gremlinServer = new GremlinServer(TestHost, TestPort);
             using (var gremlinClient = new GremlinClient(gremlinServer))
@@ -189,7 +189,7 @@ namespace Gremlin.Net.IntegrationTest.Driver
         }
 
         [Fact]
-        public async Task UseBindingsForScript()
+        public async Task ShouldUseBindingsForScript()
         {
             var gremlinServer = new GremlinServer(TestHost, TestPort);
             using (var gremlinClient = new GremlinClient(gremlinServer))

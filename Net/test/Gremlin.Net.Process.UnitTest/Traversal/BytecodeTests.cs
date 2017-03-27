@@ -6,7 +6,7 @@ namespace Gremlin.Net.Process.UnitTest.Traversal
     public class BytecodeTests
     {
         [Fact]
-        public void BytecodeShouldUseBingings()
+        public void ShouldUseBingings()
         {
             var bytecode = new Bytecode();
             var bindings = new Bindings();

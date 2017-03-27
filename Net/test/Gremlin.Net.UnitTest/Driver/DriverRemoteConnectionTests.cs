@@ -9,7 +9,7 @@ namespace Gremlin.Net.UnitTest.Driver
     public class DriverRemoteConnectionTests
     {
         [Fact]
-        public void Dispose_ProvidedGremlinClient_DisposeGremlinClient()
+        public void ShouldDisposeProvidedGremlinClientOnDispose()
         {
             var gremlinClientMock = new Mock<IGremlinClient>();
             var driverRemoteConnection = new DriverRemoteConnection(gremlinClientMock.Object);
@@ -20,7 +20,7 @@ namespace Gremlin.Net.UnitTest.Driver
         }
 
         [Fact]
-        public void Constructor_GivenNullAsGremlinClient_Throw()
+        public void ShouldThrowWhenGivenNullAsGremlinClient()
         {
             Assert.Throws<ArgumentNullException>(() => new DriverRemoteConnection(null));
         }

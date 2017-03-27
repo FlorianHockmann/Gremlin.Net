@@ -12,7 +12,7 @@ namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
         private readonly RemoteConnectionFactory _connectionFactory = new RemoteConnectionFactory();
 
         [Fact]
-        public void Get_CloseAfterSameGet_GetCachedSideEffect()
+        public void ShouldReturnCachedSideEffectWhenGetIsCalledAfterClose()
         {
             var graph = new Graph();
             var connection = _connectionFactory.CreateRemoteConnection();
@@ -27,7 +27,7 @@ namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
         }
 
         [Fact]
-        public void Get_ClosedSideEffects_Throw()
+        public void ShouldThrowWhenGetIsCalledAfterCloseAndNoSideEffectsAreCachec()
         {
             var graph = new Graph();
             var connection = _connectionFactory.CreateRemoteConnection();
@@ -39,7 +39,7 @@ namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
         }
 
         [Fact]
-        public void Get_DisposedSideEffects_Throw()
+        public void ShouldThrowWhenGetIsCalledAfterDisposeAndNoSideEffectsAreCachec()
         {
             var graph = new Graph();
             var connection = _connectionFactory.CreateRemoteConnection();
@@ -51,7 +51,7 @@ namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
         }
 
         [Fact]
-        public void Get_NamedGroupCount_SideEffectValue()
+        public void ShouldReturnSideEffectValueWhenGetIsCalledForGroupCountTraversal()
         {
             var graph = new Graph();
             var connection = _connectionFactory.CreateRemoteConnection();
@@ -67,7 +67,7 @@ namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
         }
 
         [Fact]
-        public void Get_NamedList_SideEffectValue()
+        public void ShouldReturnSideEffectValueWhenGetIsCalledOnATraversalWithSideEffect()
         {
             var graph = new Graph();
             var connection = _connectionFactory.CreateRemoteConnection();
@@ -83,7 +83,7 @@ namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
         }
 
         [Fact]
-        public void Get_NonExistingKey_Throw()
+        public void ShouldThrowWhenGetIsCalledWithAnUnknownKey()
         {
             var graph = new Graph();
             var connection = _connectionFactory.CreateRemoteConnection();
@@ -94,7 +94,7 @@ namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
         }
 
         [Fact]
-        public void Get_TraversalWithTwoSideEffects_GetBothSideEffects()
+        public void ShouldReturnBothSideEffectForTraversalWithTwoSideEffects_()
         {
             var graph = new Graph();
             var connection = _connectionFactory.CreateRemoteConnection();
@@ -113,7 +113,7 @@ namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
         }
 
         [Fact]
-        public void Keys_TraversalWithoutSideEffect_NoKeys()
+        public void ShouldReturnAnEmptyCollectionWhenKeysIsCalledForTraversalWithoutSideEffect()
         {
             var graph = new Graph();
             var connection = _connectionFactory.CreateRemoteConnection();
@@ -126,7 +126,7 @@ namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
         }
 
         [Fact]
-        public void Keys_CloseAfterGet_CachedKeys()
+        public void ShouldReturnCachedKeysWhenForCloseAfterSomeGet()
         {
             var graph = new Graph();
             var connection = _connectionFactory.CreateRemoteConnection();
@@ -143,7 +143,7 @@ namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
         }
 
         [Fact]
-        public void Keys_NamedGroupCount_SideEffectKey()
+        public void ShouldReturnSideEffectKeyWhenKeysIsCalledForNamedGroupCount()
         {
             var graph = new Graph();
             var connection = _connectionFactory.CreateRemoteConnection();
@@ -158,7 +158,7 @@ namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
         }
 
         [Fact]
-        public async Task TraversalExecutedAsynchronously_SideEffectsKeys_Keys()
+        public async Task ShouldReturnSideEffectsKeysWhenKeysIsCalledOnTraversalThatExecutedAsynchronously()
         {
             var graph = new Graph();
             var connection = _connectionFactory.CreateRemoteConnection();
@@ -172,7 +172,7 @@ namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
         }
 
         [Fact]
-        public async Task TraversalExecutedAsynchronously_SideEffectsGet_SideEffectValue()
+        public async Task ShouldReturnSideEffectValueWhenGetIsCalledOnTraversalThatExecutedAsynchronously()
         {
             var graph = new Graph();
             var connection = _connectionFactory.CreateRemoteConnection();
@@ -185,7 +185,7 @@ namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
         }
 
         [Fact]
-        public async Task TraversalExecutedAsynchronously_SideEffectsClose_DontThrow()
+        public async Task ShouldNotThrowWhenCloseIsCalledOnTraversalThatExecutedAsynchronously()
         {
             var graph = new Graph();
             var connection = _connectionFactory.CreateRemoteConnection();

@@ -31,7 +31,7 @@ namespace Gremlin.CSharp.IntegrationTest.BytecodeGeneration
         }
 
         [Fact]
-        public void TraversalWithoutStrategies_MultipleStrategies_IncludeInBytecode()
+        public void ShouldIncludeMultipleStrategiesInBytecodeWhenGivenToWithoutStrategies()
         {
             var graph = new Graph();
             var g = graph.Traversal();
@@ -46,7 +46,7 @@ namespace Gremlin.CSharp.IntegrationTest.BytecodeGeneration
         }
 
         [Fact]
-        public void TraversalWithoutStrategies_OneStrategy_IncludeInBytecode()
+        public void ShouldIncludeOneStrategyInBytecodeWhenGivenToWithoutStrategies()
         {
             var graph = new Graph();
             var g = graph.Traversal();
@@ -60,7 +60,7 @@ namespace Gremlin.CSharp.IntegrationTest.BytecodeGeneration
         }
 
         [Fact]
-        public void TraversalWithStrategies_ConfigurableMatchAlgorithmStrategy_IncludeConfigInBytecode()
+        public void ShouldIncludeConfigurationInBytecodeWhenGivenToWithStrategies()
         {
             var graph = new Graph();
             var g = graph.Traversal();
@@ -71,10 +71,12 @@ namespace Gremlin.CSharp.IntegrationTest.BytecodeGeneration
             Assert.Equal(1, bytecode.SourceInstructions[0].Arguments.Length);
             Assert.Equal("withStrategies", bytecode.SourceInstructions[0].OperatorName);
             Assert.Equal(new MatchAlgorithmStrategy(), bytecode.SourceInstructions[0].Arguments[0]);
+            Assert.Contains("greedy",
+                ((MatchAlgorithmStrategy) bytecode.SourceInstructions[0].Arguments[0]).Configuration.Values);
         }
 
         [Fact]
-        public void TraversalWithStrategies_MultipleStrategies_IncludeInBytecode()
+        public void ShouldIncludeMultipleStrategiesInBytecodeWhenGivenToWithStrategies()
         {
             var graph = new Graph();
             var g = graph.Traversal();
@@ -89,7 +91,7 @@ namespace Gremlin.CSharp.IntegrationTest.BytecodeGeneration
         }
 
         [Fact]
-        public void TraversalWithStrategies_OneStrategy_IncludeInBytecode()
+        public void ShouldIncludeOneStrategyInBytecodeWhenGivenToWithStrategies()
         {
             var graph = new Graph();
             var g = graph.Traversal();

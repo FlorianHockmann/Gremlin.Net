@@ -9,7 +9,7 @@ namespace Gremlin.Net.UnitTest.Structure
     public class PathTests
     {
         [Fact]
-        public void Constructor_ValidARguments_CorrectProperties()
+        public void ShouldAssignPropertiesCorrectly()
         {
             var labels = new List<List<string>>
             {
@@ -26,7 +26,7 @@ namespace Gremlin.Net.UnitTest.Structure
         }
 
         [Fact]
-        public void ContainsKey_ExistingLabel_ReturnsTrue()
+        public void ShouldReturnTrueForContainsKeyWhenGivenKeyExists()
         {
             var labels = new List<List<string>>
             {
@@ -42,7 +42,7 @@ namespace Gremlin.Net.UnitTest.Structure
         }
 
         [Fact]
-        public void ContainsKey_NotExistingLabel_ReturnsFalse()
+        public void ShouldReturnFalseForContainsKeyWhenGivenKeyDoesNotExist()
         {
             var labels = new List<List<string>>
             {
@@ -58,7 +58,7 @@ namespace Gremlin.Net.UnitTest.Structure
         }
 
         [Fact]
-        public void Count_VariousObjects_ReturnObjectCount()
+        public void ShouldReturnCountOfObjectsForCountProperty()
         {
             var objects = new List<object> {1, new Vertex(1), "hello"};
             var path = new Path(new List<List<string>>(), objects);
@@ -69,7 +69,7 @@ namespace Gremlin.Net.UnitTest.Structure
         }
 
         [Fact]
-        public void Enumerator_SomeObject_EnumerateObjects()
+        public void ShouldEnumeratorObjectsIntoListWhenToListIsCalled()
         {
             var objects = new List<object> {1, new Vertex(1), "hello"};
             var path = new Path(new List<List<string>>(), objects);
@@ -80,7 +80,7 @@ namespace Gremlin.Net.UnitTest.Structure
         }
 
         [Fact]
-        public void Equals_EqualPath_ReturnTrue()
+        public void ShouldReturnTrueForEqualsOfTwoEqualPaths()
         {
             var firstPath =
                 new Path(
@@ -105,7 +105,7 @@ namespace Gremlin.Net.UnitTest.Structure
         }
 
         [Fact]
-        public void Equals_LabelsNotEqual_ReturnFalse()
+        public void ShouldReturnFalseForEqualsOfPathsWithDifferentLabels()
         {
             var firstPath =
                 new Path(
@@ -130,7 +130,7 @@ namespace Gremlin.Net.UnitTest.Structure
         }
 
         [Fact]
-        public void Equals_ObjectsNotEqual_ReturnFalse()
+        public void ShouldReturnFalseForEqualsOfPathsWithDifferentObjects()
         {
             var firstPath =
                 new Path(
@@ -155,7 +155,7 @@ namespace Gremlin.Net.UnitTest.Structure
         }
 
         [Fact]
-        public void EqualsObject_EqualPath_ReturnTrue()
+        public void ShouldReturnTrueForEqualsObjectOfTwoEqualPaths()
         {
             var firstPath =
                 new Path(
@@ -180,7 +180,7 @@ namespace Gremlin.Net.UnitTest.Structure
         }
 
         [Fact]
-        public void EqualsObject_LabelsNotEqual_ReturnFalse()
+        public void ShouldReturnFalseForEqualsObjectOfPathsWithDifferentLabels()
         {
             var firstPath =
                 new Path(
@@ -205,7 +205,7 @@ namespace Gremlin.Net.UnitTest.Structure
         }
 
         [Fact]
-        public void EqualsObject_ObjectsNotEqual_ReturnFalse()
+        public void ShouldReturnFalseForEqualsObjectOfPathsWithDifferentObjects()
         {
             var firstPath =
                 new Path(
@@ -230,7 +230,7 @@ namespace Gremlin.Net.UnitTest.Structure
         }
 
         [Fact]
-        public void Equals_OtherIsNull_ReturnFalse()
+        public void ShouldReturnFalseForEqualsWhereOtherIsNull()
         {
             var path = new Path(new List<List<string>> {new List<string> {"a", "b"},}, new List<object> {1});
 
@@ -240,7 +240,7 @@ namespace Gremlin.Net.UnitTest.Structure
         }
 
         [Fact]
-        public void GetHashCode_EqualPaths_EqualHashCodes()
+        public void ShouldReturnEqualHashcodesForEqualPaths()
         {
             var firstPath =
                 new Path(
@@ -266,7 +266,7 @@ namespace Gremlin.Net.UnitTest.Structure
         }
 
         [Fact]
-        public void IndexAccessor_InvalidIndex_Throw()
+        public void ShouldThrowWhenInvalidIndexIsAccessed()
         {
             var objects = new List<object> {1, new Vertex(1), "hello"};
             var path = new Path(new List<List<string>>(), objects);
@@ -275,7 +275,7 @@ namespace Gremlin.Net.UnitTest.Structure
         }
 
         [Fact]
-        public void IndexAccessor_ValidIndices_ReturnObjects()
+        public void ShouldReturnObjectsByTheirIndex()
         {
             var objects = new List<object> {1, new Vertex(1), "hello"};
             var path = new Path(new List<List<string>>(), objects);
@@ -286,7 +286,7 @@ namespace Gremlin.Net.UnitTest.Structure
         }
 
         [Fact]
-        public void KeyAccessor_KeyWithMultipleObjects_ReturnObjects()
+        public void ShouldReturnAllObjectsWhenTheirKeyIsAccessed()
         {
             var labels = new List<List<string>>
             {
@@ -303,7 +303,7 @@ namespace Gremlin.Net.UnitTest.Structure
         }
 
         [Fact]
-        public void KeyAccessor_OneObjectPerKey_ReturnCorrectObject()
+        public void ShouldReturnObjectsByTheirKey()
         {
             var labels = new List<List<string>>
             {
@@ -320,7 +320,7 @@ namespace Gremlin.Net.UnitTest.Structure
         }
 
         [Fact]
-        public void KeyAccessor_UnknownKey_Throw()
+        public void ShouldThrowWhenUnknownKeyIsAccessed()
         {
             var path = new Path(new List<List<string>>(), new List<object>());
 
@@ -328,7 +328,7 @@ namespace Gremlin.Net.UnitTest.Structure
         }
 
         [Fact]
-        public void ToString_PathWithVariousObjects_CommonRepresentation()
+        public void ShouldReturnCommonStringRepresentationForToString()
         {
             var labels = new List<List<string>>
             {
@@ -345,7 +345,7 @@ namespace Gremlin.Net.UnitTest.Structure
         }
 
         [Fact]
-        public void TryGetValue_KeyWithMultipleObjects_ReturnTrueAndObjects()
+        public void ShouldReturnTrueAndObjectsForTryGetWhenKeyWithMultipleObjectsIsProvided()
         {
             var labels = new List<List<string>>
             {
@@ -364,7 +364,7 @@ namespace Gremlin.Net.UnitTest.Structure
         }
 
         [Fact]
-        public void TryGetValue_OneObjectPerKey_ReturnTrueAndCorrectObject()
+        public void ShouldReturnTrueAndCorrectObjectForTryGet()
         {
             var labels = new List<List<string>>
             {
@@ -383,7 +383,7 @@ namespace Gremlin.Net.UnitTest.Structure
         }
 
         [Fact]
-        public void TryGetValue_UnknownKey_ReturnFalse()
+        public void ShouldReturnFalseForTryGetWhenUnknownKeyIsProvided()
         {
             var path = new Path(new List<List<string>>(), new List<object>());
 

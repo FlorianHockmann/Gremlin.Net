@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Gremlin.Net.Process.Traversal;
 using Gremlin.Net.Structure.IO.GraphSON;
-using Newtonsoft.Json.Linq;
 using Xunit;
 
 namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
@@ -14,7 +13,7 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
         }
 
         [Fact]
-        public void NestedTraversalSerializationTest()
+        public void ShouldSerializeByteCodeWithNestedTraversal()
         {
             var bytecode = new Bytecode();
             bytecode.AddStep("V");
@@ -32,7 +31,7 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
         }
 
         [Fact]
-        public void NumberSerializationTest()
+        public void ShouldSerializeBytecodeWithNumbers()
         {
             var bytecode = new Bytecode();
             bytecode.AddStep("V", (long) 1);
@@ -48,7 +47,7 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
         }
 
         [Fact]
-        public void Serialize_g_V()
+        public void ShouldSerialize_g_V()
         {
             var bytecode = new Bytecode();
             bytecode.AddStep("V");
@@ -60,7 +59,7 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
         }
 
         [Fact]
-        public void Serialize_g_V_Count()
+        public void ShouldSerialize_g_V_Count()
         {
             var bytecode = new Bytecode();
             bytecode.AddStep("V");
@@ -74,7 +73,7 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
         }
 
         [Fact]
-        public void Serialize_g_V_HasXPerson_Name_GremlinX_Count()
+        public void ShouldSerialize_g_V_HasXPerson_Name_GremlinX_Count()
         {
             var bytecode = new Bytecode();
             bytecode.AddStep("V");
@@ -90,16 +89,7 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
         }
 
         [Fact]
-        public void SimpleDeserializeTest()
-        {
-            dynamic d = JObject.Parse("{\"@type\":\"g:Traverser\",\"@value\":1}");
-
-            Assert.NotNull(d);
-            Assert.Equal("g:Traverser", (string) d["@type"]);
-        }
-
-        [Fact]
-        public void SourceStepSerializationTest()
+        public void ShouldSerializeBytecodeWithSourcesStep()
         {
             var bytecode = new Bytecode();
             bytecode.AddSource("withSideEffect", "a", new List<string> {"josh", "peter"});
@@ -116,7 +106,7 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
         }
 
         [Fact]
-        public void TraversalWithBindingsSerializationTest()
+        public void ShouldSerializeBytecodeWithBindings()
         {
             var bytecode = new Bytecode();
             bytecode.AddStep("V", new Binding("id", 123));

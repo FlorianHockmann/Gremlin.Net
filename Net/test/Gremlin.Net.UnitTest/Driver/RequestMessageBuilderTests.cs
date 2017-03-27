@@ -24,10 +24,10 @@ using Xunit;
 
 namespace Gremlin.Net.UnitTest.Driver
 {
-    public class MessagesTests
+    public class RequestMessageBuilderTests
     {
         [Fact]
-        public void RequestIdsShouldBeUnique()
+        public void ShouldUseUniqueRequestIds()
         {
             var firstMsg = RequestMessage.Build(Tokens.OpsEval).Create();
             var secondMsg = RequestMessage.Build(Tokens.OpsEval).Create();

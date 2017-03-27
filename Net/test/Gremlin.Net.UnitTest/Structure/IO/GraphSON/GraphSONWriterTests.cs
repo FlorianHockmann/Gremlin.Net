@@ -16,7 +16,7 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
         }
 
         [Fact]
-        public void NumberConverter_WriteInt_ToInt32GraphSon()
+        public void ShouldSerializeInt()
         {
             var writer = CreateStandardGraphSONWriter();
 
@@ -26,7 +26,7 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
         }
 
         [Fact]
-        public void NumberConverter_WriteLong_ToInt64GraphSon()
+        public void ShouldSerializeLong()
         {
             var writer = CreateStandardGraphSONWriter();
 
@@ -36,7 +36,7 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
         }
 
         [Fact]
-        public void NumberConverter_WriteFloat_ToFloatGraphSon()
+        public void ShouldSerializeFloat()
         {
             var writer = CreateStandardGraphSONWriter();
 
@@ -46,7 +46,7 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
         }
 
         [Fact]
-        public void NumberConverter_WriteDouble_ToDoubleGraphSon()
+        public void ShouldSerializeDouble()
         {
             var writer = CreateStandardGraphSONWriter();
 
@@ -56,7 +56,7 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
         }
 
         [Fact]
-        public void GraphSonWriter_WriteBoolean_ToUntypedValueString()
+        public void ShouldSerializeBoolean()
         {
             var writer = CreateStandardGraphSONWriter();
 
@@ -66,7 +66,7 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
         }
 
         [Fact]
-        public void ArraySerializationTest()
+        public void ShouldSerializeArray()
         {
             var writer = CreateStandardGraphSONWriter();
             var array = new[] {5, 6};
@@ -78,7 +78,7 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
         }
 
         [Fact]
-        public void BindingWriter_WriteBinding_ToGraphSON()
+        public void ShouldSerializeBinding()
         {
             var writer = CreateStandardGraphSONWriter();
             var binding = new Binding("theKey", 123);
@@ -91,7 +91,7 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
         }
 
         [Fact]
-        public void CustomSerializationTest()
+        public void ShouldSerializeWithCustomSerializerForNewType()
         {
             var customSerializerByType = new Dictionary<Type, IGraphSONSerializer>
             {
@@ -106,7 +106,7 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
         }
 
         [Fact]
-        public void GraphSonWriter_CustomSerializerForCommonType_OverwriteDefaultSerializer()
+        public void ShouldSerializeWithCustomSerializerForCommonType()
         {
             var customSerializerMock = new Mock<IGraphSONSerializer>();
             var customSerializerByType = new Dictionary<Type, IGraphSONSerializer>
@@ -121,7 +121,7 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
         }
 
         [Fact]
-        public void DateWriter_WriteDatetime_ToGraphSON()
+        public void ShouldSerializeDateTime()
         {
             var writer = CreateStandardGraphSONWriter();
             var dateTime = TestUtils.FromJavaTime(1475583442552);
@@ -133,7 +133,7 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
         }
 
         [Fact]
-        public void DictionarySerializationTest()
+        public void ShouldSerializeDictionary()
         {
             var writer = CreateStandardGraphSONWriter();
             var dictionary = new Dictionary<string, dynamic>
@@ -149,7 +149,7 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
         }
 
         [Fact]
-        public void EdgeWriter_WriteEdge_ToGraphSON()
+        public void ShouldSerializeEdge()
         {
             var writer = CreateStandardGraphSONWriter();
             var edge = new Edge(7, new Vertex(0, "person"), "knows", new Vertex(1, "dog"));
@@ -162,7 +162,7 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
         }
 
         [Fact]
-        public void EnumSerializationTest()
+        public void ShouldSerializeEnum()
         {
             var writer = CreateStandardGraphSONWriter();
 
@@ -173,7 +173,7 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
         }
 
         [Fact]
-        public void ListSerializationTest()
+        public void ShouldSerializeList()
         {
             var writer = CreateStandardGraphSONWriter();
             var list = new List<int> {5, 6};
@@ -185,7 +185,7 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
         }
 
         [Fact]
-        public void PredicateSerializationTest()
+        public void ShouldSerializePredicateWithTwoValues()
         {
             var writer = CreateStandardGraphSONWriter();
             var predicate = new TraversalPredicate("within", new List<int> {1, 2});
@@ -198,7 +198,7 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
         }
 
         [Fact]
-        public void PredicateWithSingleValueSerializationTest()
+        public void ShouldSerializePredicateWithSingleValue()
         {
             var writer = CreateStandardGraphSONWriter();
             var predicate = new TraversalPredicate("lt", 5);
@@ -211,7 +211,7 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
         }
 
         [Fact]
-        public void PropertyWriter_WritePropertyWithEdgeElement_ToGraphSON()
+        public void ShouldSerializePropertyWithEdgeElement()
         {
             var writer = CreateStandardGraphSONWriter();
             var property = new Property("aKey", "aValue", new Edge("anId", new Vertex(1), "edgeLabel", new Vertex(2)));
@@ -224,7 +224,7 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
         }
 
         [Fact]
-        public void PropertyWriter_WritePropertyWithVertexPropertyElement_ToGraphSON()
+        public void ShouldSerializePropertyWithVertexPropertyElement()
         {
             var writer = CreateStandardGraphSONWriter();
             var property = new Property("name", "marko",
@@ -238,19 +238,7 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
         }
 
         [Fact]
-        public void UuidWriter_WriteGuid_ToGraphSON()
-        {
-            var writer = CreateStandardGraphSONWriter();
-            var guid = Guid.Parse("41d2e28a-20a4-4ab0-b379-d810dede3786");
-
-            var graphSon = writer.WriteObject(guid);
-
-            const string expected = "{\"@type\":\"g:UUID\",\"@value\":\"41d2e28a-20a4-4ab0-b379-d810dede3786\"}";
-            Assert.Equal(expected, graphSon);
-        }
-
-        [Fact]
-        public void VertexPropertyWriter_WriteVertexProperty_ToGraphSON()
+        public void ShouldSerializeVertexProperty()
         {
             var writer = CreateStandardGraphSONWriter();
             var vertexProperty = new VertexProperty("blah", "keyA", true, new Vertex("stephen"));
@@ -263,7 +251,19 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
         }
 
         [Fact]
-        public void VertexWriter_WriteSimpleVertex_ToGraphSON()
+        public void ShouldSerializeGuid()
+        {
+            var writer = CreateStandardGraphSONWriter();
+            var guid = Guid.Parse("41d2e28a-20a4-4ab0-b379-d810dede3786");
+
+            var graphSon = writer.WriteObject(guid);
+
+            const string expected = "{\"@type\":\"g:UUID\",\"@value\":\"41d2e28a-20a4-4ab0-b379-d810dede3786\"}";
+            Assert.Equal(expected, graphSon);
+        }
+
+        [Fact]
+        public void ShouldSerializeVertex()
         {
             var writer = CreateStandardGraphSONWriter();
             var vertex = new Vertex(45.23f);
@@ -276,7 +276,7 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
         }
 
         [Fact]
-        public void VertexWriter_WriteVertexWithLabel_ToGraphSON()
+        public void ShouldSerializeVertexWithLabel()
         {
             var writer = CreateStandardGraphSONWriter();
             var vertex = new Vertex((long) 123, "project");

@@ -6,7 +6,7 @@ namespace Gremlin.Net.Process.UnitTest.Traversal
     public class TraverserTests
     {
         [Fact]
-        public void Equals_OtherIsNull_ReturnFalse()
+        public void ShouldReturnFalseForEqualsWhereOtherIsNull()
         {
             var traverser = new Traverser("anObject");
 
@@ -16,7 +16,7 @@ namespace Gremlin.Net.Process.UnitTest.Traversal
         }
 
         [Fact]
-        public void Equals_SameObjectDifferentBulk_ReturnTrue()
+        public void ShouldReturnTrueForEqualsWithSameObjectAndDifferentBulk()
         {
             var firstTraverser = new Traverser("anObject", 1234);
             var secondTraverser = new Traverser("anObject", 9876);
@@ -27,7 +27,7 @@ namespace Gremlin.Net.Process.UnitTest.Traversal
         }
 
         [Fact]
-        public void EqualsObject_SameObjectDifferentBulk_ReturnTrue()
+        public void ShouldReturnTrueForEqualsObjectWithSameObjectAndDifferentBulk()
         {
             var firstTraverser = new Traverser("anObject", 1234);
             object secondTraverser = new Traverser("anObject", 9876);
@@ -38,7 +38,7 @@ namespace Gremlin.Net.Process.UnitTest.Traversal
         }
 
         [Fact]
-        public void GetHashCode_SameObjectDifferentBulk_EqualHashCodes()
+        public void ShouldReturnEqualHashcodesForTraversersWithSameObjectAndDifferentBulk()
         {
             var firstTraverser = new Traverser("anObject", 1234);
             var secondTraverser = new Traverser("anObject", 9876);

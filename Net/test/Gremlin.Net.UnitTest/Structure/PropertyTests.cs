@@ -6,7 +6,7 @@ namespace Gremlin.Net.UnitTest.Structure
     public class PropertyTests
     {
         [Fact]
-        public void Constructor_ValidArguments_InitializeProperties()
+        public void ShouldAssignPropertiesCorrectly()
         {
             const string key = "age";
             const int value = 29;
@@ -20,7 +20,7 @@ namespace Gremlin.Net.UnitTest.Structure
         }
 
         [Fact]
-        public void Equals_EqualProperty_ReturnsTrue()
+        public void ShouldReturnTrueForEqualsOfTwoEqualProperties()
         {
             var firstProperty = new Property("age", 29, new Vertex(1));
             var secondProperty = new Property("age", 29, new Vertex(1));
@@ -31,7 +31,7 @@ namespace Gremlin.Net.UnitTest.Structure
         }
 
         [Fact]
-        public void Equals_OtherIsNull_ReturnsFalse()
+        public void ShouldReturnFalseForEqualsWhereOtherIsNull()
         {
             var property = new Property("age", 29, new Vertex(1));
 
@@ -41,7 +41,7 @@ namespace Gremlin.Net.UnitTest.Structure
         }
 
         [Fact]
-        public void Equals_DifferentKey_ReturnsFalse()
+        public void ShouldReturnFalseForEqualsOfPropertiesWithDifferentKeys()
         {
             var firstProperty = new Property("age", 29, new Vertex(1));
             var secondProperty = new Property("aDifferentKey", 29, new Vertex(1));
@@ -52,7 +52,7 @@ namespace Gremlin.Net.UnitTest.Structure
         }
 
         [Fact]
-        public void Equals_DifferentValue_ReturnsFalse()
+        public void ShouldReturnFalseForEqualsOfPropertiesWithDifferentValues()
         {
             var firstProperty = new Property("age", 29, new Vertex(1));
             var secondProperty = new Property("age", 12, new Vertex(1));
@@ -63,7 +63,7 @@ namespace Gremlin.Net.UnitTest.Structure
         }
 
         [Fact]
-        public void Equals_DifferentElement_ReturnsFalse()
+        public void ShouldReturnFalseForEqualsOfPropertiesWithDifferentElements()
         {
             var firstProperty = new Property("age", 29, new Vertex(1));
             var secondProperty = new Property("age", 29, new Vertex(1234));
@@ -74,7 +74,7 @@ namespace Gremlin.Net.UnitTest.Structure
         }
 
         [Fact]
-        public void EqualsObject_EqualProperty_ReturnsTrue()
+        public void ShouldReturnTrueForEqualsObjectOfTwoEqualProperties()
         {
             var firstProperty = new Property("age", 29, new Vertex(1));
             object secondProperty = new Property("age", 29, new Vertex(1));
@@ -85,7 +85,7 @@ namespace Gremlin.Net.UnitTest.Structure
         }
 
         [Fact]
-        public void EqualsObject_DifferentKey_ReturnsFalse()
+        public void ShouldReturnFalseForEqualsObjectOfPropertiesWithDifferentKeys()
         {
             var firstProperty = new Property("age", 29, new Vertex(1));
             object secondProperty = new Property("aDifferentKey", 29, new Vertex(1));
@@ -96,7 +96,7 @@ namespace Gremlin.Net.UnitTest.Structure
         }
 
         [Fact]
-        public void EqualsObject_DifferentValue_ReturnsFalse()
+        public void ShouldReturnFalseForEqualsObjectOfPropertiesWithDifferentValues()
         {
             var firstProperty = new Property("age", 29, new Vertex(1));
             object secondProperty = new Property("age", 12, new Vertex(1));
@@ -107,7 +107,7 @@ namespace Gremlin.Net.UnitTest.Structure
         }
 
         [Fact]
-        public void EqualsObject_DifferentElement_ReturnsFalse()
+        public void ShouldReturnFalseForEqualsObjectOfPropertiesWithDifferentElements()
         {
             var firstProperty = new Property("age", 29, new Vertex(1));
             object secondProperty = new Property("age", 29, new Vertex(1234));
@@ -118,7 +118,7 @@ namespace Gremlin.Net.UnitTest.Structure
         }
 
         [Fact]
-        public void GetHashCode_EqualProperty_EqualHashCodes()
+        public void ShouldReturnEqualHashcodesForEqualProperties()
         {
             var firstProperty = new Property("age", 29, new Vertex(1));
             var secondProperty = new Property("age", 29, new Vertex(1));
@@ -130,7 +130,7 @@ namespace Gremlin.Net.UnitTest.Structure
         }
 
         [Fact]
-        public void ToString_SimpleVertexProperty_CommonEdgeRepresentation()
+        public void ShouldReturnCommonStringRepresentationForToString()
         {
             var property = new Property("age", 29, new Vertex(1));
 

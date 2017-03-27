@@ -13,7 +13,7 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
         }
 
         [Fact]
-        public void WriteObject_SubgraphStrategyWithoutValues_ExpectedGraphSON()
+        public void ShouldSerializeSubgraphStrategyWithoutValues()
         {
             var subgraphStrategy = new SubgraphStrategy();
             var writer = CreateGraphSONWriter();
@@ -25,7 +25,7 @@ namespace Gremlin.Net.UnitTest.Structure.IO.GraphSON
         }
 
         [Fact]
-        public void WriteObject_SubgraphStrategyWithVertexCriterion_ExpectedGraphSON()
+        public void ShouldDeserializeSubgraphStrategyWithVertexCriterion()
         {
             var vertexCriterionBytecode = new Bytecode();
             vertexCriterionBytecode.AddStep("has", "name", "marko");

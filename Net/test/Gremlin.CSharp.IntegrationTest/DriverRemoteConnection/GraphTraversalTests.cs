@@ -14,7 +14,7 @@ namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
         private readonly RemoteConnectionFactory _connectionFactory = new RemoteConnectionFactory();
 
         [Fact]
-        public void g_V_Count_Test()
+        public void g_V_Count()
         {
             var graph = new Graph();
             var connection = _connectionFactory.CreateRemoteConnection();
@@ -26,7 +26,7 @@ namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
         }
 
         [Fact]
-        public void g_VX1X_Next_Test()
+        public void g_VX1X_Next()
         {
             var graph = new Graph();
             var connection = _connectionFactory.CreateRemoteConnection();
@@ -39,7 +39,7 @@ namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
         }
 
         [Fact]
-        public void g_VX1X_NextTraverser_Test()
+        public void g_VX1X_NextTraverser()
         {
             var graph = new Graph();
             var connection = _connectionFactory.CreateRemoteConnection();
@@ -51,7 +51,7 @@ namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
         }
 
         [Fact]
-        public void g_VX1X_ToList_Test()
+        public void g_VX1X_ToList()
         {
             var graph = new Graph();
             var connection = _connectionFactory.CreateRemoteConnection();
@@ -63,7 +63,7 @@ namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
         }
 
         [Fact]
-        public void Next_WithAmountArgument_AmountNrValues()
+        public void g_V_RepeatXBothX_TimesX5X_NextX10X()
         {
             var graph = new Graph();
             var connection = _connectionFactory.CreateRemoteConnection();
@@ -75,7 +75,7 @@ namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
         }
 
         [Fact]
-        public void GetValueMapTest()
+        public void g_V_HasXname_markoX_ValueMap_Next()
         {
             var graph = new Graph();
             var connection = _connectionFactory.CreateRemoteConnection();
@@ -92,7 +92,7 @@ namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
         }
 
         [Fact]
-        public void g_V_RepeatXOutX_TimesX2X_ValuesXNameX_Test()
+        public void g_V_RepeatXOutX_TimesX2X_ValuesXNameX()
         {
             var graph = new Graph();
             var connection = _connectionFactory.CreateRemoteConnection();
@@ -104,27 +104,6 @@ namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
             Assert.Equal((long) 2, names.Count);
             Assert.Contains("lop", names);
             Assert.Contains("ripple", names);
-        }
-
-        [Fact]
-        public void WithSideEffect_TraversalUsingSideEffects_IncludeInResults()
-        {
-            var graph = new Graph();
-            var connection = _connectionFactory.CreateRemoteConnection();
-            var g = graph.Traversal().WithRemote(connection);
-
-            var results =
-                g.WithSideEffect("a", new List<string> {"josh", "peter"})
-                    .V(1)
-                    .Out("created")
-                    .In("created")
-                    .Values("name")
-                    .Where(P.Within("a"))
-                    .ToList();
-
-            Assert.Equal(2, results.Count);
-            Assert.Contains("josh", results);
-            Assert.Contains("peter", results);
         }
 
         [Fact]
@@ -142,7 +121,7 @@ namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
         }
 
         [Fact]
-        public void TraversalWithBindingsTest()
+        public void ShouldUseBindingsInTraversal()
         {
             var graph = new Graph();
             var connection = _connectionFactory.CreateRemoteConnection();
@@ -155,7 +134,7 @@ namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
         }
 
         [Fact]
-        public async Task g_V_Count_PromiseXNextX_Test()
+        public async Task ShouldExecuteAsynchronouslyWhenPromiseIsCalled()
         {
             var graph = new Graph();
             var connection = _connectionFactory.CreateRemoteConnection();

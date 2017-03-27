@@ -7,7 +7,7 @@ namespace Gremlin.CSharp.IntegrationTest
     public class GraphSONWriterTests
     {
         [Fact]
-        public void LongPredicateSerializationTest()
+        public void ShouldSerializeLongPredicateCorrectly()
         {
             var writer = CreateStandardGraphSONWriter();
             var predicate = P.Lt("b").Or(P.Gt("c")).And(P.Neq("d"));

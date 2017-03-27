@@ -8,7 +8,7 @@ namespace Gremlin.Net.Process.UnitTest.Traversal.Strategy
     public class StrategyTests
     {
         [Fact]
-        public void Equals_DifferentStrategyNames_ReturnFalse()
+        public void ShouldReturnFalseForEqualsOfStrategiesWithDifferentStrategyNames()
         {
             var firstStrategy = new TestStrategy("aConfigKey", "aConfigValue");
             var secondStrategy = new IncidentToAdjacentStrategy();
@@ -19,7 +19,7 @@ namespace Gremlin.Net.Process.UnitTest.Traversal.Strategy
         }
 
         [Fact]
-        public void Equals_EqualStrategyNameDifferentConfiguration_ReturnTrue()
+        public void ShouldReturnTrueForEqualsOfStrategiesWithEqualNamesButDifferentConfigurations()
         {
             var firstStrategy = new TestStrategy("aConfigKey", "aConfigValue");
             var secondStrategy = new TestStrategy("anotherKey", "anotherValue");
@@ -30,7 +30,7 @@ namespace Gremlin.Net.Process.UnitTest.Traversal.Strategy
         }
 
         [Fact]
-        public void GetHashCode_DifferentNameDifferentConfiguration_DifferentHashCode()
+        public void ShouldReturnDifferentHashcodesForStrategiesWithDifferentNames()
         {
             var firstStrategy = new TestStrategy();
             var secondStrategy = new ReadOnlyStrategy();
@@ -42,7 +42,7 @@ namespace Gremlin.Net.Process.UnitTest.Traversal.Strategy
         }
 
         [Fact]
-        public void GetHashCode_EqualStrategyNameDifferentConfiguration_SameHashCode()
+        public void ShouldReturnEqualHashcodesForStrategiesWithEqualNamesButDifferentConfigurations()
         {
             var firstStrategy = new TestStrategy("aConfigKey", "aConfigValue");
             var secondStrategy = new TestStrategy("anotherKey", "anotherValue");
@@ -54,7 +54,7 @@ namespace Gremlin.Net.Process.UnitTest.Traversal.Strategy
         }
 
         [Fact]
-        public void StrategyName_TestStrategy_ClassName()
+        public void ShouldReturnClassNameForStrategyNameProperty()
         {
             var testStrategy = new TestStrategy();
 
@@ -62,7 +62,7 @@ namespace Gremlin.Net.Process.UnitTest.Traversal.Strategy
         }
 
         [Fact]
-        public void ToString_TestStrategy_StrategyName()
+        public void ShouldReturnStrategyNameWhenForToString()
         {
             var testStrategy = new TestStrategy();
 

@@ -10,7 +10,7 @@ namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
         private readonly RemoteConnectionFactory _connectionFactory = new RemoteConnectionFactory();
 
         [Fact]
-        public void WithSideEffects_ListAsSideEffect_IncludeInBytecode()
+        public void ShouldUseSideEffectSpecifiedInWithSideEffect()
         {
             var graph = new Graph();
             var connection = _connectionFactory.CreateRemoteConnection();

@@ -28,7 +28,7 @@ namespace Gremlin.Net.UnitTest.Driver
         [Theory]
         [InlineData("localhost", 8182)]
         [InlineData("1.2.3.4", 5678)]
-        public void BuildCorrectUri(string host, int port)
+        public void ShouldBuildCorrectUri(string host, int port)
         {
             var gremlinServer = new GremlinServer(host, port);
 
@@ -38,7 +38,7 @@ namespace Gremlin.Net.UnitTest.Driver
         }
 
         [Fact]
-        public void BuildCorrectUriForSsl()
+        public void ShouldBuildCorrectUriForSsl()
         {
             var host = "localhost";
             var port = 8181;
@@ -50,7 +50,7 @@ namespace Gremlin.Net.UnitTest.Driver
         }
 
         [Fact]
-        public void UseCorrectDefaultPortIfNoneProvided()
+        public void ShouldUseCorrectDefaultPortWhenNoneProvided()
         {
             var host = "testHost";
             var gremlinServer = new GremlinServer(host);

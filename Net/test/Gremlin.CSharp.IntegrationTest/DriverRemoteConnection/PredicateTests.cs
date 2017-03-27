@@ -9,7 +9,7 @@ namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
         private readonly RemoteConnectionFactory _connectionFactory = new RemoteConnectionFactory();
 
         [Fact]
-        public void PredicateAndTest()
+        public void ShouldUsePredicatesCombinedWithPAndInHasStep()
         {
             var graph = new Graph();
             var connection = _connectionFactory.CreateRemoteConnection();
@@ -21,7 +21,7 @@ namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
         }
 
         [Fact]
-        public void SimplePWithinTest()
+        public void ShouldUsePWithinInHasStep()
         {
             var graph = new Graph();
             var connection = _connectionFactory.CreateRemoteConnection();

@@ -6,7 +6,7 @@ namespace Gremlin.CSharp.UnitTest
     public class GraphTraversalSourceTests
     {
         [Fact]
-        public void BytecodeShouldBeIndependentFromReturnedGraphTraversal()
+        public void ShouldBeIndependentFromReturnedGraphTraversalModififyingBytecode()
         {
             var graph = new Graph();
             var g = graph.Traversal();
@@ -18,7 +18,7 @@ namespace Gremlin.CSharp.UnitTest
         }
 
         [Fact]
-        public void BytecodeShouldBeIndependentFromReturnedGraphTraversalSource()
+        public void ShouldBeIndependentFromReturnedGraphTraversalSourceModififyingBytecode()
         {
             var graph = new Graph();
             var g1 = graph.Traversal();
@@ -31,7 +31,7 @@ namespace Gremlin.CSharp.UnitTest
         }
 
         [Fact]
-        public void TraversalStrategiesShouldBeIndependentFromReturnedGraphTraversalSource()
+        public void ShouldBeIndependentFromReturnedGraphTraversalSourceModififyingTraversalStrategies()
         {
             var graph = new Graph();
             var gLocal = graph.Traversal();

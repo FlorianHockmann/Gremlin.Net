@@ -6,7 +6,7 @@ namespace Gremlin.Net.UnitTest.Structure
     public class VertexPropertyTests
     {
         [Fact]
-        public void Constructor_ValidArguments_InitializeProperties()
+        public void ShouldAssignPropertiesCorrectly()
         {
             const long id = 24;
             const string label = "name";
@@ -23,7 +23,7 @@ namespace Gremlin.Net.UnitTest.Structure
         }
 
         [Fact]
-        public void Equals_EqualVertexProperty_ReturnsTrue()
+        public void ShouldReturnTrueForEqualsOfTwoEqualVertexProperties()
         {
             var firstVertexProperty = new VertexProperty((long) 24, "name", "marko", new Vertex(1));
             var secondVertexProperty = new VertexProperty((long) 24, "name", "marko", new Vertex(1));
@@ -34,7 +34,7 @@ namespace Gremlin.Net.UnitTest.Structure
         }
 
         [Fact]
-        public void ToString_VertexProperty_CommonVertexPropertyRepresentation()
+        public void ShouldReturnCommonStringRepresentationForToString()
         {
             var vertexProperty = new VertexProperty((long) 24, "name", "marko", new Vertex(1));
 

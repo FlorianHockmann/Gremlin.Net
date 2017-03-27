@@ -44,7 +44,7 @@ namespace Gremlin.Net.IntegrationTest.Driver
         }
 
         [Fact]
-        public async Task ConnectionShouldBeReusedForSequentialRequests()
+        public async Task ShouldReuseConnectionForSequentialRequests()
         {
             var gremlinServer = new GremlinServer(TestHost, TestPort);
             using (var gremlinClient = new GremlinClient(gremlinServer))
@@ -58,7 +58,7 @@ namespace Gremlin.Net.IntegrationTest.Driver
         }
 
         [Fact]
-        public void ConnectionShouldOnlyBeCreatedIfNeeded()
+        public void ShouldOnlyCreateConnectionWhenNecessary()
         {
             var gremlinServer = new GremlinServer(TestHost, TestPort);
             using (var gremlinClient = new GremlinClient(gremlinServer))
@@ -69,7 +69,7 @@ namespace Gremlin.Net.IntegrationTest.Driver
         }
 
         [Fact]
-        public async Task ParallelRequestsShouldBeExecutedOnDifferentConnections()
+        public async Task ShouldExecuteParallelRequestsOnDifferentConnections()
         {
             var gremlinServer = new GremlinServer(TestHost, TestPort);
             using (var gremlinClient = new GremlinClient(gremlinServer))

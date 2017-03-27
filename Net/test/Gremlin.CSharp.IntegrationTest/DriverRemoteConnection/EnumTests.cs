@@ -10,7 +10,7 @@ namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
         private readonly RemoteConnectionFactory _connectionFactory = new RemoteConnectionFactory();
 
         [Fact]
-        public void OrderTest()
+        public void ShouldUseOrderDecrInByStep()
         {
             var graph = new Graph();
             var connection = _connectionFactory.CreateRemoteConnection();
@@ -22,7 +22,7 @@ namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
         }
 
         [Fact]
-        public void SimpleTLabelTest()
+        public void ShouldUseTLabelInHasStep()
         {
             var graph = new Graph();
             var connection = _connectionFactory.CreateRemoteConnection();

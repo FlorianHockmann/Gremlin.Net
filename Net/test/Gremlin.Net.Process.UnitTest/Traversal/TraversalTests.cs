@@ -12,7 +12,7 @@ namespace Gremlin.Net.Process.UnitTest.Traversal
         [Theory]
         [InlineData(1)]
         [InlineData("test")]
-        public void NextShouldReturnAvailableTraverserObj(object traverserObj)
+        public void ShouldReturnAvailableTraverserObjWhenNextIsCalled(object traverserObj)
         {
             var traversal = new TestTraversal(new List<object> {traverserObj});
 
@@ -24,7 +24,7 @@ namespace Gremlin.Net.Process.UnitTest.Traversal
         [Theory]
         [InlineData(3)]
         [InlineData(10)]
-        public void NextShouldReturnCorrectNrOfResultObjs(int nrOfResults)
+        public void ShouldReturnCorrectNrOfResultObjsWhenNextIsCalledWithAmountArgument(int nrOfResults)
         {
             var objs = new List<object>(20);
             for (var i = 0; i < 20; i++)
@@ -49,7 +49,7 @@ namespace Gremlin.Net.Process.UnitTest.Traversal
         }
 
         [Fact]
-        public void IterateShouldDrainAllTraversers()
+        public void ShouldDrainAllTraversersWhenIterateIsCalled()
         {
             var someObjs = new List<object> {1, 2, 3};
             var traversal = new TestTraversal(someObjs);
@@ -60,7 +60,7 @@ namespace Gremlin.Net.Process.UnitTest.Traversal
         }
 
         [Fact]
-        public void NextShouldReturnNullWhenNoTraverserIsAvailable()
+        public void ShouldReturnNullWhenNextIsCalledAndNoTraverserIsAvailable()
         {
             var expectedFirstObj = 1;
             var traversal = new TestTraversal(new List<object> {expectedFirstObj});
@@ -73,7 +73,7 @@ namespace Gremlin.Net.Process.UnitTest.Traversal
         }
 
         [Fact]
-        public void NextTraverserTest()
+        public void ShouldReturnTraversalsTraverserWhenNextTraverserIsCalled()
         {
             var someObjs = new List<object> {1, 2, 3};
             var traversal = new TestTraversal(someObjs);
@@ -84,7 +84,7 @@ namespace Gremlin.Net.Process.UnitTest.Traversal
         }
 
         [Fact]
-        public void ResetShouldThrowNotSupportedException()
+        public void ShouldThrowNotSupportedExceptionWhenResetIsCalled()
         {
             var someObjs = new List<object> {1, 2, 3};
             var traversal = new TestTraversal(someObjs);
@@ -93,7 +93,7 @@ namespace Gremlin.Net.Process.UnitTest.Traversal
         }
 
         [Fact]
-        public void ToListShouldReturnAllTraverserObjs()
+        public void ShouldReturnAllTraverserObjsWhenToListIsCalled()
         {
             var expectedObjs = new List<object> {1, 2, 3};
             var traversal = new TestTraversal(expectedObjs);
@@ -104,7 +104,7 @@ namespace Gremlin.Net.Process.UnitTest.Traversal
         }
 
         [Fact]
-        public void TraversalShouldApplyStrategiesWhenNoTraversersPresent()
+        public void ShouldApplyStrategiesWhenNextIsCalledAndNoTraversersPresent()
         {
             const int expectedObj = 531;
             var testStrategy = new TestTraversalStrategy(new List<Traverser> {new Traverser(expectedObj)});
@@ -116,7 +116,7 @@ namespace Gremlin.Net.Process.UnitTest.Traversal
         }
 
         [Fact]
-        public void TraverserBulksShouldBeUnfolded()
+        public void ShouldBeUnfoldTraverserBulksWhenToListIsCalled()
         {
             var objs = new List<object> {1, 2, 3};
             var bulks = new List<long> {3, 2, 1};
@@ -129,7 +129,7 @@ namespace Gremlin.Net.Process.UnitTest.Traversal
         }
 
         [Fact]
-        public void Dispose_SetSideEffects_DisposeSideEffects()
+        public void ShouldDisposeSideEffectsWhenDisposeIsCalled()
         {
             var sideEffectsMock = new Mock<ITraversalSideEffects>();
             var traversal = new TestTraversal(new List<object>()) {SideEffects = sideEffectsMock.Object};

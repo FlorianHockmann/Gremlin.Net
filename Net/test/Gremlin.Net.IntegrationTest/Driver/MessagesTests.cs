@@ -37,7 +37,7 @@ namespace Gremlin.Net.IntegrationTest.Driver
         private static readonly int TestPort = Convert.ToInt32(ConfigProvider.Configuration["TestServerPort"]);
 
         [Fact]
-        public async Task AliasForTraversalSourceShouldBeUsed()
+        public async Task ShouldUseAliasForTraversalSource()
         {
             var gremlinServer = new GremlinServer(TestHost, TestPort);
             using (var gremlinClient = new GremlinClient(gremlinServer))
@@ -58,7 +58,7 @@ namespace Gremlin.Net.IntegrationTest.Driver
         }
 
         [Fact]
-        public async Task InvalidOperationShouldThrowException()
+        public async Task ShouldThrowForInvalidOperation()
         {
             var gremlinServer = new GremlinServer(TestHost, TestPort);
             using (var gremlinClient = new GremlinClient(gremlinServer))
@@ -75,7 +75,7 @@ namespace Gremlin.Net.IntegrationTest.Driver
         }
 
         [Fact]
-        public async Task InvalidProcessorShouldThrowException()
+        public async Task ShouldThrowForInvalidProcessor()
         {
             var gremlinServer = new GremlinServer(TestHost, TestPort);
             using (var gremlinClient = new GremlinClient(gremlinServer))
@@ -93,7 +93,7 @@ namespace Gremlin.Net.IntegrationTest.Driver
         }
 
         [Fact]
-        public async Task ScriptEvaluationTimeoutShouldBeConfigurable()
+        public async Task ShouldUseSpecifiedScriptEvaluationTimeout()
         {
             var gremlinServer = new GremlinServer(TestHost, TestPort);
             using (var gremlinClient = new GremlinClient(gremlinServer))
@@ -121,7 +121,7 @@ namespace Gremlin.Net.IntegrationTest.Driver
         }
 
         [Fact]
-        public async Task UnsupportedLanguageShouldThrowException()
+        public async Task ShouldThrowForUnsupportedLanguage()
         {
             var gremlinServer = new GremlinServer(TestHost, TestPort);
             using (var gremlinClient = new GremlinClient(gremlinServer))
