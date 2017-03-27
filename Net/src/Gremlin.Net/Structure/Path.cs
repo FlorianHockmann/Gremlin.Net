@@ -34,6 +34,13 @@ namespace Gremlin.Net.Structure
         /// </summary>
         public List<object> Objects { get; }
 
+        /// <summary>
+        ///     Gets the object associated with the particular label of the path.
+        /// </summary>
+        /// <remarks>If the path has multiple labels of the type, then get a collection of those objects.</remarks>
+        /// <param name="label">The label of the path</param>
+        /// <returns>The object associated with the label of the path</returns>
+        /// <exception cref="KeyNotFoundException">Thrown if the path does not contain the label.</exception>
         public object this[string label]
         {
             get
@@ -54,8 +61,16 @@ namespace Gremlin.Net.Structure
             return ObjectsEqual(other.Objects) && LabelsEqual(other.Labels);
         }
 
+        /// <summary>
+        ///     Get the object associated with the specified index into the path.
+        /// </summary>
+        /// <param name="index">The index of the path</param>
+        /// <returns>The object associated with the index of the path</returns>
         public dynamic this[int index] => Objects[index];
 
+        /// <summary>
+        ///     Gets the number of steps in the path.
+        /// </summary>
         public int Count => Objects.Count;
 
         /// <inheritdoc />
@@ -75,11 +90,23 @@ namespace Gremlin.Net.Structure
             return $"[{string.Join(", ", Objects)}]";
         }
 
+        /// <summary>
+        ///     Returns true if the path has the specified label, else return false.
+        /// </summary>
+        /// <param name="key">The label to search for.</param>
+        /// <returns>True if the label exists in the path.</returns>
         public bool ContainsKey(string key)
         {
             return Labels.Any(objLabels => objLabels.Contains(key));
         }
 
+        /// <summary>
+        ///     Tries to get the object associated with the particular label of the path.
+        /// </summary>
+        /// <remarks>If the path has multiple labels of the type, then get a collection of those objects.</remarks>
+        /// <param name="label">The label of the path.</param>
+        /// <param name="value">The object associated with the label of the path.</param>
+        /// <returns>True, if an object was found for the label.</returns>
         public bool TryGetValue(string label, out object value)
         {
             value = null;
