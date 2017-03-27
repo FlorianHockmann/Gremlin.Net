@@ -8,7 +8,7 @@ namespace Gremlin.Net.Driver.Messages
     /// </summary>
     public class RequestMessage
     {
-        internal RequestMessage(Guid requestId, string operation, string processor, Dictionary<string, object> arguments)
+        private RequestMessage(Guid requestId, string operation, string processor, Dictionary<string, object> arguments)
         {
             RequestId = requestId;
             Operation = operation;
@@ -46,75 +46,75 @@ namespace Gremlin.Net.Driver.Messages
         public Dictionary<string, object> Arguments { get; }
 
         /// <summary>
-        ///     Initializes a <see cref="RequestMessageBuilder" /> to build a <see cref="RequestMessage" />.
+        ///     Initializes a <see cref="Builder" /> to build a <see cref="RequestMessage" />.
         /// </summary>
         /// <param name="operation">The name of the OpProcessor to utilize.</param>
-        /// <returns>A <see cref="RequestMessageBuilder" /> to build a <see cref="RequestMessage" />.</returns>
-        public static RequestMessageBuilder Build(string operation)
+        /// <returns>A <see cref="Builder" /> to build a <see cref="RequestMessage" />.</returns>
+        public static Builder Build(string operation)
         {
-            return new RequestMessageBuilder(operation);
-        }
-    }
-
-    /// <summary>
-    ///     Allows to build <see cref="RequestMessage" /> objects.
-    /// </summary>
-    public class RequestMessageBuilder
-    {
-        private const string DefaultProcessor = "";
-        private readonly Dictionary<string, object> _arguments = new Dictionary<string, object>();
-        private readonly string _operation;
-        private string _processor = DefaultProcessor;
-        private Guid _requestId = Guid.NewGuid();
-
-        internal RequestMessageBuilder(string operation)
-        {
-            _operation = operation;
+            return new Builder(operation);
         }
 
         /// <summary>
-        ///     If this value is not set in the builder then the <see cref="RequestMessage.Processor" /> defaults to
-        ///     the standard op processor (empty string).
+        ///     Allows to build <see cref="RequestMessage" /> objects.
         /// </summary>
-        /// <param name="processor">The name of the processor.</param>
-        /// <returns>The <see cref="RequestMessageBuilder" />.</returns>
-        public RequestMessageBuilder Processor(string processor)
+        public class Builder
         {
-            _processor = processor;
-            return this;
-        }
+            private const string DefaultProcessor = "";
+            private readonly Dictionary<string, object> _arguments = new Dictionary<string, object>();
+            private readonly string _operation;
+            private string _processor = DefaultProcessor;
+            private Guid _requestId = Guid.NewGuid();
 
-        /// <summary>
-        ///     Overrides the request identifier with a specified one, otherwise the
-        ///     <see cref="RequestMessageBuilder" /> will randomly generate a <see cref="Guid" />.
-        /// </summary>
-        /// <param name="requestId">The request identifier to use.</param>
-        /// <returns>The <see cref="RequestMessageBuilder" />.</returns>
-        public RequestMessageBuilder OverrideRequestId(Guid requestId)
-        {
-            _requestId = requestId;
-            return this;
-        }
+            internal Builder(string operation)
+            {
+                _operation = operation;
+            }
 
-        /// <summary>
-        ///     Adds and argument to the <see cref="RequestMessage" />.
-        /// </summary>
-        /// <param name="key">The key of the argument.</param>
-        /// <param name="value">The value of the argument.</param>
-        /// <returns>The <see cref="RequestMessageBuilder" />.</returns>
-        public RequestMessageBuilder AddArgument(string key, object value)
-        {
-            _arguments.Add(key, value);
-            return this;
-        }
+            /// <summary>
+            ///     If this value is not set in the builder then the <see cref="RequestMessage.Processor" /> defaults to
+            ///     the standard op processor (empty string).
+            /// </summary>
+            /// <param name="processor">The name of the processor.</param>
+            /// <returns>The <see cref="Builder" />.</returns>
+            public Builder Processor(string processor)
+            {
+                _processor = processor;
+                return this;
+            }
 
-        /// <summary>
-        ///     Creates the <see cref="RequestMessage" /> given the settings provided to the <see cref="RequestMessageBuilder" />.
-        /// </summary>
-        /// <returns>The built <see cref="RequestMessage" />.</returns>
-        public RequestMessage Create()
-        {
-            return new RequestMessage(_requestId, _operation, _processor, _arguments);
+            /// <summary>
+            ///     Overrides the request identifier with a specified one, otherwise the
+            ///     <see cref="Builder" /> will randomly generate a <see cref="Guid" />.
+            /// </summary>
+            /// <param name="requestId">The request identifier to use.</param>
+            /// <returns>The <see cref="Builder" />.</returns>
+            public Builder OverrideRequestId(Guid requestId)
+            {
+                _requestId = requestId;
+                return this;
+            }
+
+            /// <summary>
+            ///     Adds and argument to the <see cref="RequestMessage" />.
+            /// </summary>
+            /// <param name="key">The key of the argument.</param>
+            /// <param name="value">The value of the argument.</param>
+            /// <returns>The <see cref="Builder" />.</returns>
+            public Builder AddArgument(string key, object value)
+            {
+                _arguments.Add(key, value);
+                return this;
+            }
+
+            /// <summary>
+            ///     Creates the <see cref="RequestMessage" /> given the settings provided to the <see cref="Builder" />.
+            /// </summary>
+            /// <returns>The built <see cref="RequestMessage" />.</returns>
+            public RequestMessage Create()
+            {
+                return new RequestMessage(_requestId, _operation, _processor, _arguments);
+            }
         }
     }
 }
