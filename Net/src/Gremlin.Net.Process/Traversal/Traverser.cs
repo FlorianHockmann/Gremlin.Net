@@ -18,21 +18,35 @@
 
 #endregion
 
-using System;
-
 namespace Gremlin.Net.Process.Traversal
 {
+    /// <summary>
+    ///     A traverser represents the current state of an object flowing through a <see cref="Traversal" />.
+    /// </summary>
     public class Traverser
     {
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="Traverser" /> class.
+        /// </summary>
+        /// <param name="obj">The object of the traverser.</param>
+        /// <param name="bulk">The number of traversers represented in this traverser.</param>
         public Traverser(dynamic obj, long bulk = 1)
         {
             Object = obj;
             Bulk = bulk;
         }
 
+        /// <summary>
+        ///     Gets the object of this traverser.
+        /// </summary>
         public dynamic Object { get; }
+
+        /// <summary>
+        ///     Gets the number of traversers represented in this traverser.
+        /// </summary>
         public long Bulk { get; internal set; }
 
+        /// <inheritdoc />
         public bool Equals(Traverser other)
         {
             if (ReferenceEquals(null, other)) return false;
@@ -40,6 +54,7 @@ namespace Gremlin.Net.Process.Traversal
             return Equals(Object, other.Object);
         }
 
+        /// <inheritdoc />
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
@@ -48,6 +63,7 @@ namespace Gremlin.Net.Process.Traversal
             return Equals((Traverser)obj);
         }
 
+        /// <inheritdoc />
         public override int GetHashCode()
         {
             return (Object != null ? Object.GetHashCode() : 0);
