@@ -19,19 +19,19 @@
         }
 
         /// <summary>
-        ///     Gets or sets the name of the predicate.
+        ///     Gets the name of the predicate.
         /// </summary>
-        public string OperatorName { get; set; }
+        public string OperatorName { get; }
 
         /// <summary>
-        ///     Gets or sets the value of the predicate.
+        ///     Gets the value of the predicate.
         /// </summary>
-        public dynamic Value { get; set; }
+        public dynamic Value { get; }
 
         /// <summary>
-        ///     Gets or sets an optional other predicate that is used as an argument for this predicate.
+        ///     Gets an optional other predicate that is used as an argument for this predicate.
         /// </summary>
-        public TraversalPredicate Other { get; set; }
+        public TraversalPredicate Other { get; }
 
         /// <summary>
         ///     Returns a composed predicate that represents a logical AND of this predicate and another.
