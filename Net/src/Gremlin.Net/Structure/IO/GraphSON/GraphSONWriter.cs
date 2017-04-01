@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using Gremlin.Net.Driver.Messages;
 using Gremlin.Net.Process.Traversal;
 using Gremlin.Net.Process.Traversal.Strategy;
@@ -16,8 +15,6 @@ namespace Gremlin.Net.Structure.IO.GraphSON
     /// </summary>
     public class GraphSONWriter
     {
-        private const string MimeType = "application/vnd.gremlin-v2.0+json";
-
         private readonly Dictionary<Type, IGraphSONSerializer> _serializerByType = new Dictionary
             <Type, IGraphSONSerializer>
             {
@@ -55,13 +52,6 @@ namespace Gremlin.Net.Structure.IO.GraphSON
         {
             foreach (var serializerAndType in customSerializerByType)
                 _serializerByType[serializerAndType.Key] = serializerAndType.Value;
-        }
-
-        internal byte[] SerializeMessage(RequestMessage message)
-        {
-            var payload = WriteObject(message);
-            var messageWithHeader = $"{(char) MimeType.Length}{MimeType}{payload}";
-            return Encoding.UTF8.GetBytes(messageWithHeader);
         }
 
         /// <summary>

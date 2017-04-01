@@ -20,12 +20,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Gremlin.Net.Driver.Messages;
 using Gremlin.Net.Driver.ResultsAggregation;
 using Gremlin.Net.Structure.IO.GraphSON;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Gremlin.Net.Driver
@@ -34,6 +32,7 @@ namespace Gremlin.Net.Driver
     {
         private readonly GraphSONReader _graphSONReader;
         private readonly GraphSONWriter _graphSONWriter;
+        private readonly JsonMessageSerializer _messageSerializer = new JsonMessageSerializer();
         private readonly Uri _uri;
         private readonly WebSocketConnection _webSocketConnection = new WebSocketConnection();
 
@@ -62,7 +61,8 @@ namespace Gremlin.Net.Driver
 
         private async Task SendAsync(RequestMessage message)
         {
-            var serializedMsg = _graphSONWriter.SerializeMessage(message);
+            var graphsonMsg = _graphSONWriter.WriteObject(message);
+            var serializedMsg = _messageSerializer.SerializeMessage(graphsonMsg);
             await _webSocketConnection.SendMessageAsync(serializedMsg).ConfigureAwait(false);
         }
 
@@ -75,8 +75,7 @@ namespace Gremlin.Net.Driver
             do
             {
                 var received = await _webSocketConnection.ReceiveMessageAsync().ConfigureAwait(false);
-                var responseStr = Encoding.UTF8.GetString(received);
-                var receivedMsg = JsonConvert.DeserializeObject<ResponseMessage<JToken>>(responseStr);
+                var receivedMsg = _messageSerializer.DeserializeMessage<ResponseMessage<JToken>>(received);
 
                 status = receivedMsg.Status;
                 status.ThrowIfStatusIndicatesError();
