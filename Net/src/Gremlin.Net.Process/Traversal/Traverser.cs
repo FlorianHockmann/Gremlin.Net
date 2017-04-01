@@ -60,13 +60,13 @@ namespace Gremlin.Net.Process.Traversal
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != GetType()) return false;
-            return Equals((Traverser)obj);
+            return Equals((Traverser) obj);
         }
 
         /// <inheritdoc />
         public override int GetHashCode()
         {
-            return (Object != null ? Object.GetHashCode() : 0);
+            return Object != null ? Object.GetHashCode() : 0;
         }
     }
 }

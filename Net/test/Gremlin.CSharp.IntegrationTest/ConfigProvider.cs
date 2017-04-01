@@ -30,7 +30,7 @@ namespace Gremlin.Net.IntegrationTest
             Configuration = GetConfig();
         }
 
-        public static IConfiguration Configuration { get; private set; }
+        public static IConfiguration Configuration { get; }
 
         private static IConfiguration GetConfig()
         {

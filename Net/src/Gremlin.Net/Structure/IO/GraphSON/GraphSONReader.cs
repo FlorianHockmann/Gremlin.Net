@@ -38,7 +38,10 @@ namespace Gremlin.Net.Structure.IO.GraphSON
         /// <summary>
         ///     Initializes a new instance of the <see cref="GraphSONReader" /> class.
         /// </summary>
-        /// <param name="deserializerByGraphSONType"><see cref="IGraphSONDeserializer" /> deserializers identified by their GraphSON type.</param>
+        /// <param name="deserializerByGraphSONType">
+        ///     <see cref="IGraphSONDeserializer" /> deserializers identified by their
+        ///     GraphSON type.
+        /// </param>
         public GraphSONReader(IReadOnlyDictionary<string, IGraphSONDeserializer> deserializerByGraphSONType)
         {
             foreach (var deserializerAndGraphSONType in deserializerByGraphSONType)

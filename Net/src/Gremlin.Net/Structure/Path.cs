@@ -9,8 +9,10 @@ namespace Gremlin.Net.Structure
     /// <summary>
     ///     A Path denotes a particular walk through a graph as defined by a <see cref="Traversal" />.
     /// </summary>
-    /// <remarks>In abstraction, any Path implementation maintains two lists: a list of sets of labels and a list of objects.
-    /// The list of labels are the labels of the steps traversed. The list of objects are the objects traversed.</remarks>
+    /// <remarks>
+    ///     In abstraction, any Path implementation maintains two lists: a list of sets of labels and a list of objects.
+    ///     The list of labels are the labels of the steps traversed. The list of objects are the objects traversed.
+    /// </remarks>
     public class Path : IReadOnlyList<object>, IEquatable<Path>
     {
         /// <summary>

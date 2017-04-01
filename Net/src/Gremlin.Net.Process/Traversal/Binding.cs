@@ -10,8 +10,8 @@ namespace Gremlin.Net.Process.Traversal
         /// <summary>
         ///     Initializes a new instance of the <see cref="Binding" /> class.
         /// </summary>
-        /// <param name="key">The key that identifies the <see cref="Binding"/>.</param>
-        /// <param name="value">The value of the <see cref="Binding"/>.</param>
+        /// <param name="key">The key that identifies the <see cref="Binding" />.</param>
+        /// <param name="value">The value of the <see cref="Binding" />.</param>
         public Binding(string key, object value)
         {
             Key = key;
@@ -19,12 +19,12 @@ namespace Gremlin.Net.Process.Traversal
         }
 
         /// <summary>
-        ///     Gets the key that identifies the <see cref="Binding"/>.
+        ///     Gets the key that identifies the <see cref="Binding" />.
         /// </summary>
         public string Key { get; }
 
         /// <summary>
-        ///     Gets the value of the <see cref="Binding"/>.
+        ///     Gets the value of the <see cref="Binding" />.
         /// </summary>
         public object Value { get; }
 

@@ -47,7 +47,10 @@ namespace Gremlin.Net.Structure.IO.GraphSON
         /// <summary>
         ///     Initializes a new instance of the <see cref="GraphSONWriter" /> class.
         /// </summary>
-        /// <param name="customSerializerByType"><see cref="IGraphSONSerializer" /> serializers identified by their <see cref="Type" />.</param>
+        /// <param name="customSerializerByType">
+        ///     <see cref="IGraphSONSerializer" /> serializers identified by their
+        ///     <see cref="Type" />.
+        /// </param>
         public GraphSONWriter(IReadOnlyDictionary<Type, IGraphSONSerializer> customSerializerByType)
         {
             foreach (var serializerAndType in customSerializerByType)

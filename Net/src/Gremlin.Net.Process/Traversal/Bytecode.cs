@@ -26,28 +26,17 @@ namespace Gremlin.Net.Process.Traversal
     ///     A language agnostic representation of <see cref="Traversal" /> mutations.
     /// </summary>
     /// <remarks>
-    /// Bytecode is simply a list of ordered instructions.
-    /// Bytecode can be serialized between environments and machines by way of a GraphSON representation.
-    /// Thus, Gremlin-CSharp can create bytecode in C# and ship it to Gremlin-Java for evaluation in Java.
+    ///     Bytecode is simply a list of ordered instructions.
+    ///     Bytecode can be serialized between environments and machines by way of a GraphSON representation.
+    ///     Thus, Gremlin-CSharp can create bytecode in C# and ship it to Gremlin-Java for evaluation in Java.
     /// </remarks>
     public class Bytecode
     {
-        /// <summary>
-        ///     Gets the traversal source instructions.
-        /// </summary>
-        public List<Instruction> SourceInstructions { get; } = new List<Instruction>();
-
-        /// <summary>
-        ///     Gets the <see cref="Traversal" /> instructions.
-        /// </summary>
-        public List<Instruction> StepInstructions { get; } = new List<Instruction>();
-
         /// <summary>
         ///     Initializes a new instance of the <see cref="Bytecode" /> class.
         /// </summary>
         public Bytecode()
         {
-            
         }
 
         /// <summary>
@@ -59,6 +48,16 @@ namespace Gremlin.Net.Process.Traversal
             SourceInstructions = new List<Instruction>(byteCode.SourceInstructions);
             StepInstructions = new List<Instruction>(byteCode.StepInstructions);
         }
+
+        /// <summary>
+        ///     Gets the traversal source instructions.
+        /// </summary>
+        public List<Instruction> SourceInstructions { get; } = new List<Instruction>();
+
+        /// <summary>
+        ///     Gets the <see cref="Traversal" /> instructions.
+        /// </summary>
+        public List<Instruction> StepInstructions { get; } = new List<Instruction>();
 
         /// <summary>
         ///     Add a traversal source instruction to the bytecode.

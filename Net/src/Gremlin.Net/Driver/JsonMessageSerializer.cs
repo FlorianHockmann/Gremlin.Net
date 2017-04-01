@@ -14,7 +14,7 @@ namespace Gremlin.Net.Driver
 
         private string MessageWithHeader(string messageContent)
         {
-            return $"{(char)MimeType.Length}{MimeType}{messageContent}";
+            return $"{(char) MimeType.Length}{MimeType}{messageContent}";
         }
 
         public TMessage DeserializeMessage<TMessage>(byte[] message)

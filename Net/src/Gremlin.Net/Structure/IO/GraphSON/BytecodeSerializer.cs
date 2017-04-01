@@ -27,7 +27,7 @@ namespace Gremlin.Net.Structure.IO.GraphSON
 
         private IEnumerable<dynamic> DictifyInstruction(Instruction instruction, GraphSONWriter writer)
         {
-            var result = new List<dynamic> { instruction.OperatorName };
+            var result = new List<dynamic> {instruction.OperatorName};
             result.AddRange(instruction.Arguments.Select(arg => writer.ToDict(arg)));
             return result;
         }

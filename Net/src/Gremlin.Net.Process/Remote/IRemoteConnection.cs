@@ -29,11 +29,11 @@ namespace Gremlin.Net.Process.Remote
     public interface IRemoteConnection
     {
         /// <summary>
-        ///     Submits <see cref="Traversal.Traversal"/> <see cref="Bytecode"/> to a server and returns a
-        ///     <see cref="Traversal.Traversal"/>.
+        ///     Submits <see cref="Traversal.Traversal" /> <see cref="Bytecode" /> to a server and returns a
+        ///     <see cref="Traversal.Traversal" />.
         /// </summary>
-        /// <param name="bytecode">The <see cref="Bytecode"/> to send.</param>
-        /// <returns>The <see cref="Traversal.Traversal"/> with the results and optional side-effects.</returns>
+        /// <param name="bytecode">The <see cref="Bytecode" /> to send.</param>
+        /// <returns>The <see cref="Traversal.Traversal" /> with the results and optional side-effects.</returns>
         Task<Traversal.Traversal> SubmitAsync(Bytecode bytecode);
     }
 }

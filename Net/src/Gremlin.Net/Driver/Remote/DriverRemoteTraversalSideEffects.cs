@@ -75,7 +75,7 @@ namespace Gremlin.Net.Driver.Remote
             return RequestMessage.Build(Tokens.OpsGather)
                 .AddArgument(Tokens.ArgsSideEffect, _serverSideEffectId)
                 .AddArgument(Tokens.ArgsSideEffectKey, key)
-                .AddArgument(Tokens.ArgsAliases, new Dictionary<string, string> { { "g", "g" } })
+                .AddArgument(Tokens.ArgsAliases, new Dictionary<string, string> {{"g", "g"}})
                 .Processor(Tokens.ProcessorTraversal)
                 .Create();
         }

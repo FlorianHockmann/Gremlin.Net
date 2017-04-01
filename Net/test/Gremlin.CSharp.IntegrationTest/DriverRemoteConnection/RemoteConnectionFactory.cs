@@ -12,7 +12,8 @@ namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
 
         public IRemoteConnection CreateRemoteConnection()
         {
-            return new Net.Driver.Remote.DriverRemoteConnection(new GremlinClient(new GremlinServer(TestHost, TestPort)));
+            return new Net.Driver.Remote.DriverRemoteConnection(
+                new GremlinClient(new GremlinServer(TestHost, TestPort)));
         }
     }
 }

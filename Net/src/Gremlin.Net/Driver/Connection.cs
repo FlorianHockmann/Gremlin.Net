@@ -89,7 +89,7 @@ namespace Gremlin.Net.Driver
                             if (aggregator == null)
                                 aggregator =
                                     new AggregatorFactory().GetAggregatorFor(
-                                        (string)receivedMsg.Result.Meta[Tokens.ArgsAggregateTo]);
+                                        (string) receivedMsg.Result.Meta[Tokens.ArgsAggregateTo]);
                             aggregator.Add(d);
                             isAggregatingSideEffects = true;
                         }

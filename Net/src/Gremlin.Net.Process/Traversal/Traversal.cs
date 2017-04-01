@@ -169,9 +169,9 @@ namespace Gremlin.Net.Process.Traversal
         /// <summary>
         ///     Starts a promise to execute a function on the current traversal that will be completed in the future.
         /// </summary>
-        /// <typeparam name="TReturn">The return type of the <paramref name="callback"/>.</typeparam>
+        /// <typeparam name="TReturn">The return type of the <paramref name="callback" />.</typeparam>
         /// <param name="callback">The function to execute on the current traversal.</param>
-        /// <returns>The result of the executed <paramref name="callback"/>.</returns>
+        /// <returns>The result of the executed <paramref name="callback" />.</returns>
         public async Task<TReturn> Promise<TReturn>(Func<Traversal, TReturn> callback)
         {
             await ApplyStrategiesAsync().ConfigureAwait(false);
