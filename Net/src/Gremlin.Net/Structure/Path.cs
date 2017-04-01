@@ -45,8 +45,7 @@ namespace Gremlin.Net.Structure
         {
             get
             {
-                object obj;
-                var objFound = TryGetValue(label, out obj);
+                var objFound = TryGetValue(label, out object obj);
                 if (!objFound)
                     throw new KeyNotFoundException($"The step with label {label} does not exist");
                 return obj;

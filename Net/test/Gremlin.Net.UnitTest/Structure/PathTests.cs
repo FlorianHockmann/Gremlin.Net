@@ -356,8 +356,7 @@ namespace Gremlin.Net.UnitTest.Structure
             var objects = new List<object> {1, new Vertex(1), "hello"};
             var path = new Path(labels, objects);
 
-            object actualObj;
-            var success = path.TryGetValue("b", out actualObj);
+            var success = path.TryGetValue("b", out object actualObj);
 
             Assert.True(success);
             Assert.Equal(new List<object> {1, new Vertex(1)}, actualObj);
@@ -375,8 +374,7 @@ namespace Gremlin.Net.UnitTest.Structure
             var objects = new List<object> {1, new Vertex(1), "hello"};
             var path = new Path(labels, objects);
 
-            object actualObj;
-            var success = path.TryGetValue("b", out actualObj);
+            var success = path.TryGetValue("b", out object actualObj);
 
             Assert.True(success);
             Assert.Equal(new Vertex(1), actualObj);
@@ -387,8 +385,7 @@ namespace Gremlin.Net.UnitTest.Structure
         {
             var path = new Path(new List<List<string>>(), new List<object>());
 
-            object targetObj;
-            var success = path.TryGetValue("unknownKey", out targetObj);
+            var success = path.TryGetValue("unknownKey", out object _);
 
             Assert.False(success);
         }
