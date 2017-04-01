@@ -7,8 +7,8 @@ namespace Gremlin.Net.Driver.ResultsAggregation
         private readonly Dictionary<string, IAggregator> _aggregatorByAggregateToType =
             new Dictionary<string, IAggregator>
             {
-                {"map", new DictionaryAggregator()},
-                {"bulkset", new TraverserAggregator()}
+                {Tokens.ValAggregateToMap, new DictionaryAggregator()},
+                {Tokens.ValAggregateToBulkSet, new TraverserAggregator()}
             };
 
         public IAggregator GetAggregatorFor(string aggregateTo)

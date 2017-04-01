@@ -38,12 +38,14 @@ namespace Gremlin.Net.Driver
         public static string ProcessorTraversal = "traversal";
 
         /// <summary>
-        ///     Argument name that allows to defines the number of iterations each ResponseMessage should contain - overrides the resultIterationBatchSize server setting.
+        ///     Argument name that allows to defines the number of iterations each ResponseMessage should contain - overrides the
+        ///     resultIterationBatchSize server setting.
         /// </summary>
         public static string ArgsBatchSize = "batchSize";
 
         /// <summary>
-        ///     Argument name that allows to provide a map of key/value pairs to apply as variables in the context of the Gremlin script.
+        ///     Argument name that allows to provide a map of key/value pairs to apply as variables in the context of the Gremlin
+        ///     script.
         /// </summary>
         public static string ArgsBindings = "bindings";
 
@@ -68,13 +70,22 @@ namespace Gremlin.Net.Driver
         public static string ArgsSideEffectKey = "sideEffectKey";
 
         /// <summary>
+        ///     <see cref="ResponseMessage{T}" /> argument that describes how side-effect data should be treated.
+        /// </summary>
+        public static string ArgsAggregateTo = "aggregateTo";
+
+        /// <summary>
         ///     Argument name that allows to change the flavor of Gremlin used (e.g. gremlin-groovy).
         /// </summary>
         public static string ArgsLanguage = "language";
 
         /// <summary>
-        ///     Argument name that allows to override the server setting that determines the maximum time to wait for a script to execute on the server.
+        ///     Argument name that allows to override the server setting that determines the maximum time to wait for a script to
+        ///     execute on the server.
         /// </summary>
         public static string ArgsEvalTimeout = "scriptEvaluationTimeout";
+
+        internal static string ValAggregateToMap = "map";
+        internal static string ValAggregateToBulkSet = "bulkset";
     }
 }

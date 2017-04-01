@@ -84,12 +84,12 @@ namespace Gremlin.Net.Driver
                 {
                     var receivedData = _graphSONReader.ToObject(receivedMsg.Result.Data);
                     foreach (var d in receivedData)
-                        if (receivedMsg.Result.Meta.ContainsKey("sideEffectKey"))
+                        if (receivedMsg.Result.Meta.ContainsKey(Tokens.ArgsSideEffectKey))
                         {
                             if (aggregator == null)
                                 aggregator =
                                     new AggregatorFactory().GetAggregatorFor(
-                                        (string)receivedMsg.Result.Meta["aggregateTo"]);
+                                        (string)receivedMsg.Result.Meta[Tokens.ArgsAggregateTo]);
                             aggregator.Add(d);
                             isAggregatingSideEffects = true;
                         }
