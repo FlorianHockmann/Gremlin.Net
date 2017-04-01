@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Gremlin.CSharp.Process;
 using Gremlin.CSharp.Structure;
 using Gremlin.Net.Driver.Exceptions;
@@ -166,27 +165,6 @@ namespace Gremlin.CSharp.IntegrationTest.DriverRemoteConnection
             var g = graph.Traversal().WithRemote(connection).WithStrategies(new ReadOnlyStrategy());
 
             await Assert.ThrowsAsync<ResponseException>(async () => await g.AddV("person").Promise(t => t.Next()));
-        }
-
-        [Fact]
-        public void ShouldUseSeparatedViewsForPartitionStrategy()
-        {
-            var graph = new Graph();
-            var connection = _connectionFactory.CreateRemoteConnection();
-            var g1 = graph.Traversal()
-                .WithRemote(connection)
-                .WithStrategies(new PartitionStrategy("_partition", "p1", new List<string> {"p1"}));
-            var g2 = graph.Traversal()
-                .WithRemote(connection)
-                .WithStrategies(new PartitionStrategy("_partition", "p2", new List<string> {"p2"}));
-
-            g1.AddV().Property("name", "tester").Next();
-
-            Assert.Equal((long)1, g1.V().Has("name", "tester").Count().Next());
-            Assert.Equal((long)0, g2.V().Has("name", "tester").Count().Next());
-
-            // cleanup
-            g1.V().Has("name", "tester").Drop().Next();
         }
     }
 }
