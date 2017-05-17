@@ -31,9 +31,13 @@ namespace Gremlin.Net
         /// <param name="hostname">The hostname of the server.</param>
         /// <param name="port">The port on which Gremlin Server can be reached.</param>
         /// <param name="enableSsl">Specifies whether SSL should be enabled.</param>
-        public GremlinServer(string hostname, int port = 8182, bool enableSsl = false)
+        /// <param name="Username">The username to connect the Gremlin Server.</param>
+        /// <param name="Password">The password to connect the Gremlin Server.</param>
+        public GremlinServer(string hostname, int port = 8182, bool enableSsl = false, string Username = null, string Password = null)
         {
             Uri = CreateUri(hostname, port, enableSsl);
+            this.Username = Username;
+            this.Password = Password;
         }
 
         /// <summary>
@@ -41,6 +45,18 @@ namespace Gremlin.Net
         /// </summary>
         /// <value>The WebSocket <see cref="System.Uri"/> that the Gremlin Server responds to.</value>
         public Uri Uri { get; }
+
+        /// <summary>
+        /// Gets the username to connect the Gremlin Server.
+        /// </summary>
+        /// <value>The username to connect the Gremlin Server.</value>
+        public string Username { get; }
+
+        /// <summary>
+        /// Gets the password to connect the Gremlin Server.
+        /// </summary>
+        /// <value>The password to connect the Gremlin Server.</value>
+        public string Password { get; }
 
         private Uri CreateUri(string hostname, int port, bool enableSsl)
         {

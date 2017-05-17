@@ -16,28 +16,30 @@
  */
 #endregion
 
-using System;
 using Newtonsoft.Json;
 
 namespace Gremlin.Net.Messages
 {
     /// <summary>
-    /// Represents a script request message to send to a Gremlin Server.
+    /// Represents parameters to pass to Gremlin Server for a <see cref="AuthenticationRequestMessage"/>.
     /// </summary>
-    public class ScriptRequestMessage : RequestMessage
+    public class AuthenticationRequestArguments : RequestArguments
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ScriptRequestMessage"/> class.
+        /// Initializes a new instance of the <see cref="AuthenticationRequestArguments"/> class.
         /// </summary>
-        public ScriptRequestMessage()
+        /// <param name="username">The username.</param>
+        /// <param name="password">The password.</param>
+        public AuthenticationRequestArguments(string username, string password)
         {
-            this.Operation = "eval";
+            this.Sasl = $"\0{username}\0{password}";
         }
 
         /// <summary>
-        /// Gets or sets parameters for this <see cref="ScriptRequestMessage"/> to pass to Gremlin Server.
+        /// Gets or sets the response to the server authentication challenge. This value is dependent on the SASL authentication mechanism required by the server.
         /// </summary>
-        [JsonProperty(PropertyName = "args")]
-        public ScriptRequestArguments Arguments { get; set; }
+        /// <value>The response to the server authentication challenge.</value>
+        [JsonProperty(PropertyName = "sasl")]
+        public string Sasl { get; set; }
     }
 }
