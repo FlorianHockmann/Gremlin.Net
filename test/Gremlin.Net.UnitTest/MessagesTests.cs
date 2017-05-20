@@ -31,5 +31,14 @@ namespace Gremlin.Net.UnitTest
 
             Assert.NotEqual(firstMsg.RequestId, secondMsg.RequestId);
         }
+
+        [Theory]
+        [InlineData("username", "password")]
+        public void BuildCorrectSasl(string username, string password)
+        {
+            var argument = new AuthenticationRequestArguments(username, password);
+
+            Assert.Equal($"\0{username}\0{password}", argument.Sasl);
+        }
     }
 }

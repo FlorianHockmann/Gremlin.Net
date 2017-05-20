@@ -26,10 +26,10 @@ namespace Gremlin.Net
     {
         private const string MimeType = "application/json";
 
-        public byte[] SerializeMessage(ScriptRequestMessage message)
+        public byte[] SerializeMessage(RequestMessage message)
         {
             var payload = JsonConvert.SerializeObject(message);
-            var messageWithHeader = $"{(char) MimeType.Length}{MimeType}{payload}";
+            var messageWithHeader = $"{(char)MimeType.Length}{MimeType}{payload}";
             return Encoding.UTF8.GetBytes(messageWithHeader);
         }
 

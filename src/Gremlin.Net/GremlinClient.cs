@@ -36,7 +36,7 @@ namespace Gremlin.Net
         /// <param name="gremlinServer">The <see cref="GremlinServer"/> the requests should be sent to.</param>
         public GremlinClient(GremlinServer gremlinServer)
         {
-            _connectionPool = new ConnectionPool(gremlinServer.Uri);
+            _connectionPool = new ConnectionPool(gremlinServer.Uri, gremlinServer.Username, gremlinServer.Password);
         }
 
         /// <summary>
