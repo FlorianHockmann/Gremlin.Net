@@ -73,7 +73,8 @@ namespace Gremlin.Net
                 if (status.Code == ResponseStatusCode.Authenticate)
                 {
                     if (string.IsNullOrEmpty(_username) || string.IsNullOrEmpty(_password))
-                        throw new ResponseException($"{status.Code}: {status.Message}");
+                        throw new InvalidOperationException(
+                            $"The Gremlin Server requires authentication, but no credentials are specified - username: {_username}, password: {_password}.");
 
                     var message = new AuthenticationRequestMessage
                     {

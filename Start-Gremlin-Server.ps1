@@ -44,4 +44,10 @@ Set-Location $gremlinServerDirectory
 Start-Process $gremlinServerStartFile
 Write-Output "Gremlin Server should now be running"
 
+$gremlinServerSecureConf = "conf/gremlin-server-secure.yaml"
+(Get-Content $gremlinServerSecureConf).Replace("8182", "8183").Replace("enabled: true}","enabled: false}") | Set-Content $gremlinServerSecureConf
+Write-Output "Starting Secure Gremlin Server on Port 8183"
+Start-Process $gremlinServerStartFile $gremlinServerSecureConf
+Write-Output "Secure Gremlin Server should now be running"
+
 Set-Location $currentDirectory
