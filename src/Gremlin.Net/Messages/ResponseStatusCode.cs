@@ -44,9 +44,9 @@ namespace Gremlin.Net.Messages
                 case ResponseStatusCode.Success:
                 case ResponseStatusCode.NoContent:
                 case ResponseStatusCode.PartialContent:
+                case ResponseStatusCode.Authenticate:
                     return false;
                 case ResponseStatusCode.Unauthorized:
-                case ResponseStatusCode.Authenticate:
                 case ResponseStatusCode.MalformedRequest:
                 case ResponseStatusCode.InvalidRequestArguments:
                 case ResponseStatusCode.ServerError:

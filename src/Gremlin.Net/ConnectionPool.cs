@@ -29,14 +29,18 @@ namespace Gremlin.Net
         private readonly ConcurrentBag<Connection> _connections = new ConcurrentBag<Connection>();
         private readonly object _connectionsLock = new object();
         private readonly Uri _uri;
+        private readonly string _username;
+        private readonly string _password;
 
-        public ConnectionPool(Uri uri)
+        public ConnectionPool(Uri uri, string username, string password)
         {
             _uri = uri;
+            _username = username;
+            _password = password;
         }
 
         public int NrConnections { get; private set; }
-        
+
         public async Task<IConnection> GetAvailableConnectionAsync()
         {
             Connection connection = null;
@@ -56,7 +60,7 @@ namespace Gremlin.Net
         {
             NrConnections++;
             var newConnection = new Connection();
-            await newConnection.ConnectAsync(_uri).ConfigureAwait(false);
+            await newConnection.ConnectAsync(_uri, _username, _password).ConfigureAwait(false);
             return newConnection;
         }
 

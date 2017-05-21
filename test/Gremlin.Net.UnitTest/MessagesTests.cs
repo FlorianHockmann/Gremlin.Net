@@ -16,6 +16,8 @@
  */
 #endregion
 
+using System;
+using System.Text;
 using Gremlin.Net.Messages;
 using Xunit;
 
@@ -30,6 +32,23 @@ namespace Gremlin.Net.UnitTest
             var secondMsg = new ScriptRequestMessage();
 
             Assert.NotEqual(firstMsg.RequestId, secondMsg.RequestId);
+        }
+
+        [Theory]
+        [InlineData("username", "password")]
+        public void BuildCorrectSasl(string username, string password)
+        {
+            var expectedSaslPlaintext = $"\0{username}\0{password}";
+
+            var argument = new AuthenticationRequestArguments(username, password);
+
+            Assert.Equal(Base64Encode(expectedSaslPlaintext), argument.Sasl);
+        }
+
+        private string Base64Encode(string plaintext)
+        {
+            var plaintextBytes = Encoding.UTF8.GetBytes(plaintext);
+            return Convert.ToBase64String(plaintextBytes);
         }
     }
 }

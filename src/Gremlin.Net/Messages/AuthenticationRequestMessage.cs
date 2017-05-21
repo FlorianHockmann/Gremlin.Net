@@ -21,22 +21,22 @@ using Newtonsoft.Json;
 namespace Gremlin.Net.Messages
 {
     /// <summary>
-    /// Represents a script request message to send to a Gremlin Server.
+    /// Represents an authentication request message to send to a Gremlin Server.
     /// </summary>
-    public class ScriptRequestMessage : RequestMessage
+    public class AuthenticationRequestMessage : RequestMessage
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ScriptRequestMessage"/> class.
+        /// Initializes a new instance of the <see cref="AuthenticationRequestMessage"/> class.
         /// </summary>
-        public ScriptRequestMessage()
+        public AuthenticationRequestMessage()
         {
-            Operation = "eval";
+            Operation = "authentication";
         }
 
         /// <summary>
-        /// Gets or sets parameters for this <see cref="ScriptRequestMessage"/> to pass to Gremlin Server.
+        /// Gets or sets parameters for this <see cref="AuthenticationRequestMessage"/> to pass to Gremlin Server.
         /// </summary>
         [JsonProperty(PropertyName = "args")]
-        public ScriptRequestArguments Arguments { get; set; }
+        public AuthenticationRequestArguments Arguments { get; set; }
     }
 }

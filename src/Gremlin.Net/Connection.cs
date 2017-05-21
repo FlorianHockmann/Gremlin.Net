@@ -27,10 +27,14 @@ namespace Gremlin.Net
     {
         private readonly JsonMessageSerializer _messageSerializer = new JsonMessageSerializer();
         private readonly WebSocketConnection _webSocketConnection = new WebSocketConnection();
-        
-        public async Task ConnectAsync(Uri uri)
+        private string _username;
+        private string _password;
+
+        public async Task ConnectAsync(Uri uri, string username, string password)
         {
             await _webSocketConnection.ConnectAsync(uri).ConfigureAwait(false);
+            _username = username;
+            _password = password;
         }
 
         public async Task CloseAsync()
@@ -44,7 +48,7 @@ namespace Gremlin.Net
             return await ReceiveAsync<T>().ConfigureAwait(false);
         }
 
-        private async Task SendAsync(ScriptRequestMessage message)
+        private async Task SendAsync(RequestMessage message)
         {
             var serializedMsg = _messageSerializer.SerializeMessage(message);
             await _webSocketConnection.SendMessageAsync(serializedMsg).ConfigureAwait(false);
@@ -62,9 +66,23 @@ namespace Gremlin.Net
                 status = receivedMessage.Status;
                 status.ThrowIfStatusIndicatesError();
 
-                if (status.Code != ResponseStatusCode.NoContent)
+                if (receivedMessage.Result.Data != null)
                     result.AddRange(receivedMessage.Result.Data);
-            } while (status.Code == ResponseStatusCode.PartialContent);
+
+                if (status.Code == ResponseStatusCode.Authenticate)
+                {
+                    if (string.IsNullOrEmpty(_username) || string.IsNullOrEmpty(_password))
+                        throw new InvalidOperationException(
+                            $"The Gremlin Server requires authentication, but no credentials are specified - username: {_username}, password: {_password}.");
+
+                    var message = new AuthenticationRequestMessage
+                    {
+                        Arguments = new AuthenticationRequestArguments(_username, _password)
+                    };
+
+                    await SendAsync(message).ConfigureAwait(false);
+                }
+            } while (status.Code == ResponseStatusCode.PartialContent || status.Code == ResponseStatusCode.Authenticate);
 
             return result;
         }
