@@ -16,7 +16,6 @@
  */
 #endregion
 
-using System;
 using Newtonsoft.Json;
 
 namespace Gremlin.Net.Messages
@@ -31,7 +30,7 @@ namespace Gremlin.Net.Messages
         /// </summary>
         public ScriptRequestMessage()
         {
-            this.Operation = "eval";
+            Operation = "eval";
         }
 
         /// <summary>

@@ -19,7 +19,6 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Gremlin.Net.Exceptions;
 using Gremlin.Net.Messages;
 
 namespace Gremlin.Net

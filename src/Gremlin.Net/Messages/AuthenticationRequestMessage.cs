@@ -16,13 +16,12 @@
  */
 #endregion
 
-using System;
 using Newtonsoft.Json;
 
 namespace Gremlin.Net.Messages
 {
     /// <summary>
-    /// Represents a authentication request message to send to a Gremlin Server.
+    /// Represents an authentication request message to send to a Gremlin Server.
     /// </summary>
     public class AuthenticationRequestMessage : RequestMessage
     {
@@ -31,7 +30,7 @@ namespace Gremlin.Net.Messages
         /// </summary>
         public AuthenticationRequestMessage()
         {
-            this.Operation = "authentication";
+            Operation = "authentication";
         }
 
         /// <summary>

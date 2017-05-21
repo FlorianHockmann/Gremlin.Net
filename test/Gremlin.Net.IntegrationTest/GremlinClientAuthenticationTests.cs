@@ -32,7 +32,7 @@ namespace Gremlin.Net.IntegrationTest
         [InlineData("stephen", "wrongPassword")]
         public async Task ShouldThrowForWrongCredentials(string username, string password)
         {
-            var gremlinServer = new GremlinServer(TestHost, TestPort, Username: username, Password: password);
+            var gremlinServer = new GremlinServer(TestHost, TestPort, username: username, password: password);
             using (var gremlinClient = new GremlinClient(gremlinServer))
             {
                 var exception = await Assert.ThrowsAsync<ResponseException>(
@@ -51,7 +51,7 @@ namespace Gremlin.Net.IntegrationTest
         {
             const string username = "stephen";
             const string password = "password";
-            var gremlinServer = new GremlinServer(TestHost, TestPort, Username: username, Password: password);
+            var gremlinServer = new GremlinServer(TestHost, TestPort, username: username, password: password);
             using (var gremlinClient = new GremlinClient(gremlinServer))
             {
                 var response = await gremlinClient.SubmitWithSingleResultAsync<string>(requestMsg);
