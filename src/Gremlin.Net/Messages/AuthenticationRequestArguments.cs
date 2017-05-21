@@ -16,6 +16,8 @@
  */
 #endregion
 
+using System;
+using System.Text;
 using Newtonsoft.Json;
 
 namespace Gremlin.Net.Messages
@@ -32,7 +34,9 @@ namespace Gremlin.Net.Messages
         /// <param name="password">The password.</param>
         public AuthenticationRequestArguments(string username, string password)
         {
-            this.Sasl = $"\0{username}\0{password}";
+            var auth = $"\0{username}\0{password}";
+            var authBytes = Encoding.UTF8.GetBytes(auth);
+            Sasl = Convert.ToBase64String(authBytes);
         }
 
         /// <summary>
