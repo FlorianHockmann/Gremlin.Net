@@ -3,25 +3,25 @@ sorted: true
 references:
 - uid: Gremlin.Net
   name: Gremlin.Net
-  href: api/Gremlin.Net.html#Gremlin_Net
+  href: api/Gremlin.Net.html
   commentId: N:Gremlin.Net
   fullName: Gremlin.Net
   nameWithType: Gremlin.Net
 - uid: Gremlin.Net.Exceptions
   name: Gremlin.Net.Exceptions
-  href: api/Gremlin.Net.Exceptions.html#Gremlin_Net_Exceptions
+  href: api/Gremlin.Net.Exceptions.html
   commentId: N:Gremlin.Net.Exceptions
   fullName: Gremlin.Net.Exceptions
   nameWithType: Gremlin.Net.Exceptions
 - uid: Gremlin.Net.Exceptions.ResponseException
   name: ResponseException
-  href: api/Gremlin.Net.Exceptions.ResponseException.html#Gremlin_Net_Exceptions_ResponseException
+  href: api/Gremlin.Net.Exceptions.ResponseException.html
   commentId: T:Gremlin.Net.Exceptions.ResponseException
   fullName: Gremlin.Net.Exceptions.ResponseException
   nameWithType: ResponseException
 - uid: Gremlin.Net.GremlinClient
   name: GremlinClient
-  href: api/Gremlin.Net.GremlinClient.html#Gremlin_Net_GremlinClient
+  href: api/Gremlin.Net.GremlinClient.html
   commentId: T:Gremlin.Net.GremlinClient
   fullName: Gremlin.Net.GremlinClient
   nameWithType: GremlinClient
@@ -32,10 +32,11 @@ references:
   fullName: Gremlin.Net.GremlinClient.GremlinClient(Gremlin.Net.GremlinServer)
   nameWithType: GremlinClient.GremlinClient(GremlinServer)
 - uid: Gremlin.Net.GremlinClient.#ctor*
+  name: GremlinClient
   href: api/Gremlin.Net.GremlinClient.html#Gremlin_Net_GremlinClient__ctor_
   commentId: Overload:Gremlin.Net.GremlinClient.#ctor
-  name: GremlinClient
-  fullName: Gremlin.Net.GremlinClient.GremlinClient(Gremlin.Net.GremlinServer)
+  fullName: Gremlin.Net.GremlinClient.GremlinClient
+  nameWithType: GremlinClient.GremlinClient
 - uid: Gremlin.Net.GremlinClient.Dispose
   name: Dispose()
   href: api/Gremlin.Net.GremlinClient.html#Gremlin_Net_GremlinClient_Dispose
@@ -49,10 +50,11 @@ references:
   fullName: Gremlin.Net.GremlinClient.Dispose(System.Boolean)
   nameWithType: GremlinClient.Dispose(Boolean)
 - uid: Gremlin.Net.GremlinClient.Dispose*
+  name: Dispose
   href: api/Gremlin.Net.GremlinClient.html#Gremlin_Net_GremlinClient_Dispose_
   commentId: Overload:Gremlin.Net.GremlinClient.Dispose
-  name: Dispose
-  fullName: Gremlin.Net.GremlinClient.Dispose()
+  fullName: Gremlin.Net.GremlinClient.Dispose
+  nameWithType: GremlinClient.Dispose
 - uid: Gremlin.Net.GremlinClient.NrConnections
   name: NrConnections
   href: api/Gremlin.Net.GremlinClient.html#Gremlin_Net_GremlinClient_NrConnections
@@ -60,17 +62,17 @@ references:
   fullName: Gremlin.Net.GremlinClient.NrConnections
   nameWithType: GremlinClient.NrConnections
 - uid: Gremlin.Net.GremlinClient.NrConnections*
+  name: NrConnections
   href: api/Gremlin.Net.GremlinClient.html#Gremlin_Net_GremlinClient_NrConnections_
   commentId: Overload:Gremlin.Net.GremlinClient.NrConnections
-  name: NrConnections
   fullName: Gremlin.Net.GremlinClient.NrConnections
+  nameWithType: GremlinClient.NrConnections
 - uid: Gremlin.Net.GremlinClient.SubmitAsync*
+  name: SubmitAsync
   href: api/Gremlin.Net.GremlinClient.html#Gremlin_Net_GremlinClient_SubmitAsync_
   commentId: Overload:Gremlin.Net.GremlinClient.SubmitAsync
-  name: SubmitAsync<T>
-  name.vb: SubmitAsync
-  fullName: Gremlin.Net.GremlinClient.SubmitAsync<T>(Gremlin.Net.Messages.ScriptRequestMessage)
-  fullName.vb: Gremlin.Net.GremlinClient.SubmitAsync
+  fullName: Gremlin.Net.GremlinClient.SubmitAsync
+  nameWithType: GremlinClient.SubmitAsync
 - uid: Gremlin.Net.GremlinClient.SubmitAsync``1(Gremlin.Net.Messages.ScriptRequestMessage)
   name: SubmitAsync<T>(ScriptRequestMessage)
   href: api/Gremlin.Net.GremlinClient.html#Gremlin_Net_GremlinClient_SubmitAsync__1_Gremlin_Net_Messages_ScriptRequestMessage_
@@ -79,10 +81,10 @@ references:
   fullName: Gremlin.Net.GremlinClient.SubmitAsync<T>(Gremlin.Net.Messages.ScriptRequestMessage)
   fullName.vb: Gremlin.Net.GremlinClient.SubmitAsync(Of T)(Gremlin.Net.Messages.ScriptRequestMessage)
   nameWithType: GremlinClient.SubmitAsync<T>(ScriptRequestMessage)
-  nameWithType.vb: SubmitAsync(Of T)(ScriptRequestMessage)
+  nameWithType.vb: GremlinClient.SubmitAsync(Of T)(ScriptRequestMessage)
 - uid: Gremlin.Net.GremlinClientExtensions
   name: GremlinClientExtensions
-  href: api/Gremlin.Net.GremlinClientExtensions.html#Gremlin_Net_GremlinClientExtensions
+  href: api/Gremlin.Net.GremlinClientExtensions.html
   commentId: T:Gremlin.Net.GremlinClientExtensions
   fullName: Gremlin.Net.GremlinClientExtensions
   nameWithType: GremlinClientExtensions
@@ -100,14 +102,13 @@ references:
   fullName: Gremlin.Net.GremlinClientExtensions.SubmitAsync(Gremlin.Net.IGremlinClient, System.String, System.Collections.Generic.Dictionary<System.String, System.Object>)
   fullName.vb: Gremlin.Net.GremlinClientExtensions.SubmitAsync(Gremlin.Net.IGremlinClient, System.String, System.Collections.Generic.Dictionary(Of System.String, System.Object))
   nameWithType: GremlinClientExtensions.SubmitAsync(IGremlinClient, String, Dictionary<String, Object>)
-  nameWithType.vb: SubmitAsync(IGremlinClient, String, Dictionary(Of String, Object))
+  nameWithType.vb: GremlinClientExtensions.SubmitAsync(IGremlinClient, String, Dictionary(Of String, Object))
 - uid: Gremlin.Net.GremlinClientExtensions.SubmitAsync*
+  name: SubmitAsync
   href: api/Gremlin.Net.GremlinClientExtensions.html#Gremlin_Net_GremlinClientExtensions_SubmitAsync_
   commentId: Overload:Gremlin.Net.GremlinClientExtensions.SubmitAsync
-  name: SubmitAsync
-  name.vb: SubmitAsync
-  fullName: Gremlin.Net.GremlinClientExtensions.SubmitAsync(Gremlin.Net.IGremlinClient, System.String, System.Collections.Generic.Dictionary<System.String, System.Object>)
-  fullName.vb: Gremlin.Net.GremlinClientExtensions.SubmitAsync
+  fullName: Gremlin.Net.GremlinClientExtensions.SubmitAsync
+  nameWithType: GremlinClientExtensions.SubmitAsync
 - uid: Gremlin.Net.GremlinClientExtensions.SubmitAsync``1(Gremlin.Net.IGremlinClient,System.String,System.Collections.Generic.Dictionary{System.String,System.Object})
   name: SubmitAsync<T>(IGremlinClient, String, Dictionary<String, Object>)
   href: api/Gremlin.Net.GremlinClientExtensions.html#Gremlin_Net_GremlinClientExtensions_SubmitAsync__1_Gremlin_Net_IGremlinClient_System_String_System_Collections_Generic_Dictionary_System_String_System_Object__
@@ -116,14 +117,13 @@ references:
   fullName: Gremlin.Net.GremlinClientExtensions.SubmitAsync<T>(Gremlin.Net.IGremlinClient, System.String, System.Collections.Generic.Dictionary<System.String, System.Object>)
   fullName.vb: Gremlin.Net.GremlinClientExtensions.SubmitAsync(Of T)(Gremlin.Net.IGremlinClient, System.String, System.Collections.Generic.Dictionary(Of System.String, System.Object))
   nameWithType: GremlinClientExtensions.SubmitAsync<T>(IGremlinClient, String, Dictionary<String, Object>)
-  nameWithType.vb: SubmitAsync(Of T)(IGremlinClient, String, Dictionary(Of String, Object))
+  nameWithType.vb: GremlinClientExtensions.SubmitAsync(Of T)(IGremlinClient, String, Dictionary(Of String, Object))
 - uid: Gremlin.Net.GremlinClientExtensions.SubmitWithSingleResultAsync*
+  name: SubmitWithSingleResultAsync
   href: api/Gremlin.Net.GremlinClientExtensions.html#Gremlin_Net_GremlinClientExtensions_SubmitWithSingleResultAsync_
   commentId: Overload:Gremlin.Net.GremlinClientExtensions.SubmitWithSingleResultAsync
-  name: SubmitWithSingleResultAsync<T>
-  name.vb: SubmitWithSingleResultAsync
-  fullName: Gremlin.Net.GremlinClientExtensions.SubmitWithSingleResultAsync<T>(Gremlin.Net.IGremlinClient, System.String, System.Collections.Generic.Dictionary<System.String, System.Object>)
-  fullName.vb: Gremlin.Net.GremlinClientExtensions.SubmitWithSingleResultAsync
+  fullName: Gremlin.Net.GremlinClientExtensions.SubmitWithSingleResultAsync
+  nameWithType: GremlinClientExtensions.SubmitWithSingleResultAsync
 - uid: Gremlin.Net.GremlinClientExtensions.SubmitWithSingleResultAsync``1(Gremlin.Net.IGremlinClient,Gremlin.Net.Messages.ScriptRequestMessage)
   name: SubmitWithSingleResultAsync<T>(IGremlinClient, ScriptRequestMessage)
   href: api/Gremlin.Net.GremlinClientExtensions.html#Gremlin_Net_GremlinClientExtensions_SubmitWithSingleResultAsync__1_Gremlin_Net_IGremlinClient_Gremlin_Net_Messages_ScriptRequestMessage_
@@ -132,7 +132,7 @@ references:
   fullName: Gremlin.Net.GremlinClientExtensions.SubmitWithSingleResultAsync<T>(Gremlin.Net.IGremlinClient, Gremlin.Net.Messages.ScriptRequestMessage)
   fullName.vb: Gremlin.Net.GremlinClientExtensions.SubmitWithSingleResultAsync(Of T)(Gremlin.Net.IGremlinClient, Gremlin.Net.Messages.ScriptRequestMessage)
   nameWithType: GremlinClientExtensions.SubmitWithSingleResultAsync<T>(IGremlinClient, ScriptRequestMessage)
-  nameWithType.vb: SubmitWithSingleResultAsync(Of T)(IGremlinClient, ScriptRequestMessage)
+  nameWithType.vb: GremlinClientExtensions.SubmitWithSingleResultAsync(Of T)(IGremlinClient, ScriptRequestMessage)
 - uid: Gremlin.Net.GremlinClientExtensions.SubmitWithSingleResultAsync``1(Gremlin.Net.IGremlinClient,System.String,System.Collections.Generic.Dictionary{System.String,System.Object})
   name: SubmitWithSingleResultAsync<T>(IGremlinClient, String, Dictionary<String, Object>)
   href: api/Gremlin.Net.GremlinClientExtensions.html#Gremlin_Net_GremlinClientExtensions_SubmitWithSingleResultAsync__1_Gremlin_Net_IGremlinClient_System_String_System_Collections_Generic_Dictionary_System_String_System_Object__
@@ -141,24 +141,37 @@ references:
   fullName: Gremlin.Net.GremlinClientExtensions.SubmitWithSingleResultAsync<T>(Gremlin.Net.IGremlinClient, System.String, System.Collections.Generic.Dictionary<System.String, System.Object>)
   fullName.vb: Gremlin.Net.GremlinClientExtensions.SubmitWithSingleResultAsync(Of T)(Gremlin.Net.IGremlinClient, System.String, System.Collections.Generic.Dictionary(Of System.String, System.Object))
   nameWithType: GremlinClientExtensions.SubmitWithSingleResultAsync<T>(IGremlinClient, String, Dictionary<String, Object>)
-  nameWithType.vb: SubmitWithSingleResultAsync(Of T)(IGremlinClient, String, Dictionary(Of String, Object))
+  nameWithType.vb: GremlinClientExtensions.SubmitWithSingleResultAsync(Of T)(IGremlinClient, String, Dictionary(Of String, Object))
 - uid: Gremlin.Net.GremlinServer
   name: GremlinServer
-  href: api/Gremlin.Net.GremlinServer.html#Gremlin_Net_GremlinServer
+  href: api/Gremlin.Net.GremlinServer.html
   commentId: T:Gremlin.Net.GremlinServer
   fullName: Gremlin.Net.GremlinServer
   nameWithType: GremlinServer
-- uid: Gremlin.Net.GremlinServer.#ctor(System.String,System.Int32,System.Boolean)
-  name: GremlinServer(String, Int32, Boolean)
-  href: api/Gremlin.Net.GremlinServer.html#Gremlin_Net_GremlinServer__ctor_System_String_System_Int32_System_Boolean_
-  commentId: M:Gremlin.Net.GremlinServer.#ctor(System.String,System.Int32,System.Boolean)
-  fullName: Gremlin.Net.GremlinServer.GremlinServer(System.String, System.Int32, System.Boolean)
-  nameWithType: GremlinServer.GremlinServer(String, Int32, Boolean)
+- uid: Gremlin.Net.GremlinServer.#ctor(System.String,System.Int32,System.Boolean,System.String,System.String)
+  name: GremlinServer(String, Int32, Boolean, String, String)
+  href: api/Gremlin.Net.GremlinServer.html#Gremlin_Net_GremlinServer__ctor_System_String_System_Int32_System_Boolean_System_String_System_String_
+  commentId: M:Gremlin.Net.GremlinServer.#ctor(System.String,System.Int32,System.Boolean,System.String,System.String)
+  fullName: Gremlin.Net.GremlinServer.GremlinServer(System.String, System.Int32, System.Boolean, System.String, System.String)
+  nameWithType: GremlinServer.GremlinServer(String, Int32, Boolean, String, String)
 - uid: Gremlin.Net.GremlinServer.#ctor*
+  name: GremlinServer
   href: api/Gremlin.Net.GremlinServer.html#Gremlin_Net_GremlinServer__ctor_
   commentId: Overload:Gremlin.Net.GremlinServer.#ctor
-  name: GremlinServer
-  fullName: Gremlin.Net.GremlinServer.GremlinServer(System.String, System.Int32, System.Boolean)
+  fullName: Gremlin.Net.GremlinServer.GremlinServer
+  nameWithType: GremlinServer.GremlinServer
+- uid: Gremlin.Net.GremlinServer.Password
+  name: Password
+  href: api/Gremlin.Net.GremlinServer.html#Gremlin_Net_GremlinServer_Password
+  commentId: P:Gremlin.Net.GremlinServer.Password
+  fullName: Gremlin.Net.GremlinServer.Password
+  nameWithType: GremlinServer.Password
+- uid: Gremlin.Net.GremlinServer.Password*
+  name: Password
+  href: api/Gremlin.Net.GremlinServer.html#Gremlin_Net_GremlinServer_Password_
+  commentId: Overload:Gremlin.Net.GremlinServer.Password
+  fullName: Gremlin.Net.GremlinServer.Password
+  nameWithType: GremlinServer.Password
 - uid: Gremlin.Net.GremlinServer.Uri
   name: Uri
   href: api/Gremlin.Net.GremlinServer.html#Gremlin_Net_GremlinServer_Uri
@@ -166,23 +179,35 @@ references:
   fullName: Gremlin.Net.GremlinServer.Uri
   nameWithType: GremlinServer.Uri
 - uid: Gremlin.Net.GremlinServer.Uri*
+  name: Uri
   href: api/Gremlin.Net.GremlinServer.html#Gremlin_Net_GremlinServer_Uri_
   commentId: Overload:Gremlin.Net.GremlinServer.Uri
-  name: Uri
   fullName: Gremlin.Net.GremlinServer.Uri
+  nameWithType: GremlinServer.Uri
+- uid: Gremlin.Net.GremlinServer.Username
+  name: Username
+  href: api/Gremlin.Net.GremlinServer.html#Gremlin_Net_GremlinServer_Username
+  commentId: P:Gremlin.Net.GremlinServer.Username
+  fullName: Gremlin.Net.GremlinServer.Username
+  nameWithType: GremlinServer.Username
+- uid: Gremlin.Net.GremlinServer.Username*
+  name: Username
+  href: api/Gremlin.Net.GremlinServer.html#Gremlin_Net_GremlinServer_Username_
+  commentId: Overload:Gremlin.Net.GremlinServer.Username
+  fullName: Gremlin.Net.GremlinServer.Username
+  nameWithType: GremlinServer.Username
 - uid: Gremlin.Net.IGremlinClient
   name: IGremlinClient
-  href: api/Gremlin.Net.IGremlinClient.html#Gremlin_Net_IGremlinClient
+  href: api/Gremlin.Net.IGremlinClient.html
   commentId: T:Gremlin.Net.IGremlinClient
   fullName: Gremlin.Net.IGremlinClient
   nameWithType: IGremlinClient
 - uid: Gremlin.Net.IGremlinClient.SubmitAsync*
+  name: SubmitAsync
   href: api/Gremlin.Net.IGremlinClient.html#Gremlin_Net_IGremlinClient_SubmitAsync_
   commentId: Overload:Gremlin.Net.IGremlinClient.SubmitAsync
-  name: SubmitAsync<T>
-  name.vb: SubmitAsync
-  fullName: Gremlin.Net.IGremlinClient.SubmitAsync<T>(Gremlin.Net.Messages.ScriptRequestMessage)
-  fullName.vb: Gremlin.Net.IGremlinClient.SubmitAsync
+  fullName: Gremlin.Net.IGremlinClient.SubmitAsync
+  nameWithType: IGremlinClient.SubmitAsync
 - uid: Gremlin.Net.IGremlinClient.SubmitAsync``1(Gremlin.Net.Messages.ScriptRequestMessage)
   name: SubmitAsync<T>(ScriptRequestMessage)
   href: api/Gremlin.Net.IGremlinClient.html#Gremlin_Net_IGremlinClient_SubmitAsync__1_Gremlin_Net_Messages_ScriptRequestMessage_
@@ -191,16 +216,76 @@ references:
   fullName: Gremlin.Net.IGremlinClient.SubmitAsync<T>(Gremlin.Net.Messages.ScriptRequestMessage)
   fullName.vb: Gremlin.Net.IGremlinClient.SubmitAsync(Of T)(Gremlin.Net.Messages.ScriptRequestMessage)
   nameWithType: IGremlinClient.SubmitAsync<T>(ScriptRequestMessage)
-  nameWithType.vb: SubmitAsync(Of T)(ScriptRequestMessage)
+  nameWithType.vb: IGremlinClient.SubmitAsync(Of T)(ScriptRequestMessage)
 - uid: Gremlin.Net.Messages
   name: Gremlin.Net.Messages
-  href: api/Gremlin.Net.Messages.html#Gremlin_Net_Messages
+  href: api/Gremlin.Net.Messages.html
   commentId: N:Gremlin.Net.Messages
   fullName: Gremlin.Net.Messages
   nameWithType: Gremlin.Net.Messages
+- uid: Gremlin.Net.Messages.AuthenticationRequestArguments
+  name: AuthenticationRequestArguments
+  href: api/Gremlin.Net.Messages.AuthenticationRequestArguments.html
+  commentId: T:Gremlin.Net.Messages.AuthenticationRequestArguments
+  fullName: Gremlin.Net.Messages.AuthenticationRequestArguments
+  nameWithType: AuthenticationRequestArguments
+- uid: Gremlin.Net.Messages.AuthenticationRequestArguments.#ctor(System.String,System.String)
+  name: AuthenticationRequestArguments(String, String)
+  href: api/Gremlin.Net.Messages.AuthenticationRequestArguments.html#Gremlin_Net_Messages_AuthenticationRequestArguments__ctor_System_String_System_String_
+  commentId: M:Gremlin.Net.Messages.AuthenticationRequestArguments.#ctor(System.String,System.String)
+  fullName: Gremlin.Net.Messages.AuthenticationRequestArguments.AuthenticationRequestArguments(System.String, System.String)
+  nameWithType: AuthenticationRequestArguments.AuthenticationRequestArguments(String, String)
+- uid: Gremlin.Net.Messages.AuthenticationRequestArguments.#ctor*
+  name: AuthenticationRequestArguments
+  href: api/Gremlin.Net.Messages.AuthenticationRequestArguments.html#Gremlin_Net_Messages_AuthenticationRequestArguments__ctor_
+  commentId: Overload:Gremlin.Net.Messages.AuthenticationRequestArguments.#ctor
+  fullName: Gremlin.Net.Messages.AuthenticationRequestArguments.AuthenticationRequestArguments
+  nameWithType: AuthenticationRequestArguments.AuthenticationRequestArguments
+- uid: Gremlin.Net.Messages.AuthenticationRequestArguments.Sasl
+  name: Sasl
+  href: api/Gremlin.Net.Messages.AuthenticationRequestArguments.html#Gremlin_Net_Messages_AuthenticationRequestArguments_Sasl
+  commentId: P:Gremlin.Net.Messages.AuthenticationRequestArguments.Sasl
+  fullName: Gremlin.Net.Messages.AuthenticationRequestArguments.Sasl
+  nameWithType: AuthenticationRequestArguments.Sasl
+- uid: Gremlin.Net.Messages.AuthenticationRequestArguments.Sasl*
+  name: Sasl
+  href: api/Gremlin.Net.Messages.AuthenticationRequestArguments.html#Gremlin_Net_Messages_AuthenticationRequestArguments_Sasl_
+  commentId: Overload:Gremlin.Net.Messages.AuthenticationRequestArguments.Sasl
+  fullName: Gremlin.Net.Messages.AuthenticationRequestArguments.Sasl
+  nameWithType: AuthenticationRequestArguments.Sasl
+- uid: Gremlin.Net.Messages.AuthenticationRequestMessage
+  name: AuthenticationRequestMessage
+  href: api/Gremlin.Net.Messages.AuthenticationRequestMessage.html
+  commentId: T:Gremlin.Net.Messages.AuthenticationRequestMessage
+  fullName: Gremlin.Net.Messages.AuthenticationRequestMessage
+  nameWithType: AuthenticationRequestMessage
+- uid: Gremlin.Net.Messages.AuthenticationRequestMessage.#ctor
+  name: AuthenticationRequestMessage()
+  href: api/Gremlin.Net.Messages.AuthenticationRequestMessage.html#Gremlin_Net_Messages_AuthenticationRequestMessage__ctor
+  commentId: M:Gremlin.Net.Messages.AuthenticationRequestMessage.#ctor
+  fullName: Gremlin.Net.Messages.AuthenticationRequestMessage.AuthenticationRequestMessage()
+  nameWithType: AuthenticationRequestMessage.AuthenticationRequestMessage()
+- uid: Gremlin.Net.Messages.AuthenticationRequestMessage.#ctor*
+  name: AuthenticationRequestMessage
+  href: api/Gremlin.Net.Messages.AuthenticationRequestMessage.html#Gremlin_Net_Messages_AuthenticationRequestMessage__ctor_
+  commentId: Overload:Gremlin.Net.Messages.AuthenticationRequestMessage.#ctor
+  fullName: Gremlin.Net.Messages.AuthenticationRequestMessage.AuthenticationRequestMessage
+  nameWithType: AuthenticationRequestMessage.AuthenticationRequestMessage
+- uid: Gremlin.Net.Messages.AuthenticationRequestMessage.Arguments
+  name: Arguments
+  href: api/Gremlin.Net.Messages.AuthenticationRequestMessage.html#Gremlin_Net_Messages_AuthenticationRequestMessage_Arguments
+  commentId: P:Gremlin.Net.Messages.AuthenticationRequestMessage.Arguments
+  fullName: Gremlin.Net.Messages.AuthenticationRequestMessage.Arguments
+  nameWithType: AuthenticationRequestMessage.Arguments
+- uid: Gremlin.Net.Messages.AuthenticationRequestMessage.Arguments*
+  name: Arguments
+  href: api/Gremlin.Net.Messages.AuthenticationRequestMessage.html#Gremlin_Net_Messages_AuthenticationRequestMessage_Arguments_
+  commentId: Overload:Gremlin.Net.Messages.AuthenticationRequestMessage.Arguments
+  fullName: Gremlin.Net.Messages.AuthenticationRequestMessage.Arguments
+  nameWithType: AuthenticationRequestMessage.Arguments
 - uid: Gremlin.Net.Messages.RequestArguments
   name: RequestArguments
-  href: api/Gremlin.Net.Messages.RequestArguments.html#Gremlin_Net_Messages_RequestArguments
+  href: api/Gremlin.Net.Messages.RequestArguments.html
   commentId: T:Gremlin.Net.Messages.RequestArguments
   fullName: Gremlin.Net.Messages.RequestArguments
   nameWithType: RequestArguments
@@ -211,13 +296,56 @@ references:
   fullName: Gremlin.Net.Messages.RequestArguments.BatchSize
   nameWithType: RequestArguments.BatchSize
 - uid: Gremlin.Net.Messages.RequestArguments.BatchSize*
+  name: BatchSize
   href: api/Gremlin.Net.Messages.RequestArguments.html#Gremlin_Net_Messages_RequestArguments_BatchSize_
   commentId: Overload:Gremlin.Net.Messages.RequestArguments.BatchSize
-  name: BatchSize
   fullName: Gremlin.Net.Messages.RequestArguments.BatchSize
+  nameWithType: RequestArguments.BatchSize
+- uid: Gremlin.Net.Messages.RequestMessage
+  name: RequestMessage
+  href: api/Gremlin.Net.Messages.RequestMessage.html
+  commentId: T:Gremlin.Net.Messages.RequestMessage
+  fullName: Gremlin.Net.Messages.RequestMessage
+  nameWithType: RequestMessage
+- uid: Gremlin.Net.Messages.RequestMessage.Operation
+  name: Operation
+  href: api/Gremlin.Net.Messages.RequestMessage.html#Gremlin_Net_Messages_RequestMessage_Operation
+  commentId: P:Gremlin.Net.Messages.RequestMessage.Operation
+  fullName: Gremlin.Net.Messages.RequestMessage.Operation
+  nameWithType: RequestMessage.Operation
+- uid: Gremlin.Net.Messages.RequestMessage.Operation*
+  name: Operation
+  href: api/Gremlin.Net.Messages.RequestMessage.html#Gremlin_Net_Messages_RequestMessage_Operation_
+  commentId: Overload:Gremlin.Net.Messages.RequestMessage.Operation
+  fullName: Gremlin.Net.Messages.RequestMessage.Operation
+  nameWithType: RequestMessage.Operation
+- uid: Gremlin.Net.Messages.RequestMessage.Processor
+  name: Processor
+  href: api/Gremlin.Net.Messages.RequestMessage.html#Gremlin_Net_Messages_RequestMessage_Processor
+  commentId: P:Gremlin.Net.Messages.RequestMessage.Processor
+  fullName: Gremlin.Net.Messages.RequestMessage.Processor
+  nameWithType: RequestMessage.Processor
+- uid: Gremlin.Net.Messages.RequestMessage.Processor*
+  name: Processor
+  href: api/Gremlin.Net.Messages.RequestMessage.html#Gremlin_Net_Messages_RequestMessage_Processor_
+  commentId: Overload:Gremlin.Net.Messages.RequestMessage.Processor
+  fullName: Gremlin.Net.Messages.RequestMessage.Processor
+  nameWithType: RequestMessage.Processor
+- uid: Gremlin.Net.Messages.RequestMessage.RequestId
+  name: RequestId
+  href: api/Gremlin.Net.Messages.RequestMessage.html#Gremlin_Net_Messages_RequestMessage_RequestId
+  commentId: P:Gremlin.Net.Messages.RequestMessage.RequestId
+  fullName: Gremlin.Net.Messages.RequestMessage.RequestId
+  nameWithType: RequestMessage.RequestId
+- uid: Gremlin.Net.Messages.RequestMessage.RequestId*
+  name: RequestId
+  href: api/Gremlin.Net.Messages.RequestMessage.html#Gremlin_Net_Messages_RequestMessage_RequestId_
+  commentId: Overload:Gremlin.Net.Messages.RequestMessage.RequestId
+  fullName: Gremlin.Net.Messages.RequestMessage.RequestId
+  nameWithType: RequestMessage.RequestId
 - uid: Gremlin.Net.Messages.ScriptRequestArguments
   name: ScriptRequestArguments
-  href: api/Gremlin.Net.Messages.ScriptRequestArguments.html#Gremlin_Net_Messages_ScriptRequestArguments
+  href: api/Gremlin.Net.Messages.ScriptRequestArguments.html
   commentId: T:Gremlin.Net.Messages.ScriptRequestArguments
   fullName: Gremlin.Net.Messages.ScriptRequestArguments
   nameWithType: ScriptRequestArguments
@@ -228,10 +356,11 @@ references:
   fullName: Gremlin.Net.Messages.ScriptRequestArguments.Aliases
   nameWithType: ScriptRequestArguments.Aliases
 - uid: Gremlin.Net.Messages.ScriptRequestArguments.Aliases*
+  name: Aliases
   href: api/Gremlin.Net.Messages.ScriptRequestArguments.html#Gremlin_Net_Messages_ScriptRequestArguments_Aliases_
   commentId: Overload:Gremlin.Net.Messages.ScriptRequestArguments.Aliases
-  name: Aliases
   fullName: Gremlin.Net.Messages.ScriptRequestArguments.Aliases
+  nameWithType: ScriptRequestArguments.Aliases
 - uid: Gremlin.Net.Messages.ScriptRequestArguments.Bindings
   name: Bindings
   href: api/Gremlin.Net.Messages.ScriptRequestArguments.html#Gremlin_Net_Messages_ScriptRequestArguments_Bindings
@@ -239,10 +368,11 @@ references:
   fullName: Gremlin.Net.Messages.ScriptRequestArguments.Bindings
   nameWithType: ScriptRequestArguments.Bindings
 - uid: Gremlin.Net.Messages.ScriptRequestArguments.Bindings*
+  name: Bindings
   href: api/Gremlin.Net.Messages.ScriptRequestArguments.html#Gremlin_Net_Messages_ScriptRequestArguments_Bindings_
   commentId: Overload:Gremlin.Net.Messages.ScriptRequestArguments.Bindings
-  name: Bindings
   fullName: Gremlin.Net.Messages.ScriptRequestArguments.Bindings
+  nameWithType: ScriptRequestArguments.Bindings
 - uid: Gremlin.Net.Messages.ScriptRequestArguments.GremlinScript
   name: GremlinScript
   href: api/Gremlin.Net.Messages.ScriptRequestArguments.html#Gremlin_Net_Messages_ScriptRequestArguments_GremlinScript
@@ -250,10 +380,11 @@ references:
   fullName: Gremlin.Net.Messages.ScriptRequestArguments.GremlinScript
   nameWithType: ScriptRequestArguments.GremlinScript
 - uid: Gremlin.Net.Messages.ScriptRequestArguments.GremlinScript*
+  name: GremlinScript
   href: api/Gremlin.Net.Messages.ScriptRequestArguments.html#Gremlin_Net_Messages_ScriptRequestArguments_GremlinScript_
   commentId: Overload:Gremlin.Net.Messages.ScriptRequestArguments.GremlinScript
-  name: GremlinScript
   fullName: Gremlin.Net.Messages.ScriptRequestArguments.GremlinScript
+  nameWithType: ScriptRequestArguments.GremlinScript
 - uid: Gremlin.Net.Messages.ScriptRequestArguments.Language
   name: Language
   href: api/Gremlin.Net.Messages.ScriptRequestArguments.html#Gremlin_Net_Messages_ScriptRequestArguments_Language
@@ -261,10 +392,11 @@ references:
   fullName: Gremlin.Net.Messages.ScriptRequestArguments.Language
   nameWithType: ScriptRequestArguments.Language
 - uid: Gremlin.Net.Messages.ScriptRequestArguments.Language*
+  name: Language
   href: api/Gremlin.Net.Messages.ScriptRequestArguments.html#Gremlin_Net_Messages_ScriptRequestArguments_Language_
   commentId: Overload:Gremlin.Net.Messages.ScriptRequestArguments.Language
-  name: Language
   fullName: Gremlin.Net.Messages.ScriptRequestArguments.Language
+  nameWithType: ScriptRequestArguments.Language
 - uid: Gremlin.Net.Messages.ScriptRequestArguments.ScriptEvaluationTimeoutInMs
   name: ScriptEvaluationTimeoutInMs
   href: api/Gremlin.Net.Messages.ScriptRequestArguments.html#Gremlin_Net_Messages_ScriptRequestArguments_ScriptEvaluationTimeoutInMs
@@ -272,16 +404,29 @@ references:
   fullName: Gremlin.Net.Messages.ScriptRequestArguments.ScriptEvaluationTimeoutInMs
   nameWithType: ScriptRequestArguments.ScriptEvaluationTimeoutInMs
 - uid: Gremlin.Net.Messages.ScriptRequestArguments.ScriptEvaluationTimeoutInMs*
+  name: ScriptEvaluationTimeoutInMs
   href: api/Gremlin.Net.Messages.ScriptRequestArguments.html#Gremlin_Net_Messages_ScriptRequestArguments_ScriptEvaluationTimeoutInMs_
   commentId: Overload:Gremlin.Net.Messages.ScriptRequestArguments.ScriptEvaluationTimeoutInMs
-  name: ScriptEvaluationTimeoutInMs
   fullName: Gremlin.Net.Messages.ScriptRequestArguments.ScriptEvaluationTimeoutInMs
+  nameWithType: ScriptRequestArguments.ScriptEvaluationTimeoutInMs
 - uid: Gremlin.Net.Messages.ScriptRequestMessage
   name: ScriptRequestMessage
-  href: api/Gremlin.Net.Messages.ScriptRequestMessage.html#Gremlin_Net_Messages_ScriptRequestMessage
+  href: api/Gremlin.Net.Messages.ScriptRequestMessage.html
   commentId: T:Gremlin.Net.Messages.ScriptRequestMessage
   fullName: Gremlin.Net.Messages.ScriptRequestMessage
   nameWithType: ScriptRequestMessage
+- uid: Gremlin.Net.Messages.ScriptRequestMessage.#ctor
+  name: ScriptRequestMessage()
+  href: api/Gremlin.Net.Messages.ScriptRequestMessage.html#Gremlin_Net_Messages_ScriptRequestMessage__ctor
+  commentId: M:Gremlin.Net.Messages.ScriptRequestMessage.#ctor
+  fullName: Gremlin.Net.Messages.ScriptRequestMessage.ScriptRequestMessage()
+  nameWithType: ScriptRequestMessage.ScriptRequestMessage()
+- uid: Gremlin.Net.Messages.ScriptRequestMessage.#ctor*
+  name: ScriptRequestMessage
+  href: api/Gremlin.Net.Messages.ScriptRequestMessage.html#Gremlin_Net_Messages_ScriptRequestMessage__ctor_
+  commentId: Overload:Gremlin.Net.Messages.ScriptRequestMessage.#ctor
+  fullName: Gremlin.Net.Messages.ScriptRequestMessage.ScriptRequestMessage
+  nameWithType: ScriptRequestMessage.ScriptRequestMessage
 - uid: Gremlin.Net.Messages.ScriptRequestMessage.Arguments
   name: Arguments
   href: api/Gremlin.Net.Messages.ScriptRequestMessage.html#Gremlin_Net_Messages_ScriptRequestMessage_Arguments
@@ -289,40 +434,8 @@ references:
   fullName: Gremlin.Net.Messages.ScriptRequestMessage.Arguments
   nameWithType: ScriptRequestMessage.Arguments
 - uid: Gremlin.Net.Messages.ScriptRequestMessage.Arguments*
+  name: Arguments
   href: api/Gremlin.Net.Messages.ScriptRequestMessage.html#Gremlin_Net_Messages_ScriptRequestMessage_Arguments_
   commentId: Overload:Gremlin.Net.Messages.ScriptRequestMessage.Arguments
-  name: Arguments
   fullName: Gremlin.Net.Messages.ScriptRequestMessage.Arguments
-- uid: Gremlin.Net.Messages.ScriptRequestMessage.Operation
-  name: Operation
-  href: api/Gremlin.Net.Messages.ScriptRequestMessage.html#Gremlin_Net_Messages_ScriptRequestMessage_Operation
-  commentId: P:Gremlin.Net.Messages.ScriptRequestMessage.Operation
-  fullName: Gremlin.Net.Messages.ScriptRequestMessage.Operation
-  nameWithType: ScriptRequestMessage.Operation
-- uid: Gremlin.Net.Messages.ScriptRequestMessage.Operation*
-  href: api/Gremlin.Net.Messages.ScriptRequestMessage.html#Gremlin_Net_Messages_ScriptRequestMessage_Operation_
-  commentId: Overload:Gremlin.Net.Messages.ScriptRequestMessage.Operation
-  name: Operation
-  fullName: Gremlin.Net.Messages.ScriptRequestMessage.Operation
-- uid: Gremlin.Net.Messages.ScriptRequestMessage.Processor
-  name: Processor
-  href: api/Gremlin.Net.Messages.ScriptRequestMessage.html#Gremlin_Net_Messages_ScriptRequestMessage_Processor
-  commentId: P:Gremlin.Net.Messages.ScriptRequestMessage.Processor
-  fullName: Gremlin.Net.Messages.ScriptRequestMessage.Processor
-  nameWithType: ScriptRequestMessage.Processor
-- uid: Gremlin.Net.Messages.ScriptRequestMessage.Processor*
-  href: api/Gremlin.Net.Messages.ScriptRequestMessage.html#Gremlin_Net_Messages_ScriptRequestMessage_Processor_
-  commentId: Overload:Gremlin.Net.Messages.ScriptRequestMessage.Processor
-  name: Processor
-  fullName: Gremlin.Net.Messages.ScriptRequestMessage.Processor
-- uid: Gremlin.Net.Messages.ScriptRequestMessage.RequestId
-  name: RequestId
-  href: api/Gremlin.Net.Messages.ScriptRequestMessage.html#Gremlin_Net_Messages_ScriptRequestMessage_RequestId
-  commentId: P:Gremlin.Net.Messages.ScriptRequestMessage.RequestId
-  fullName: Gremlin.Net.Messages.ScriptRequestMessage.RequestId
-  nameWithType: ScriptRequestMessage.RequestId
-- uid: Gremlin.Net.Messages.ScriptRequestMessage.RequestId*
-  href: api/Gremlin.Net.Messages.ScriptRequestMessage.html#Gremlin_Net_Messages_ScriptRequestMessage_RequestId_
-  commentId: Overload:Gremlin.Net.Messages.ScriptRequestMessage.RequestId
-  name: RequestId
-  fullName: Gremlin.Net.Messages.ScriptRequestMessage.RequestId
+  nameWithType: ScriptRequestMessage.Arguments

@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Class ScriptRequestMessage
+    <title>Class AuthenticationRequestArguments
    </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Class ScriptRequestMessage
+    <meta name="title" content="Class AuthenticationRequestArguments
    ">
     <meta name="generator" content="docfx 2.17.7.15">
     
@@ -67,30 +67,24 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="Gremlin.Net.Messages.ScriptRequestMessage">
+            <article class="content wrap" id="_content" data-uid="Gremlin.Net.Messages.AuthenticationRequestArguments">
   
   
-  <h1 id="Gremlin_Net_Messages_ScriptRequestMessage" data-uid="Gremlin.Net.Messages.ScriptRequestMessage">Class ScriptRequestMessage
+  <h1 id="Gremlin_Net_Messages_AuthenticationRequestArguments" data-uid="Gremlin.Net.Messages.AuthenticationRequestArguments">Class AuthenticationRequestArguments
   </h1>
-  <div class="markdown level0 summary"><p>Represents a script request message to send to a Gremlin Server.</p>
+  <div class="markdown level0 summary"><p>Represents parameters to pass to Gremlin Server for a <a class="xref" href="Gremlin.Net.Messages.AuthenticationRequestMessage.html">AuthenticationRequestMessage</a>.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">System.Object</span></div>
-    <div class="level1"><a class="xref" href="Gremlin.Net.Messages.RequestMessage.html">RequestMessage</a></div>
-    <div class="level2"><span class="xref">ScriptRequestMessage</span></div>
+    <div class="level1"><a class="xref" href="Gremlin.Net.Messages.RequestArguments.html">RequestArguments</a></div>
+    <div class="level2"><span class="xref">AuthenticationRequestArguments</span></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <a class="xref" href="Gremlin.Net.Messages.RequestMessage.html#Gremlin_Net_Messages_RequestMessage_RequestId">RequestMessage.RequestId</a>
-    </div>
-    <div>
-      <a class="xref" href="Gremlin.Net.Messages.RequestMessage.html#Gremlin_Net_Messages_RequestMessage_Operation">RequestMessage.Operation</a>
-    </div>
-    <div>
-      <a class="xref" href="Gremlin.Net.Messages.RequestMessage.html#Gremlin_Net_Messages_RequestMessage_Processor">RequestMessage.Processor</a>
+      <a class="xref" href="Gremlin.Net.Messages.RequestArguments.html#Gremlin_Net_Messages_RequestArguments_BatchSize">RequestArguments.BatchSize</a>
     </div>
     <div>
       <span class="xref">System.Object.Equals(System.Object)</span>
@@ -116,46 +110,70 @@
   </div>
   <h6><strong>Namespace</strong>:Gremlin.Net.Messages</h6>
   <h6><strong>Assembly</strong>:Gremlin.Net.dll</h6>
-  <h5 id="Gremlin_Net_Messages_ScriptRequestMessage_syntax">Syntax</h5>
+  <h5 id="Gremlin_Net_Messages_AuthenticationRequestArguments_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class ScriptRequestMessage : RequestMessage</code></pre>
+    <pre><code class="lang-csharp hljs">public class AuthenticationRequestArguments : RequestArguments</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/FlorianHockmann/Gremlin.Net/new/master/apiSpec/new?filename=Gremlin_Net_Messages_ScriptRequestMessage__ctor.md&amp;value=---%0Auid%3A%20Gremlin.Net.Messages.ScriptRequestMessage.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/FlorianHockmann/Gremlin.Net/new/master/apiSpec/new?filename=Gremlin_Net_Messages_AuthenticationRequestArguments__ctor_System_String_System_String_.md&amp;value=---%0Auid%3A%20Gremlin.Net.Messages.AuthenticationRequestArguments.%23ctor(System.String%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/FlorianHockmann/Gremlin.Net/blob/master/src/Gremlin.Net/Messages/ScriptRequestMessage.cs/#L31">View Source</a>
+    <a href="https://github.com/FlorianHockmann/Gremlin.Net/blob/master/src/Gremlin.Net/Messages/AuthenticationRequestArguments.cs/#L35">View Source</a>
   </span>
-  <a id="Gremlin_Net_Messages_ScriptRequestMessage__ctor_" data-uid="Gremlin.Net.Messages.ScriptRequestMessage.#ctor*"></a>
-  <h4 id="Gremlin_Net_Messages_ScriptRequestMessage__ctor" data-uid="Gremlin.Net.Messages.ScriptRequestMessage.#ctor">ScriptRequestMessage()</h4>
-  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Gremlin.Net.Messages.ScriptRequestMessage.html">ScriptRequestMessage</a> class.</p>
+  <a id="Gremlin_Net_Messages_AuthenticationRequestArguments__ctor_" data-uid="Gremlin.Net.Messages.AuthenticationRequestArguments.#ctor*"></a>
+  <h4 id="Gremlin_Net_Messages_AuthenticationRequestArguments__ctor_System_String_System_String_" data-uid="Gremlin.Net.Messages.AuthenticationRequestArguments.#ctor(System.String,System.String)">AuthenticationRequestArguments(String, String)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Gremlin.Net.Messages.AuthenticationRequestArguments.html">AuthenticationRequestArguments</a> class.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ScriptRequestMessage()</code></pre>
+    <pre><code class="lang-csharp hljs">public AuthenticationRequestArguments(string username, string password)</code></pre>
   </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">username</span></td>
+        <td><p>The username.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">password</span></td>
+        <td><p>The password.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="properties">Properties
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/FlorianHockmann/Gremlin.Net/new/master/apiSpec/new?filename=Gremlin_Net_Messages_ScriptRequestMessage_Arguments.md&amp;value=---%0Auid%3A%20Gremlin.Net.Messages.ScriptRequestMessage.Arguments%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/FlorianHockmann/Gremlin.Net/new/master/apiSpec/new?filename=Gremlin_Net_Messages_AuthenticationRequestArguments_Sasl.md&amp;value=---%0Auid%3A%20Gremlin.Net.Messages.AuthenticationRequestArguments.Sasl%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/FlorianHockmann/Gremlin.Net/blob/master/src/Gremlin.Net/Messages/ScriptRequestMessage.cs/#L39">View Source</a>
+    <a href="https://github.com/FlorianHockmann/Gremlin.Net/blob/master/src/Gremlin.Net/Messages/AuthenticationRequestArguments.cs/#L46">View Source</a>
   </span>
-  <a id="Gremlin_Net_Messages_ScriptRequestMessage_Arguments_" data-uid="Gremlin.Net.Messages.ScriptRequestMessage.Arguments*"></a>
-  <h4 id="Gremlin_Net_Messages_ScriptRequestMessage_Arguments" data-uid="Gremlin.Net.Messages.ScriptRequestMessage.Arguments">Arguments</h4>
-  <div class="markdown level1 summary"><p>Gets or sets parameters for this <a class="xref" href="Gremlin.Net.Messages.ScriptRequestMessage.html">ScriptRequestMessage</a> to pass to Gremlin Server.</p>
+  <a id="Gremlin_Net_Messages_AuthenticationRequestArguments_Sasl_" data-uid="Gremlin.Net.Messages.AuthenticationRequestArguments.Sasl*"></a>
+  <h4 id="Gremlin_Net_Messages_AuthenticationRequestArguments_Sasl" data-uid="Gremlin.Net.Messages.AuthenticationRequestArguments.Sasl">Sasl</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the response to the server authentication challenge. This value is dependent on the SASL authentication mechanism required by the server.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[JsonProperty(PropertyName = &quot;args&quot;)]
-public ScriptRequestArguments Arguments { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">[JsonProperty(PropertyName = &quot;sasl&quot;)]
+public string Sasl { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -167,8 +185,9 @@ public ScriptRequestArguments Arguments { get; set; }</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Gremlin.Net.Messages.ScriptRequestArguments.html">ScriptRequestArguments</a></td>
-        <td></td>
+        <td><span class="xref">System.String</span></td>
+        <td><p>The response to the server authentication challenge.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -180,10 +199,10 @@ public ScriptRequestArguments Arguments { get; set; }</code></pre>
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/FlorianHockmann/Gremlin.Net/new/master/apiSpec/new?filename=Gremlin_Net_Messages_ScriptRequestMessage.md&amp;value=---%0Auid%3A%20Gremlin.Net.Messages.ScriptRequestMessage%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/FlorianHockmann/Gremlin.Net/new/master/apiSpec/new?filename=Gremlin_Net_Messages_AuthenticationRequestArguments.md&amp;value=---%0Auid%3A%20Gremlin.Net.Messages.AuthenticationRequestArguments%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/FlorianHockmann/Gremlin.Net/blob/master/src/Gremlin.Net/Messages/ScriptRequestMessage.cs/#L26" class="contribution-link">View Source</a>
+                    <a href="https://github.com/FlorianHockmann/Gremlin.Net/blob/master/src/Gremlin.Net/Messages/AuthenticationRequestArguments.cs/#L28" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
