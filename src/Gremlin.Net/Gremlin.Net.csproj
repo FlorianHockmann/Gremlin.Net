@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Description>Gremlin.Net is a cross-platform Gremlin Server driver for .NET that is written in C#. It uses WebSockets to communicate with Gremlin Server.</Description>
     <AssemblyTitle>Gremlin.Net</AssemblyTitle>
-    <VersionPrefix>0.1.3</VersionPrefix>
+    <VersionPrefix>0.2.0</VersionPrefix>
     <Authors>Florian Hockmann</Authors>
     <TargetFramework>netstandard1.3</TargetFramework>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
