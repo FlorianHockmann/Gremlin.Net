@@ -28,10 +28,21 @@ namespace Gremlin.Net.UnitTest
         [Fact]
         public void RequestIdsShouldBeUnique()
         {
-            var firstMsg = new ScriptRequestMessage();
-            var secondMsg = new ScriptRequestMessage();
+            var firstMsg = new RequestMessage();
+            var secondMsg = new RequestMessage();
 
             Assert.NotEqual(firstMsg.RequestId, secondMsg.RequestId);
+        }
+
+        [Fact]
+        public void RequestIdShouldNotChangeAfterBeingCreated()
+        {
+            var requestMsg = new RequestMessage();
+
+            var requestIdOnFirstAccess = requestMsg.RequestId;
+            var requestIdOnSecondAccess = requestMsg.RequestId;
+
+            Assert.Equal(requestIdOnFirstAccess, requestIdOnSecondAccess);
         }
 
         [Theory]

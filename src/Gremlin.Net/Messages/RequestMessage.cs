@@ -31,7 +31,7 @@ namespace Gremlin.Net.Messages
         /// </summary>
         /// <value>A UUID representing the unique identification for the request.</value>
         [JsonProperty(PropertyName = "requestId")]
-        public Guid RequestId => Guid.NewGuid();
+        public Guid RequestId { get; } = Guid.NewGuid();
 
         /// <summary>
         /// Gets or sets the name of the operation that should be executed by the Gremlin Server.
