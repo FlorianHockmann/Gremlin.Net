@@ -3,13 +3,13 @@
   <PropertyGroup>
     <Description>Gremlin.Net is a cross-platform Gremlin Server driver for .NET that is written in C#. It uses WebSockets to communicate with Gremlin Server.</Description>
     <AssemblyTitle>Gremlin.Net</AssemblyTitle>
-    <VersionPrefix>0.2.1</VersionPrefix>
+    <VersionPrefix>0.2.2</VersionPrefix>
     <Authors>Florian Hockmann</Authors>
     <TargetFrameworks>netstandard1.3;net45</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AssemblyName>Gremlin.Net</AssemblyName>
     <PackageId>Gremlin.Net</PackageId>
-    <PackageTags>gremlin;tinkerpop;tinkerpop3;titan</PackageTags>
+    <PackageTags>gremlin;tinkerpop;tinkerpop3</PackageTags>
     <PackageProjectUrl>https://github.com/FlorianHockmann/Gremlin.Net</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/FlorianHockmann/Gremlin.Net/blob/master/LICENSE</PackageLicenseUrl>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
